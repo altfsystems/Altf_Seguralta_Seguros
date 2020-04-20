@@ -26,7 +26,7 @@ namespace AltfErp
         private void AtualizaGrid()
         {
             grdVisaoRelCliente.DataSource = MetodosSql.GetDT(String.Format(@"select IDFCFO, NOME, NOMEFANTASIA AS 'SOBRENOME',
-               CPFCNPJ, RG, CNH,
+               CPF, CNPJ, RG, CNH,
                OBSDOCUMENTO, DTANASCIMENTO,
                TELEFONE1, CELULAR, EMAIL,
                CIDADE, ESTADO, OBSERVACAO,

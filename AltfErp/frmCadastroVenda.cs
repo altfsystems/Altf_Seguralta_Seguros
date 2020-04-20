@@ -77,7 +77,7 @@ namespace AltfErp
 
             for (int parcela = 1; parcela <= NParcelas; parcela++)
             {
-                sql = String.Format(@"insert into PARCELA(NPARCELA, IDVENDA, IDFCFO, VALOR, DATAVENCIMENTO) values ({0},{1},{2},cast({3} as numeric(20,2))/{4}, '{5}') select SCOPE_IDENTITY()", parcela, txtCodigo.Text, txtIdCliente.Text, txtTotalVenda.Text.Replace(".", "").Replace(",", "."), NParcelas, data1);
+                sql = String.Format(@"insert into PARCELA(NPARCELA, IDVENDA, IDFCFO, VALOR, DATAVENCIMENTO) values ({0},{1},{2},cast({3} as numeric(20,2))/{4}, CONVERT(DATETIME, CONVERT(VARCHAR,'{5}', 121),103)) select SCOPE_IDENTITY()", parcela, txtCodigo.Text, txtIdCliente.Text, txtTotalVenda.Text.Replace(".", "").Replace(",", "."), NParcelas, data1);
                 object Codparcela = MetodosSql.ExecScalar(sql);
                 Cod = Codparcela.ToString();
                 if (mes == 12)
@@ -195,7 +195,7 @@ namespace AltfErp
                     txtDesconto.Text = "0";
                 }
 
-                sql = String.Format(@"insert into VENDA (IDFCFO, IDVENDEDOR, IDORDEM, TIPOPAGAMENTO, DESCONTO, OBSERVACAO, STATUS, DATAINCLUSAO, DATAPAGAMENTO, DATAVENCIMENTO) values('{0}' ,{4}, null, '{1}' ,{2}, '{3}' , 'A' , getdate() , null, CONVERT(DATETIME, CONVERT(VARCHAR,'{5}', 121),103))) select SCOPE_IDENTITY()"
+                sql = String.Format(@"insert into VENDA (IDFCFO, IDVENDEDOR, IDORDEM, TIPOPAGAMENTO, DESCONTO, OBSERVACAO, STATUS, DATAINCLUSAO, DATAPAGAMENTO, DATAVENCIMENTO) values('{0}' ,{4}, null, '{1}' ,{2}, '{3}' , 'A' , getdate() , null, CONVERT(DATETIME, CONVERT(VARCHAR,'{5}', 121),103)) select SCOPE_IDENTITY()"
               , txtIdCliente.Text, txtTipoPagamento.Text, txtDesconto.Text.Replace(".", "").Replace(",", "."), txtObservacao.Text, txtIdVendedor.Text, txtDataVencimento.Text);
 
                 object IDVENDA = MetodosSql.ExecScalar(sql);

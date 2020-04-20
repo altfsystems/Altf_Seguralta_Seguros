@@ -18,6 +18,7 @@ namespace AltfErp
         public frmDataVencimento()
         {
             InitializeComponent();
+            txtDataVencimento.Select();
         }
 
      
