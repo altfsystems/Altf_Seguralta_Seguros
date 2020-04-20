@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Alias>
+    <host>127.0.0.1</host>
+    <port>1433</port>
+    <instance>master</instance>
+    <user>sa</user>
+    <password>masterkey</password>
+    <timeout>30</timeout>  
+    <type>sqlExterno</type> 
+</Alias>

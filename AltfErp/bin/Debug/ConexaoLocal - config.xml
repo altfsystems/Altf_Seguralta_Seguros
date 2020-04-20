@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Alias>
+    <host>SQLEXPRESS</host>
+    <port>1433</port>
+    <instance>BD</instance>
+    <user>sa</user>
+    <password>masterkey</password>
+    <timeout>30</timeout>  
+    <type>local</type> 
+</Alias>
