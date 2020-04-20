@@ -237,7 +237,7 @@
             // 
             // btnVenda
             // 
-            this.btnVenda.Caption = "Venda";
+            this.btnVenda.Caption = "Vendas";
             this.btnVenda.Id = 10;
             this.btnVenda.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnVenda.ImageOptions.Image")));
             this.btnVenda.Name = "btnVenda";
