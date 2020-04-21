@@ -259,16 +259,16 @@
             // 
             // txtCiaSeguradora
             // 
-            this.txtCiaSeguradora.Location = new System.Drawing.Point(43, 188);
+            this.txtCiaSeguradora.Location = new System.Drawing.Point(39, 188);
             this.txtCiaSeguradora.Margin = new System.Windows.Forms.Padding(2);
             this.txtCiaSeguradora.Name = "txtCiaSeguradora";
-            this.txtCiaSeguradora.Size = new System.Drawing.Size(579, 20);
+            this.txtCiaSeguradora.Size = new System.Drawing.Size(583, 20);
             this.txtCiaSeguradora.TabIndex = 62;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(40, 173);
+            this.label12.Location = new System.Drawing.Point(36, 173);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(80, 13);

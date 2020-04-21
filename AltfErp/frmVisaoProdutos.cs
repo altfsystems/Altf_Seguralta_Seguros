@@ -15,8 +15,8 @@ namespace AltfErp
     public partial class frmVisaoProdutos : Form
     {
 
-        
-        
+
+
         public frmVisaoProdutos()
         {
             InitializeComponent();
@@ -25,17 +25,17 @@ namespace AltfErp
             gridControl1.EmbeddedNavigator.Buttons.Remove.Visible = false;
             gridView1.BestFitColumns();
             AtualizaGrid();
-            
-               
 
-      
+
+
+
         }
 
-            
-            
-            
-            
-            
+
+
+
+
+
 
         public void AtualizaGrid()
         {
@@ -50,18 +50,18 @@ namespace AltfErp
             MetodosSql.ExecQuery(sql);
         }
 
-       
+
 
         public void btnNovo_Click(object sender, EventArgs e)
         {
             frmCadastroProdutos frm = new frmCadastroProdutos(false, null);
             frm.ShowDialog();
             AtualizaGrid();
-            
+
         }
 
-            
-        
+
+
 
         private void gridControl1_DoubleClick(object sender, EventArgs e)
         {
@@ -74,7 +74,7 @@ namespace AltfErp
                 frmCadastroProdutos frm = new frmCadastroProdutos(true, obj.ToString());
                 frm.ShowDialog();
                 AtualizaGrid();
-               
+
 
 
             }
@@ -84,7 +84,7 @@ namespace AltfErp
             }
         }
 
-       
+
 
         private void toolStripLabel1_Click(object sender, EventArgs e)
         {
@@ -109,27 +109,38 @@ namespace AltfErp
 
         private void btnDelete_Click_1(object sender, EventArgs e)
         {
+
+            try
             {
-                try
+                int quant;
+                var rowHandle = gridView1.FocusedRowHandle;
+                var obj = gridView1.GetRowCellValue(rowHandle, "IDPRODUTO");
+
+                
+                quant = int.Parse(MetodosSql.GetField(String.Format(@"SELECT COUNT(IDPRODUTO) AS PRODUTO FROM ITEMMOVIMENTO WHERE IDPRODUTO= '{0}'", obj.ToString()), "PRODUTO"));
+
+                if (DialogResult.Yes == MessageBox.Show("Deseja mesmo exluir?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                 {
-                    var rowHandle = gridView1.FocusedRowHandle;
-
-                    var obj = gridView1.GetRowCellValue(rowHandle, "IDPRODUTO");
-
-                    if (DialogResult.Yes == MessageBox.Show("Deseja mesmo exluir?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                    if(quant > 0)
                     {
-
+                        MessageBox.Show("Existe uma venda que contém este seguro. Você não poderá excluir seguros que estão cadastrados em vendas.", "Aviso.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        
+                    }
+                    else
+                    {
                         MetodosSql.ExecQuery(String.Format(@"delete from PRODUTO where IDPRODUTO = {0}", obj.ToString()));
                         AtualizaGrid();
                     }
+                    
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-
-                
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
+
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)
@@ -143,7 +154,7 @@ namespace AltfErp
         }
     }
 }
-                
 
-            
-            
+
+
+

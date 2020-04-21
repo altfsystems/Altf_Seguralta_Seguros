@@ -273,6 +273,7 @@ namespace AltfErp
                     txtIdVendedor.Text = idVendedor.ToString();
                     sql = String.Format(@"select DESCRICAO from TIPOPAGAMENTO WHERE IDTIPOPAGAMENTO = {0}", txtTipoPagamento.Text);
                     txtDescricaoTipoPagamento.Text = MetodosSql.GetField(sql, "DESCRICAO");
+                    txtDataVencimento.Text = MetodosSql.GetField(String.Format(@"select CONVERT(varchar, CONVERT(varchar, DATAVENCIMENTO, 103)) as 'Vencimento' from VENDA where IDVENDA = {0}", Cod), "Vencimento");
 
 
 
