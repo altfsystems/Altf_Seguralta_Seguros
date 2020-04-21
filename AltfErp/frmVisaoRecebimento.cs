@@ -32,7 +32,7 @@ namespace AltfErp
 	                                                     C.NOME,
 	   	                                                     C.NOMEFANTASIA AS SOBRENOME,
 	   	                                                     C.CPF, C.CNPJ,
-	   	                                                     ROUND(cast(isnull(P.TOTAL,0) - isnull(R.PAGO,0) as numeric(20,2)),-1) as 'DEVENDO'
+	   	                                                     ROUND(cast(isnull(P.TOTAL,0) - isnull(R.PAGO,0) as numeric(20,2)), 2) as 'DEVENDO'
 													
 	                                                     from FCFO C
 

@@ -228,16 +228,16 @@ namespace AltfErp
 
                 InsertParcela();
 
-                if (vendaClick == false)
-                {
-                    frmIdPagamento frm = new frmIdPagamento(false, null);
-                    frm.txtValorRestante.Enabled = false;
-                    frm.label7.Enabled = false;
-                    frm.CODIGOVENDA = IDVENDA.ToString();
-                    frm.CODIGOPARCELA = Cod.ToString();
-                    frm.CODIGOCLIENTE = txtIdCliente.Text;
-                    frm.ShowDialog();
-                }
+                //if (vendaClick == false)
+                //{
+                //    frmIdPagamento frm = new frmIdPagamento(false, null);
+                //    frm.txtValorRestante.Enabled = false;
+                //    frm.label7.Enabled = false;
+                //    frm.CODIGOVENDA = IDVENDA.ToString();
+                //    frm.CODIGOPARCELA = Cod.ToString();
+                //    frm.CODIGOCLIENTE = txtIdCliente.Text;
+                //    frm.ShowDialog();
+                //}
 
                 InsereEstoque();
             }

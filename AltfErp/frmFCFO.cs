@@ -369,20 +369,14 @@ namespace AltfErp
             e.Handled = true;
         }
 
-        private void txtEstado_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+   
 
         private void txtEstado_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
         }
 
-        private void txtCpf_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
+        
 
 
 
@@ -399,6 +393,22 @@ namespace AltfErp
         private void btnSalvar_Click_1(object sender, EventArgs e)
         {
             Cadastro();
+        }
+
+        private void txtApolice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtCnh_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
         }
 
         private void btnCancelar_Click_1(object sender, EventArgs e)

@@ -720,6 +720,7 @@
             this.txtApolice.Name = "txtApolice";
             this.txtApolice.Size = new System.Drawing.Size(152, 20);
             this.txtApolice.TabIndex = 25;
+            this.txtApolice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtApolice_KeyPress);
             // 
             // label29
             // 
@@ -789,6 +790,7 @@
             this.txtCnh.Name = "txtCnh";
             this.txtCnh.Size = new System.Drawing.Size(116, 20);
             this.txtCnh.TabIndex = 22;
+            this.txtCnh.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCnh_KeyPress);
             // 
             // label19
             // 
