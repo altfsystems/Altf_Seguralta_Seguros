@@ -27,10 +27,12 @@ namespace AltfErp
         {
             public String IDPRODUTO { get; set; }
             public String DESCRICAO { get; set; }
-            public String PRECOUNITARIO { get; set; }
-            public String QUANTIDADE { get; set; }
+            public String CIASEGURADORA { get; set; }
+            //public String PRECOUNITARIO { get; set; }
+            //public String QUANTIDADE { get; set; }
             public String VALORTOTAL { get; set; }
-            public String CODPARCELA { get; set; }
+            //public String CODPARCELA { get; set; }
+
 
         }
 
@@ -95,6 +97,8 @@ namespace AltfErp
             }
         }
 
+
+
         private void AtualizaGrid()
         {
             try
@@ -114,13 +118,16 @@ namespace AltfErp
                     where IDVENDA = '{0}'
                     ORDER BY IDITEM DESC", txtCodigo.Text));
 
+                    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+                    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                     gridView1.BestFitColumns();
                     txtTotalVenda.Text = MetodosSql.GetField(String.Format(@"select cast(sum(QUANTIDADE* VALOR) as numeric(20, 2)) as 'TOTAL' from ITEMMOVIMENTO where IDVENDA = '{0}'", txtCodigo.Text), "TOTAL");
                     txtTotalDesconto.Text = MetodosSql.GetField(String.Format(@"SELECT VD.IDVENDA, VD.IDFCFO,  cast(SUM(IT.VALOR * IT.QUANTIDADE) - VD.DESCONTO as numeric(20,2)) AS TOTAL_VENDA FROM VENDA VD
-                    INNER JOIN ITEMMOVIMENTO IT
-                    ON IT.IDVENDA = VD.IDVENDA WHERE VD.IDVENDA IS NOT NULL AND VD.IDVENDA = {0}
-                    GROUP BY VD.DESCONTO, VD.IDVENDA, VD.IDFCFO", txtCodigo.Text), "TOTAL_VENDA");
+                                                                                INNER JOIN ITEMMOVIMENTO IT
+                                                                                ON IT.IDVENDA = VD.IDVENDA WHERE VD.IDVENDA IS NOT NULL AND VD.IDVENDA = {0}
+                                                                                GROUP BY VD.DESCONTO, VD.IDVENDA, VD.IDFCFO", txtCodigo.Text), "TOTAL_VENDA");
 
 
 
@@ -151,8 +158,11 @@ namespace AltfErp
         private void AlteraEstoque()
         {
             string SQL = String.Format(@"select IDPRODUTO, QUANTIDADE from ITEMMOVIMENTO where IDVENDA = '{0}'", txtCodigo.Text);
-
             DataTable Produtos = MetodosSql.GetDT(sql);
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             foreach (DataRow Produto in Produtos.Rows)
             {
@@ -166,8 +176,11 @@ namespace AltfErp
         private void InsereEstoque()
         {
             sql = String.Format(@"select IDPRODUTO, QUANTIDADE from ITEMMOVIMENTO where IDVENDA = '{0}'", txtCodigo.Text);
-
             DataTable Produtos = MetodosSql.GetDT(sql);
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             foreach (DataRow Produto in Produtos.Rows)
             {
@@ -177,6 +190,8 @@ namespace AltfErp
                 MetodosSql.ExecQuery(sql);
             }
         }
+
+
 
         private void Cadastro()
         {
@@ -189,11 +204,18 @@ namespace AltfErp
                     data.ShowDialog();
                     data1 = data.dataVencimento;
                 }
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
 
                 if (String.IsNullOrWhiteSpace(txtDesconto.Text))
                 {
                     txtDesconto.Text = "0";
                 }
+
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                 sql = String.Format(@"insert into VENDA (IDFCFO, IDVENDEDOR, IDORDEM, TIPOPAGAMENTO, DESCONTO, OBSERVACAO, STATUS, DATAINCLUSAO, DATAPAGAMENTO, DATAVENCIMENTO) values('{0}' ,{4}, null, '{1}' ,{2}, '{3}' , 'A' , getdate() , null, CONVERT(DATETIME, CONVERT(VARCHAR,'{5}', 121),103)) select SCOPE_IDENTITY()"
               , txtIdCliente.Text, txtTipoPagamento.Text, txtDesconto.Text.Replace(".", "").Replace(",", "."), txtObservacao.Text, txtIdVendedor.Text, txtDataVencimento.Text);
@@ -201,16 +223,44 @@ namespace AltfErp
                 object IDVENDA = MetodosSql.ExecScalar(sql);
                 txtCodigo.Text = IDVENDA.ToString();
 
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                char coCorretagem, valor;
 
+                if (cbCoCorretagem.Checked == true)
+                {
+                    valor = 'S';
+                }
+                else
+                {
+                    valor = 'N';
+                }
+                coCorretagem = valor;
 
+                sql = String.Format(@"INSERT INTO VENDACOMISSAO(IDVENDA, IDCLIENTE, VALORLIQUIDO, IOF, TOTALVENDA, COMISSAO, COMISSAOVENDA, COCORRETAGEM) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}')",
+                                  /*{0}*/ IDVENDA,
+                                  /*{1}*/ txtIdCliente.Text,
+                                  /*{2}*/ txtValorLiquido.Text.Replace(".", "").Replace(",", "."),
+                                  /*{3}*/ txtIof.Text.Replace(".", "").Replace(",", "."),
+                                  /*{4}*/ txtValorTotal.Text.Replace(".", "").Replace(",", "."),
+                                  /*{5}*/ txtComissao.Text.Replace(".", "").Replace(",", "."),
+                                  /*{6}*/ txtComissaoVenda.Text.Replace(".", "").Replace(",", "."),
+                                  /*{7}*/ coCorretagem);
+                MetodosSql.ExecQuery(sql);
+
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                 foreach (Produto p in produtos)
                 {
-                    sql = String.Format("insert into ITEMMOVIMENTO (IDVENDA, IDPRODUTO, VALOR, QUANTIDADE, DATAINCLUSAO) values ('{0}','{1}','{2}','{3}', GETDATE())",
+                    sql = String.Format("insert into ITEMMOVIMENTO (IDVENDA, IDPRODUTO, VALOR, QUANTIDADE, DATAINCLUSAO) values ('{0}','{1}','{2}','1', GETDATE())",
                                                   /*{0}*/ IDVENDA.ToString(),
                                                   /*{1}*/ p.IDPRODUTO,
-                                                  /*{2}*/ p.PRECOUNITARIO.Replace(".", "").Replace(",", "."),
-                                                  /*{3}*/ p.QUANTIDADE.Replace(",", "."));
+                                                  /*{2}*/ txtTotalVenda.Text.Replace(".", "").Replace(",", "."));
+
+
 
 
 
@@ -219,14 +269,17 @@ namespace AltfErp
                 }
 
                 Editar = true;
-
-
                 double TotalDesconto = Convert.ToDouble(txtTotalVenda.Text) - Convert.ToDouble(txtDesconto.Text);
                 txtTotalVenda.Text = String.Format("{0:N}", TotalDesconto.ToString());
-
-
-
                 InsertParcela();
+                InsereEstoque();
+
+
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
                 //if (vendaClick == false)
                 //{
@@ -239,7 +292,6 @@ namespace AltfErp
                 //    frm.ShowDialog();
                 //}
 
-                InsereEstoque();
             }
             catch (Exception ex)
             {
@@ -247,6 +299,8 @@ namespace AltfErp
 
             }
         }
+
+
 
         private void frmCadastroVenda_Load(object sender, EventArgs e)
         {
@@ -301,10 +355,14 @@ namespace AltfErp
             txtSobrenome.Text = frm.SOBRENOME;
         }
 
+
+
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+
 
         private void btnOk_Click(object sender, EventArgs e)
         {
@@ -350,26 +408,28 @@ namespace AltfErp
 
         }
 
+
+
         private void CalculaTotal()
         {
-            try
-            {
-                double total = (Convert.ToDouble(txtValorUnitario.Text) * Convert.ToDouble(txtQuantidade.Text));
-                txtValorTotal.Text = String.Format("{0:N}", total);
+            //try
+            //{
+            //    double total = (Convert.ToDouble(txtIof.Text) * Convert.ToDouble(txtQuantidade.Text));
+            //    txtValorTotal.Text = String.Format("{0:N}", total);
 
-                double valorUnitario = Convert.ToDouble(txtValorUnitario.Text);
-                txtValorUnitario.Text = String.Format("{0:N}", valorUnitario);
+            //    double valorUnitario = Convert.ToDouble(txtIof.Text);
+            //    txtIof.Text = String.Format("{0:N}", valorUnitario);
 
-                double quantidade = Convert.ToDouble(txtQuantidade.Text);
-                txtQuantidade.Text = String.Format("{0:N}", quantidade);
+            //    double quantidade = Convert.ToDouble(txtQuantidade.Text);
+            //    txtQuantidade.Text = String.Format("{0:N}", quantidade);
 
-                double totalvenda = Convert.ToDouble(txtTotalVenda.Text);
-                txtTotalVenda.Text = String.Format("{0:N}", totalvenda);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            //    double totalvenda = Convert.ToDouble(txtTotalVenda.Text);
+            //    txtTotalVenda.Text = String.Format("{0:N}", totalvenda);
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
 
         }
 
@@ -378,8 +438,9 @@ namespace AltfErp
             txtCodigoProduto.Text = String.Empty;
             txtDescricaoProduto.Text = String.Empty;
             txtQuantidade.Text = "1";
-            txtValorUnitario.Text = String.Empty;
+            txtIof.Text = String.Empty;
             txtValorTotal.Text = String.Empty;
+            txtCiaSeguradora.Text = String.Empty;
         }
 
         private void btnSelecionaProduto_Click(object sender, EventArgs e)
@@ -388,19 +449,103 @@ namespace AltfErp
             frm.ShowDialog();
             txtCodigoProduto.Text = frm.CODIGO;
             txtDescricaoProduto.Text = frm.DESCRICAO;
+            txtCiaSeguradora.Text = frm.CIASEGURADORA;
 
 
+            //sql = String.Format(@"select * from PRODUTO where IDPRODUTO = '{0}'", frm.CODIGO);
+            //txtValorUnitario.Text = MetodosSql.GetField(sql, "PRECOUNVENDA");
 
-            sql = String.Format(@"select * from PRODUTO where IDPRODUTO = '{0}'", frm.CODIGO);
-            txtValorUnitario.Text = MetodosSql.GetField(sql, "PRECOUNVENDA");
 
-
-            CalculaTotal();
+            //CalculaTotal();
         }
 
-        private void txtValorUnitario_Leave(object sender, EventArgs e)
+
+
+        private void txtValorLiquido_Leave(object sender, EventArgs e)
         {
-            CalculaTotal();
+            if (String.IsNullOrWhiteSpace(txtValorLiquido.Text))
+            {
+                txtValorLiquido.Text = "0,00";
+            }
+            else
+            {
+                double valorLiquido = Convert.ToDouble(txtValorLiquido.Text);
+                txtValorLiquido.Text = String.Format("{0:N}", valorLiquido).Replace(".", "").Replace(".", ",");
+            }
+
+        }
+
+        private void txtIof_Leave(object sender, EventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(txtIof.Text))
+            {
+                txtIof.Text = "0,00";
+                double iof = Convert.ToDouble(txtIof.Text);
+                txtIof.Text = String.Format("{0:N}", iof).Replace(".", "").Replace(".", ",");
+
+                if (!String.IsNullOrWhiteSpace(txtValorLiquido.Text))
+                {
+                    double valorLiquido = double.Parse(txtValorLiquido.Text);
+                    double valorTotal = Convert.ToDouble(valorLiquido + iof);
+                    txtValorTotal.Text = String.Format("{0:N}", valorTotal);
+
+                }
+                else
+                {
+                    txtValorLiquido.Text = "0,00";
+                    double valorLiquido = double.Parse(txtValorLiquido.Text);
+                    double valorTotal = Convert.ToDouble(valorLiquido + iof);
+                    txtValorTotal.Text = String.Format("{0:N}", valorTotal);
+                }
+                txtTotalVenda.Text = txtValorTotal.Text;
+            }
+            else
+            {
+                double iof = Convert.ToDouble(txtIof.Text);
+                txtIof.Text = String.Format("{0:N}", iof).Replace(".", "").Replace(".", ",");
+
+                if (!String.IsNullOrWhiteSpace(txtValorLiquido.Text))
+                {
+                    double valorLiquido = double.Parse(txtValorLiquido.Text);
+                    double valorTotal = Convert.ToDouble(valorLiquido + iof);
+                    txtValorTotal.Text = String.Format("{0:N}", valorTotal);
+
+                }
+                else
+                {
+                    txtValorLiquido.Text = "0,00";
+                    double valorLiquido = double.Parse(txtValorLiquido.Text);
+                    double valorTotal = Convert.ToDouble(valorLiquido + iof);
+                    txtValorTotal.Text = String.Format("{0:N}", valorTotal);
+                }
+                txtTotalVenda.Text = txtValorTotal.Text;
+            }
+
+
+        }
+
+        private void txtComissao_Leave(object sender, EventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(txtComissao.Text))
+            {
+                txtComissao.Text = "0,00";
+                double valorLiquido = double.Parse(txtValorLiquido.Text);
+                double comissao = double.Parse(txtComissao.Text);
+                double comissaoVenda = valorLiquido * comissao / 100;
+
+                txtComissaoVenda.Text = String.Format("{0:N}", comissaoVenda);
+            }
+            else
+            {
+                double valorLiquido = double.Parse(txtValorLiquido.Text);
+                double comissao = double.Parse(txtComissao.Text);
+                double comissaoVenda = valorLiquido * comissao / 100;
+
+                txtComissaoVenda.Text = String.Format("{0:N}", comissaoVenda);
+            }
+            
+
+            
         }
 
         private void btnSelecionaVendedor_Click(object sender, EventArgs e)
@@ -443,7 +588,7 @@ namespace AltfErp
                             sql = String.Format("insert into ITEMMOVIMENTO (IDVENDA, IDPRODUTO, VALOR, QUANTIDADE, DATAINCLUSAO) values ('{0}','{1}','{2}','{3}', GETDATE())",
                                                   /*{0}*/ txtCodigo.Text,
                                                   /*{1}*/ txtCodigoProduto.Text,
-                                                  /*{2}*/ txtValorUnitario.Text.Replace(",", "."),
+                                                  /*{2}*/ txtIof.Text.Replace(",", "."),
                                                   /*{3}*/ txtQuantidade.Text.Replace(",", "."));
 
                             MetodosSql.ExecQuery(sql);
@@ -456,7 +601,7 @@ namespace AltfErp
 			                                                QUANTIDADE = '{1}',
 			                                                DATAINCLUSAO = GETDATE()
 		                                                where IDITEM = '{2}'",
-                                                    /*{0}*/ txtValorUnitario.Text.Replace(",", "."),
+                                                    /*{0}*/ txtIof.Text.Replace(",", "."),
                                                     /*{1}*/ txtQuantidade.Text.Replace(",", "."),
                                                     /*{2}*/ IDITEM);
 
@@ -476,18 +621,19 @@ namespace AltfErp
 
                             produto.IDPRODUTO = txtCodigoProduto.Text;
                             produto.DESCRICAO = txtDescricaoProduto.Text;
-                            produto.PRECOUNITARIO = txtValorUnitario.Text;
-                            produto.QUANTIDADE = txtQuantidade.Text;
-                            produto.VALORTOTAL = txtValorTotal.Text;
+                            produto.CIASEGURADORA = txtCiaSeguradora.Text;
+                            //produto.PRECOUNITARIO = txtIof.Text;
+                            //produto.QUANTIDADE = txtQuantidade.Text;
+                            //produto.VALORTOTAL = txtValorTotal.Text;
 
                             produtos.Add(produto);
                         }
                         else
                         {
-                            int indice = int.Parse(IDITEM);
-                            produtos[indice].PRECOUNITARIO = txtValorUnitario.Text;
-                            produtos[indice].QUANTIDADE = txtQuantidade.Text;
-                            produtos[indice].VALORTOTAL = txtValorTotal.Text;
+                            //int indice = int.Parse(IDITEM);
+                            //produtos[indice].PRECOUNITARIO = txtIof.Text;
+                            //produtos[indice].QUANTIDADE = txtQuantidade.Text;
+                            //produtos[indice].VALORTOTAL = txtValorTotal.Text;
                         }
 
                     }
@@ -520,7 +666,7 @@ namespace AltfErp
                     sql = String.Format(@"select * from ITEMMOVIMENTO where IDITEM = '{0}'", IDITEM);
 
                     txtCodigoProduto.Text = MetodosSql.GetField(sql, "IDPRODUTO");
-                    txtValorUnitario.Text = MetodosSql.GetField(sql, "VALOR");
+                    txtIof.Text = MetodosSql.GetField(sql, "VALOR");
                     txtQuantidade.Text = MetodosSql.GetField(sql, "QUANTIDADE");
 
 
@@ -534,8 +680,8 @@ namespace AltfErp
                 {
                     int indice = int.Parse(rowHandle.ToString());
                     txtCodigoProduto.Text = produtos[indice].IDPRODUTO;
-                    txtValorUnitario.Text = produtos[indice].PRECOUNITARIO;
-                    txtQuantidade.Text = produtos[indice].QUANTIDADE;
+                    //txtIof.Text = produtos[indice].PRECOUNITARIO;
+                    //txtQuantidade.Text = produtos[indice].QUANTIDADE;
                     txtValorTotal.Text = produtos[indice].VALORTOTAL;
                     txtDescricaoProduto.Text = produtos[indice].DESCRICAO;
 

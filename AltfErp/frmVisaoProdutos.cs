@@ -40,15 +40,14 @@ namespace AltfErp
         public void AtualizaGrid()
         {
             string sql = String.Format(@"select IDPRODUTO, DESCRICAO, TIPOSEGURO, CIASEGURADORA, NUMEROQUIVER,  
-                        CAST(PRECOUNENTRADA as DECIMAL(10, 2)) AS PRECOUNENTRADA,
-                        CAST(MARGEMVENDA as DECIMAL(10, 2)) AS MARGEMVENDA,
-                        CAST(PRECOUNVENDA as DECIMAL(10, 2)) AS PRECOUNVENDA,
-                        OBSERVACAO, DATAINCLUSAO
-                        from PRODUTO 
-						ORDER BY PRODUTO.IDPRODUTO");
+                                        OBSERVACAO, DATAINCLUSAO
+                                        from PRODUTO 
+						                ORDER BY PRODUTO.IDPRODUTO");
             gridControl1.DataSource = MetodosSql.GetDT(sql);
             MetodosSql.ExecQuery(sql);
         }
+                        
+                        
 
 
 

@@ -132,7 +132,7 @@ namespace AltfErp
                 Cad.btnSalvar.Enabled = false;
                 Cad.btnOk.Enabled = false;
                 Cad.btnExcluir.Enabled = false;
-                Cad.txtValorUnitario.Enabled = false;
+                Cad.txtIof.Enabled = false;
                 Cad.simpleButton2.Enabled = false;
                 Cad.txtQuantidade.Enabled = false;
                 Cad.txtValorTotal.Enabled = false;
@@ -234,7 +234,7 @@ namespace AltfErp
                 Cad.btnSalvar.Enabled = false;
                 Cad.btnOk.Enabled = false;
                 Cad.btnExcluir.Enabled = false;
-                Cad.txtValorUnitario.Enabled = false;
+                Cad.txtIof.Enabled = false;
                 Cad.simpleButton2.Enabled = false;
                 Cad.txtQuantidade.Enabled = false;
                 Cad.txtValorTotal.Enabled = false;

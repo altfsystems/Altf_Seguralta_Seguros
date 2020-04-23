@@ -32,8 +32,8 @@ namespace AltfErp
 
         private void ValidarReplace()
         {
-            double PrecoEntrada = Convert.ToDouble(txtPrecoEntrada.Text);
-            txtPrecoEntrada.Text = String.Format("{0:N}", PrecoEntrada);
+            //double PrecoEntrada = Convert.ToDouble(txtPrecoEntrada.Text);
+            //txtPrecoEntrada.Text = String.Format("{0:N}", PrecoEntrada);
         }
 
         private void Validar()
@@ -45,10 +45,10 @@ namespace AltfErp
 
            
 
-            if(String.IsNullOrWhiteSpace(txtPrecoVenda.Text))
-            {
-                throw new Exception("Digite um Preço de Venda");
-            }
+            //if(String.IsNullOrWhiteSpace(txtPrecoVenda.Text))
+            //{
+            //    throw new Exception("Digite um Preço de Venda");
+            //}
 
          
 
@@ -61,9 +61,9 @@ namespace AltfErp
             txtDescricao.Clear();
             txtObservacao.Clear();
             txtDataInclusao.Clear();
-            txtPrecoEntrada.Clear();
-            txtPrecoVenda.Clear();
-            txtMargemVenda.Clear();
+            //txtPrecoEntrada.Clear();
+            //txtPrecoVenda.Clear();
+            //txtMargemVenda.Clear();
 
         }
 
@@ -81,13 +81,16 @@ namespace AltfErp
 
                     ValidarReplace();
 
-                    string SQL = String.Format(@"insert into PRODUTO  (DESCRICAO , TIPOSEGURO, CIASEGURADORA, NUMEROQUIVER, PRECOUNENTRADA , MARGEMVENDA , OBSERVACAO , UNIDADECONTROLE , DATAINCLUSAO, PRECOUNVENDA) 
-                                                    values ('{0}' , '{6}', '{7}', '{8}', '{1}' , '{2}' , '{3}' , '{4}' , getdate() , '{5}') select SCOPE_IDENTITY()"
-                    , txtDescricao.Text, txtPrecoEntrada.Text.Replace(".", "").Replace(",", "."), txtMargemVenda.Text.Replace(".", "").Replace(",", "."), txtObservacao.Text, null, txtPrecoVenda.Text.Replace(".", "").Replace(",", "."), txtTipoSeguro.Text, txtCiaSeguradora.Text, txtNumeroQuiver.Text );
-                    Clipboard.SetText(SQL);
-
-
-
+                    string SQL = String.Format(@"insert into PRODUTO (DESCRICAO , TIPOSEGURO, CIASEGURADORA, NUMEROQUIVER , OBSERVACAO , UNIDADECONTROLE , DATAINCLUSAO) 
+                                                    values('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', getdate()) select SCOPE_IDENTITY()",
+                   /*{0}*/  txtDescricao.Text,
+                   /*{1}*/ txtTipoSeguro.Text,
+                   /*{2}*/ txtCiaSeguradora.Text,
+                   /*{3}*/ txtNumeroQuiver.Text,
+                   /*{4}*/ txtObservacao.Text,
+                   /*{5}*/ null);
+                    
+                    
                     object IDPRODUTO = MetodosSql.ExecScalar(SQL);
                     txtCodigo.Text = IDPRODUTO.ToString();
 
@@ -109,18 +112,22 @@ namespace AltfErp
                                                      TIPOSEGURO = '{1}',
                                                      CIASEGURADORA = '{2}',
                                                      NUMEROQUIVER = '{3}',
-			                                         PRECOUNENTRADA = ('{4}'),
-                                                     PRECOUNVENDA = {5}, 
-                                                     MARGEMVENDA = ('{6}'),  
-                                                     OBSERVACAO = ('{7}'),
-                                                     UNIDADECONTROLE = null,
-                                                     DATAINCLUSAO = CONVERT(DATETIME, '{8}', 103)
-                                                     where IDPRODUTO = '{9}'
+                                                     OBSERVACAO = ('{4}'),
+                                                     where IDPRODUTO = '{5}'",
+                                                     
+                                                     
+                   /*{0}*/  txtDescricao.Text,
+                   /*{1}*/ txtTipoSeguro.Text,
+                   /*{2}*/ txtCiaSeguradora.Text,
+                   /*{3}*/ txtNumeroQuiver.Text,
+                   /*{4}*/ txtObservacao.Text,
+                   /*{5}*/ Cod);
+                    MetodosSql.ExecQuery(SQL);
+			                                         
+                                                     
+                                                     
 
 		                                             
-                                                   ", txtDescricao.Text, txtTipoSeguro.Text, txtCiaSeguradora.Text, txtNumeroQuiver.Text, txtPrecoEntrada.Text.Replace("." , "").Replace("," , "."),
-                                                     txtPrecoVenda.Text.Replace(".", "").Replace(",", "."), txtMargemVenda.Text.Replace(".", "").Replace(",", "."), txtObservacao.Text, txtDataInclusao.Text, txtCodigo.Text);
-                    MetodosSql.ExecQuery(SQL);
 
                     //string sql = String.Format(@"update ESTOQUE set QUANTIDADE = {0} WHERE IDPRODUTO = {1}", txtQuantidadeEmEstoque.Text, txtCodigo.Text);
                     //MetodosSql.ExecQuery(sql);
@@ -134,6 +141,11 @@ namespace AltfErp
             }
             
         }
+                    
+                    
+
+
+
 
 
      
@@ -164,13 +176,13 @@ namespace AltfErp
                         string sql = String.Format(@"select * from PRODUTO where IDPRODUTO = {0}", Cod);
                         txtDescricao.Text = MetodosSql.GetField(sql, "DESCRICAO");
                         //txtPrecoEntrada.Text = MetodosSql.GetField(sql, "PRECOUNENTRADA");
-                        txtPrecoEntrada.Text = MetodosSql.GetField(String.Format(@"select CAST(PRECOUNENTRADA as numeric(20,2))as 'PE' from PRODUTO where IDPRODUTO = {0}", Cod), "PE");
+                        //txtPrecoEntrada.Text = MetodosSql.GetField(String.Format(@"select CAST(PRECOUNENTRADA as numeric(20,2))as 'PE' from PRODUTO where IDPRODUTO = {0}", Cod), "PE");
                         //txtMargemVenda.Text = MetodosSql.GetField(sql, "MARGEMVENDA");
-                        txtMargemVenda.Text = MetodosSql.GetField(String.Format(@"select CAST(MARGEMVENDA as numeric(20,2))as 'MA' from PRODUTO where IDPRODUTO = {0}", Cod), "MA");
+                        //txtMargemVenda.Text = MetodosSql.GetField(String.Format(@"select CAST(MARGEMVENDA as numeric(20,2))as 'MA' from PRODUTO where IDPRODUTO = {0}", Cod), "MA");
                         txtObservacao.Text = MetodosSql.GetField(sql, "OBSERVACAO");
                         txtDataInclusao.Text = MetodosSql.GetField(String.Format(@"select CONVERT(varchar, CONVERT(DATETIME, DATAINCLUSAO, 121), 103) as 'Nasc' from PRODUTO where IDPRODUTO = {0}", Cod), "Nasc");
                         //txtPrecoVenda.Text = MetodosSql.GetField(sql, "PRECOUNVENDA");
-                        txtPrecoVenda.Text = MetodosSql.GetField(String.Format(@"select CAST(PRECOUNVENDA as numeric(20,2))as 'PV' from PRODUTO where IDPRODUTO = {0}", Cod), "PV");
+                        //txtPrecoVenda.Text = MetodosSql.GetField(String.Format(@"select CAST(PRECOUNVENDA as numeric(20,2))as 'PV' from PRODUTO where IDPRODUTO = {0}", Cod), "PV");
                         txtTipoSeguro.Text = MetodosSql.GetField(sql, "TIPOSEGURO");
                         txtCiaSeguradora.Text = MetodosSql.GetField(sql, "CIASEGURADORA");
                         txtNumeroQuiver.Text = MetodosSql.GetField(sql, "NUMEROQUIVER");
@@ -203,54 +215,54 @@ namespace AltfErp
 
 
 
-        private void txtPrecoVenda_Leave(object sender, EventArgs e)
-        {
+        //private void txtPrecoVenda_Leave(object sender, EventArgs e)
+        //{
 
-            if(String.IsNullOrWhiteSpace(txtPrecoEntrada.Text))
-            {
-                txtPrecoEntrada.Text = "0,00";
-                txtMargemVenda.Text = "0";
-            }
+        //    if(String.IsNullOrWhiteSpace(txtPrecoEntrada.Text))
+        //    {
+        //        txtPrecoEntrada.Text = "0,00";
+        //        txtMargemVenda.Text = "0";
+        //    }
             
             
-                if (!String.IsNullOrWhiteSpace(txtPrecoVenda.Text) && !String.IsNullOrWhiteSpace(txtPrecoEntrada.Text))
-                {
-                    double precoEntrada = Convert.ToDouble(txtPrecoEntrada.Text.Replace(".", ","));
-                    double precoVenda = Convert.ToDouble(txtPrecoVenda.Text.Replace(".", "").Replace(".", ","));
-                    txtPrecoEntrada.Text = String.Format("{0:N}", precoEntrada).Replace(".", "").Replace(".", ",");
-                    txtPrecoVenda.Text = String.Format("{0:N}", precoVenda).Replace(".", "").Replace("." , ",");
-                }
+        //        if (!String.IsNullOrWhiteSpace(txtPrecoVenda.Text) && !String.IsNullOrWhiteSpace(txtPrecoEntrada.Text))
+        //        {
+        //            double precoEntrada = Convert.ToDouble(txtPrecoEntrada.Text.Replace(".", ","));
+        //            double precoVenda = Convert.ToDouble(txtPrecoVenda.Text.Replace(".", "").Replace(".", ","));
+        //            txtPrecoEntrada.Text = String.Format("{0:N}", precoEntrada).Replace(".", "").Replace(".", ",");
+        //            txtPrecoVenda.Text = String.Format("{0:N}", precoVenda).Replace(".", "").Replace("." , ",");
+        //        }
 
-            try
-            {
-                if (txtPrecoEntrada.Text == "0,00")
-                {
-                    txtMargemVenda.Text = "0";
-                }
-                else
-                {
-                    if (!String.IsNullOrWhiteSpace(txtPrecoVenda.Text) && !String.IsNullOrWhiteSpace(txtPrecoEntrada.Text))
-                    {
-                        double precoEntrada = Convert.ToDouble(txtPrecoEntrada.Text.Replace(".", ","));
-                        double precoVenda = Convert.ToDouble(txtPrecoVenda.Text.Replace(".", ","));
-                        double porcentagem = ((precoVenda * 100) / precoEntrada) - 100;
-                        txtMargemVenda.Text = String.Format("{0:N}", porcentagem);
+        //    try
+        //    {
+        //        if (txtPrecoEntrada.Text == "0,00")
+        //        {
+        //            txtMargemVenda.Text = "0";
+        //        }
+        //        else
+        //        {
+        //            if (!String.IsNullOrWhiteSpace(txtPrecoVenda.Text) && !String.IsNullOrWhiteSpace(txtPrecoEntrada.Text))
+        //            {
+        //                double precoEntrada = Convert.ToDouble(txtPrecoEntrada.Text.Replace(".", ","));
+        //                double precoVenda = Convert.ToDouble(txtPrecoVenda.Text.Replace(".", ","));
+        //                double porcentagem = ((precoVenda * 100) / precoEntrada) - 100;
+        //                txtMargemVenda.Text = String.Format("{0:N}", porcentagem);
                     
 
-                    }
+        //            }
 
-                }
-
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+        //        }
 
 
-        }
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //    }
+
+
+        //}
 
       
 
@@ -287,13 +299,13 @@ namespace AltfErp
 
         
 
-        private void txtPrecoEntrada_Leave(object sender, EventArgs e)
-        {
-            if (String.IsNullOrWhiteSpace(txtPrecoEntrada.Text))
-            {
-                txtPrecoEntrada.Text = "0,00";
-            }
-        }
+        //private void txtPrecoEntrada_Leave(object sender, EventArgs e)
+        //{
+        //    if (String.IsNullOrWhiteSpace(txtPrecoEntrada.Text))
+        //    {
+        //        txtPrecoEntrada.Text = "0,00";
+        //    }
+        //}
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {

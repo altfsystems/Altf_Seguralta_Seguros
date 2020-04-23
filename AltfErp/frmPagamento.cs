@@ -189,7 +189,7 @@ namespace AltfErp
                 frm.btnTipoPagamento.Enabled = false;
                 frm.txtObservacao.Enabled = false;
                 frm.txtValorTotal.Enabled = false;
-                frm.txtValorUnitario.Enabled = false;
+                frm.txtIof.Enabled = false;
                 frm.txtTotalVenda.Enabled = false;
                 frm.txtQuantidade.Enabled = false;
                 frm.ShowDialog();

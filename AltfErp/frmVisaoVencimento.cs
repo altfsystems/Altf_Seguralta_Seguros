@@ -55,7 +55,7 @@ namespace AltfErp
                 frm.btnTipoPagamento.Enabled = false;
                 frm.txtObservacao.Enabled = false;
                 frm.txtValorTotal.Enabled = false;
-                frm.txtValorUnitario.Enabled = false;
+                frm.txtIof.Enabled = false;
                 frm.txtTotalVenda.Enabled = false;
                 frm.txtQuantidade.Enabled = false;
                 frm.ShowDialog();
@@ -79,7 +79,9 @@ namespace AltfErp
                                         ON FCFO.IDFCFO = VENDA.IDFCFO
                                         INNER JOIN VENDEDORES
                                         ON VENDEDORES.IDVENDEDOR = VENDA.IDVENDEDOR
-                                        WHERE CONVERT(VARCHAR, DATAVENCIMENTO, 103) >= '{0}' AND CONVERT(VARCHAR, DATAVENCIMENTO, 103) <= '{1}'", Inicio, Fim);
+                                        WHERE DATAVENCIMENTO >=CONVERT(varchar, CONVERT(DATETIME, '{0}', 103), 121) AND DATAVENCIMENTO <= CONVERT(varchar, CONVERT(datetime, '{1}', 103), 121)
+										", Inicio, Fim);
+
             grdVisaoDataVencimento.DataSource = MetodosSql.GetDT(sql);
 
         }

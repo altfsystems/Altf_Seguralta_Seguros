@@ -281,12 +281,12 @@ namespace AltfErp
             frm.ShowDialog();
             txtCodigoProduto.Text = frm.CODIGO;
             txtDescricaoProduto.Text = frm.DESCRICAO;
-            txtPrecoVenda.Text = frm.PRECOVENDA;
-            txtPrecoEntrada.Text = frm.PRECOENTRADA;
-            double Venda = Convert.ToDouble(txtPrecoVenda.Text);
-            txtPrecoVenda.Text = String.Format("{0:N}", Venda);
-            double Entrada = Convert.ToDouble(txtPrecoEntrada.Text);
-            txtPrecoEntrada.Text = String.Format("{0:N}", Entrada);
+            //txtPrecoVenda.Text = frm.PRECOVENDA;
+            //txtPrecoEntrada.Text = frm.PRECOENTRADA;
+            //double Venda = Convert.ToDouble(txtPrecoVenda.Text);
+            //txtPrecoVenda.Text = String.Format("{0:N}", Venda);
+            //double Entrada = Convert.ToDouble(txtPrecoEntrada.Text);
+            //txtPrecoEntrada.Text = String.Format("{0:N}", Entrada);
             }
             catch(Exception ex)
             {

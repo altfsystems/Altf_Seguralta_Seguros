@@ -399,7 +399,7 @@
             // 
             // barHeaderItem1
             // 
-            this.barHeaderItem1.Caption = "2020.04.15.0001";
+            this.barHeaderItem1.Caption = "2020.04.23.0001";
             this.barHeaderItem1.Id = 28;
             this.barHeaderItem1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barHeaderItem1.ImageOptions.Image")));
             this.barHeaderItem1.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barHeaderItem1.ImageOptions.LargeImage")));
