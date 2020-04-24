@@ -264,6 +264,12 @@
     <Compile Include="frmVisaoRelCliente.Designer.cs">
       <DependentUpon>frmVisaoRelCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmVisaoRelComissoes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmVisaoRelComissoes.Designer.cs">
+      <DependentUpon>frmVisaoRelComissoes.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmVisaoRelVenda.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -450,6 +456,9 @@
     <EmbeddedResource Include="frmVisaoRelCliente.resx">
       <DependentUpon>frmVisaoRelCliente.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmVisaoRelComissoes.resx">
+      <DependentUpon>frmVisaoRelComissoes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmVisaoRelVenda.resx">
       <DependentUpon>frmVisaoRelVenda.cs</DependentUpon>
     </EmbeddedResource>
@@ -519,6 +528,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
+    <None Include="Resources\RelatorioVenda 512px.png" />
     <None Include="Resources\edit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
