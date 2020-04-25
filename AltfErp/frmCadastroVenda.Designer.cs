@@ -46,6 +46,9 @@
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.btnOk = new DevExpress.XtraEditors.SimpleButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.txtCiaSeguradora = new System.Windows.Forms.TextBox();
+            this.cbCoCorretagem = new System.Windows.Forms.CheckBox();
             this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.txtComissaoVenda = new System.Windows.Forms.TextBox();
@@ -94,9 +97,6 @@
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.txtSobrenomeVendedor = new System.Windows.Forms.TextBox();
-            this.cbCoCorretagem = new System.Windows.Forms.CheckBox();
-            this.label27 = new System.Windows.Forms.Label();
-            this.txtCiaSeguradora = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -318,6 +318,36 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cadastro";
             // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(343, 89);
+            this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(80, 13);
+            this.label27.TabIndex = 1043;
+            this.label27.Text = "Cia Seguradora";
+            // 
+            // txtCiaSeguradora
+            // 
+            this.txtCiaSeguradora.Location = new System.Drawing.Point(346, 104);
+            this.txtCiaSeguradora.Margin = new System.Windows.Forms.Padding(2);
+            this.txtCiaSeguradora.Name = "txtCiaSeguradora";
+            this.txtCiaSeguradora.ReadOnly = true;
+            this.txtCiaSeguradora.Size = new System.Drawing.Size(211, 20);
+            this.txtCiaSeguradora.TabIndex = 1042;
+            // 
+            // cbCoCorretagem
+            // 
+            this.cbCoCorretagem.AutoSize = true;
+            this.cbCoCorretagem.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbCoCorretagem.Location = new System.Drawing.Point(738, 236);
+            this.cbCoCorretagem.Name = "cbCoCorretagem";
+            this.cbCoCorretagem.Size = new System.Drawing.Size(171, 28);
+            this.cbCoCorretagem.TabIndex = 8;
+            this.cbCoCorretagem.Text = "Co-Corretagem";
+            this.cbCoCorretagem.UseVisualStyleBackColor = true;
+            // 
             // label26
             // 
             this.label26.AutoSize = true;
@@ -378,6 +408,7 @@
             this.txtComissao.Name = "txtComissao";
             this.txtComissao.Size = new System.Drawing.Size(80, 26);
             this.txtComissao.TabIndex = 6;
+            this.txtComissao.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtComissao_KeyPress);
             this.txtComissao.Leave += new System.EventHandler(this.txtComissao_Leave);
             // 
             // label22
@@ -409,6 +440,7 @@
             this.txtValorLiquido.Name = "txtValorLiquido";
             this.txtValorLiquido.Size = new System.Drawing.Size(108, 26);
             this.txtValorLiquido.TabIndex = 4;
+            this.txtValorLiquido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValorLiquido_KeyPress);
             this.txtValorLiquido.Leave += new System.EventHandler(this.txtValorLiquido_Leave);
             // 
             // txtSobrenome
@@ -523,6 +555,7 @@
             this.txtIof.Name = "txtIof";
             this.txtIof.Size = new System.Drawing.Size(93, 26);
             this.txtIof.TabIndex = 5;
+            this.txtIof.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIof_KeyPress);
             this.txtIof.Leave += new System.EventHandler(this.txtIof_Leave);
             // 
             // label12
@@ -811,36 +844,6 @@
             this.txtSobrenomeVendedor.Size = new System.Drawing.Size(186, 22);
             this.txtSobrenomeVendedor.TabIndex = 1041;
             // 
-            // cbCoCorretagem
-            // 
-            this.cbCoCorretagem.AutoSize = true;
-            this.cbCoCorretagem.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbCoCorretagem.Location = new System.Drawing.Point(738, 236);
-            this.cbCoCorretagem.Name = "cbCoCorretagem";
-            this.cbCoCorretagem.Size = new System.Drawing.Size(171, 28);
-            this.cbCoCorretagem.TabIndex = 8;
-            this.cbCoCorretagem.Text = "Co-Corretagem";
-            this.cbCoCorretagem.UseVisualStyleBackColor = true;
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(343, 89);
-            this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(80, 13);
-            this.label27.TabIndex = 1043;
-            this.label27.Text = "Cia Seguradora";
-            // 
-            // txtCiaSeguradora
-            // 
-            this.txtCiaSeguradora.Location = new System.Drawing.Point(346, 104);
-            this.txtCiaSeguradora.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCiaSeguradora.Name = "txtCiaSeguradora";
-            this.txtCiaSeguradora.ReadOnly = true;
-            this.txtCiaSeguradora.Size = new System.Drawing.Size(211, 20);
-            this.txtCiaSeguradora.TabIndex = 1042;
-            // 
             // frmCadastroVenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -962,8 +965,8 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label21;
         public System.Windows.Forms.TextBox txtValorLiquido;
-        private System.Windows.Forms.CheckBox cbCoCorretagem;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.TextBox txtCiaSeguradora;
+        public System.Windows.Forms.CheckBox cbCoCorretagem;
     }
 }

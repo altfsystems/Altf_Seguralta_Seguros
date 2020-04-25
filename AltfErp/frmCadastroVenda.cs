@@ -316,16 +316,16 @@ namespace AltfErp
 
 
 
-                //if (vendaClick == false)
-                //{
-                //    frmIdPagamento frm = new frmIdPagamento(false, null);
-                //    frm.txtValorRestante.Enabled = false;
-                //    frm.label7.Enabled = false;
-                //    frm.CODIGOVENDA = IDVENDA.ToString();
-                //    frm.CODIGOPARCELA = Cod.ToString();
-                //    frm.CODIGOCLIENTE = txtIdCliente.Text;
-                //    frm.ShowDialog();
-                //}
+                if (vendaClick == false)
+                {
+                    frmIdPagamento frm = new frmIdPagamento(false, null);
+                    frm.txtValorRestante.Enabled = false;
+                    frm.label7.Enabled = false;
+                    frm.CODIGOVENDA = IDVENDA.ToString();
+                    frm.CODIGOPARCELA = Cod.ToString();
+                    frm.CODIGOCLIENTE = txtIdCliente.Text;
+                    frm.ShowDialog();
+                }
 
             }
             catch (Exception ex)
@@ -365,6 +365,18 @@ namespace AltfErp
                     sql = String.Format(@"select DESCRICAO from TIPOPAGAMENTO WHERE IDTIPOPAGAMENTO = {0}", txtTipoPagamento.Text);
                     txtDescricaoTipoPagamento.Text = MetodosSql.GetField(sql, "DESCRICAO");
                     txtDataVencimento.Text = MetodosSql.GetField(String.Format(@"select CONVERT(varchar, CONVERT(varchar, DATAVENCIMENTO, 103)) as 'Vencimento' from VENDA where IDVENDA = {0}", Cod), "Vencimento");
+                    sql = String.Format(@"SELECT * FROM VENDACOMISSAO WHERE IDVENDA = '{0}'", Cod);
+                    txtValorLiquido.Text = MetodosSql.GetField(sql, "VALORLIQUIDO");
+                    txtIof.Text = MetodosSql.GetField(sql, "IOF");
+                    txtComissao.Text = MetodosSql.GetField(sql, "COMISSAO");
+                    txtTotalVenda.Text = MetodosSql.GetField(sql, "TOTALVENDA");
+                    txtValorTotal.Text = txtTotalVenda.Text;
+                    txtComissaoVenda.Text = MetodosSql.GetField(sql, "COMISSAOVENDA");
+                    if(MetodosSql.GetField(sql, "COCORRETAGEM") == "S")
+                    {
+                        cbCoCorretagem.Checked = true;
+                    }
+
 
 
 
@@ -591,6 +603,30 @@ namespace AltfErp
 
 
 
+        }
+
+        private void txtValorLiquido_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtIof_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtComissao_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
         }
 
         private void btnSelecionaVendedor_Click(object sender, EventArgs e)

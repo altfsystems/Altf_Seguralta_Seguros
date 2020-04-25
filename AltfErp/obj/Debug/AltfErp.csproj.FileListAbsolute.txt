@@ -1502,3 +1502,4 @@ C:\Users\gabri\Documents\GitHub\Altf_Seguralta_Seguros\AltfErp\obj\Debug\AltfErp
 C:\Users\gabri\Documents\GitHub\Altf_Seguralta_Seguros\AltfErp\obj\Debug\AltfErp.csproj.CopyComplete
 C:\Users\gabri\Documents\GitHub\Altf_Seguralta_Seguros\AltfErp\obj\Debug\AltfErp.exe
 C:\Users\gabri\Documents\GitHub\Altf_Seguralta_Seguros\AltfErp\obj\Debug\AltfErp.pdb
+C:\Users\gabri\Documents\GitHub\Altf_Seguralta_Seguros\AltfErp\obj\Debug\AltfErp.frmVisaoRelComissoes.resources

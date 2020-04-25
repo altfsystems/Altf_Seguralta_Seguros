@@ -34,6 +34,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnCancelar = new DevExpress.XtraEditors.SimpleButton();
             this.btnFiltrar = new DevExpress.XtraEditors.SimpleButton();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.txtDthInicio.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDthInicio.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDthFim.Properties.CalendarTimeProperties)).BeginInit();
@@ -43,7 +45,7 @@
             // txtDthInicio
             // 
             this.txtDthInicio.EditValue = null;
-            this.txtDthInicio.Location = new System.Drawing.Point(6, 25);
+            this.txtDthInicio.Location = new System.Drawing.Point(6, 47);
             this.txtDthInicio.Name = "txtDthInicio";
             this.txtDthInicio.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDthInicio.Properties.Appearance.Options.UseFont = true;
@@ -65,7 +67,7 @@
             // txtDthFim
             // 
             this.txtDthFim.EditValue = null;
-            this.txtDthFim.Location = new System.Drawing.Point(136, 25);
+            this.txtDthFim.Location = new System.Drawing.Point(136, 47);
             this.txtDthFim.Name = "txtDthFim";
             this.txtDthFim.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDthFim.Properties.Appearance.Options.UseFont = true;
@@ -111,11 +113,31 @@
             this.btnFiltrar.Text = "Filtrar";
             this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 31);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(58, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Data Inicio";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(133, 31);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(49, 13);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "Data Fim";
+            // 
             // frmFiltroDataVencimento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(275, 132);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.btnFiltrar);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.label1);
@@ -141,5 +163,7 @@
         private System.Windows.Forms.Label label1;
         private DevExpress.XtraEditors.SimpleButton btnCancelar;
         private DevExpress.XtraEditors.SimpleButton btnFiltrar;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }

@@ -28,6 +28,40 @@ namespace AltfErp
             Filtra();
             gridView1.BestFitColumns();
         }
+
+        private void ChamaCadastro()
+        {
+            var rowHandle = gridView1.FocusedRowHandle;
+            var obj = gridView1.GetRowCellValue(rowHandle, "IDVENDA");
+            var status = gridView1.GetRowCellValue(rowHandle, "STATUS");
+
+
+
+            frmCadastroVenda Cad = new frmCadastroVenda(true, obj.ToString(), status.ToString());
+            Cad.btnAdicionar.Enabled = false;
+            Cad.btnTipoPagamento.Enabled = false;
+            Cad.btnSelecionaProduto.Enabled = false;
+            Cad.btnSalvar.Enabled = false;
+            Cad.btnOk.Enabled = false;
+            Cad.btnExcluir.Enabled = false;
+            Cad.txtIof.Enabled = false;
+            Cad.simpleButton2.Enabled = false;
+            Cad.txtQuantidade.Enabled = false;
+            Cad.txtValorTotal.Enabled = false;
+            Cad.txtTotalVenda.Enabled = false;
+            Cad.txtObservacao.Enabled = false;
+            Cad.txtDesconto.Enabled = false;
+            Cad.txtTotalDesconto.Visible = true;
+            Cad.lblTotalDesconto.Visible = true;
+            Cad.btnSelecionaVendedor.Enabled = false;
+            Cad.txtComissao.Enabled = false;
+            Cad.txtValorLiquido.Enabled = false;
+            Cad.txtIof.Enabled = false;
+            Cad.cbCoCorretagem.Enabled = false;
+            Cad.ShowDialog();
+
+            AtualizaGrid();
+        }
         private void Filtra()
         {
             frmFiltroVenda frm = new frmFiltroVenda();
@@ -55,10 +89,10 @@ namespace AltfErp
             try
             {
 
-                string sql = String.Format(@"SELECT VD.IDVENDA, VD.IDFCFO AS IDCLIENTE, FC.NOME, FC.NOMEFANTASIA AS SOBRENOME, cast(SUM(IT.VALOR * IT.QUANTIDADE) - VD.DESCONTO as numeric(20,2)) AS TOTAL_VENDA, VD.DESCONTO, ROUND(X.TOTAL_RECEBIMENTO, -1) AS TOTAL_RECEBIMENTO ,
-		                                        ROUND(cast(SUM(IT.VALOR * IT.QUANTIDADE) - VD.DESCONTO as numeric(20,2)) - ROUND(X.TOTAL_RECEBIMENTO, -1), -1) AS TOTAL_RESTANTE, VD.OBSERVACAO, CONVERT(VARCHAR , CONVERT(DATETIME , VD.DATAINCLUSAO , 121) , 103) AS DATAINCLUSAO , CONVERT(varchar, CONVERT(DATETIME,VD.DATAPAGAMENTO,121),103) AS DATAPAGAMENTO,
+                string sql = String.Format(@"SELECT VD.IDVENDA, VD.IDFCFO AS IDCLIENTE, FC.NOME, FC.NOMEFANTASIA AS SOBRENOME, cast(SUM(IT.VALOR * IT.QUANTIDADE) - VD.DESCONTO as numeric(20,2)) AS TOTAL_VENDA, VD.DESCONTO, ROUND(X.TOTAL_RECEBIMENTO, 2) AS TOTAL_RECEBIMENTO ,
+		                                        ROUND(cast(SUM(IT.VALOR * IT.QUANTIDADE) - VD.DESCONTO as numeric(20,2)) - ROUND(X.TOTAL_RECEBIMENTO, 2), 2) AS TOTAL_RESTANTE, VD.OBSERVACAO, CONVERT(VARCHAR , CONVERT(DATETIME , VD.DATAINCLUSAO , 121) , 103) AS DATAINCLUSAO , CONVERT(varchar, CONVERT(DATETIME,VD.DATAPAGAMENTO,121),103) AS DATAPAGAMENTO,
 		                                           case
-	                                               WHEN ROUND(cast(SUM(IT.VALOR * IT.QUANTIDADE) - VD.DESCONTO as numeric(20,2)) - ROUND(X.TOTAL_RECEBIMENTO, -1), -1) <= 0 THEN 'P'
+	                                               WHEN ROUND(cast(SUM(IT.VALOR * IT.QUANTIDADE) - VD.DESCONTO as numeric(20,2)) - ROUND(X.TOTAL_RECEBIMENTO, 2), 2) <= 0 THEN 'P'
                                                    ELSE
 	                                               'A'
                                                    END AS STATUS
@@ -119,33 +153,8 @@ namespace AltfErp
         {
             try
             {
-                var rowHandle = gridView1.FocusedRowHandle;
-                var obj = gridView1.GetRowCellValue(rowHandle, "IDVENDA");
-                var status = gridView1.GetRowCellValue(rowHandle, "STATUS");
 
-
-
-                frmCadastroVenda Cad = new frmCadastroVenda(true, obj.ToString(), status.ToString());
-                Cad.btnAdicionar.Enabled = false;
-                Cad.btnTipoPagamento.Enabled = false;
-                Cad.btnSelecionaProduto.Enabled = false;
-                Cad.btnSalvar.Enabled = false;
-                Cad.btnOk.Enabled = false;
-                Cad.btnExcluir.Enabled = false;
-                Cad.txtIof.Enabled = false;
-                Cad.simpleButton2.Enabled = false;
-                Cad.txtQuantidade.Enabled = false;
-                Cad.txtValorTotal.Enabled = false;
-                Cad.txtTotalVenda.Enabled = false;
-                Cad.txtObservacao.Enabled = false;
-                Cad.txtDesconto.Enabled = false;
-                Cad.txtTotalDesconto.Visible = true;
-                Cad.lblTotalDesconto.Visible = true;
-                Cad.btnSelecionaVendedor.Enabled = false;
-                Cad.ShowDialog();
-
-                AtualizaGrid();
-
+                ChamaCadastro();
 
 
             }
@@ -174,7 +183,7 @@ namespace AltfErp
                 var obj = gridView1.GetRowCellValue(rowHandle, "IDVENDA");
                 int LINHA, IDITEM, IDPRODUTO;
                 double QUANTIDADE;
-                
+
 
                 if (DialogResult.Yes == MessageBox.Show("Deseja mesmo exluir?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                 {
@@ -200,7 +209,7 @@ namespace AltfErp
                         MetodosSql.ExecQuery(estoque);
                     }
 
-                    
+
 
 
                     MetodosSql.ExecQuery(String.Format(@"DELETE FROM PARCELA WHERE IDVENDA = {0}", obj));
@@ -221,29 +230,7 @@ namespace AltfErp
         {
             try
             {
-                var rowHandle = gridView1.FocusedRowHandle;
-                var obj = gridView1.GetRowCellValue(rowHandle, "IDVENDA");
-                var status = gridView1.GetRowCellValue(rowHandle, "STATUS");
-
-
-
-                frmCadastroVenda Cad = new frmCadastroVenda(true, obj.ToString(), status.ToString());
-                Cad.btnAdicionar.Enabled = false;
-                Cad.btnTipoPagamento.Enabled = false;
-                Cad.btnSelecionaProduto.Enabled = false;
-                Cad.btnSalvar.Enabled = false;
-                Cad.btnOk.Enabled = false;
-                Cad.btnExcluir.Enabled = false;
-                Cad.txtIof.Enabled = false;
-                Cad.simpleButton2.Enabled = false;
-                Cad.txtQuantidade.Enabled = false;
-                Cad.txtValorTotal.Enabled = false;
-                Cad.txtTotalVenda.Enabled = false;
-                Cad.txtObservacao.Enabled = false;
-                Cad.btnSelecionaVendedor.Enabled = false;
-                Cad.ShowDialog();
-
-                AtualizaGrid();
+                ChamaCadastro();
 
 
 
