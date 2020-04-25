@@ -6,14 +6,12 @@ using DevExpress.XtraReports.UI;
 
 namespace AltfErp
 {
-    public partial class relClientes : DevExpress.XtraReports.UI.XtraReport
+    public partial class relComissoes : DevExpress.XtraReports.UI.XtraReport
     {
-        public relClientes(string cod)
+        public relComissoes()
         {
             InitializeComponent();
-            sqlDataSource1.Queries[1].Parameters[0].Value = cod; 
         }
 
     }
 }
-            

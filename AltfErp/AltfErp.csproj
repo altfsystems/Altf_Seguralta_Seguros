@@ -351,6 +351,12 @@
     <Compile Include="relClientes.Designer.cs">
       <DependentUpon>relClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="relComissoes.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="relComissoes.Designer.cs">
+      <DependentUpon>relComissoes.cs</DependentUpon>
+    </Compile>
     <Compile Include="relInfoCliente.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -508,6 +514,9 @@
     </Compile>
     <EmbeddedResource Include="relClientes.resx">
       <DependentUpon>relClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="relComissoes.resx">
+      <DependentUpon>relComissoes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="relInfoCliente.resx">
       <DependentUpon>relInfoCliente.cs</DependentUpon>
