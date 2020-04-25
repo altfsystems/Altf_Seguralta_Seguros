@@ -182,5 +182,12 @@ namespace AltfErp
             frm.MdiParent = this;
             frm.Show();
         }
+
+        private void barButtonItem13_ItemClick_1(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            frmVisaoRelComissoes frm = new frmVisaoRelComissoes();
+            frm.MdiParent = this;
+            frm.Show();
+        }
     }
 }

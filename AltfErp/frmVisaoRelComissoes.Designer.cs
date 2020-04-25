@@ -33,10 +33,10 @@
             this.grdVisaoRelComissoes = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnRelatorio = new System.Windows.Forms.ToolStripLabel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btnAtualizar = new DevExpress.XtraEditors.SimpleButton();
-            this.btnRelatorio = new System.Windows.Forms.ToolStripLabel();
             ((System.ComponentModel.ISupportInitialize)(this.grdVisaoRelComissoes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -79,6 +79,14 @@
             this.toolStrip1.TabIndex = 18;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // btnRelatorio
+            // 
+            this.btnRelatorio.Image = global::AltfErp.Properties.Resources.RelatorioVenda_512px;
+            this.btnRelatorio.Name = "btnRelatorio";
+            this.btnRelatorio.Size = new System.Drawing.Size(74, 46);
+            this.btnRelatorio.Text = "Relatório";
+            this.btnRelatorio.Click += new System.EventHandler(this.btnRelatorio_Click);
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -94,13 +102,6 @@
             this.btnAtualizar.Name = "btnAtualizar";
             this.btnAtualizar.Size = new System.Drawing.Size(40, 46);
             this.btnAtualizar.TabIndex = 21;
-            // 
-            // btnRelatorio
-            // 
-            this.btnRelatorio.Image = global::AltfErp.Properties.Resources.RelatorioVenda_512px;
-            this.btnRelatorio.Name = "btnRelatorio";
-            this.btnRelatorio.Size = new System.Drawing.Size(74, 46);
-            this.btnRelatorio.Text = "Relatório";
             // 
             // frmVisaoRelComissoes
             // 
