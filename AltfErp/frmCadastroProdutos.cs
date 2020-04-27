@@ -71,9 +71,38 @@ namespace AltfErp
         {
             try
             {
-                if(String.IsNullOrWhiteSpace(txtCodigo.Text))
+                if(Editar)
                 {
-                    Validar();
+                    string SQL = String.Format(@"update PRODUTO
+	                                             set DESCRICAO = ('{0}'),
+                                                     TIPOSEGURO = '{1}',
+                                                     CIASEGURADORA = '{2}',
+                                                     NUMEROQUIVER = '{3}',
+                                                     OBSERVACAO = '{4}'
+                                                     where IDPRODUTO = '{5}'",
+
+
+                   /*{0}*/  txtDescricao.Text,
+                   /*{1}*/ txtTipoSeguro.Text,
+                   /*{2}*/ txtCiaSeguradora.Text,
+                   /*{3}*/ txtNumeroQuiver.Text,
+                   /*{4}*/ txtObservacao.Text,
+                   /*{5}*/ Cod);
+                    MetodosSql.ExecQuery(SQL);
+
+
+
+
+
+
+                    //string sql = String.Format(@"update ESTOQUE set QUANTIDADE = {0} WHERE IDPRODUTO = {1}", txtQuantidadeEmEstoque.Text, txtCodigo.Text);
+                    //MetodosSql.ExecQuery(sql);
+
+                }
+                else
+                {
+                    
+                    
                     //if (String.IsNullOrWhiteSpace(txtQuantidadeEmEstoque.Text))
                     //{
                     //    txtQuantidadeEmEstoque.Text = "0";
@@ -89,8 +118,8 @@ namespace AltfErp
                    /*{3}*/ txtNumeroQuiver.Text,
                    /*{4}*/ txtObservacao.Text,
                    /*{5}*/ null);
-                    
-                    
+
+
                     object IDPRODUTO = MetodosSql.ExecScalar(SQL);
                     txtCodigo.Text = IDPRODUTO.ToString();
 
@@ -102,35 +131,7 @@ namespace AltfErp
                     //MetodosSql.ExecQuery(sql);
 
                     Editar = true;
-
-                }
-                else
-                {
                     
-                    string SQL = String.Format(@"update PRODUTO
-	                                             set DESCRICAO = ('{0}'),
-                                                     TIPOSEGURO = '{1}',
-                                                     CIASEGURADORA = '{2}',
-                                                     NUMEROQUIVER = '{3}',
-                                                     OBSERVACAO = ('{4}'),
-                                                     where IDPRODUTO = '{5}'",
-                                                     
-                                                     
-                   /*{0}*/  txtDescricao.Text,
-                   /*{1}*/ txtTipoSeguro.Text,
-                   /*{2}*/ txtCiaSeguradora.Text,
-                   /*{3}*/ txtNumeroQuiver.Text,
-                   /*{4}*/ txtObservacao.Text,
-                   /*{5}*/ Cod);
-                    MetodosSql.ExecQuery(SQL);
-			                                         
-                                                     
-                                                     
-
-		                                             
-
-                    //string sql = String.Format(@"update ESTOQUE set QUANTIDADE = {0} WHERE IDPRODUTO = {1}", txtQuantidadeEmEstoque.Text, txtCodigo.Text);
-                    //MetodosSql.ExecQuery(sql);
                 }
                
             }
@@ -141,21 +142,20 @@ namespace AltfErp
             }
             
         }
-                    
-                    
-
-
-
-
-
-     
-
-        
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-           
-            Cadastro();
+
+
+            if (String.IsNullOrWhiteSpace(txtDescricao.Text))
+            {
+                MessageBox.Show("Digite um Nome ou Descrição", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                
+                Cadastro();
+            }
 
         }
 
@@ -209,8 +209,16 @@ namespace AltfErp
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            Cadastro();
-            this.Close();
+            if (String.IsNullOrWhiteSpace(txtDescricao.Text))
+            {
+                MessageBox.Show("Digite um Nome ou Descrição", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                Cadastro();
+                this.Close();
+            }
+            
         }
 
 
@@ -320,6 +328,19 @@ namespace AltfErp
         }
     }
 
+}
+                    
+                    
+
+
+
+
+
+     
+
+        
+
+
 
             
             
@@ -329,4 +350,3 @@ namespace AltfErp
 
             
     
-}

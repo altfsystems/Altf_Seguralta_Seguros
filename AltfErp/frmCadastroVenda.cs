@@ -343,6 +343,7 @@ namespace AltfErp
         {
             try
             {
+                double valorLiquido, iof, valorTotal, comissaoVenda;
                 if (Editar)
                 {
                     txtCodigo.Text = Cod;
@@ -366,12 +367,17 @@ namespace AltfErp
                     txtDescricaoTipoPagamento.Text = MetodosSql.GetField(sql, "DESCRICAO");
                     txtDataVencimento.Text = MetodosSql.GetField(String.Format(@"select CONVERT(varchar, CONVERT(varchar, DATAVENCIMENTO, 103)) as 'Vencimento' from VENDA where IDVENDA = {0}", Cod), "Vencimento");
                     sql = String.Format(@"SELECT * FROM VENDACOMISSAO WHERE IDVENDA = '{0}'", Cod);
-                    txtValorLiquido.Text = MetodosSql.GetField(sql, "VALORLIQUIDO");
-                    txtIof.Text = MetodosSql.GetField(sql, "IOF");
-                    txtComissao.Text = MetodosSql.GetField(sql, "COMISSAO");
-                    txtTotalVenda.Text = MetodosSql.GetField(sql, "TOTALVENDA");
+                    valorLiquido = double.Parse(MetodosSql.GetField(sql, "VALORLIQUIDO"));
+                    txtValorLiquido.Text =  valorLiquido.ToString("F2");
+                    iof = double.Parse(MetodosSql.GetField(sql, "IOF"));
+                    txtIof.Text = iof.ToString("F2");
+                    comissaoVenda = double.Parse(MetodosSql.GetField(sql, "COMISSAO"));
+                    txtComissaoVenda.Text = comissaoVenda.ToString("F2");
+                    valorTotal = double.Parse(MetodosSql.GetField(sql, "TOTALVENDA"));
+                    txtTotalVenda.Text = valorTotal.ToString("F2");
                     txtValorTotal.Text = txtTotalVenda.Text;
-                    txtComissaoVenda.Text = MetodosSql.GetField(sql, "COMISSAOVENDA");
+                    comissaoVenda = double.Parse(MetodosSql.GetField(sql, "COMISSAOVENDA"));
+                    txtComissaoVenda.Text = comissaoVenda.ToString("F2");
                     if(MetodosSql.GetField(sql, "COCORRETAGEM") == "S")
                     {
                         cbCoCorretagem.Checked = true;

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCadastroCiaSeguradora));
-            this.txtTipoPessoa = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.btnSalvar = new DevExpress.XtraEditors.SimpleButton();
@@ -38,7 +37,6 @@
             this.txtDataInclusao = new System.Windows.Forms.MaskedTextBox();
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtObservacaoDocumento = new System.Windows.Forms.TextBox();
@@ -64,8 +62,6 @@
             this.label17 = new System.Windows.Forms.Label();
             this.txtTelefone2 = new System.Windows.Forms.MaskedTextBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.lblSexo = new System.Windows.Forms.Label();
-            this.txtSexo = new System.Windows.Forms.ComboBox();
             this.txtCelular = new System.Windows.Forms.MaskedTextBox();
             this.txtTelefone = new System.Windows.Forms.MaskedTextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -79,18 +75,6 @@
             this.Email.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // txtTipoPessoa
-            // 
-            this.txtTipoPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTipoPessoa.FormattingEnabled = true;
-            this.txtTipoPessoa.Items.AddRange(new object[] {
-            "Pessoa Física",
-            "Pessoa Jurídica"});
-            this.txtTipoPessoa.Location = new System.Drawing.Point(224, 24);
-            this.txtTipoPessoa.Name = "txtTipoPessoa";
-            this.txtTipoPessoa.Size = new System.Drawing.Size(121, 24);
-            this.txtTipoPessoa.TabIndex = 1032;
             // 
             // label13
             // 
@@ -176,15 +160,6 @@
             this.label12.Size = new System.Drawing.Size(59, 13);
             this.label12.TabIndex = 1022;
             this.label12.Text = "CPF/CNPJ";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(221, 9);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(28, 13);
-            this.label15.TabIndex = 1031;
-            this.label15.Text = "Tipo";
             // 
             // tabPage2
             // 
@@ -317,8 +292,6 @@
             this.groupBox2.Controls.Add(this.label17);
             this.groupBox2.Controls.Add(this.txtTelefone2);
             this.groupBox2.Controls.Add(this.label16);
-            this.groupBox2.Controls.Add(this.lblSexo);
-            this.groupBox2.Controls.Add(this.txtSexo);
             this.groupBox2.Controls.Add(this.txtCelular);
             this.groupBox2.Controls.Add(this.txtTelefone);
             this.groupBox2.Controls.Add(this.label11);
@@ -337,7 +310,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(397, 157);
+            this.label22.Location = new System.Drawing.Point(5, 160);
             this.label22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(65, 13);
@@ -347,7 +320,7 @@
             // txtObservacao
             // 
             this.txtObservacao.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtObservacao.Location = new System.Drawing.Point(399, 174);
+            this.txtObservacao.Location = new System.Drawing.Point(7, 177);
             this.txtObservacao.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtObservacao.Multiline = true;
             this.txtObservacao.Name = "txtObservacao";
@@ -433,7 +406,7 @@
             // txtCelular2
             // 
             this.txtCelular2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCelular2.Location = new System.Drawing.Point(136, 116);
+            this.txtCelular2.Location = new System.Drawing.Point(136, 81);
             this.txtCelular2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtCelular2.Mask = "(99) 9 9999-9999";
             this.txtCelular2.Name = "txtCelular2";
@@ -443,7 +416,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(133, 101);
+            this.label17.Location = new System.Drawing.Point(136, 70);
             this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(45, 13);
@@ -453,7 +426,7 @@
             // txtTelefone2
             // 
             this.txtTelefone2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTelefone2.Location = new System.Drawing.Point(136, 157);
+            this.txtTelefone2.Location = new System.Drawing.Point(136, 122);
             this.txtTelefone2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtTelefone2.Mask = "(99) 0000-0000";
             this.txtTelefone2.Name = "txtTelefone2";
@@ -463,40 +436,17 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(133, 142);
+            this.label16.Location = new System.Drawing.Point(136, 107);
             this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(32, 13);
             this.label16.TabIndex = 25;
             this.label16.Text = "Fixo2";
             // 
-            // lblSexo
-            // 
-            this.lblSexo.AutoSize = true;
-            this.lblSexo.Location = new System.Drawing.Point(6, 61);
-            this.lblSexo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblSexo.Name = "lblSexo";
-            this.lblSexo.Size = new System.Drawing.Size(31, 13);
-            this.lblSexo.TabIndex = 23;
-            this.lblSexo.Text = "Sexo";
-            // 
-            // txtSexo
-            // 
-            this.txtSexo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.txtSexo.FormattingEnabled = true;
-            this.txtSexo.Items.AddRange(new object[] {
-            "M",
-            "F"});
-            this.txtSexo.Location = new System.Drawing.Point(4, 76);
-            this.txtSexo.Margin = new System.Windows.Forms.Padding(2);
-            this.txtSexo.Name = "txtSexo";
-            this.txtSexo.Size = new System.Drawing.Size(101, 21);
-            this.txtSexo.TabIndex = 2;
-            // 
             // txtCelular
             // 
             this.txtCelular.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCelular.Location = new System.Drawing.Point(4, 116);
+            this.txtCelular.Location = new System.Drawing.Point(4, 81);
             this.txtCelular.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtCelular.Mask = "(99) 9 9999-9999";
             this.txtCelular.Name = "txtCelular";
@@ -506,7 +456,7 @@
             // txtTelefone
             // 
             this.txtTelefone.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTelefone.Location = new System.Drawing.Point(4, 158);
+            this.txtTelefone.Location = new System.Drawing.Point(4, 122);
             this.txtTelefone.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtTelefone.Mask = "(99) 0000-0000";
             this.txtTelefone.Name = "txtTelefone";
@@ -516,7 +466,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 101);
+            this.label11.Location = new System.Drawing.Point(4, 65);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(39, 13);
@@ -526,7 +476,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 142);
+            this.label10.Location = new System.Drawing.Point(4, 106);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(32, 13);
@@ -567,7 +517,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(888, 508);
-            this.Controls.Add(this.txtTipoPessoa);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.btnCancelar);
@@ -577,7 +526,6 @@
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.label15);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmCadastroCiaSeguradora";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -598,7 +546,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.ComboBox txtTipoPessoa;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label8;
         private DevExpress.XtraEditors.SimpleButton btnSalvar;
@@ -607,7 +554,6 @@
         private System.Windows.Forms.MaskedTextBox txtDataInclusao;
         private System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox txtObservacaoDocumento;
@@ -633,8 +579,6 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.MaskedTextBox txtTelefone2;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label lblSexo;
-        private System.Windows.Forms.ComboBox txtSexo;
         private System.Windows.Forms.MaskedTextBox txtCelular;
         private System.Windows.Forms.MaskedTextBox txtTelefone;
         private System.Windows.Forms.Label label11;

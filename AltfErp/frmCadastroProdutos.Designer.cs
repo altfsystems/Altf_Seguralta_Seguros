@@ -272,7 +272,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmCadastroProdutos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Cadastro de Produto / Serviço";
+            this.Text = "Cadastro Seguro";
             this.Load += new System.EventHandler(this.frmCadastroProdutos_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

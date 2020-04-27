@@ -402,7 +402,7 @@
             // 
             // barHeaderItem1
             // 
-            this.barHeaderItem1.Caption = "2020.04.23.0001";
+            this.barHeaderItem1.Caption = "2020.04.27.0003";
             this.barHeaderItem1.Id = 28;
             this.barHeaderItem1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barHeaderItem1.ImageOptions.Image")));
             this.barHeaderItem1.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barHeaderItem1.ImageOptions.LargeImage")));
@@ -531,7 +531,6 @@
             // 
             this.ribbonPageGroup14.ItemLinks.Add(this.barButtonItem13);
             this.ribbonPageGroup14.Name = "ribbonPageGroup14";
-            this.ribbonPageGroup14.Text = "ribbonPageGroup14";
             // 
             // ribbonPage2
             // 

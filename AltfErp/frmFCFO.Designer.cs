@@ -75,6 +75,8 @@
             this.txtNome = new System.Windows.Forms.TextBox();
             this.lblNome = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnLimpar2 = new DevExpress.XtraEditors.SimpleButton();
+            this.btnLimpar1 = new DevExpress.XtraEditors.SimpleButton();
             this.label28 = new System.Windows.Forms.Label();
             this.pbDoc2 = new System.Windows.Forms.PictureBox();
             this.btnAbrir2 = new DevExpress.XtraEditors.SimpleButton();
@@ -199,6 +201,7 @@
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(104, 23);
             this.txtNumero.TabIndex = 13;
+            this.txtNumero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumero_KeyPress_1);
             // 
             // txtLogradouro
             // 
@@ -567,11 +570,14 @@
             // 
             this.txtSexo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.txtSexo.FormattingEnabled = true;
+            this.txtSexo.ItemHeight = 13;
             this.txtSexo.Items.AddRange(new object[] {
             "M",
             "F"});
             this.txtSexo.Location = new System.Drawing.Point(4, 115);
             this.txtSexo.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSexo.MaxDropDownItems = 2;
+            this.txtSexo.MaxLength = 1;
             this.txtSexo.Name = "txtSexo";
             this.txtSexo.Size = new System.Drawing.Size(101, 21);
             this.txtSexo.TabIndex = 3;
@@ -647,6 +653,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btnLimpar2);
+            this.tabPage1.Controls.Add(this.btnLimpar1);
             this.tabPage1.Controls.Add(this.label28);
             this.tabPage1.Controls.Add(this.pbDoc2);
             this.tabPage1.Controls.Add(this.btnAbrir2);
@@ -662,6 +670,24 @@
             this.tabPage1.Text = "Documentos";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // btnLimpar2
+            // 
+            this.btnLimpar2.Location = new System.Drawing.Point(634, 50);
+            this.btnLimpar2.Name = "btnLimpar2";
+            this.btnLimpar2.Size = new System.Drawing.Size(245, 23);
+            this.btnLimpar2.TabIndex = 1020;
+            this.btnLimpar2.Text = "Limpar";
+            this.btnLimpar2.Click += new System.EventHandler(this.btnLimpar2_Click);
+            // 
+            // btnLimpar1
+            // 
+            this.btnLimpar1.Location = new System.Drawing.Point(383, 50);
+            this.btnLimpar1.Name = "btnLimpar1";
+            this.btnLimpar1.Size = new System.Drawing.Size(245, 23);
+            this.btnLimpar1.TabIndex = 1019;
+            this.btnLimpar1.Text = "Limpar";
+            this.btnLimpar1.Click += new System.EventHandler(this.btnLimpar1_Click);
+            // 
             // label28
             // 
             this.label28.AutoSize = true;
@@ -673,7 +699,7 @@
             // 
             // pbDoc2
             // 
-            this.pbDoc2.Location = new System.Drawing.Point(631, 50);
+            this.pbDoc2.Location = new System.Drawing.Point(631, 79);
             this.pbDoc2.Name = "pbDoc2";
             this.pbDoc2.Size = new System.Drawing.Size(245, 309);
             this.pbDoc2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -709,14 +735,14 @@
             this.groupBox3.Controls.Add(this.txtCNPJ);
             this.groupBox3.Location = new System.Drawing.Point(6, 6);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(372, 353);
+            this.groupBox3.Size = new System.Drawing.Size(372, 382);
             this.groupBox3.TabIndex = 1015;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Documentos";
             // 
             // txtApolice
             // 
-            this.txtApolice.Location = new System.Drawing.Point(9, 207);
+            this.txtApolice.Location = new System.Drawing.Point(6, 206);
             this.txtApolice.Name = "txtApolice";
             this.txtApolice.Size = new System.Drawing.Size(152, 20);
             this.txtApolice.TabIndex = 25;
@@ -725,7 +751,7 @@
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(9, 190);
+            this.label29.Location = new System.Drawing.Point(6, 190);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(42, 13);
             this.label29.TabIndex = 1013;
@@ -751,7 +777,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(120, 16);
+            this.label26.Location = new System.Drawing.Point(121, 16);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(23, 13);
             this.label26.TabIndex = 19;
@@ -760,7 +786,7 @@
             // txtRg
             // 
             this.txtRg.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRg.Location = new System.Drawing.Point(122, 31);
+            this.txtRg.Location = new System.Drawing.Point(124, 31);
             this.txtRg.Mask = "00.000.000-00";
             this.txtRg.Name = "txtRg";
             this.txtRg.Size = new System.Drawing.Size(100, 22);
@@ -769,7 +795,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(224, 15);
+            this.label20.Location = new System.Drawing.Point(226, 15);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(34, 13);
             this.label20.TabIndex = 1011;
@@ -814,7 +840,7 @@
             // 
             this.txtCpf.Culture = new System.Globalization.CultureInfo("");
             this.txtCpf.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCpf.Location = new System.Drawing.Point(4, 31);
+            this.txtCpf.Location = new System.Drawing.Point(6, 31);
             this.txtCpf.Margin = new System.Windows.Forms.Padding(2);
             this.txtCpf.Mask = "000.000.000-00";
             this.txtCpf.Name = "txtCpf";
@@ -856,7 +882,7 @@
             // 
             this.txtCNPJ.Culture = new System.Globalization.CultureInfo("");
             this.txtCNPJ.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCNPJ.Location = new System.Drawing.Point(227, 30);
+            this.txtCNPJ.Location = new System.Drawing.Point(229, 30);
             this.txtCNPJ.Margin = new System.Windows.Forms.Padding(2);
             this.txtCNPJ.Mask = "00.000.000/0000-00";
             this.txtCNPJ.Name = "txtCNPJ";
@@ -875,7 +901,7 @@
             // 
             // pbImagemDoc1
             // 
-            this.pbImagemDoc1.Location = new System.Drawing.Point(384, 50);
+            this.pbImagemDoc1.Location = new System.Drawing.Point(384, 79);
             this.pbImagemDoc1.Name = "pbImagemDoc1";
             this.pbImagemDoc1.Size = new System.Drawing.Size(245, 309);
             this.pbImagemDoc1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1111,5 +1137,7 @@
         private DevExpress.XtraEditors.SimpleButton btnAbrir1;
         private System.Windows.Forms.TextBox txtApolice;
         private System.Windows.Forms.Label label29;
+        private DevExpress.XtraEditors.SimpleButton btnLimpar2;
+        private DevExpress.XtraEditors.SimpleButton btnLimpar1;
     }
 }

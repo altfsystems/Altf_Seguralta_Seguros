@@ -45,20 +45,23 @@ namespace AltfErp
         {
             try
             {
-                string sql = String.Format(@"SELECT PARCELA.IDPARCELA , PARCELA.NPARCELA , PARCELA.IDVENDA , PARCELA.IDFCFO , CAST(PARCELA.VALOR AS numeric(20,2)) AS VALOR , cast(isnull(X.VALORPAGO,0.00)as numeric(20,2)) as 'VALOR PAGO' , PARCELA.STATUS , PARCELA.DATAVENCIMENTO ,VENDA.DATAINCLUSAO AS DATAVENDA ,CONVERT(varchar, CONVERT(DATETIME, DATAPAGAMENTO, 121), 103) AS DATAPAGAMENTO , cast((isnull(PARCELA.VALOR, 0) - isnull(X.VALORPAGO, 0)) as numeric(20,2)) as RESTANTE FROM PARCELA
-                                                       INNER JOIN VENDA
-													   ON PARCELA.IDVENDA = VENDA.IDVENDA
-													   
-                                                       left JOIN(SELECT IDPARCELA, cast((SUM(isnull((RECEBIMENTO.VALORDINHEIRO),0.00))+ (SUM(isnull((RECEBIMENTO.VALORCHEQUE),0.00)))+ 
-							(SUM(isnull((RECEBIMENTO.VALORCARTAOCREDITO),0.00)) + (SUM(isnull((RECEBIMENTO.VALORCARTAODEBITO),0.00)))))as numeric(20,2))
-                                                       AS 'VALORPAGO' FROM RECEBIMENTO
+                string sql = String.Format(@"SELECT PARCELA.IDPARCELA , PARCELA.NPARCELA , PARCELA.IDVENDA , PARCELA.IDFCFO , CAST(PARCELA.VALOR AS numeric(20,2)) AS VALOR , 
+                                            cast(isnull(X.VALORPAGO,0.00)as numeric(20,2)) as 'VALOR PAGO' , PARCELA.STATUS , PARCELA.DATAVENCIMENTO ,VENDA.DATAINCLUSAO AS DATAVENDA, 
+                                            CONVERT(varchar, CONVERT(DATETIME, DATAPAGAMENTO, 121), 103) AS DATAPAGAMENTO , 
+                                            ROUND(cast((isnull(PARCELA.VALOR, 0) - isnull(X.VALORPAGO, 0)) as numeric(20,2)), -2) as RESTANTE FROM PARCELA
+                                            INNER JOIN VENDA
+											ON PARCELA.IDVENDA = VENDA.IDVENDA
+                                            left JOIN(SELECT IDPARCELA, ROUND(cast((SUM(isnull((RECEBIMENTO.VALORDINHEIRO),0.00))+ (SUM(isnull((RECEBIMENTO.VALORCHEQUE),0.00)))+ 
+							                (SUM(isnull((RECEBIMENTO.VALORCARTAOCREDITO),0.00)) + (SUM(isnull((RECEBIMENTO.VALORCARTAODEBITO),0.00)))))as numeric(20,2)), 2)
+                                            AS 'VALORPAGO' FROM RECEBIMENTO
+                                            GROUP BY IDPARCELA)X
+                                            ON X.IDPARCELA = PARCELA.IDPARCELA
+											where PARCELA.IDFCFO = {0} {1}
+                                            Order by IDPARCELA", txtCodigoCliente.Text, CODIGOVENDA);
 													   
 													
-                                                       GROUP BY IDPARCELA)X
-                                                       ON X.IDPARCELA = PARCELA.IDPARCELA
-													   where PARCELA.IDFCFO = {0} {1}
-                                                       Order by IDPARCELA", txtCodigoCliente.Text, CODIGOVENDA);
 
+													   
 
                 gridView1.BestFitColumns();
                 gridControl1.DataSource = MetodosSql.GetDT(sql);

@@ -26,7 +26,7 @@ namespace AltfErp
 
         private void AtualizaGrid()
         {
-            gridControl1.DataSource = MetodosSql.GetDT(@"SELECT IDSEGURADORA AS COD, NOME, NOMEFANTASIA, CPF, CNPJ, RG, OBSDOCUMENTO, TIPOPESSOA, OBSERVACAO FROM FCFOSEGURADORA");
+            gridControl1.DataSource = MetodosSql.GetDT(@"SELECT IDSEGURADORA AS COD, NOME, NOMEFANTASIA, CPF, CNPJ, RG, OBSDOCUMENTO, OBSERVACAO FROM FCFOSEGURADORA");
         }
 
       

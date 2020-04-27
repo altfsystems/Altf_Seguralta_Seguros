@@ -28,46 +28,46 @@ namespace AltfErp
                 if(Editar)
                 {
                     string sql = String.Format(@"UPDATE FCFOSEGURADORA SET NOME = '{0}', NOMEFANTASIA = '{1}', CPF = '{2}', CNPJ = '{3}', RG = '{4}', OBSDOCUMENTO = '{5}',
-                                                 SEXO = '{6}', TELEFONE1 = '{7}', TELEFONE2 = '{8}', CELULAR1 = '{9}', CELULAR2 = '{10}', EMAIL = '{11}', EMAIL2 = '{12}',
-                                                 OBSERVACAO = '{13}', TIPOPESSOA = '{14}'",
+                                                 TELEFONE1 = '{6}', TELEFONE2 = '{7}', CELULAR = '{8}', CELULAR2 = '{9}', EMAIL = '{10}', EMAIL2 = '{11}',
+                                                 OBSERVACAO = '{12}'",
                                                   /*{0}*/  txtNome.Text,
                                                   /*{1}*/  txtNomeFantasia.Text,
                                                   /*{2}*/  txtCpf.Text,
                                                   /*{3}*/  txtCNPJ.Text,
                                                   /*{4}*/  txtRg.Text,
                                                   /*{5}*/  txtObservacaoDocumento.Text,
-                                                  /*{6}*/  txtSexo.Text,
-                                                  /*{7}*/  txtTelefone.Text,
-                                                  /*{8}*/  txtTelefone2.Text,
-                                                 /*{9}*/   txtCelular.Text,
-                                                 /*{10}*/  txtCelular2.Text,
-                                                 /*{11}*/  txtEmail.Text,
-                                                 /*{12}*/  txtEmail2.Text,
-                                                 /*{13}*/  txtObservacao.Text,
-                                                 /*{14}*/  txtTipoPessoa.Text);
+                                                  /*{6}*/  txtTelefone.Text,
+                                                  /*{7}*/  txtTelefone2.Text,
+                                                 /*{8}*/   txtCelular.Text,
+                                                 /*{9}*/  txtCelular2.Text,
+                                                 /*{10}*/  txtEmail.Text,
+                                                 /*{11}*/  txtEmail2.Text,
+                                                 /*{12}*/  txtObservacao.Text);
 
-                                                 MetodosSql.ExecQuery(sql);
+                                                  
+
+                    MetodosSql.ExecQuery(sql);
 
                 }
                 else
                 {
                     string sql = String.Format(@"INSERT INTO FCFOSEGURADORA VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}',
-                                                '{10}', '{11}', '{12}', '{13}', '{14}', getdate())",
+                                                '{10}', '{11}', '{12}', getdate())",
                                                   /*{0}*/  txtNome.Text,
                                                   /*{1}*/  txtNomeFantasia.Text,
                                                   /*{2}*/  txtCpf.Text,
                                                   /*{3}*/  txtCNPJ.Text,
                                                   /*{4}*/  txtRg.Text,
                                                   /*{5}*/  txtObservacaoDocumento.Text,
-                                                  /*{6}*/  txtSexo.Text,
-                                                  /*{7}*/  txtTelefone.Text,
-                                                  /*{8}*/  txtTelefone2.Text,
-                                                 /*{9}*/   txtCelular.Text,
-                                                 /*{10}*/  txtCelular2.Text,
-                                                 /*{11}*/  txtEmail.Text,
-                                                 /*{12}*/  txtEmail2.Text,
-                                                 /*{13}*/  txtObservacao.Text,
-                                                 /*{14}*/  txtTipoPessoa.Text);
+                                                  /*{6}*/  txtTelefone.Text,
+                                                  /*{7}*/  txtTelefone2.Text,
+                                                 /*{8}*/   txtCelular.Text,
+                                                 /*{9}*/  txtCelular2.Text,
+                                                 /*{10}*/  txtEmail.Text,
+                                                 /*{11}*/  txtEmail2.Text,
+                                                 /*{12}*/  txtObservacao.Text);
+
+                                                 
 
                                                  MetodosSql.ExecQuery(sql);
                     Editar = true;
@@ -99,7 +99,7 @@ namespace AltfErp
                     string sql = String.Format(@"SELECT * FROM FCFOSEGURADORA WHERE IDSEGURADORA = '{0}'", Cod);
                     txtNome.Text = MetodosSql.GetField(sql, "NOME");
                     txtNomeFantasia.Text = MetodosSql.GetField(sql, "NOMEFANTASIA");
-                    txtSexo.Text = MetodosSql.GetField(sql, "SEXO");
+                   
                     txtCelular.Text = MetodosSql.GetField(sql, "CELULAR");
                     txtCelular2.Text = MetodosSql.GetField(sql, "CELULAR2");
                     txtTelefone.Text = MetodosSql.GetField(sql, "TELEFONE1");
@@ -111,7 +111,7 @@ namespace AltfErp
                     txtCNPJ.Text = MetodosSql.GetField(sql, "CNPJ");
                     txtRg.Text = MetodosSql.GetField(sql, "RG");
                     txtObservacaoDocumento.Text = MetodosSql.GetField(sql, "OBSDOCUMENTO");
-                    txtTipoPessoa.Text = MetodosSql.GetField(sql, "TIPOPESSOA");
+                    
                     txtDataInclusao.Text = MetodosSql.GetField(String.Format(@"SELECT CONVERT(VARCHAR, DATAINCLUSAO, 103) AS DATAINCLUSAO FROM FCFOSEGURADORA WHERE IDSEGURADORA = '{0}'", Cod), "DATAINCLUSAO");
                     txtCodigo.Text = MetodosSql.GetField(sql, "IDSEGURADORA");
                 }

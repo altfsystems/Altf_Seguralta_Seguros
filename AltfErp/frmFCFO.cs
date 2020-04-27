@@ -411,6 +411,24 @@ namespace AltfErp
             }
         }
 
+        private void btnLimpar1_Click(object sender, EventArgs e)
+        {
+            pbImagemDoc1.Image = null;
+        }
+
+        private void btnLimpar2_Click(object sender, EventArgs e)
+        {
+            pbDoc2.Image = null;
+        }
+
+        private void txtNumero_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
         private void btnCancelar_Click_1(object sender, EventArgs e)
         {
             this.Close();

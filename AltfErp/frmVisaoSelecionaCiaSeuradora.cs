@@ -26,7 +26,7 @@ namespace AltfErp
 
       private void AtualizaGrid()
         {
-            grdVisaoSelecionaCia.DataSource = MetodosSql.GetDT("SELECT IDSEGURADORA AS COD, NOME, NOMEFANTASIA, CPF, CNPJ, RG, TIPOPESSOA, CONVERT(VARCHAR, DATAINCLUSAO, 103) AS DATAINCLUSAO FROM FCFOSEGURADORA");
+            grdVisaoSelecionaCia.DataSource = MetodosSql.GetDT("SELECT IDSEGURADORA AS COD, NOME, NOMEFANTASIA, CPF, CNPJ, RG, CONVERT(VARCHAR, DATAINCLUSAO, 103) AS DATAINCLUSAO FROM FCFOSEGURADORA");
         }
 
         private void btnSeleciona_Click(object sender, EventArgs e)
