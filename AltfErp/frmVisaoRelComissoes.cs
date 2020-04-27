@@ -17,10 +17,10 @@ namespace AltfErp
         public frmVisaoRelComissoes()
         {
             InitializeComponent();
-            frmFiltroDataVencimento frm = new frmFiltroDataVencimento();
+            frmFiltroComissoes frm = new frmFiltroComissoes();
             frm.ShowDialog();
-            Inicio = frm.DataInicio;
-            Fim = frm.DataFim;
+            Inicio = frm.dtInicio;
+            Fim = frm.dtFim;
             AtualizaGrid();
         }
 

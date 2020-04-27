@@ -229,7 +229,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(224, 15);
+            this.label20.Location = new System.Drawing.Point(228, 16);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(34, 13);
             this.label20.TabIndex = 1011;
@@ -310,7 +310,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(5, 160);
+            this.label22.Location = new System.Drawing.Point(2, 148);
             this.label22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(65, 13);
@@ -320,7 +320,7 @@
             // txtObservacao
             // 
             this.txtObservacao.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtObservacao.Location = new System.Drawing.Point(7, 177);
+            this.txtObservacao.Location = new System.Drawing.Point(4, 164);
             this.txtObservacao.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtObservacao.Multiline = true;
             this.txtObservacao.Name = "txtObservacao";
@@ -346,7 +346,7 @@
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 72);
+            this.label9.Location = new System.Drawing.Point(4, 73);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(38, 13);
@@ -387,7 +387,7 @@
             // txtNomeFantasia
             // 
             this.txtNomeFantasia.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNomeFantasia.Location = new System.Drawing.Point(176, 35);
+            this.txtNomeFantasia.Location = new System.Drawing.Point(177, 35);
             this.txtNomeFantasia.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtNomeFantasia.Name = "txtNomeFantasia";
             this.txtNomeFantasia.Size = new System.Drawing.Size(168, 23);
@@ -446,7 +446,7 @@
             // txtCelular
             // 
             this.txtCelular.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCelular.Location = new System.Drawing.Point(4, 81);
+            this.txtCelular.Location = new System.Drawing.Point(4, 80);
             this.txtCelular.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtCelular.Mask = "(99) 9 9999-9999";
             this.txtCelular.Name = "txtCelular";
@@ -466,7 +466,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(4, 65);
+            this.label11.Location = new System.Drawing.Point(3, 64);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(39, 13);
@@ -476,7 +476,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(4, 106);
+            this.label10.Location = new System.Drawing.Point(2, 106);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(32, 13);
@@ -495,7 +495,7 @@
             // lblNome
             // 
             this.lblNome.AutoSize = true;
-            this.lblNome.Location = new System.Drawing.Point(6, 18);
+            this.lblNome.Location = new System.Drawing.Point(3, 18);
             this.lblNome.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblNome.Name = "lblNome";
             this.lblNome.Size = new System.Drawing.Size(35, 13);

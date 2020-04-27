@@ -33,8 +33,8 @@ namespace AltfErp
 
         private void AtualizaGrid()
         {
-            grdVisaoCliente.DataSource = MetodosSql.GetDT(@"select IDFCFO AS IDCLIENTE, NOME, NOMEFANTASIA AS SOBRENOME, CPF, CNPJ, DTANASCIMENTO, SEXO, TELEFONE1, TELEFONE2, CELULAR,CELULAR2, EMAIL, EMAIL2,
-                                                                              CIDADE, ESTADO, OBSERVACAO, DATAINCLUSAO  FROM FCFO WHERE TIPO = 'C' ORDER BY NOME" );
+            grdVisaoCliente.DataSource = MetodosSql.GetDT(@"select IDFCFO AS IDCLIENTE, NOME, NOMEFANTASIA AS SOBRENOME, TELEFONE1, TELEFONE2, CELULAR,CELULAR2, EMAIL, EMAIL2,
+                                                               OBSERVACAO, DATAINCLUSAO  FROM FCFO WHERE TIPO = 'C' ORDER BY NOME" );
 
         }
 

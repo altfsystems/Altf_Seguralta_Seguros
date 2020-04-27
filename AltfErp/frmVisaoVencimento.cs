@@ -12,7 +12,7 @@ namespace AltfErp
 {
     public partial class frmVisaoVencimento : Form
     {
-        string Inicio, Fim;
+        string Inicio, Fim, Todos, Vencidos;
         public frmVisaoVencimento()
         {
             InitializeComponent();
@@ -36,6 +36,8 @@ namespace AltfErp
             frm.ShowDialog();
             Inicio = frm.DataInicio;
             Fim = frm.DataFim;
+            Todos = frm.todos;
+            Vencidos = frm.vencidos;
         }
 
         private void toolStripLabel1_Click(object sender, EventArgs e)
@@ -79,8 +81,8 @@ namespace AltfErp
                                         ON FCFO.IDFCFO = VENDA.IDFCFO
                                         INNER JOIN VENDEDORES
                                         ON VENDEDORES.IDVENDEDOR = VENDA.IDVENDEDOR
-                                        WHERE DATAVENCIMENTO >=CONVERT(varchar, CONVERT(DATETIME, '{0}', 103), 121) AND DATAVENCIMENTO <= CONVERT(varchar, CONVERT(datetime, '{1}', 103), 121)
-										", Inicio, Fim);
+                                        WHERE {0} {1} DATAVENCIMENTO >=CONVERT(varchar, CONVERT(DATETIME, '{2}', 103), 121) AND DATAVENCIMENTO <= CONVERT(varchar, CONVERT(datetime, '{3}', 103), 121)
+										", Todos, Vencidos, Inicio, Fim);
 
             grdVisaoDataVencimento.DataSource = MetodosSql.GetDT(sql);
 

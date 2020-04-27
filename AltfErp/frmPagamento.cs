@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.Charts.Native;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -228,7 +229,15 @@ namespace AltfErp
             }
         }
 
-       
+        private void btnEditarData_Click(object sender, EventArgs e)
+        {
+            var rowHandle = gridView1.FocusedRowHandle;
+            var cod = gridView1.GetRowCellValue(rowHandle, "IDPARCELA");
+
+            frmEditarData frm = new frmEditarData(cod.ToString());
+            frm.ShowDialog();
+            AtualizaGrid();
+        }
     }
 }
 

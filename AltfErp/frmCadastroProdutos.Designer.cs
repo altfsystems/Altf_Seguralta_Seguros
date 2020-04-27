@@ -212,6 +212,7 @@
             this.txtCiaSeguradora.Location = new System.Drawing.Point(39, 188);
             this.txtCiaSeguradora.Margin = new System.Windows.Forms.Padding(2);
             this.txtCiaSeguradora.Name = "txtCiaSeguradora";
+            this.txtCiaSeguradora.ReadOnly = true;
             this.txtCiaSeguradora.Size = new System.Drawing.Size(583, 20);
             this.txtCiaSeguradora.TabIndex = 62;
             // 

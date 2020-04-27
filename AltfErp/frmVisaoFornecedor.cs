@@ -26,7 +26,7 @@ namespace AltfErp
 
         private void AtualizaGrid()
         {
-            gridControl1.DataSource = MetodosSql.GetDT(@"SELECT IDSEGURADORA AS COD, NOME, NOMEFANTASIA, CPF, CNPJ, RG, OBSDOCUMENTO, OBSERVACAO FROM FCFOSEGURADORA");
+            gridControl1.DataSource = MetodosSql.GetDT(@"SELECT IDSEGURADORA AS COD, NOME, NOMEFANTASIA, CPF, CNPJ, RG, OBSDOCUMENTO, OBSERVACAO FROM FCFOSEGURADORA ORDER BY NOME");
         }
 
       
@@ -88,9 +88,18 @@ namespace AltfErp
 
                 var obj = gridView1.GetRowCellValue(rowHandle, "COD");
 
-                frmCadastroCiaSeguradora frm = new frmCadastroCiaSeguradora(true, obj.ToString());
-                frm.ShowDialog();
-                AtualizaGrid();
+                if(obj == null)
+                {
+                    MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    frmCadastroCiaSeguradora frm = new frmCadastroCiaSeguradora(true, obj.ToString());
+                    frm.ShowDialog();
+                    AtualizaGrid();
+                }
+
+               
 
 
             }

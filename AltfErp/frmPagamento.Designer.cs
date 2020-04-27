@@ -44,6 +44,7 @@
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.btnVisualizarVenda = new DevExpress.XtraEditors.SimpleButton();
             this.btnEfetuarPagamento = new DevExpress.XtraEditors.SimpleButton();
+            this.btnEditarData = new DevExpress.XtraEditors.SimpleButton();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -196,7 +197,7 @@
             // 
             // btnVisualizarVenda
             // 
-            this.btnVisualizarVenda.Location = new System.Drawing.Point(122, 85);
+            this.btnVisualizarVenda.Location = new System.Drawing.Point(122, 86);
             this.btnVisualizarVenda.Margin = new System.Windows.Forms.Padding(2);
             this.btnVisualizarVenda.Name = "btnVisualizarVenda";
             this.btnVisualizarVenda.Size = new System.Drawing.Size(85, 23);
@@ -206,13 +207,23 @@
             // 
             // btnEfetuarPagamento
             // 
-            this.btnEfetuarPagamento.Location = new System.Drawing.Point(12, 85);
+            this.btnEfetuarPagamento.Location = new System.Drawing.Point(12, 86);
             this.btnEfetuarPagamento.Margin = new System.Windows.Forms.Padding(2);
             this.btnEfetuarPagamento.Name = "btnEfetuarPagamento";
             this.btnEfetuarPagamento.Size = new System.Drawing.Size(106, 23);
             this.btnEfetuarPagamento.TabIndex = 61;
             this.btnEfetuarPagamento.Text = "Efetuar Pagamento";
             this.btnEfetuarPagamento.Click += new System.EventHandler(this.btnEfetuarPagamento_Click);
+            // 
+            // btnEditarData
+            // 
+            this.btnEditarData.Location = new System.Drawing.Point(211, 86);
+            this.btnEditarData.Margin = new System.Windows.Forms.Padding(2);
+            this.btnEditarData.Name = "btnEditarData";
+            this.btnEditarData.Size = new System.Drawing.Size(130, 23);
+            this.btnEditarData.TabIndex = 62;
+            this.btnEditarData.Text = "Editar Data Pagamento";
+            this.btnEditarData.Click += new System.EventHandler(this.btnEditarData_Click);
             // 
             // frmPagamento
             // 
@@ -221,6 +232,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(905, 583);
+            this.Controls.Add(this.btnEditarData);
             this.Controls.Add(this.btnEfetuarPagamento);
             this.Controls.Add(this.btnVisualizarVenda);
             this.Controls.Add(this.gridControl1);
@@ -258,5 +270,6 @@
         private System.Windows.Forms.Label label1;
         public DevExpress.XtraEditors.SimpleButton btnVisualizarVenda;
         public DevExpress.XtraEditors.SimpleButton btnEfetuarPagamento;
+        public DevExpress.XtraEditors.SimpleButton btnEditarData;
     }
 }

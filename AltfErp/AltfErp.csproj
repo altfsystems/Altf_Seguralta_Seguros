@@ -126,6 +126,12 @@
     <Compile Include="frmDataVencimento.Designer.cs">
       <DependentUpon>frmDataVencimento.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmEditarData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEditarData.Designer.cs">
+      <DependentUpon>frmEditarData.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmEntradaProduto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +143,12 @@
     </Compile>
     <Compile Include="frmFCFO.Designer.cs">
       <DependentUpon>frmFCFO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmFiltroComissoes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFiltroComissoes.Designer.cs">
+      <DependentUpon>frmFiltroComissoes.cs</DependentUpon>
     </Compile>
     <Compile Include="frmFiltroDataVencimento.cs">
       <SubType>Form</SubType>
@@ -393,11 +405,17 @@
     <EmbeddedResource Include="frmDataVencimento.resx">
       <DependentUpon>frmDataVencimento.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmEditarData.resx">
+      <DependentUpon>frmEditarData.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEntradaProduto.resx">
       <DependentUpon>frmEntradaProduto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmFCFO.resx">
       <DependentUpon>frmFCFO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFiltroComissoes.resx">
+      <DependentUpon>frmFiltroComissoes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmFiltroDataVencimento.resx">
       <DependentUpon>frmFiltroDataVencimento.cs</DependentUpon>

@@ -12,7 +12,8 @@ namespace AltfErp
 {
     public partial class frmFiltroDataVencimento : Form
     {
-       public string DataInicio, DataFim;
+       public string DataInicio, DataFim, todos, vencidos
+            ;
         public frmFiltroDataVencimento()
         {
             InitializeComponent();
@@ -23,24 +24,51 @@ namespace AltfErp
             this.Close();
         }
 
-        private void btnFiltrar_Click(object sender, EventArgs e)
+        private void rbtnTodos_CheckedChanged(object sender, EventArgs e)
         {
-            if(String.IsNullOrWhiteSpace(txtDthInicio.Text))
+            if(rbtnPeriodo.Checked == true)
             {
-                MessageBox.Show("Selecione uma data de inicio.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else if(String.IsNullOrWhiteSpace(txtDthFim.Text))
-            {
-                MessageBox.Show("Selecione uma data para o final.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDthInicio.Enabled = true;
+                txtDthFim.Enabled = true;
             }
             else
             {
-                DataInicio = txtDthInicio.DateTime.ToString("dd/MM/yyyy");
-                DataFim = txtDthFim.DateTime.ToString("dd/MM/yyyy");
-                this.Close();
+                txtDthInicio.Enabled = false;
+                txtDthFim.Enabled = false;
             }
-            
-            
+        }
+
+        private void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            if(rbtnTodos.Checked == true)
+            {
+                todos = "1=1 --";
+            }
+            else if(rbtnVencidos.Checked == true)
+            {
+
+                vencidos = "DATAVENCIMENTO <= GETDATE() --";
+            }
+            else
+            {
+                if (String.IsNullOrWhiteSpace(txtDthInicio.Text))
+                {
+                    MessageBox.Show("Selecione uma data de inicio.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else if (String.IsNullOrWhiteSpace(txtDthFim.Text))
+                {
+                    MessageBox.Show("Selecione uma data para o final.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    DataInicio = txtDthInicio.DateTime.ToString("dd/MM/yyyy");
+                    DataFim = txtDthFim.DateTime.ToString("dd/MM/yyyy");
+                    
+                }
+            }
+
+            this.Close();
+
         }
     }
 }

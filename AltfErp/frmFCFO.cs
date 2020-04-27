@@ -429,6 +429,26 @@ namespace AltfErp
             }
         }
 
+        private void txtSexo_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsLetter(e.KeyChar) || char.IsControl(e.KeyChar)))
+            {
+
+                e.Handled = true;
+
+            }
+        }
+
+        private void txtEstadoCivil_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsLetter(e.KeyChar) || char.IsControl(e.KeyChar)))
+            {
+
+                e.Handled = true;
+
+            }
+        }
+
         private void btnCancelar_Click_1(object sender, EventArgs e)
         {
             this.Close();

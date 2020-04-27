@@ -208,7 +208,7 @@
             this.txtLogradouro.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLogradouro.Location = new System.Drawing.Point(6, 124);
             this.txtLogradouro.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.txtLogradouro.MaxLength = 10;
+            this.txtLogradouro.MaxLength = 40;
             this.txtLogradouro.Name = "txtLogradouro";
             this.txtLogradouro.Size = new System.Drawing.Size(328, 23);
             this.txtLogradouro.TabIndex = 15;
@@ -581,6 +581,7 @@
             this.txtSexo.Name = "txtSexo";
             this.txtSexo.Size = new System.Drawing.Size(101, 21);
             this.txtSexo.TabIndex = 3;
+            this.txtSexo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSexo_KeyPress_1);
             // 
             // txtCelular
             // 
@@ -861,6 +862,7 @@
             this.txtEstadoCivil.Name = "txtEstadoCivil";
             this.txtEstadoCivil.Size = new System.Drawing.Size(121, 21);
             this.txtEstadoCivil.TabIndex = 23;
+            this.txtEstadoCivil.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEstadoCivil_KeyPress);
             // 
             // txtTipoResidencia
             // 
