@@ -33,20 +33,27 @@ namespace AltfErp
                 var rowHandle = gridView1.FocusedRowHandle;
 
                 var obj = gridView1.GetRowCellValue(rowHandle, "IDFCFO");
+
+                if(obj != null)
+                {
+
+
                     CODIGO = obj.ToString();
-
-
-                
-                
                     obj = gridView1.GetRowCellValue(rowHandle, "NOME");
                     NOME = obj.ToString();
                     obj = gridView1.GetRowCellValue(rowHandle, "NOMEFANTASIA");
                     NOMEFANTASIA = obj.ToString();
+
+
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
                 
-
-
-
-                this.Close();
+                
+                   
             }
             catch (Exception ex)
             {

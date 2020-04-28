@@ -36,7 +36,7 @@ namespace AltfErp
             try
             {
                 var rowHandle = gridView1.FocusedRowHandle;
-
+                
 
 
             

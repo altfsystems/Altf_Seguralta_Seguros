@@ -53,12 +53,20 @@ namespace AltfErp
             var rowHandle = gridView1.FocusedRowHandle;
             var cod = gridView1.GetRowCellValue(rowHandle, "IDFCFO");
 
-            relInfoCliente report = new relInfoCliente(cod.ToString());
-
-            using (ReportPrintTool printTool = new ReportPrintTool(report))
+            if(cod != null)
             {
-                printTool.ShowPreviewDialog();
+                relInfoCliente report = new relInfoCliente(cod.ToString());
+
+                using (ReportPrintTool printTool = new ReportPrintTool(report))
+                {
+                    printTool.ShowPreviewDialog();
+                }
             }
+            else
+            {
+                MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         }
     }
 }

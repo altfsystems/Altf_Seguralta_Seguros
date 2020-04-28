@@ -93,10 +93,16 @@ namespace AltfErp
 
                 var obj = gridView1.GetRowCellValue(rowHandle, "IDPRODUTO");
 
-                frmCadastroProdutos frm = new frmCadastroProdutos(true, obj.ToString());
-                frm.ShowDialog();
-                AtualizaGrid();
-
+                if(obj != null)
+                {
+                    frmCadastroProdutos frm = new frmCadastroProdutos(true, obj.ToString());
+                    frm.ShowDialog();
+                    AtualizaGrid();
+                }
+                else
+                {
+                    MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
 
             }
             catch (Exception ex)
@@ -115,23 +121,30 @@ namespace AltfErp
                 var rowHandle = gridView1.FocusedRowHandle;
                 var obj = gridView1.GetRowCellValue(rowHandle, "IDPRODUTO");
 
-                
-                quant = int.Parse(MetodosSql.GetField(String.Format(@"SELECT COUNT(IDPRODUTO) AS PRODUTO FROM ITEMMOVIMENTO WHERE IDPRODUTO= '{0}'", obj.ToString()), "PRODUTO"));
-
-                if (DialogResult.Yes == MessageBox.Show("Deseja mesmo exluir?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                if(obj != null)
                 {
-                    if(quant > 0)
+                    quant = int.Parse(MetodosSql.GetField(String.Format(@"SELECT COUNT(IDPRODUTO) AS PRODUTO FROM ITEMMOVIMENTO WHERE IDPRODUTO= '{0}'", obj.ToString()), "PRODUTO"));
+
+                    if (DialogResult.Yes == MessageBox.Show("Deseja mesmo exluir?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                     {
-                        MessageBox.Show("Existe uma venda que contém este seguro. Você não poderá excluir seguros que estão cadastrados em vendas.", "Aviso.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        
+                        if (quant > 0)
+                        {
+                            MessageBox.Show("Existe uma venda que contém este seguro. Você não poderá excluir seguros que estão cadastrados em vendas.", "Aviso.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        }
+                        else
+                        {
+                            MetodosSql.ExecQuery(String.Format(@"delete from PRODUTO where IDPRODUTO = {0}", obj.ToString()));
+                            AtualizaGrid();
+                        }
+
                     }
-                    else
-                    {
-                        MetodosSql.ExecQuery(String.Format(@"delete from PRODUTO where IDPRODUTO = {0}", obj.ToString()));
-                        AtualizaGrid();
-                    }
-                    
                 }
+                else
+                {
+                    MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+               
             }
             catch (Exception ex)
             {

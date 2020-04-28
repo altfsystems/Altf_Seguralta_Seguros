@@ -29,7 +29,7 @@ namespace AltfErp
                 {
                     string sql = String.Format(@"UPDATE FCFOSEGURADORA SET NOME = '{0}', NOMEFANTASIA = '{1}', CPF = '{2}', CNPJ = '{3}', RG = '{4}', OBSDOCUMENTO = '{5}',
                                                  TELEFONE1 = '{6}', TELEFONE2 = '{7}', CELULAR = '{8}', CELULAR2 = '{9}', EMAIL = '{10}', EMAIL2 = '{11}',
-                                                 OBSERVACAO = '{12}'",
+                                                 OBSERVACAO = '{12}' WHERE IDSEGURADORA = '{13}'",
                                                   /*{0}*/  txtNome.Text,
                                                   /*{1}*/  txtNomeFantasia.Text,
                                                   /*{2}*/  txtCpf.Text,
@@ -38,11 +38,12 @@ namespace AltfErp
                                                   /*{5}*/  txtObservacaoDocumento.Text,
                                                   /*{6}*/  txtTelefone.Text,
                                                   /*{7}*/  txtTelefone2.Text,
-                                                 /*{8}*/   txtCelular.Text,
-                                                 /*{9}*/  txtCelular2.Text,
+                                                  /*{8}*/  txtCelular.Text,
+                                                  /*{9}*/  txtCelular2.Text,
                                                  /*{10}*/  txtEmail.Text,
                                                  /*{11}*/  txtEmail2.Text,
-                                                 /*{12}*/  txtObservacao.Text);
+                                                 /*{12}*/  txtObservacao.Text,
+                                                 /*{13}*/  Cod);
 
                                                   
 
@@ -131,6 +132,14 @@ namespace AltfErp
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void txtCelular_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

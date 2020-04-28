@@ -257,9 +257,11 @@
             "TO"});
             this.txtEstado.Location = new System.Drawing.Point(280, 215);
             this.txtEstado.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.txtEstado.MaxLength = 2;
             this.txtEstado.Name = "txtEstado";
             this.txtEstado.Size = new System.Drawing.Size(132, 23);
             this.txtEstado.TabIndex = 18;
+            this.txtEstado.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEstado_KeyPress_1);
             // 
             // txtCidade
             // 

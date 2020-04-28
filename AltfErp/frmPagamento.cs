@@ -46,10 +46,10 @@ namespace AltfErp
         {
             try
             {
-                string sql = String.Format(@"SELECT PARCELA.IDPARCELA , PARCELA.NPARCELA , PARCELA.IDVENDA , PARCELA.IDFCFO , CAST(PARCELA.VALOR AS numeric(20,2)) AS VALOR , 
+                string sql = String.Format(@"SELECT PARCELA.IDPARCELA , PARCELA.NPARCELA , PARCELA.IDVENDA , PARCELA.IDFCFO , ROUND(CAST(PARCELA.VALOR AS numeric(20,2)), 1) AS VALOR , 
                                             cast(isnull(X.VALORPAGO,0.00)as numeric(20,2)) as 'VALOR PAGO' , PARCELA.STATUS , PARCELA.DATAVENCIMENTO ,VENDA.DATAINCLUSAO AS DATAVENDA, 
-                                            CONVERT(varchar, CONVERT(DATETIME, DATAPAGAMENTO, 121), 103) AS DATAPAGAMENTO , 
-                                            ROUND(cast((isnull(PARCELA.VALOR, 0) - isnull(X.VALORPAGO, 0)) as numeric(20,2)), -2) as RESTANTE FROM PARCELA
+                                            CONVERT(varchar, CONVERT(DATETIME, PARCELA.DATAPAGAMENTO, 121), 103) AS DATAPAGAMENTO , 
+                                            ROUND(cast((isnull(PARCELA.VALOR, 0) - isnull(X.VALORPAGO, 0)) as numeric(20,2)), 1) as RESTANTE FROM PARCELA
                                             INNER JOIN VENDA
 											ON PARCELA.IDVENDA = VENDA.IDVENDA
                                             left JOIN(SELECT IDPARCELA, ROUND(cast((SUM(isnull((RECEBIMENTO.VALORDINHEIRO),0.00))+ (SUM(isnull((RECEBIMENTO.VALORCHEQUE),0.00)))+ 
@@ -145,13 +145,13 @@ namespace AltfErp
             try
             {
                 var rowHandle = gridView1.FocusedRowHandle;
-                object  obj = gridView1.GetRowCellValue(rowHandle, "IDVENDA");
+                object  obj = gridView1.GetRowCellValue(rowHandle, "IDPARCELA");
                 
-                string sql = String.Format(@"select CONVERT(varchar, CONVERT(DATETIME, DATAPAGAMENTO, 121), 103) as 'Nasc' from VENDA where IDVENDA = {0}", obj);
+                string sql = String.Format(@"select CONVERT(varchar, CONVERT(DATETIME, DATAPAGAMENTO, 121), 103) as 'Nasc' from PARCELA where IDPARCELA = {0}", obj);
                 
 
                 frmIdPagamento frm = new frmIdPagamento(false , null);
-                frm.txtDataPagamento.Text = MetodosSql.GetField(String.Format(@"select CONVERT(varchar, CONVERT(DATETIME, DATAPAGAMENTO, 121), 103) as 'Data' from VENDA where IDVENDA = {0}", obj), "Data");
+                frm.txtDataPagamento.Text = MetodosSql.GetField(String.Format(@"select CONVERT(varchar, CONVERT(DATETIME, DATAPAGAMENTO, 121), 103) as 'Data' from PARCELA where IDPARCELA = {0}", obj), "Data");
                 frm.CODIGOPARCELA = gridView1.GetRowCellValue(rowHandle, "IDPARCELA").ToString();
                 frm.CODIGOVENDA = gridView1.GetRowCellValue(rowHandle, "IDVENDA").ToString();
                 frm.RESTANTE =   gridView1.GetRowCellValue(rowHandle, "RESTANTE").ToString();

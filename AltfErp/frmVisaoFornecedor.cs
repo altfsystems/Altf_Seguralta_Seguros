@@ -67,11 +67,19 @@ namespace AltfErp
 
                     var obj = gridView1.GetRowCellValue(rowHandle, "COD");
 
-                    if (DialogResult.Yes == MessageBox.Show("Deseja mesmo exluir?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                    if(obj != null)
                     {
-                        MetodosSql.ExecQuery(String.Format(@"delete from FCFOSEGURADORA where IDSEGURADORA = {0}", obj.ToString()));
-                        AtualizaGrid();
+                        if (DialogResult.Yes == MessageBox.Show("Deseja mesmo exluir?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                        {
+                            MetodosSql.ExecQuery(String.Format(@"delete from FCFOSEGURADORA where IDSEGURADORA = {0}", obj.ToString()));
+                            AtualizaGrid();
+                        }
                     }
+                    else
+                    {
+                        MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                   
                 }
                 catch (Exception ex)
                 {

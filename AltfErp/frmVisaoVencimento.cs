@@ -47,20 +47,27 @@ namespace AltfErp
                 var rowHandle = gridView1.FocusedRowHandle;
                 var obj = gridView1.GetRowCellValue(rowHandle, "IDVENDA");
 
-                frmCadastroVenda frm = new frmCadastroVenda(true, obj.ToString(), null);
-                frm.btnAdicionar.Enabled = false;
-                frm.btnExcluir.Enabled = false;
-                frm.btnOk.Enabled = false;
-                frm.btnSalvar.Enabled = false;
-                frm.btnSelecionaProduto.Enabled = false;
-                frm.simpleButton2.Enabled = false;
-                frm.btnTipoPagamento.Enabled = false;
-                frm.txtObservacao.Enabled = false;
-                frm.txtValorTotal.Enabled = false;
-                frm.txtIof.Enabled = false;
-                frm.txtTotalVenda.Enabled = false;
-                frm.txtQuantidade.Enabled = false;
-                frm.ShowDialog();
+                if(obj != null)
+                {
+                    frmCadastroVenda frm = new frmCadastroVenda(true, obj.ToString(), null);
+                    frm.btnAdicionar.Enabled = false;
+                    frm.btnExcluir.Enabled = false;
+                    frm.btnOk.Enabled = false;
+                    frm.btnSalvar.Enabled = false;
+                    frm.btnSelecionaProduto.Enabled = false;
+                    frm.simpleButton2.Enabled = false;
+                    frm.btnTipoPagamento.Enabled = false;
+                    frm.txtObservacao.Enabled = false;
+                    frm.txtValorTotal.Enabled = false;
+                    frm.txtIof.Enabled = false;
+                    frm.txtTotalVenda.Enabled = false;
+                    frm.txtQuantidade.Enabled = false;
+                    frm.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
 
 
 

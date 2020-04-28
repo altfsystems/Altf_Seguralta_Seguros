@@ -26,15 +26,15 @@ namespace AltfErp
 
         private void frmEditarData_Load(object sender, EventArgs e)
         {
-            string sql = String.Format(@"SELECT CONVERT(VARCHAR, DATAVENCIMENTO, 103) AS DATAVENCIMENTO FROM PARCELA WHERE IDPARCELA = '{0}'", Cod);
-            txtDataVencimentoParcela.Text = MetodosSql.GetField(sql, "DATAVENCIMENTO");
+            string sql = String.Format(@"SELECT CONVERT(VARCHAR, DATAPAGAMENTO, 103) AS DATAPAGAMENTO FROM PARCELA WHERE IDPARCELA = '{0}'", Cod);
+            txtDataVencimentoParcela.Text = MetodosSql.GetField(sql, "DATAPAGAMENTO");
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             try
             {
-                string sql = String.Format(@"UPDATE PARCELA SET DATAVENCIMENTO = CONVERT(DATETIME, CONVERT(VARCHAR, '{0}', 121), 103) WHERE IDPARCELA = '{1}'", txtDataVencimentoParcela.Text, Cod);
+                string sql = String.Format(@"UPDATE PARCELA SET DATAPAGAMENTO = CONVERT(DATETIME, CONVERT(VARCHAR, '{0}', 121), 103) WHERE IDPARCELA = '{1}'", txtDataVencimentoParcela.Text, Cod);
                 MetodosSql.ExecQuery(sql);
                 this.Close();
             }

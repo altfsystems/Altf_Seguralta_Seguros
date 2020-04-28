@@ -20,10 +20,10 @@ namespace AltfErp
             grdVisaoVendedores.EmbeddedNavigator.Buttons.Remove.Visible = false;
             gridView1.BestFitColumns();
             AtualizaGrid();
-            
+
         }
 
-       private void AtualizaGrid()
+        private void AtualizaGrid()
         {
             grdVisaoVendedores.DataSource = MetodosSql.GetDT(@"SELECT * FROM VENDEDORES");
         }
@@ -40,9 +40,16 @@ namespace AltfErp
             var rowHandle = gridView1.FocusedRowHandle;
             var obj = gridView1.GetRowCellValue(rowHandle, "IDVENDEDOR");
 
-            frmCadastroVendedores frm = new frmCadastroVendedores(true, obj.ToString());
-            frm.ShowDialog();
-            AtualizaGrid();
+            if (obj != null)
+            {
+                frmCadastroVendedores frm = new frmCadastroVendedores(true, obj.ToString());
+                frm.ShowDialog();
+                AtualizaGrid();
+            }
+            else
+            {
+                MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -50,12 +57,23 @@ namespace AltfErp
             var rowHandle = gridView1.FocusedRowHandle;
             var obj = gridView1.GetRowCellValue(rowHandle, "IDVENDEDOR");
 
-            if(DialogResult.Yes == MessageBox.Show("Tem certeza que deseja excluir este vendedor?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            if (obj != null)
             {
-                string sql = String.Format(@"DELETE FROM VENDEDORES WHERE IDVENDEDOR = '{0}'", obj.ToString());
-                MetodosSql.ExecQuery(sql);
-                AtualizaGrid();
+                if (DialogResult.Yes == MessageBox.Show("Tem certeza que deseja excluir este vendedor?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                {
+                    string sql = String.Format(@"DELETE FROM VENDEDORES WHERE IDVENDEDOR = '{0}'", obj.ToString());
+                    MetodosSql.ExecQuery(sql);
+                    AtualizaGrid();
+                }
             }
+            else
+            {
+                MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+
+
+
         }
 
         private void grdVisaoVendedores_DoubleClick(object sender, EventArgs e)
@@ -63,9 +81,16 @@ namespace AltfErp
             var rowHandle = gridView1.FocusedRowHandle;
             var obj = gridView1.GetRowCellValue(rowHandle, "IDVENDEDOR");
 
-            frmCadastroVendedores frm = new frmCadastroVendedores(true, obj.ToString());
-            frm.ShowDialog();
-            AtualizaGrid();
+            if (obj != null)
+            {
+                frmCadastroVendedores frm = new frmCadastroVendedores(true, obj.ToString());
+                frm.ShowDialog();
+                AtualizaGrid();
+            }
+            else
+            {
+                MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }

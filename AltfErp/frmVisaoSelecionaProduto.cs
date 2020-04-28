@@ -15,8 +15,10 @@ namespace AltfErp
 
         public string CODIGO { get; set; }
         public string DESCRICAO { get; set; }
-
         public string CIASEGURADORA { get; set; }
+        public string OBSERVACAO { get; set; }
+
+
         // public string PRECOVENDA { get; set; }
         //public string PRECOENTRADA { get; set; }
 
@@ -49,6 +51,8 @@ namespace AltfErp
                 obj = gridView1.GetRowCellValue(rowHandle, "CIASEGURADORA");
                 CIASEGURADORA = obj.ToString();
 
+                obj = gridView1.GetRowCellValue(rowHandle, "OBSERVACAO");
+                OBSERVACAO = obj.ToString();
                 //obj = gridView1.GetRowCellValue(rowHandle, "PRECOUNVENDA");
                 //PRECOVENDA = obj.ToString();
                 //obj = gridView1.GetRowCellValue(rowHandle, "PRECOUNENTRADA");
@@ -73,20 +77,30 @@ namespace AltfErp
                 var rowHandle = gridView1.FocusedRowHandle;
 
                 var obj = gridView1.GetRowCellValue(rowHandle, "IDPRODUTO");
-                CODIGO = obj.ToString();
 
-                obj = gridView1.GetRowCellValue(rowHandle, "DESCRICAO");
-                DESCRICAO = obj.ToString();
+                if(obj != null)
+                {
+                    CODIGO = obj.ToString();
+                    obj = gridView1.GetRowCellValue(rowHandle, "DESCRICAO");
+                    DESCRICAO = obj.ToString();
 
-                obj = gridView1.GetRowCellValue(rowHandle, "CIASEGURADORA");
-                CIASEGURADORA = obj.ToString();
+                    obj = gridView1.GetRowCellValue(rowHandle, "CIASEGURADORA");
+                    CIASEGURADORA = obj.ToString();
 
-                //obj = gridView1.GetRowCellValue(rowHandle, "PRECOUNVENDA");
-                //PRECOVENDA = obj.ToString();
-                //obj = gridView1.GetRowCellValue(rowHandle, "PRECOUNENTRADA");
-                //PRECOENTRADA = obj.ToString();
+                    obj = gridView1.GetRowCellValue(rowHandle, "OBSERVACAO");
+                    OBSERVACAO = obj.ToString();
+                    //obj = gridView1.GetRowCellValue(rowHandle, "PRECOUNVENDA");
+                    //PRECOVENDA = obj.ToString();
+                    //obj = gridView1.GetRowCellValue(rowHandle, "PRECOUNENTRADA");
+                    //PRECOENTRADA = obj.ToString();
 
-                this.Close();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                
             }
             catch (Exception ex)
             {

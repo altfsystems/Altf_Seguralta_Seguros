@@ -449,6 +449,16 @@ namespace AltfErp
             }
         }
 
+        private void txtEstado_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsLetter(e.KeyChar) || char.IsControl(e.KeyChar)))
+            {
+
+                e.Handled = true;
+
+            }
+        }
+
         private void btnCancelar_Click_1(object sender, EventArgs e)
         {
             this.Close();
@@ -460,9 +470,17 @@ namespace AltfErp
             OpenFileDialog open = new OpenFileDialog();
             if (open.ShowDialog() == DialogResult.OK)
             {
-                string imagem1 = open.FileName;
-                bmpImagem1 = new Bitmap(imagem1);
-                pbImagemDoc1.Image = bmpImagem1;
+                try
+                {
+                    string imagem1 = open.FileName;
+                    bmpImagem1 = new Bitmap(imagem1);
+                    pbImagemDoc1.Image = bmpImagem1;
+                }
+                catch(Exception)
+                {
+                    MessageBox.Show("O arquivo de imagem não suporta arquivos .pdf", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
 
 
 
@@ -476,9 +494,18 @@ namespace AltfErp
             OpenFileDialog open = new OpenFileDialog();
             if (open.ShowDialog() == DialogResult.OK)
             {
-                string imagem2 = open.FileName;
-                bmpImagem2 = new Bitmap(imagem2);
-                pbDoc2.Image = bmpImagem2;
+                try
+                {
+                    string imagem2 = open.FileName;
+                    bmpImagem2 = new Bitmap(imagem2);
+                    pbDoc2.Image = bmpImagem2;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("O arquivo de imagem não suporta arquivos .pdf", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+                
 
             }
         }

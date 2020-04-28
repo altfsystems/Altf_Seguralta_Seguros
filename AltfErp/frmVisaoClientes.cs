@@ -79,11 +79,11 @@ namespace AltfErp
                     frm.ShowDialog();
                     AtualizaGrid();
                 }
-
                 else
                 {
                     MessageBox.Show("Selecione um registro", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
+
 
 
             }

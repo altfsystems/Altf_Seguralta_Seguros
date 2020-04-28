@@ -42,8 +42,16 @@ namespace AltfErp
         {
             var rowHandle = gridView1.FocusedRowHandle;
             var obj = gridView1.GetRowCellValue(rowHandle, "IDVENDEDOR");
-            CodVendedor = obj.ToString();
-            this.Close();
+
+            if (obj != null)
+            {
+                CodVendedor = obj.ToString();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }

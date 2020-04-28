@@ -117,7 +117,7 @@ namespace AltfErp
             txtValorRestante.Text =  RESTANTE;
             txtCodigoVenda.Text = CODIGOVENDA;
             txtCodigoParcela.Text = CODIGOPARCELA;
-            sql = String.Format(@"select cast(VALOR as numeric(20,2)) as 'VALOR' from PARCELA where IDPARCELA = '{0}'", CODIGOPARCELA);
+            sql = String.Format(@"select ROUND(cast(VALOR as numeric(20,2)), 1) as 'VALOR' from PARCELA where IDPARCELA = '{0}'", CODIGOPARCELA);
             txtValorParcela.Text = MetodosSql.GetField(sql, "VALOR");
             
             
@@ -211,9 +211,9 @@ namespace AltfErp
                    
                     if(ValorPagamento.ToString() != "0")
                     {
-                        string sql = String.Format(@"UPDATE VENDA set DATAPAGAMENTO = getdate() where IDVENDA = {0}", txtCodigoVenda.Text);
-                        Clipboard.SetText(sql);
+                        string sql = String.Format(@"UPDATE PARCELA set DATAPAGAMENTO = getdate() where IDPARCELA = {0}", CODIGOPARCELA);
                         MetodosSql.ExecQuery(sql);
+                        
                     }
                   
                         

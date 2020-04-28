@@ -87,11 +87,20 @@ namespace AltfErp
 
                     var obj = gridView1.GetRowCellValue(rowHandle, "IDENTRADA");
 
-                    if (DialogResult.Yes == MessageBox.Show("Deseja mesmo exluir?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                    if(obj != null)
                     {
-                        MetodosSql.ExecQuery(String.Format(@"delete from ENTRADAPRODUTO where IDENTRADA = {0}", obj.ToString()));
-                        AtualizaGrid();
+                        if (DialogResult.Yes == MessageBox.Show("Deseja mesmo exluir?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                        {
+                            MetodosSql.ExecQuery(String.Format(@"delete from ENTRADAPRODUTO where IDENTRADA = {0}", obj.ToString()));
+                            AtualizaGrid();
+                        }
                     }
+                    else
+                    {
+                        MessageBox.Show(@"Por favor, selecione um registro para ser excluido", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                    
                 }
                 catch (Exception ex)
                 {
@@ -108,9 +117,17 @@ namespace AltfErp
 
                 var obj = gridView1.GetRowCellValue(rowHandle, "IDENTRADA");
 
-                frmEntradaProduto frm = new frmEntradaProduto(true, obj.ToString());
-                frm.ShowDialog();
-                AtualizaGrid();
+                if(obj != null)
+                {
+                    frmEntradaProduto frm = new frmEntradaProduto(true, obj.ToString());
+                    frm.ShowDialog();
+                    AtualizaGrid();
+                }
+                else
+                {
+                    MessageBox.Show(@"Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+               
 
 
             }

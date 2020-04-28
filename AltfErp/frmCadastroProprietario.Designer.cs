@@ -37,10 +37,21 @@
             this.label13 = new System.Windows.Forms.Label();
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtCelular2 = new System.Windows.Forms.MaskedTextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.txtCelular = new System.Windows.Forms.MaskedTextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtTelefone2 = new System.Windows.Forms.MaskedTextBox();
+            this.txtCnpj = new System.Windows.Forms.MaskedTextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtCpf = new System.Windows.Forms.MaskedTextBox();
             this.txtContato = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.Email = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
+            this.txtEmail2 = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtNomeFantasia = new System.Windows.Forms.TextBox();
             this.lblSobrenome = new System.Windows.Forms.Label();
@@ -50,6 +61,7 @@
             this.txtNome = new System.Windows.Forms.TextBox();
             this.lblNome = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtCep = new System.Windows.Forms.MaskedTextBox();
             this.txtNumero = new System.Windows.Forms.TextBox();
             this.txtLogradouro = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -65,18 +77,6 @@
             this.txtRua = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtCpf = new System.Windows.Forms.MaskedTextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtCnpj = new System.Windows.Forms.MaskedTextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txtEmail2 = new System.Windows.Forms.TextBox();
-            this.txtTelefone2 = new System.Windows.Forms.MaskedTextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.txtCelular = new System.Windows.Forms.MaskedTextBox();
-            this.txtCelular2 = new System.Windows.Forms.MaskedTextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.txtCep = new System.Windows.Forms.MaskedTextBox();
             this.groupBox2.SuspendLayout();
             this.Email.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -187,6 +187,101 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Identficação";
             // 
+            // txtCelular2
+            // 
+            this.txtCelular2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCelular2.Location = new System.Drawing.Point(139, 119);
+            this.txtCelular2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.txtCelular2.Mask = "(99) 9 9999-9999";
+            this.txtCelular2.Name = "txtCelular2";
+            this.txtCelular2.Size = new System.Drawing.Size(128, 23);
+            this.txtCelular2.TabIndex = 5;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(136, 103);
+            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(45, 13);
+            this.label17.TabIndex = 1028;
+            this.label17.Text = "Celular2";
+            // 
+            // txtCelular
+            // 
+            this.txtCelular.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCelular.Location = new System.Drawing.Point(7, 119);
+            this.txtCelular.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.txtCelular.Mask = "(99) 9 9999-9999";
+            this.txtCelular.Name = "txtCelular";
+            this.txtCelular.Size = new System.Drawing.Size(128, 23);
+            this.txtCelular.TabIndex = 4;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(4, 103);
+            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(39, 13);
+            this.label16.TabIndex = 1026;
+            this.label16.Text = "Celular";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(136, 145);
+            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(55, 13);
+            this.label15.TabIndex = 1025;
+            this.label15.Text = "Telefone2";
+            // 
+            // txtTelefone2
+            // 
+            this.txtTelefone2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTelefone2.Location = new System.Drawing.Point(139, 161);
+            this.txtTelefone2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.txtTelefone2.Mask = "(99) 0000-0000";
+            this.txtTelefone2.Name = "txtTelefone2";
+            this.txtTelefone2.Size = new System.Drawing.Size(128, 23);
+            this.txtTelefone2.TabIndex = 7;
+            // 
+            // txtCnpj
+            // 
+            this.txtCnpj.Culture = new System.Globalization.CultureInfo("");
+            this.txtCnpj.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCnpj.Location = new System.Drawing.Point(125, 77);
+            this.txtCnpj.Margin = new System.Windows.Forms.Padding(2);
+            this.txtCnpj.Mask = "00.000.000/0000-00";
+            this.txtCnpj.Name = "txtCnpj";
+            this.txtCnpj.Size = new System.Drawing.Size(138, 23);
+            this.txtCnpj.TabIndex = 3;
+            this.txtCnpj.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(122, 62);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(34, 13);
+            this.label9.TabIndex = 37;
+            this.label9.Text = "CNPJ";
+            // 
+            // txtCpf
+            // 
+            this.txtCpf.Culture = new System.Globalization.CultureInfo("");
+            this.txtCpf.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCpf.Location = new System.Drawing.Point(8, 77);
+            this.txtCpf.Margin = new System.Windows.Forms.Padding(2);
+            this.txtCpf.Mask = "000.000.000-00";
+            this.txtCpf.Name = "txtCpf";
+            this.txtCpf.Size = new System.Drawing.Size(113, 23);
+            this.txtCpf.TabIndex = 2;
+            this.txtCpf.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals;
+            this.txtCpf.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCpf_KeyPress);
+            // 
             // txtContato
             // 
             this.txtContato.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -221,6 +316,17 @@
             this.Email.TabStop = false;
             this.Email.Text = "Email";
             // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(8, 78);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(38, 13);
+            this.label11.TabIndex = 1025;
+            this.label11.Text = "Email2";
+            // 
             // label18
             // 
             this.label18.AutoSize = true;
@@ -230,6 +336,16 @@
             this.label18.Size = new System.Drawing.Size(38, 13);
             this.label18.TabIndex = 33;
             this.label18.Text = "Email1";
+            // 
+            // txtEmail2
+            // 
+            this.txtEmail2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtEmail2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmail2.Location = new System.Drawing.Point(6, 95);
+            this.txtEmail2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.txtEmail2.Name = "txtEmail2";
+            this.txtEmail2.Size = new System.Drawing.Size(325, 23);
+            this.txtEmail2.TabIndex = 10;
             // 
             // txtEmail
             // 
@@ -335,6 +451,17 @@
             this.groupBox1.TabIndex = 1005;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Endereço";
+            // 
+            // txtCep
+            // 
+            this.txtCep.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCep.Location = new System.Drawing.Point(10, 33);
+            this.txtCep.Margin = new System.Windows.Forms.Padding(2);
+            this.txtCep.Mask = "00000-999";
+            this.txtCep.Name = "txtCep";
+            this.txtCep.Size = new System.Drawing.Size(113, 23);
+            this.txtCep.TabIndex = 11;
+            this.txtCep.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals;
             // 
             // txtNumero
             // 
@@ -509,132 +636,6 @@
             this.label1.Size = new System.Drawing.Size(28, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "CEP";
-            // 
-            // txtCpf
-            // 
-            this.txtCpf.Culture = new System.Globalization.CultureInfo("");
-            this.txtCpf.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCpf.Location = new System.Drawing.Point(8, 77);
-            this.txtCpf.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCpf.Mask = "000.000.000-00";
-            this.txtCpf.Name = "txtCpf";
-            this.txtCpf.Size = new System.Drawing.Size(113, 23);
-            this.txtCpf.TabIndex = 2;
-            this.txtCpf.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(122, 62);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(34, 13);
-            this.label9.TabIndex = 37;
-            this.label9.Text = "CNPJ";
-            // 
-            // txtCnpj
-            // 
-            this.txtCnpj.Culture = new System.Globalization.CultureInfo("");
-            this.txtCnpj.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCnpj.Location = new System.Drawing.Point(125, 77);
-            this.txtCnpj.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCnpj.Mask = "00.000.000/0000-00";
-            this.txtCnpj.Name = "txtCnpj";
-            this.txtCnpj.Size = new System.Drawing.Size(138, 23);
-            this.txtCnpj.TabIndex = 3;
-            this.txtCnpj.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals;
-            // 
-            // label11
-            // 
-            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(8, 78);
-            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(38, 13);
-            this.label11.TabIndex = 1025;
-            this.label11.Text = "Email2";
-            // 
-            // txtEmail2
-            // 
-            this.txtEmail2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtEmail2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmail2.Location = new System.Drawing.Point(6, 95);
-            this.txtEmail2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.txtEmail2.Name = "txtEmail2";
-            this.txtEmail2.Size = new System.Drawing.Size(325, 23);
-            this.txtEmail2.TabIndex = 10;
-            // 
-            // txtTelefone2
-            // 
-            this.txtTelefone2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTelefone2.Location = new System.Drawing.Point(139, 161);
-            this.txtTelefone2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.txtTelefone2.Mask = "(99) 0000-0000";
-            this.txtTelefone2.Name = "txtTelefone2";
-            this.txtTelefone2.Size = new System.Drawing.Size(128, 23);
-            this.txtTelefone2.TabIndex = 7;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(136, 145);
-            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(55, 13);
-            this.label15.TabIndex = 1025;
-            this.label15.Text = "Telefone2";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(4, 103);
-            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(39, 13);
-            this.label16.TabIndex = 1026;
-            this.label16.Text = "Celular";
-            // 
-            // txtCelular
-            // 
-            this.txtCelular.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCelular.Location = new System.Drawing.Point(7, 119);
-            this.txtCelular.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.txtCelular.Mask = "(99) 9 9999-9999";
-            this.txtCelular.Name = "txtCelular";
-            this.txtCelular.Size = new System.Drawing.Size(128, 23);
-            this.txtCelular.TabIndex = 4;
-            // 
-            // txtCelular2
-            // 
-            this.txtCelular2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCelular2.Location = new System.Drawing.Point(139, 119);
-            this.txtCelular2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.txtCelular2.Mask = "(99) 9 9999-9999";
-            this.txtCelular2.Name = "txtCelular2";
-            this.txtCelular2.Size = new System.Drawing.Size(128, 23);
-            this.txtCelular2.TabIndex = 5;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(136, 103);
-            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(45, 13);
-            this.label17.TabIndex = 1028;
-            this.label17.Text = "Celular2";
-            // 
-            // txtCep
-            // 
-            this.txtCep.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCep.Location = new System.Drawing.Point(10, 33);
-            this.txtCep.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCep.Mask = "00000-999";
-            this.txtCep.Name = "txtCep";
-            this.txtCep.Size = new System.Drawing.Size(113, 23);
-            this.txtCep.TabIndex = 11;
-            this.txtCep.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals;
             // 
             // frmCadastroProprietario
             // 

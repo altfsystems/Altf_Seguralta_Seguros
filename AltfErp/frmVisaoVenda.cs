@@ -35,32 +35,39 @@ namespace AltfErp
             var obj = gridView1.GetRowCellValue(rowHandle, "IDVENDA");
             var status = gridView1.GetRowCellValue(rowHandle, "STATUS");
 
+            if(obj != null)
+            {
+                frmCadastroVenda Cad = new frmCadastroVenda(true, obj.ToString(), status.ToString());
+                Cad.btnAdicionar.Enabled = false;
+                Cad.btnTipoPagamento.Enabled = false;
+                Cad.btnSelecionaProduto.Enabled = false;
+                Cad.btnSalvar.Enabled = false;
+                Cad.btnOk.Enabled = false;
+                Cad.btnExcluir.Enabled = false;
+                Cad.txtIof.Enabled = false;
+                Cad.simpleButton2.Enabled = false;
+                Cad.txtQuantidade.Enabled = false;
+                Cad.txtValorTotal.Enabled = false;
+                Cad.txtTotalVenda.Enabled = false;
+                Cad.txtObservacao.Enabled = false;
+                Cad.txtDesconto.Enabled = false;
+                Cad.txtTotalDesconto.Visible = true;
+                Cad.lblTotalDesconto.Visible = true;
+                Cad.btnSelecionaVendedor.Enabled = false;
+                Cad.txtComissao.Enabled = false;
+                Cad.txtValorLiquido.Enabled = false;
+                Cad.txtIof.Enabled = false;
+                Cad.cbCoCorretagem.Enabled = false;
+                Cad.ShowDialog();
 
+                AtualizaGrid();
+            }
+            else
+            {
+                MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
-            frmCadastroVenda Cad = new frmCadastroVenda(true, obj.ToString(), status.ToString());
-            Cad.btnAdicionar.Enabled = false;
-            Cad.btnTipoPagamento.Enabled = false;
-            Cad.btnSelecionaProduto.Enabled = false;
-            Cad.btnSalvar.Enabled = false;
-            Cad.btnOk.Enabled = false;
-            Cad.btnExcluir.Enabled = false;
-            Cad.txtIof.Enabled = false;
-            Cad.simpleButton2.Enabled = false;
-            Cad.txtQuantidade.Enabled = false;
-            Cad.txtValorTotal.Enabled = false;
-            Cad.txtTotalVenda.Enabled = false;
-            Cad.txtObservacao.Enabled = false;
-            Cad.txtDesconto.Enabled = false;
-            Cad.txtTotalDesconto.Visible = true;
-            Cad.lblTotalDesconto.Visible = true;
-            Cad.btnSelecionaVendedor.Enabled = false;
-            Cad.txtComissao.Enabled = false;
-            Cad.txtValorLiquido.Enabled = false;
-            Cad.txtIof.Enabled = false;
-            Cad.cbCoCorretagem.Enabled = false;
-            Cad.ShowDialog();
-
-            AtualizaGrid();
+            
         }
         private void Filtra()
         {
@@ -184,37 +191,44 @@ namespace AltfErp
                 int LINHA, IDITEM, IDPRODUTO;
                 double QUANTIDADE;
 
-
-                if (DialogResult.Yes == MessageBox.Show("Deseja mesmo exluir?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                if(obj != null)
                 {
-
-                    string sql = String.Format(@"select count(IDITEM) as LINHA FROM ITEMMOVIMENTO WHERE IDVENDA = {0}", obj);
-                    LINHA = int.Parse(MetodosSql.GetField(sql, "LINHA"));
-
-                    sql = String.Format(@"SELECT MIN(IDITEM) AS MINIDITEM FROM ITEMMOVIMENTO WHERE IDVENDA = {0}", obj);
-                    IDITEM = int.Parse(MetodosSql.GetField(sql, "MINIDITEM"));
-
-                    for (int i = 1; i <= LINHA; i++)
+                    if (DialogResult.Yes == MessageBox.Show("Deseja mesmo exluir?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                     {
 
-                        sql = String.Format(@"SELECT IDPRODUTO, QUANTIDADE FROM ITEMMOVIMENTO WHERE IDITEM = {0}", IDITEM);
+                        string sql = String.Format(@"select count(IDITEM) as LINHA FROM ITEMMOVIMENTO WHERE IDVENDA = {0}", obj);
+                        LINHA = int.Parse(MetodosSql.GetField(sql, "LINHA"));
 
-                        IDPRODUTO = int.Parse(MetodosSql.GetField(sql, "IDPRODUTO"));
-                        QUANTIDADE = double.Parse(MetodosSql.GetField(sql, "QUANTIDADE"));
+                        sql = String.Format(@"SELECT MIN(IDITEM) AS MINIDITEM FROM ITEMMOVIMENTO WHERE IDVENDA = {0}", obj);
+                        IDITEM = int.Parse(MetodosSql.GetField(sql, "MINIDITEM"));
 
-                        string estoque = String.Format(@"UPDATE ESTOQUE SET QUANTIDADE = QUANTIDADE + {0} WHERE IDPRODUTO = {1} ", QUANTIDADE, IDPRODUTO);
-                        IDITEM++;
+                        for (int i = 1; i <= LINHA; i++)
+                        {
 
-                        MetodosSql.ExecQuery(sql);
-                        MetodosSql.ExecQuery(estoque);
+                            sql = String.Format(@"SELECT IDPRODUTO, QUANTIDADE FROM ITEMMOVIMENTO WHERE IDITEM = {0}", IDITEM);
+
+                            IDPRODUTO = int.Parse(MetodosSql.GetField(sql, "IDPRODUTO"));
+                            QUANTIDADE = double.Parse(MetodosSql.GetField(sql, "QUANTIDADE"));
+
+                            string estoque = String.Format(@"UPDATE ESTOQUE SET QUANTIDADE = QUANTIDADE + {0} WHERE IDPRODUTO = {1} ", QUANTIDADE, IDPRODUTO);
+                            IDITEM++;
+
+                            MetodosSql.ExecQuery(sql);
+                            MetodosSql.ExecQuery(estoque);
+                        }
+
+
+
+
+                        MetodosSql.ExecQuery(String.Format(@"DELETE FROM PARCELA WHERE IDVENDA = {0}", obj));
+                        MetodosSql.ExecQuery(String.Format(@"delete from VENDA where IDVENDA = {0}", obj.ToString()));
+                        AtualizaGrid();
                     }
-
-
-
-
-                    MetodosSql.ExecQuery(String.Format(@"DELETE FROM PARCELA WHERE IDVENDA = {0}", obj));
-                    MetodosSql.ExecQuery(String.Format(@"delete from VENDA where IDVENDA = {0}", obj.ToString()));
-                    AtualizaGrid();
+                    else
+                    {
+                        MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+              
                 }
             }
             catch (Exception ex)

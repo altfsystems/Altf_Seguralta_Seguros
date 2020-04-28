@@ -160,9 +160,11 @@
             "F"});
             this.txtSexo.Location = new System.Drawing.Point(4, 154);
             this.txtSexo.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSexo.MaxLength = 1;
             this.txtSexo.Name = "txtSexo";
             this.txtSexo.Size = new System.Drawing.Size(101, 21);
             this.txtSexo.TabIndex = 4;
+            this.txtSexo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSexo_KeyPress);
             // 
             // txtCelular
             // 
@@ -504,6 +506,7 @@
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(104, 23);
             this.txtNumero.TabIndex = 14;
+            this.txtNumero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumero_KeyPress);
             // 
             // txtLogradouro
             // 
@@ -559,6 +562,7 @@
             "TO"});
             this.txtEstado.Location = new System.Drawing.Point(280, 215);
             this.txtEstado.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.txtEstado.MaxLength = 2;
             this.txtEstado.Name = "txtEstado";
             this.txtEstado.Size = new System.Drawing.Size(132, 23);
             this.txtEstado.TabIndex = 19;

@@ -21,7 +21,7 @@ namespace AltfErp
         int ano, dia, mes;
         string diaVencimento, mesVencimento;
         public String VENCIMENTOANUAL { get; set; }
-
+        public String OBS { get; set; }
 
 
         public class Produto
@@ -29,10 +29,12 @@ namespace AltfErp
             public String IDPRODUTO { get; set; }
             public String DESCRICAO { get; set; }
             public String CIASEGURADORA { get; set; }
+            public String OBSERVACAO { get; set; }
             //public String PRECOUNITARIO { get; set; }
             //public String QUANTIDADE { get; set; }
-            public String VALORTOTAL { get; set; }
+            //public String VALORTOTAL { get; set; }
             //public String CODPARCELA { get; set; }
+
 
 
         }
@@ -80,7 +82,7 @@ namespace AltfErp
 
             for (int parcela = 1; parcela <= NParcelas; parcela++)
             {
-                sql = String.Format(@"insert into PARCELA(NPARCELA, IDVENDA, IDFCFO, VALOR, DATAVENCIMENTO) values ({0},{1},{2},cast({3} as numeric(20,2))/{4}, CONVERT(DATETIME, CONVERT(VARCHAR,'{5}', 121),103)) select SCOPE_IDENTITY()", parcela, txtCodigo.Text, txtIdCliente.Text, txtTotalVenda.Text.Replace(".", "").Replace(",", "."), NParcelas, data1);
+                sql = String.Format(@"insert into PARCELA(NPARCELA, IDVENDA, IDFCFO, VALOR, DATAVENCIMENTO, STATUS) values ({0},{1},{2},ROUND(cast({3} as numeric(20,2))/{4}, 2), CONVERT(DATETIME, CONVERT(VARCHAR,'{5}', 121),103), 'A') select SCOPE_IDENTITY()", parcela, txtCodigo.Text, txtIdCliente.Text, txtTotalVenda.Text.Replace(".", "").Replace(",", "."), NParcelas, data1);
                 object Codparcela = MetodosSql.ExecScalar(sql);
                 Cod = Codparcela.ToString();
                 if (mes == 12)
@@ -140,11 +142,11 @@ namespace AltfErp
                     gridControl1.RefreshDataSource();
                     double Total = 0;
 
-                    foreach (Produto P in produtos)
-                    {
-                        Total += Convert.ToDouble(P.VALORTOTAL);
+                    //foreach (Produto P in produtos)
+                    //{
+                    //    Total += Convert.ToDouble(P.VALORTOTAL);
 
-                    }
+                    //}
 
                     //txtTotalVenda.Text = String.Format("{0:N}", Total);
                 }
@@ -513,7 +515,7 @@ namespace AltfErp
             txtCodigoProduto.Text = frm.CODIGO;
             txtDescricaoProduto.Text = frm.DESCRICAO;
             txtCiaSeguradora.Text = frm.CIASEGURADORA;
-
+            OBS = frm.OBSERVACAO;
 
             //sql = String.Format(@"select * from PRODUTO where IDPRODUTO = '{0}'", frm.CODIGO);
             //txtValorUnitario.Text = MetodosSql.GetField(sql, "PRECOUNVENDA");
@@ -709,6 +711,7 @@ namespace AltfErp
                             produto.IDPRODUTO = txtCodigoProduto.Text;
                             produto.DESCRICAO = txtDescricaoProduto.Text;
                             produto.CIASEGURADORA = txtCiaSeguradora.Text;
+                            produto.OBSERVACAO = OBS;
                             //produto.PRECOUNITARIO = txtIof.Text;
                             //produto.QUANTIDADE = txtQuantidade.Text;
                             //produto.VALORTOTAL = txtValorTotal.Text;
@@ -769,7 +772,7 @@ namespace AltfErp
                     txtCodigoProduto.Text = produtos[indice].IDPRODUTO;
                     //txtIof.Text = produtos[indice].PRECOUNITARIO;
                     //txtQuantidade.Text = produtos[indice].QUANTIDADE;
-                    txtValorTotal.Text = produtos[indice].VALORTOTAL;
+                    //txtValorTotal.Text = produtos[indice].VALORTOTAL;
                     txtDescricaoProduto.Text = produtos[indice].DESCRICAO;
 
                     IDITEM = indice.ToString();

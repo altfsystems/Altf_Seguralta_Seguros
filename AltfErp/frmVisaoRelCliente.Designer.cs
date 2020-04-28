@@ -32,9 +32,9 @@
             this.grdVisaoRelCliente = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnRelatorio = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnInformacoesCliente = new System.Windows.Forms.ToolStripLabel();
+            this.btnRelatorio = new System.Windows.Forms.ToolStripLabel();
             ((System.ComponentModel.ISupportInitialize)(this.grdVisaoRelCliente)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -78,14 +78,6 @@
             this.toolStrip1.TabIndex = 15;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // btnRelatorio
-            // 
-            this.btnRelatorio.Image = ((System.Drawing.Image)(resources.GetObject("btnRelatorio.Image")));
-            this.btnRelatorio.Name = "btnRelatorio";
-            this.btnRelatorio.Size = new System.Drawing.Size(104, 43);
-            this.btnRelatorio.Text = "Relatório Todos";
-            this.btnRelatorio.Click += new System.EventHandler(this.btnRelatorio_Click);
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -98,6 +90,15 @@
             this.btnInformacoesCliente.Size = new System.Drawing.Size(129, 43);
             this.btnInformacoesCliente.Text = "Informações Cliente";
             this.btnInformacoesCliente.Click += new System.EventHandler(this.btnInformacoesCliente_Click);
+            // 
+            // btnRelatorio
+            // 
+            this.btnRelatorio.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnRelatorio.Image = ((System.Drawing.Image)(resources.GetObject("btnRelatorio.Image")));
+            this.btnRelatorio.Name = "btnRelatorio";
+            this.btnRelatorio.Size = new System.Drawing.Size(104, 43);
+            this.btnRelatorio.Text = "Relatório Todos";
+            this.btnRelatorio.Click += new System.EventHandler(this.btnRelatorio_Click);
             // 
             // frmVisaoRelCliente
             // 
@@ -122,8 +123,8 @@
         private DevExpress.XtraGrid.GridControl grdVisaoRelCliente;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripLabel btnRelatorio;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel btnInformacoesCliente;
+        private System.Windows.Forms.ToolStripLabel btnRelatorio;
     }
 }

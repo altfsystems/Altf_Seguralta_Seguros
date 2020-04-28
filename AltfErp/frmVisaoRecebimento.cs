@@ -32,7 +32,7 @@ namespace AltfErp
 	                                                     C.NOME,
 	   	                                                     C.NOMEFANTASIA AS SOBRENOME,
 	   	                                                     C.CPF, C.CNPJ,
-	   	                                                     ROUND(cast(isnull(P.TOTAL,0) - isnull(R.PAGO,0) as numeric(20,2)), 2) as 'DEVENDO'
+	   	                                                     ROUND(cast(isnull(P.TOTAL,0) - isnull(R.PAGO,0) as numeric(20,2)), 1) as 'DEVENDO'
 													
 	                                                     from FCFO C
 
@@ -89,9 +89,17 @@ namespace AltfErp
                 var rowHandle = gridView1.FocusedRowHandle;
                 var obj = gridView1.GetRowCellValue(rowHandle, "IDCLIENTE");
 
-                frmPagamento frm = new frmPagamento(true, obj.ToString());
-                frm.ShowDialog();
-                AtualizaGrid();
+
+                if(obj != null)
+                {
+                    frmPagamento frm = new frmPagamento(true, obj.ToString());
+                    frm.ShowDialog();
+                    AtualizaGrid();
+                }
+                else
+                {
+                    MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
 
             }
             catch (Exception ex)

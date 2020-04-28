@@ -38,9 +38,17 @@ namespace AltfErp
 
                 var obj = gridView1.GetRowCellValue(rowHandle, "IDPRODUTO");
 
-                frmAlteraQuantidade frm = new frmAlteraQuantidade(true, obj.ToString());
-                frm.ShowDialog();
-                AtualizaGrid();
+                if(obj != null)
+                {
+                    frmAlteraQuantidade frm = new frmAlteraQuantidade(true, obj.ToString());
+                    frm.ShowDialog();
+                    AtualizaGrid();
+                }
+                else
+                {
+                    MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+               
 
 
             }
