@@ -282,5 +282,15 @@ namespace AltfErp
             frm.CarregaNome();
             frm.ShowDialog();
         }
+
+        private void toolStripLabel2_Click(object sender, EventArgs e)
+        {
+            var rowHandle = gridView1.FocusedRowHandle;
+            var IdVenda = gridView1.GetRowCellValue(rowHandle, "IDVENDA");
+            var status = gridView1.GetRowCellValue(rowHandle, "STATUS");
+
+            frmCadastroVenda frm = new frmCadastroVenda(true, IdVenda.ToString(), status.ToString());
+            frm.ShowDialog();
+        }
     }
 }

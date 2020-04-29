@@ -47,7 +47,7 @@ namespace AltfErp
             try
             {
                 string sql = String.Format(@"SELECT PARCELA.IDPARCELA , PARCELA.NPARCELA , PARCELA.IDVENDA , PARCELA.IDFCFO , CAST(PARCELA.VALOR AS numeric(20,2)) AS VALOR , 
-                                            cast(isnull(X.VALORPAGO,0.00)as numeric(20,2)) as 'VALOR PAGO' , PARCELA.STATUS , PARCELA.DATAVENCIMENTO ,VENDA.DATAINCLUSAO AS DATAVENDA, 
+                                            cast(isnull(X.VALORPAGO,0.00)as numeric(20,2)) as 'VALORPAGO' , PARCELA.STATUS , PARCELA.DATAVENCIMENTO ,VENDA.DATAINCLUSAO AS DATAVENDA, 
                                             CONVERT(varchar, CONVERT(DATETIME, PARCELA.DATAPAGAMENTO, 121), 103) AS DATAPAGAMENTO , 
                                             cast((isnull(PARCELA.VALOR, 0) - isnull(X.VALORPAGO, 0)) as numeric(20,2)) as RESTANTE FROM PARCELA
                                             INNER JOIN VENDA
@@ -235,6 +235,20 @@ namespace AltfErp
             var cod = gridView1.GetRowCellValue(rowHandle, "IDPARCELA");
 
             frmEditarData frm = new frmEditarData(cod.ToString());
+            frm.ShowDialog();
+            AtualizaGrid();
+        }
+
+        private void btnEditarPagamento_Click(object sender, EventArgs e)
+        {
+            
+            var rowHandle = gridView1.FocusedRowHandle;
+            var codParcela = gridView1.GetRowCellValue(rowHandle, "IDPARCELA");
+            var codVenda = gridView1.GetRowCellValue(rowHandle, "IDVENDA");
+            var restante = gridView1.GetRowCellValue(rowHandle, "RESTANTE");
+            var valorParcela = gridView1.GetRowCellValue(rowHandle, "VALOR");
+
+            frmEdiçãoParcela frm = new frmEdiçãoParcela(true, codVenda.ToString(), codParcela.ToString(), restante.ToString(), valorParcela.ToString());
             frm.ShowDialog();
             AtualizaGrid();
         }

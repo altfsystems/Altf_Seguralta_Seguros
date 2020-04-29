@@ -240,14 +240,17 @@ namespace AltfErp
                 char coCorretagem;
                 double valorSeguralta;
                 string query = @"INSERT INTO VENDACOMISSAO(IDVENDA, IDCLIENTE, VALORLIQUIDO, IOF, TOTALVENDA, COMISSAO, COMISSAOVENDA, COCORRETAGEM, VALORSEGURALTA)
-                      VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}')";
+                               VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}')";
                 string valor;
+
+                sql = String.Format(@"SELECT * FROM PORCENTAGENS ");
+                double percCorretora = double.Parse(MetodosSql.GetField(sql, "PERCSEGURALTA"));
 
                 if (cbCoCorretagem.Checked == true)
                 {
 
                     coCorretagem = 'S';
-                    valorSeguralta = double.Parse(txtComissaoVenda.Text) * 0.75;
+                    valorSeguralta = (double.Parse(txtComissaoVenda.Text) * percCorretora) / 100;
                     valor = valorSeguralta.ToString("F2", CultureInfo.InvariantCulture);
 
                     sql = String.Format(query,
@@ -264,7 +267,7 @@ namespace AltfErp
                 else
                 {
                     coCorretagem = 'N';
-                    valorSeguralta = double.Parse(txtComissaoVenda.Text) * 0.75 * 0.8874;
+                    valorSeguralta = (double.Parse(txtComissaoVenda.Text) * percCorretora * 0.8874) / 100;
                     valor = valorSeguralta.ToString("F2", CultureInfo.InvariantCulture);
 
                     sql = String.Format(query,

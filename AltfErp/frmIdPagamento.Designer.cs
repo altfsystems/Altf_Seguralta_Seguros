@@ -57,7 +57,7 @@
             // 
             this.txtCodigoParcela.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCodigoParcela.Location = new System.Drawing.Point(117, 26);
-            this.txtCodigoParcela.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCodigoParcela.Margin = new System.Windows.Forms.Padding(2);
             this.txtCodigoParcela.Name = "txtCodigoParcela";
             this.txtCodigoParcela.ReadOnly = true;
             this.txtCodigoParcela.Size = new System.Drawing.Size(79, 23);
@@ -88,7 +88,7 @@
             // 
             this.txtValorParcela.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtValorParcela.Location = new System.Drawing.Point(200, 26);
-            this.txtValorParcela.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtValorParcela.Margin = new System.Windows.Forms.Padding(2);
             this.txtValorParcela.Name = "txtValorParcela";
             this.txtValorParcela.ReadOnly = true;
             this.txtValorParcela.Size = new System.Drawing.Size(102, 23);
@@ -109,7 +109,7 @@
             // 
             this.txtValorCredito.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtValorCredito.Location = new System.Drawing.Point(7, 117);
-            this.txtValorCredito.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtValorCredito.Margin = new System.Windows.Forms.Padding(2);
             this.txtValorCredito.Name = "txtValorCredito";
             this.txtValorCredito.Size = new System.Drawing.Size(180, 23);
             this.txtValorCredito.TabIndex = 1;
@@ -129,7 +129,7 @@
             // 
             this.txtValorCheque.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtValorCheque.Location = new System.Drawing.Point(7, 77);
-            this.txtValorCheque.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtValorCheque.Margin = new System.Windows.Forms.Padding(2);
             this.txtValorCheque.Name = "txtValorCheque";
             this.txtValorCheque.Size = new System.Drawing.Size(180, 23);
             this.txtValorCheque.TabIndex = 0;
@@ -149,7 +149,7 @@
             // 
             this.txtValorDebito.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtValorDebito.Location = new System.Drawing.Point(7, 157);
-            this.txtValorDebito.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtValorDebito.Margin = new System.Windows.Forms.Padding(2);
             this.txtValorDebito.Name = "txtValorDebito";
             this.txtValorDebito.Size = new System.Drawing.Size(180, 23);
             this.txtValorDebito.TabIndex = 2;
@@ -169,7 +169,7 @@
             // 
             this.txtValorDinheiro.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtValorDinheiro.Location = new System.Drawing.Point(7, 197);
-            this.txtValorDinheiro.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtValorDinheiro.Margin = new System.Windows.Forms.Padding(2);
             this.txtValorDinheiro.Name = "txtValorDinheiro";
             this.txtValorDinheiro.Size = new System.Drawing.Size(180, 23);
             this.txtValorDinheiro.TabIndex = 3;
@@ -178,7 +178,7 @@
             // btnReceber
             // 
             this.btnReceber.Location = new System.Drawing.Point(199, 298);
-            this.btnReceber.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnReceber.Margin = new System.Windows.Forms.Padding(2);
             this.btnReceber.Name = "btnReceber";
             this.btnReceber.Size = new System.Drawing.Size(128, 32);
             this.btnReceber.TabIndex = 4;
@@ -199,7 +199,7 @@
             // 
             this.txtValorRestante.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtValorRestante.Location = new System.Drawing.Point(7, 37);
-            this.txtValorRestante.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtValorRestante.Margin = new System.Windows.Forms.Padding(2);
             this.txtValorRestante.Name = "txtValorRestante";
             this.txtValorRestante.ReadOnly = true;
             this.txtValorRestante.Size = new System.Drawing.Size(180, 23);
@@ -220,7 +220,7 @@
             // 
             this.txtCodigoVenda.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCodigoVenda.Location = new System.Drawing.Point(9, 26);
-            this.txtCodigoVenda.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCodigoVenda.Margin = new System.Windows.Forms.Padding(2);
             this.txtCodigoVenda.Name = "txtCodigoVenda";
             this.txtCodigoVenda.ReadOnly = true;
             this.txtCodigoVenda.Size = new System.Drawing.Size(104, 23);
@@ -231,7 +231,7 @@
             // 
             this.txtCodigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCodigo.Location = new System.Drawing.Point(410, 5);
-            this.txtCodigo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCodigo.Margin = new System.Windows.Forms.Padding(2);
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(16, 23);
             this.txtCodigo.TabIndex = 17;
@@ -250,9 +250,9 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Location = new System.Drawing.Point(9, 57);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(319, 232);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
@@ -286,7 +286,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(338, 341);
+            this.ClientSize = new System.Drawing.Size(339, 341);
             this.Controls.Add(this.txtDataPagamento);
             this.Controls.Add(this.lblDataInclusao);
             this.Controls.Add(this.txtCodigo);
@@ -299,7 +299,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtCodigoParcela);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmIdPagamento";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Parcela";

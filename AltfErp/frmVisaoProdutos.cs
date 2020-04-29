@@ -23,8 +23,8 @@ namespace AltfErp
             gridView1.OptionsBehavior.Editable = false;
             gridControl1.EmbeddedNavigator.Buttons.Append.Visible = false;
             gridControl1.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            gridView1.BestFitColumns();
             AtualizaGrid();
+            
 
 
 

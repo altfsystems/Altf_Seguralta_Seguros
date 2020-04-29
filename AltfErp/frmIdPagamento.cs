@@ -114,11 +114,18 @@ namespace AltfErp
         private void frmIdPagamento_Load(object sender, EventArgs e)
         {
             
-            txtValorRestante.Text =  RESTANTE;
-            txtCodigoVenda.Text = CODIGOVENDA;
-            txtCodigoParcela.Text = CODIGOPARCELA;
-            sql = String.Format(@"select cast(VALOR as numeric(20,2)) as 'VALOR' from PARCELA where IDPARCELA = '{0}'", CODIGOPARCELA);
-            txtValorParcela.Text = MetodosSql.GetField(sql, "VALOR");
+            
+
+            
+            
+            
+                txtValorRestante.Text = RESTANTE;
+                txtCodigoVenda.Text = CODIGOVENDA;
+                txtCodigoParcela.Text = CODIGOPARCELA;
+                sql = String.Format(@"select cast(VALOR as numeric(20,2)) as 'VALOR' from PARCELA where IDPARCELA = '{0}'", CODIGOPARCELA);
+                txtValorParcela.Text = MetodosSql.GetField(sql, "VALOR");
+            
+            
             
             
             
