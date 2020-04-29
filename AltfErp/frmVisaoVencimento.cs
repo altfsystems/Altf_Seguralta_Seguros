@@ -49,6 +49,8 @@ namespace AltfErp
 
                 if(obj != null)
                 {
+                    string sql = String.Format(@"SELECT COCORRETAGEM FROM VENDACOMISSAO WHERE IDVENDA = '{0}'", obj.ToString());
+                    string coCorretagem = MetodosSql.GetField(sql, "COCORRETAGEM");
                     frmCadastroVenda frm = new frmCadastroVenda(true, obj.ToString(), null);
                     frm.btnAdicionar.Enabled = false;
                     frm.btnExcluir.Enabled = false;
@@ -62,6 +64,16 @@ namespace AltfErp
                     frm.txtIof.Enabled = false;
                     frm.txtTotalVenda.Enabled = false;
                     frm.txtQuantidade.Enabled = false;
+                    frm.txtValorLiquido.Enabled = false;
+                    frm.txtIof.Enabled = false;
+                    frm.txtComissao.Enabled = false;
+                    if(coCorretagem == "S")
+                    {
+                        frm.cbCoCorretagem.Checked = true;
+                    }
+                    frm.cbCoCorretagem.Enabled = false;
+                    frm.txtDesconto.Enabled = false;
+                    frm.txtDataVencimento.Enabled = false;
                     frm.ShowDialog();
                 }
                 else

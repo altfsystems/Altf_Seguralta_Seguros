@@ -96,31 +96,35 @@ namespace AltfErp
             try
             {
 
-                string sql = String.Format(@"SELECT VD.IDVENDA, VD.IDFCFO AS IDCLIENTE, FC.NOME, FC.NOMEFANTASIA AS SOBRENOME, cast(SUM(IT.VALOR * IT.QUANTIDADE) - VD.DESCONTO as numeric(20,2)) AS TOTAL_VENDA, VD.DESCONTO, ROUND(X.TOTAL_RECEBIMENTO, 2) AS TOTAL_RECEBIMENTO ,
-		                                        ROUND(cast(SUM(IT.VALOR * IT.QUANTIDADE) - VD.DESCONTO as numeric(20,2)) - ROUND(X.TOTAL_RECEBIMENTO, 2), 2) AS TOTAL_RESTANTE, VD.OBSERVACAO, CONVERT(VARCHAR , CONVERT(DATETIME , VD.DATAINCLUSAO , 121) , 103) AS DATAINCLUSAO , CONVERT(varchar, CONVERT(DATETIME,VD.DATAPAGAMENTO,121),103) AS DATAPAGAMENTO,
-		                                           case
-	                                               WHEN ROUND(cast(SUM(IT.VALOR * IT.QUANTIDADE) - VD.DESCONTO as numeric(20,2)) - ROUND(X.TOTAL_RECEBIMENTO, 2), 2) <= 0 THEN 'P'
-                                                   ELSE
-	                                               'A'
-                                                   END AS STATUS
-                                                    FROM VENDA VD
+                string sql = String.Format(@"SELECT VD.IDVENDA, VD.IDFCFO AS IDCLIENTE, FC.NOME, FC.NOMEFANTASIA AS SOBRENOME, 
+                                            (SELECT CAST(SUM(VALOR) AS NUMERIC(20,2)) FROM PARCELA WHERE IDVENDA = VD.IDVENDA) AS TOTALVENDA,
+                                            VD.DESCONTO, (X.TOTAL_RECEBIMENTO) AS TOTAL_RECEBIMENTO ,
+		                                    (SELECT CAST(SUM(VALOR) AS NUMERIC(20,2)) FROM PARCELA WHERE IDVENDA = VD.IDVENDA) - (X.TOTAL_RECEBIMENTO) AS TOTAL_RESTANTE,
+                                            VD.OBSERVACAO, CONVERT(VARCHAR , CONVERT(DATETIME , VD.DATAINCLUSAO , 121) , 103) AS DATAINCLUSAO , 
+                                            CONVERT(varchar, CONVERT(DATETIME,VD.DATAPAGAMENTO,121),103) AS DATAPAGAMENTO,
+		                                    case
+	                                        WHEN (SELECT SUM(VALOR) FROM PARCELA WHERE IDVENDA = VD.IDVENDA) - ROUND(X.TOTAL_RECEBIMENTO, 2) <= 0 THEN 'P'
+                                            ELSE
+	                                        'A'
+                                            END AS STATUS
+                                            FROM VENDA VD
+                                            inner join FCFO FC
+                                            on VD.IDFCFO = FC.IDFCFO
+                                            INNER JOIN ITEMMOVIMENTO IT
+                                            ON IT.IDVENDA = VD.IDVENDA
+                                            Left JOIN (SELECT IDVENDA, 
+                                            CAST(SUM(VALORCARTAOCREDITO+VALORCARTAODEBITO+VALORCHEQUE+VALORDINHEIRO)AS numeric(20,2)) AS TOTAL_RECEBIMENTO
+                                            FROM RECEBIMENTO
+                                            GROUP BY IDVENDA)X ON X.IDVENDA = VD.IDVENDA
+                                            WHERE VD.IDVENDA IS NOT NULL AND {0} AND CONVERT(VARCHAR, CONVERT(DATETIME, VD.DATAINCLUSAO , 121) , 103) = {2}'{1}'
+                                            GROUP BY VD.IDVENDA, VD.IDFCFO, X.TOTAL_RECEBIMENTO, FC.NOME, FC.NOMEFANTASIA, VD.OBSERVACAO, VD.DATAINCLUSAO, VD.DATAPAGAMENTO, VD.DESCONTO
+											ORDER BY IDVENDA DESC", Filtro, Data, Nulo);
 
-                                                    inner join FCFO FC
-                                                    on VD.IDFCFO = FC.IDFCFO
                             
-                                                    INNER JOIN ITEMMOVIMENTO IT
-                                                    ON IT.IDVENDA = VD.IDVENDA
-                                                    Left JOIN (SELECT IDVENDA, 
-                                                    CAST(SUM(VALORCARTAOCREDITO+VALORCARTAODEBITO+VALORCHEQUE+VALORDINHEIRO)AS numeric(20,2)) AS TOTAL_RECEBIMENTO
-                                                    FROM RECEBIMENTO
 													
 													
-                                                    GROUP BY IDVENDA)X ON X.IDVENDA = VD.IDVENDA
 
-                                                    WHERE VD.IDVENDA IS NOT NULL AND {0} AND CONVERT(VARCHAR, CONVERT(DATETIME, VD.DATAINCLUSAO , 121) , 103) = {2}'{1}'
 
-                                                    GROUP BY VD.IDVENDA, VD.IDFCFO, X.TOTAL_RECEBIMENTO, FC.NOME, FC.NOMEFANTASIA, VD.OBSERVACAO, VD.DATAINCLUSAO, VD.DATAPAGAMENTO, VD.DESCONTO
-													ORDER BY IDVENDA DESC", Filtro, Data, Nulo);
 
 
 

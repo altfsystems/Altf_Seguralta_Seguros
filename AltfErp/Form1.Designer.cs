@@ -89,6 +89,8 @@
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
+            this.ribbonPageGroup15 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.barButtonItem21 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHypertextLabel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager2)).BeginInit();
@@ -129,10 +131,11 @@
             this.barButtonItem10,
             this.barButtonItem11,
             this.barHeaderItem1,
-            this.barButtonItem13});
+            this.barButtonItem13,
+            this.barButtonItem21});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ribbonControl1.MaxItemId = 30;
+            this.ribbonControl1.MaxItemId = 31;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageHeaderItemLinks.Add(this.barButtonItem4);
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -402,7 +405,7 @@
             // 
             // barHeaderItem1
             // 
-            this.barHeaderItem1.Caption = "2020.04.27.0003";
+            this.barHeaderItem1.Caption = "2020.04.29.0005";
             this.barHeaderItem1.Id = 28;
             this.barHeaderItem1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barHeaderItem1.ImageOptions.Image")));
             this.barHeaderItem1.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barHeaderItem1.ImageOptions.LargeImage")));
@@ -449,7 +452,8 @@
             this.ribbonPage3.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroup4,
             this.ribbonPageGroup5,
-            this.ribbonPageGroup8});
+            this.ribbonPageGroup8,
+            this.ribbonPageGroup15});
             this.ribbonPage3.Name = "ribbonPage3";
             this.ribbonPage3.Text = "Controle";
             // 
@@ -599,6 +603,19 @@
             this.documentManager2.ViewCollection.AddRange(new DevExpress.XtraBars.Docking2010.Views.BaseView[] {
             this.tabbedView1});
             // 
+            // ribbonPageGroup15
+            // 
+            this.ribbonPageGroup15.ItemLinks.Add(this.barButtonItem21);
+            this.ribbonPageGroup15.Name = "ribbonPageGroup15";
+            // 
+            // barButtonItem21
+            // 
+            this.barButtonItem21.Caption = "Porcentagens";
+            this.barButtonItem21.Id = 30;
+            this.barButtonItem21.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem21.ImageOptions.SvgImage")));
+            this.barButtonItem21.Name = "barButtonItem21";
+            this.barButtonItem21.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem21_ItemClick);
+            // 
             // frmPrincipal
             // 
             this.Appearance.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -687,6 +704,8 @@
         private DevExpress.XtraBars.BarHeaderItem barHeaderItem1;
         private DevExpress.XtraBars.BarButtonItem barButtonItem13;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup14;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem21;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup15;
     }
 }
 

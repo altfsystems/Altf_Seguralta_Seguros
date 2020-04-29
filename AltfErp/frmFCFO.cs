@@ -37,7 +37,70 @@ namespace AltfErp
 
         }
 
+        private void Insert()
+        {
+           string  SQL = String.Format(@"insert into FCFO (NOME , NOMEFANTASIA, CPF, CNPJ, RG, CNH, TELEFONE1, TELEFONE2, CELULAR, CELULAR2, EMAIL, EMAIL2, RUA, LOGRADOURO, NUMERO, BAIRRO, CIDADE,
+                       CEP,ESTADO , COMPLEMENTO, OBSERVACAO, TIPO, DTANASCIMENTO, SEXO, ESTADOCIVIL, TIPORESIDENCIA, OBSDOCUMENTO, TIPOPESSOA, DATAINCLUSAO, APOLICE) values ('{0}','{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}','{10}','{11}','{12}','{13}','{14}',
+                       '{15}','{16}','{17}','{18}','{19}' , '{20}', '{21}' , '{22}' , '{23}' , '{24}' , '{25}' , '{26}','{27}', getdate(), '{28}' ) select SCOPE_IDENTITY()",
+                               /*{0}*/ txtNome.Text,
+                               /*{1}*/ txtNomeFantasia.Text,
+                               /*{2}*/ txtCpf.Text,
+                               /*{3}*/ txtCNPJ.Text,
+                               /*{4}*/ txtRg.Text,
+                               /*{5}*/ txtCnh.Text,
+                               /*{6}*/ txtTelefone.Text,
+                               /*{7}*/ txtTelefone2.Text,
+                               /*{8}*/ txtCelular.Text,
+                               /*{9}*/ txtCelular2.Text,
+                              /*{10}*/ txtEmail.Text,
+                              /*{11}*/ txtEmail2.Text,
+                              /*{12}*/ txtRua.Text,
+                              /*{13}*/ txtLogradouro.Text,
+                              /*{14}*/ txtNumero.Text,
+                              /*{15}*/ txtBairro.Text,
+                              /*{16}*/ txtCidade.Text,
+                              /*{17}*/ txtCep.Text,
+                              /*{18}*/ txtEstado.Text,
+                              /*{19}*/ txtComplemento.Text,
+                              /*{20}*/ txtObservacao.Text,
+                              /*{21}*/ tipo,
+                              /*{22}*/ txtDataNasc.Text,
+                              /*{23}*/ txtSexo.Text,
+                              /*{24}*/ txtEstadoCivil.Text,
+                              /*{25}*/ txtTipoResidencia.Text,
+                              /*{26}*/ txtObservacaoDocumento.Text,
+                              /*{27}*/ txtTipoPessoa.Text,
+                              /*{28}*/  txtApolice.Text);
 
+
+
+
+            object Ncad = MetodosSql.ExecScalar(SQL);
+            txtCodigo.Text = Ncad.ToString();
+            Image Valida1, Valida2;
+
+            Valida1 = pbImagemDoc1.Image;
+            Valida2 = pbDoc2.Image;
+
+            if (Valida2 != null && Valida1 != null)
+            {
+                MetodosSql.InsereImagem(String.Format(@"INSERT INTO FCFOIMAGEM(IDFCFO, IMAGEM1, IMAGEM2) VALUES ({0} ,@Imagem, @Imagem2)", Ncad), bmpImagem1, bmpImagem2);
+            }
+            else if (Valida1 == null && Valida2 != null)
+            {
+                MetodosSql.InsereImagem(String.Format(@"INSERT INTO FCFOIMAGEM(IDFCFO, IMAGEM2) VALUES({0}, @Imagem2) ", Ncad), bmpImagem1, bmpImagem2);
+            }
+            else if (Valida2 == null && Valida1 != null)
+            {
+                MetodosSql.InsereImagem(String.Format(@"INSERT INTO FCFOIMAGEM(IDFCFO, IMAGEM1) VALUES({0}, @Imagem) ", Ncad), bmpImagem1, bmpImagem2);
+            }
+            else if (Valida2 == null && Valida1 == null)
+            {
+                MetodosSql.ExecQuery(String.Format("INSERT INTO FCFOIMAGEM(IDFCFO) VALUES({0}) ", Ncad));
+            }
+
+            Editar = true;
+        }
 
 
         private void Validar()
@@ -205,25 +268,25 @@ namespace AltfErp
                     {
                         if (validaBtn1 == true && validaBtn2 == true)
                         {
-                            MetodosSql.InsereImagem(String.Format(@"UPDATE FCFOIMAGEM SET IMAGEM1 = @Imagem, IMAGEM2 = @Imagem2 WHERE IDFCFO = {0}", Cod), bmpImagem1, bmpImagem2);
+                            MetodosSql.InsereImagem(String.Format("UPDATE FCFOIMAGEM SET IMAGEM1 = @Imagem, IMAGEM2 = @Imagem2 WHERE IDFCFO = {0}", Cod), bmpImagem1, bmpImagem2);
                         }
                         else if (validaBtn1 == true && validaBtn2 == false)
                         {
-                            MetodosSql.InsereImagem(String.Format(@"UPDATE FCFOIMAGEM SET IMAGEM1 = @Imagem WHERE IDFCFO = {0}", Cod), bmpImagem1, bmpImagem2);
+                            MetodosSql.InsereImagem(String.Format("UPDATE FCFOIMAGEM SET IMAGEM1 = @Imagem WHERE IDFCFO = {0}", Cod), bmpImagem1, bmpImagem2);
                         }
                         else if (validaBtn1 == false && validaBtn2 == true)
                         {
-                            MetodosSql.InsereImagem(String.Format(@"UPDATE FCFOIMAGEM SET IMAGEM2 = @Imagem2 WHERE IDFCFO = {0}", Cod), bmpImagem1, bmpImagem2);
+                            MetodosSql.InsereImagem(String.Format("UPDATE FCFOIMAGEM SET IMAGEM2 = @Imagem2 WHERE IDFCFO = {0}", Cod), bmpImagem1, bmpImagem2);
                         }
 
                     }
                     else if (Valida1 == null && Valida2 != null)
                     {
-                        MetodosSql.InsereImagem(String.Format(@"UPDATE FCFOIMAGEM SET IMAGEM2 = @Imagem2 WHERE IDFCFO = {0}", Cod), bmpImagem1, bmpImagem2);
+                        MetodosSql.InsereImagem(String.Format("UPDATE FCFOIMAGEM SET IMAGEM2 = @Imagem2 WHERE IDFCFO = {0}", Cod), bmpImagem1, bmpImagem2);
                     }
                     else if (Valida2 == null && Valida1 != null)
                     {
-                        MetodosSql.InsereImagem(String.Format(@"UPDATE FCFOIMAGEM SET IMAGEM1 = @Imagem WHERE IDFCFO = {0}", Cod), bmpImagem1, bmpImagem2);
+                        MetodosSql.InsereImagem(String.Format("UPDATE FCFOIMAGEM SET IMAGEM1 = @Imagem WHERE IDFCFO = {0}", Cod), bmpImagem1, bmpImagem2);
                     }
                     else if (Valida2 == null && Valida1 == null)
                     {
@@ -234,69 +297,24 @@ namespace AltfErp
                 }
                 else
                 {
+                    string sql = String.Format(@"SELECT * FROM FCFO WHERE NOME = '{0}' AND NOMEFANTASIA = '{1}'", txtNome.Text, txtNomeFantasia.Text);
+                    string valida = MetodosSql.GetField(sql, "NOME");
 
-
-                    string SQL = String.Format(@"insert into FCFO (NOME , NOMEFANTASIA, CPF, CNPJ, RG, CNH, TELEFONE1, TELEFONE2, CELULAR, CELULAR2, EMAIL, EMAIL2, RUA, LOGRADOURO, NUMERO, BAIRRO, CIDADE,
-                       CEP,ESTADO , COMPLEMENTO, OBSERVACAO, TIPO, DTANASCIMENTO, SEXO, ESTADOCIVIL, TIPORESIDENCIA, OBSDOCUMENTO, TIPOPESSOA, DATAINCLUSAO, APOLICE) values ('{0}','{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}','{10}','{11}','{12}','{13}','{14}',
-                       '{15}','{16}','{17}','{18}','{19}' , '{20}', '{21}' , '{22}' , '{23}' , '{24}' , '{25}' , '{26}','{27}', getdate(), '{28}' ) select SCOPE_IDENTITY()",
-                                  /*{0}*/ txtNome.Text,
-                                  /*{1}*/ txtNomeFantasia.Text,
-                                  /*{2}*/ txtCpf.Text,
-                                  /*{3}*/ txtCNPJ.Text,
-                                  /*{4}*/ txtRg.Text,
-                                  /*{5}*/ txtCnh.Text,
-                                  /*{6}*/ txtTelefone.Text,
-                                  /*{7}*/ txtTelefone2.Text,
-                                  /*{8}*/ txtCelular.Text,
-                                  /*{9}*/ txtCelular2.Text,
-                                 /*{10}*/ txtEmail.Text,
-                                 /*{11}*/ txtEmail2.Text,
-                                 /*{12}*/ txtRua.Text,
-                                 /*{13}*/ txtLogradouro.Text,
-                                 /*{14}*/ txtNumero.Text,
-                                 /*{15}*/ txtBairro.Text,
-                                 /*{16}*/ txtCidade.Text,
-                                 /*{17}*/ txtCep.Text,
-                                 /*{18}*/ txtEstado.Text,
-                                 /*{19}*/ txtComplemento.Text,
-                                 /*{20}*/ txtObservacao.Text,
-                                 /*{21}*/ tipo,
-                                 /*{22}*/ txtDataNasc.Text,
-                                 /*{23}*/ txtSexo.Text,
-                                 /*{24}*/ txtEstadoCivil.Text,
-                                 /*{25}*/ txtTipoResidencia.Text,
-                                 /*{26}*/ txtObservacaoDocumento.Text,
-                                 /*{27}*/ txtTipoPessoa.Text,
-                                 /*{28}*/  txtApolice.Text);
-                            
-
-
-
-                    object Ncad = MetodosSql.ExecScalar(SQL);
-                    txtCodigo.Text = Ncad.ToString();
-                    Image Valida1, Valida2;
-
-                    Valida1 = pbImagemDoc1.Image;
-                    Valida2 = pbDoc2.Image;
-
-                    if (Valida2 != null && Valida1 != null)
+                    if(valida == "")
                     {
-                        MetodosSql.InsereImagem(String.Format(@"INSERT INTO FCFOIMAGEM(IDFCFO, IMAGEM1, IMAGEM2) VALUES ({0} ,@Imagem, @Imagem2)", Ncad), bmpImagem1, bmpImagem2);
+                        Insert();
                     }
-                    else if (Valida1 == null && Valida2 != null)
+                    else if(DialogResult.Yes == MessageBox.Show("Já existe um cadastro com esse nome. Tem certeza que deseja continuar?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                     {
-                        MetodosSql.InsereImagem(String.Format(@"INSERT INTO FCFOIMAGEM(IDFCFO, IMAGEM2) VALUES({0}, @Imagem2) ", Ncad), bmpImagem1, bmpImagem2);
+                        Insert();
                     }
-                    else if (Valida2 == null && Valida1 != null)
+                    else
                     {
-                        MetodosSql.InsereImagem(String.Format(@"INSERT INTO FCFOIMAGEM(IDFCFO, IMAGEM1) VALUES({0}, @Imagem) ", Ncad), bmpImagem1, bmpImagem2);
+                        MessageBox.Show("O cadastro foi cancelado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    else if (Valida2 == null && Valida1 == null)
-                    {
-                        MetodosSql.ExecQuery(String.Format("INSERT INTO FCFOIMAGEM(IDFCFO) VALUES({0}) ", Ncad));
-                    }
+                     
 
-                    Editar = true;
+                    
 
                 }
 
@@ -382,7 +400,7 @@ namespace AltfErp
 
         private void btnOk_Click_1(object sender, EventArgs e)
         {
-            Cadastro();
+             Cadastro();
             if (validacao != 1)
             {
 

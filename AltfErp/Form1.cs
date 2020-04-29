@@ -189,5 +189,11 @@ namespace AltfErp
             frm.MdiParent = this;
             frm.Show();
         }
+
+        private void barButtonItem21_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            frmCadastroPorcentagens frm = new frmCadastroPorcentagens();
+            frm.ShowDialog();
+        }
     }
 }

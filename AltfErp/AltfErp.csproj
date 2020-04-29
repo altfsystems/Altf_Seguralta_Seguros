@@ -96,6 +96,12 @@
     <Compile Include="frmCadastroCiaSeguradora.Designer.cs">
       <DependentUpon>frmCadastroCiaSeguradora.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCadastroPorcentagens.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCadastroPorcentagens.Designer.cs">
+      <DependentUpon>frmCadastroPorcentagens.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmCadastroProdutos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -389,6 +395,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmCadastroCiaSeguradora.resx">
       <DependentUpon>frmCadastroCiaSeguradora.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCadastroPorcentagens.resx">
+      <DependentUpon>frmCadastroPorcentagens.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCadastroProdutos.resx">
       <DependentUpon>frmCadastroProdutos.cs</DependentUpon>

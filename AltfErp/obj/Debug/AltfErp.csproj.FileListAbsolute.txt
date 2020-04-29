@@ -1506,3 +1506,4 @@ C:\Users\gabri\Documents\GitHub\Altf_Seguralta_Seguros\AltfErp\obj\Debug\AltfErp
 C:\Users\gabri\Documents\GitHub\Altf_Seguralta_Seguros\AltfErp\obj\Debug\AltfErp.relComissoes.resources
 C:\Users\gabri\Documents\GitHub\Altf_Seguralta_Seguros\AltfErp\obj\Debug\AltfErp.frmFiltroComissoes.resources
 C:\Users\gabri\Documents\GitHub\Altf_Seguralta_Seguros\AltfErp\obj\Debug\AltfErp.frmEditarData.resources
+C:\Users\gabri\Documents\GitHub\Altf_Seguralta_Seguros\AltfErp\obj\Debug\AltfErp.frmCadastroPorcentagens.resources
