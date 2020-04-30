@@ -42,7 +42,7 @@ namespace AltfErp
 	                                                     left join (select IDFCFO, sum(isnull(VALORDINHEIRO,0) + 
 			                                                     isnull(VALORCHEQUE,0) + 
 			                                                     isnull(VALORCARTAODEBITO,0) + 
-			                                                     isnull(VALORCARTAOCREDITO,0)) as 'PAGO' from RECEBIMENTO
+			                                                     isnull(VALORCARTAOCREDITO,0)) as 'PAGO' from RECEBIMENTO WHERE EXTORNO != 1
 			                                                     group by IDFCFO) R
 	                                                     on R.IDFCFO = C.IDFCFO ORDER BY C.NOME");
 

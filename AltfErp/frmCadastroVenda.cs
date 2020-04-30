@@ -382,7 +382,7 @@ namespace AltfErp
                     iof = double.Parse(MetodosSql.GetField(sql, "IOF"));
                     txtIof.Text = iof.ToString("F2");
                     comissaoVenda = double.Parse(MetodosSql.GetField(sql, "COMISSAO"));
-                    txtComissaoVenda.Text = comissaoVenda.ToString("F2");
+                    txtComissao.Text = comissaoVenda.ToString("F2");
                     valorTotal = double.Parse(MetodosSql.GetField(sql, "TOTALVENDA"));
                     txtTotalVenda.Text = valorTotal.ToString("F2");
                     txtValorTotal.Text = txtTotalVenda.Text;

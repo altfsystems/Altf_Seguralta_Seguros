@@ -198,7 +198,7 @@
             // 
             // btnVisualizarVenda
             // 
-            this.btnVisualizarVenda.Location = new System.Drawing.Point(229, 86);
+            this.btnVisualizarVenda.Location = new System.Drawing.Point(240, 86);
             this.btnVisualizarVenda.Margin = new System.Windows.Forms.Padding(2);
             this.btnVisualizarVenda.Name = "btnVisualizarVenda";
             this.btnVisualizarVenda.Size = new System.Drawing.Size(85, 23);
@@ -218,7 +218,7 @@
             // 
             // btnEditarData
             // 
-            this.btnEditarData.Location = new System.Drawing.Point(318, 86);
+            this.btnEditarData.Location = new System.Drawing.Point(329, 86);
             this.btnEditarData.Margin = new System.Windows.Forms.Padding(2);
             this.btnEditarData.Name = "btnEditarData";
             this.btnEditarData.Size = new System.Drawing.Size(130, 23);
@@ -228,13 +228,12 @@
             // 
             // btnEditarPagamento
             // 
-            this.btnEditarPagamento.Enabled = false;
             this.btnEditarPagamento.Location = new System.Drawing.Point(122, 86);
             this.btnEditarPagamento.Margin = new System.Windows.Forms.Padding(2);
             this.btnEditarPagamento.Name = "btnEditarPagamento";
-            this.btnEditarPagamento.Size = new System.Drawing.Size(103, 23);
+            this.btnEditarPagamento.Size = new System.Drawing.Size(114, 23);
             this.btnEditarPagamento.TabIndex = 63;
-            this.btnEditarPagamento.Text = "Editar Pagamento";
+            this.btnEditarPagamento.Text = "Extornar Pagamento";
             this.btnEditarPagamento.Click += new System.EventHandler(this.btnEditarPagamento_Click);
             // 
             // frmPagamento

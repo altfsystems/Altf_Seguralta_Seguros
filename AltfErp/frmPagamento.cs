@@ -52,9 +52,9 @@ namespace AltfErp
                                             cast((isnull(PARCELA.VALOR, 0) - isnull(X.VALORPAGO, 0)) as numeric(20,2)) as RESTANTE FROM PARCELA
                                             INNER JOIN VENDA
 											ON PARCELA.IDVENDA = VENDA.IDVENDA
-                                            left JOIN(SELECT IDPARCELA, ROUND(cast((SUM(isnull((RECEBIMENTO.VALORDINHEIRO),0.00))+ (SUM(isnull((RECEBIMENTO.VALORCHEQUE),0.00)))+ 
-							                (SUM(isnull((RECEBIMENTO.VALORCARTAOCREDITO),0.00)) + (SUM(isnull((RECEBIMENTO.VALORCARTAODEBITO),0.00)))))as numeric(20,2)), 2)
-                                            AS 'VALORPAGO' FROM RECEBIMENTO
+                                            left JOIN(SELECT IDPARCELA, cast((SUM(isnull((RECEBIMENTO.VALORDINHEIRO),0.00))+ (SUM(isnull((RECEBIMENTO.VALORCHEQUE),0.00)))+ 
+							                (SUM(isnull((RECEBIMENTO.VALORCARTAOCREDITO),0.00)) + (SUM(isnull((RECEBIMENTO.VALORCARTAODEBITO),0.00)))))as numeric(20,2))
+                                            AS 'VALORPAGO' FROM RECEBIMENTO WHERE EXTORNO != 1
                                             GROUP BY IDPARCELA)X
                                             ON X.IDPARCELA = PARCELA.IDPARCELA
 											where PARCELA.IDFCFO = {0} {1}
@@ -241,16 +241,25 @@ namespace AltfErp
 
         private void btnEditarPagamento_Click(object sender, EventArgs e)
         {
-            
+
             var rowHandle = gridView1.FocusedRowHandle;
             var codParcela = gridView1.GetRowCellValue(rowHandle, "IDPARCELA");
-            var codVenda = gridView1.GetRowCellValue(rowHandle, "IDVENDA");
-            var restante = gridView1.GetRowCellValue(rowHandle, "RESTANTE");
-            var valorParcela = gridView1.GetRowCellValue(rowHandle, "VALOR");
+            //var codVenda = gridView1.GetRowCellValue(rowHandle, "IDVENDA");
+            //var restante = gridView1.GetRowCellValue(rowHandle, "RESTANTE");
+            //var valorParcela = gridView1.GetRowCellValue(rowHandle, "VALOR");
 
-            frmEdiçãoParcela frm = new frmEdiçãoParcela(true, codVenda.ToString(), codParcela.ToString(), restante.ToString(), valorParcela.ToString());
-            frm.ShowDialog();
-            AtualizaGrid();
+            //frmEdiçãoParcela frm = new frmEdiçãoParcela(true, codVenda.ToString(), codParcela.ToString(), restante.ToString(), valorParcela.ToString());
+            //frm.ShowDialog();
+
+            if (DialogResult.Yes == MessageBox.Show("Deseja extornar este pagamento?", "Pergunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            {
+                string sql = String.Format(@"UPDATE RECEBIMENTO SET EXTORNO = 1 WHERE IDPARCELA = '{0}'", codParcela);
+                MetodosSql.ExecQuery(sql);
+                sql = String.Format(@"UPDATE PARCELA SET STATUS  = 'A', DATAPAGAMENTO = NULL WHERE IDPARCELA = '{0}'", codParcela);
+                MetodosSql.ExecQuery(sql);
+                MessageBox.Show("Êxito ao extornar o pagamento!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                AtualizaGrid();
+            }
         }
     }
 }

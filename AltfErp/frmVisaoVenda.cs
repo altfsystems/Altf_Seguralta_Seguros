@@ -114,7 +114,7 @@ namespace AltfErp
                                             ON IT.IDVENDA = VD.IDVENDA
                                             Left JOIN (SELECT IDVENDA, 
                                             CAST(SUM(VALORCARTAOCREDITO+VALORCARTAODEBITO+VALORCHEQUE+VALORDINHEIRO)AS numeric(20,2)) AS TOTAL_RECEBIMENTO
-                                            FROM RECEBIMENTO
+                                            FROM RECEBIMENTO WHERE EXTORNO != 1
                                             GROUP BY IDVENDA)X ON X.IDVENDA = VD.IDVENDA
                                             WHERE VD.IDVENDA IS NOT NULL AND {0} AND CONVERT(VARCHAR, CONVERT(DATETIME, VD.DATAINCLUSAO , 121) , 103) = {2}'{1}'
                                             GROUP BY VD.IDVENDA, VD.IDFCFO, X.TOTAL_RECEBIMENTO, FC.NOME, FC.NOMEFANTASIA, VD.OBSERVACAO, VD.DATAINCLUSAO, VD.DATAPAGAMENTO, VD.DESCONTO
