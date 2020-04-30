@@ -1508,3 +1508,5 @@ C:\Users\gabri\Documents\GitHub\Altf_Seguralta_Seguros\AltfErp\obj\Debug\AltfErp
 C:\Users\gabri\Documents\GitHub\Altf_Seguralta_Seguros\AltfErp\obj\Debug\AltfErp.frmEditarData.resources
 C:\Users\gabri\Documents\GitHub\Altf_Seguralta_Seguros\AltfErp\obj\Debug\AltfErp.frmCadastroPorcentagens.resources
 C:\Users\gabri\Documents\GitHub\Altf_Seguralta_Seguros\AltfErp\obj\Debug\AltfErp.frmEdiçãoParcela.resources
+C:\Users\gabri\Documents\GitHub\Altf_Seguralta_Seguros\AltfErp\obj\Debug\AltfErp.frmCadastroUsuario.resources
+C:\Users\gabri\Documents\GitHub\Altf_Seguralta_Seguros\AltfErp\obj\Debug\AltfErp.frmVisaoUsuario.resources

@@ -90,7 +90,7 @@ namespace AltfErp
                     Cod = CodParcela.ToString();
                 }
 
-                frmIdPagamento frm = new frmIdPagamento(false, null);
+                frmIdPagamento frm = new frmIdPagamento(false, null, false);
                 frm.CODIGOCLIENTE = idCliente.ToString();
                 frm.CODIGOPARCELA = Cod.ToString();
                 frm.CODIGOVENDA = CODVENDA.ToString();

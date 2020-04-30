@@ -114,6 +114,12 @@
     <Compile Include="frmCadastroProprietario.Designer.cs">
       <DependentUpon>frmCadastroProprietario.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCadastroUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCadastroUsuario.Designer.cs">
+      <DependentUpon>frmCadastroUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmCadastroVenda.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -343,6 +349,12 @@
       <DependentUpon>frmVisaoServicos.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\MetodosSql.cs" />
+    <Compile Include="frmVisaoUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmVisaoUsuario.Designer.cs">
+      <DependentUpon>frmVisaoUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmVisaoVencimento.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -410,6 +422,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmCadastroProprietario.resx">
       <DependentUpon>frmCadastroProprietario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCadastroUsuario.resx">
+      <DependentUpon>frmCadastroUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCadastroVenda.resx">
       <DependentUpon>frmCadastroVenda.cs</DependentUpon>
@@ -524,6 +539,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmVisaoServicos.resx">
       <DependentUpon>frmVisaoServicos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVisaoUsuario.resx">
+      <DependentUpon>frmVisaoUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmVisaoVencimento.resx">
       <DependentUpon>frmVisaoVencimento.cs</DependentUpon>

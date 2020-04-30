@@ -47,6 +47,23 @@ namespace AltfErp
 
         }
 
+        public static Boolean ChecaLogin(string usuario, string senha)
+        {
+            Boolean validaCadastro;
+            string sql = String.Format(@"SELECT COUNT(USUARIO) AS CADASTRO FROM LOGIN WHERE USUARIO = '{0}' AND SENHA = '{1}'", usuario, senha);
+            int numeroCad = int.Parse(GetField(sql, "CADASTRO"));
+            if(numeroCad > 0)
+            {
+                validaCadastro = true;
+            }
+            else
+            {
+                validaCadastro = false;
+            }
+
+            return validaCadastro;
+        }
+
         public static string GetConnectionString()
         {
             try

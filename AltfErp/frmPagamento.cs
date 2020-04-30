@@ -150,7 +150,7 @@ namespace AltfErp
                 string sql = String.Format(@"select CONVERT(varchar, CONVERT(DATETIME, DATAPAGAMENTO, 121), 103) as 'Nasc' from PARCELA where IDPARCELA = {0}", obj);
                 
 
-                frmIdPagamento frm = new frmIdPagamento(false , null);
+                frmIdPagamento frm = new frmIdPagamento(false , null, false);
                 frm.txtDataPagamento.Text = MetodosSql.GetField(String.Format(@"select CONVERT(varchar, CONVERT(DATETIME, DATAPAGAMENTO, 121), 103) as 'Data' from PARCELA where IDPARCELA = {0}", obj), "Data");
                 frm.CODIGOPARCELA = gridView1.GetRowCellValue(rowHandle, "IDPARCELA").ToString();
                 frm.CODIGOVENDA = gridView1.GetRowCellValue(rowHandle, "IDVENDA").ToString();
@@ -214,7 +214,7 @@ namespace AltfErp
             try
             {
                 var rowHandle = gridView1.FocusedRowHandle;
-                frmIdPagamento frm = new frmIdPagamento(false, null);
+                frmIdPagamento frm = new frmIdPagamento(false, null, false);
 
                 frm.CODIGOPARCELA = gridView1.GetRowCellValue(rowHandle, "IDPARCELA").ToString();
                 frm.CODIGOVENDA = gridView1.GetRowCellValue(rowHandle, "IDVENDA").ToString();

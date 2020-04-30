@@ -20,8 +20,8 @@ namespace AltfErp
         string data1, idVendedor, status, SALVAR, Cod, sql;
         int ano, dia, mes;
         string diaVencimento, mesVencimento;
-        public String VENCIMENTOANUAL { get; set; }
-        public String OBS { get; set; }
+        public string VENCIMENTOANUAL { get; set; }
+        public string OBS { get; set; }
 
 
         public class Produto
@@ -56,6 +56,7 @@ namespace AltfErp
             gridControl1.EmbeddedNavigator.Buttons.Append.Visible = false;
             gridControl1.EmbeddedNavigator.Buttons.Remove.Visible = false;
             txtQuantidade.Text = "1";
+            
 
 
 
@@ -83,9 +84,9 @@ namespace AltfErp
             for (int parcela = 1; parcela <= NParcelas; parcela++)
             {
                 string totalVendaString = txtTotalVenda.Text.Replace(".", "");
-                double totalVenda = (double) double.Parse(totalVendaString) / NParcelas;
+                double totalVenda = (double)double.Parse(totalVendaString) / NParcelas;
                 string totalVendaInsert = totalVenda.ToString("F2", CultureInfo.InvariantCulture);
-               
+
 
                 sql = String.Format(@"insert into PARCELA(NPARCELA, IDVENDA, IDFCFO, VALOR, DATAVENCIMENTO, STATUS) values ({0},{1},{2}, '{3}', CONVERT(DATETIME, CONVERT(VARCHAR,'{4}', 121),103), 'A') select SCOPE_IDENTITY()", parcela, txtCodigo.Text, txtIdCliente.Text, totalVendaInsert, data1);
                 object Codparcela = MetodosSql.ExecScalar(sql);
@@ -186,9 +187,7 @@ namespace AltfErp
             sql = String.Format(@"select IDPRODUTO, QUANTIDADE from ITEMMOVIMENTO where IDVENDA = '{0}'", txtCodigo.Text);
             DataTable Produtos = MetodosSql.GetDT(sql);
 
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
             foreach (DataRow Produto in Produtos.Rows)
             {
@@ -215,18 +214,13 @@ namespace AltfErp
                     data.ShowDialog();
                     data1 = data.dataVencimento;
                 }
-                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
+   
 
                 if (String.IsNullOrWhiteSpace(txtDesconto.Text))
                 {
                     txtDesconto.Text = "0";
                 }
 
-                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                 sql = String.Format(@"insert into VENDA (IDFCFO, IDVENDEDOR, IDORDEM, TIPOPAGAMENTO, DESCONTO, OBSERVACAO, STATUS, DATAINCLUSAO, DATAPAGAMENTO, DATAVENCIMENTO) values('{0}' ,{4}, null, '{1}' ,{2}, '{3}' , 'A' , getdate() , null, CONVERT(DATETIME, CONVERT(VARCHAR,'{5}', 121),103)) select SCOPE_IDENTITY()"
               , txtIdCliente.Text, txtTipoPagamento.Text, txtDesconto.Text.Replace(".", "").Replace(",", "."), txtObservacao.Text, txtIdVendedor.Text, txtDataVencimento.Text);
@@ -234,9 +228,7 @@ namespace AltfErp
                 object IDVENDA = MetodosSql.ExecScalar(sql);
                 txtCodigo.Text = IDVENDA.ToString();
 
-                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
                 char coCorretagem;
                 double valorSeguralta;
                 string query = @"INSERT INTO VENDACOMISSAO(IDVENDA, IDCLIENTE, VALORLIQUIDO, IOF, TOTALVENDA, COMISSAO, COMISSAOVENDA, COCORRETAGEM, VALORSEGURALTA)
@@ -286,9 +278,7 @@ namespace AltfErp
 
                 MetodosSql.ExecQuery(sql);
 
-                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+             
 
 
 
@@ -320,15 +310,13 @@ namespace AltfErp
                 InsereEstoque();
 
 
-                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 
                 if (vendaClick == false)
                 {
-                    frmIdPagamento frm = new frmIdPagamento(false, null);
+                    frmIdPagamento frm = new frmIdPagamento(false, null, true);
                     frm.txtValorRestante.Enabled = false;
                     frm.label7.Enabled = false;
                     frm.CODIGOVENDA = IDVENDA.ToString();
@@ -353,6 +341,7 @@ namespace AltfErp
         {
             try
             {
+                
                 double valorLiquido, iof, valorTotal, comissaoVenda;
                 if (Editar)
                 {
@@ -378,7 +367,7 @@ namespace AltfErp
                     txtDataVencimento.Text = MetodosSql.GetField(String.Format(@"select CONVERT(varchar, CONVERT(varchar, DATAVENCIMENTO, 103)) as 'Vencimento' from VENDA where IDVENDA = {0}", Cod), "Vencimento");
                     sql = String.Format(@"SELECT * FROM VENDACOMISSAO WHERE IDVENDA = '{0}'", Cod);
                     valorLiquido = double.Parse(MetodosSql.GetField(sql, "VALORLIQUIDO"));
-                    txtValorLiquido.Text =  valorLiquido.ToString("F2");
+                    txtValorLiquido.Text = valorLiquido.ToString("F2");
                     iof = double.Parse(MetodosSql.GetField(sql, "IOF"));
                     txtIof.Text = iof.ToString("F2");
                     comissaoVenda = double.Parse(MetodosSql.GetField(sql, "COMISSAO"));
@@ -388,7 +377,7 @@ namespace AltfErp
                     txtValorTotal.Text = txtTotalVenda.Text;
                     comissaoVenda = double.Parse(MetodosSql.GetField(sql, "COMISSAOVENDA"));
                     txtComissaoVenda.Text = comissaoVenda.ToString("F2");
-                    if(MetodosSql.GetField(sql, "COCORRETAGEM") == "S")
+                    if (MetodosSql.GetField(sql, "COCORRETAGEM") == "S")
                     {
                         cbCoCorretagem.Checked = true;
                     }
@@ -431,53 +420,32 @@ namespace AltfErp
 
         private void btnOk_Click(object sender, EventArgs e)
         {
+            string id = produtos.Count.ToString();
             if (SALVAR == "0")
             {
                 this.Close();
             }
+            else if (String.IsNullOrWhiteSpace(txtTipoPagamento.Text))
+            {
+                MessageBox.Show("Selecione Um Tipo De Pagameto", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else if (String.IsNullOrWhiteSpace(txtTotalVenda.Text))
+            {
+                MessageBox.Show("Selecione um Produto", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if(String.IsNullOrWhiteSpace(txtIdVendedor.Text))
+            {
+                MessageBox.Show("Selecione um vendedor", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (id != "0")
+            {
+                Cadastro();
+                this.Close();
+            }
             else
             {
-                if (String.IsNullOrWhiteSpace(txtTipoPagamento.Text))
-                {
-                    MessageBox.Show("Selecione Um Tipo De Pagameto", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
-                else
-                {
-                    if (txtTotalVenda.Text == "0,00")
-                    {
-                        MessageBox.Show("Selecione um Produto");
-
-
-                    }
-                    else
-                    {
-                        if (String.IsNullOrWhiteSpace(txtTotalVenda.Text))
-                        {
-                            MessageBox.Show("Selecione um Produto");
-
-                        }
-                        else
-                        {
-                            string id = produtos.Count.ToString();
-                            if(id != "0")
-                            {
-                                Cadastro();
-                                this.Close();
-                            }
-                            else
-                            {
-                                MessageBox.Show(@"Por favor, selecione um seguro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                            
-                        }
-
-                    }
-                }
-
+                MessageBox.Show(@"Por favor, selecione um seguro", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-
-
 
         }
 
@@ -512,8 +480,8 @@ namespace AltfErp
             txtDescricaoProduto.Text = String.Empty;
             txtQuantidade.Text = "1";
             txtCiaSeguradora.Text = String.Empty;
-            
-            
+
+
         }
 
         private void btnSelecionaProduto_Click(object sender, EventArgs e)
@@ -694,10 +662,10 @@ namespace AltfErp
                         {
 
                             sql = String.Format(@"update ITEMMOVIMENTO
-	                                                   set  VALOR = '{0}',
-			                                                QUANTIDADE = '{1}',
-			                                                DATAINCLUSAO = GETDATE()
-		                                                where IDITEM = '{2}'",
+	                                                set  VALOR = '{0}',
+			                                        QUANTIDADE = '{1}',
+			                                        DATAINCLUSAO = GETDATE()
+		                                            where IDITEM = '{2}'",
                                                     /*{0}*/ txtIof.Text.Replace(",", "."),
                                                     /*{1}*/ txtQuantidade.Text.Replace(",", "."),
                                                     /*{2}*/ IDITEM);
@@ -843,7 +811,6 @@ namespace AltfErp
         }
 
 
-
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             SALVAR = "0";
@@ -867,15 +834,6 @@ namespace AltfErp
             }
         }
 
-
-
-
-
-
-
-
-
-
         private void txtDesconto_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
@@ -887,6 +845,37 @@ namespace AltfErp
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

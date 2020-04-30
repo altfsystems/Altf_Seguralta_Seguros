@@ -12,23 +12,29 @@ namespace AltfErp
 {
     public partial class frmLogin : Form
     {
+        Boolean valida;
         public frmLogin()
         {
             InitializeComponent();
         }
-
+        
         private void btnLogin_Click(object sender, EventArgs e)
         {
-           if ((txtLogin.Text == "x" || txtLogin.Text == "1" ) && (txtSenha.Text == "x" || txtSenha.Text == "1"))
+            valida = MetodosSql.ChecaLogin(txtLogin.Text, txtSenha.Text);
+            
+           if(valida)
+           {
+                string sql = String.Format(@"SELECT NOME, USUARIO FROM LOGIN WHERE USUARIO = '{0}'", txtLogin.Text);
+                string nome = MetodosSql.GetField(sql, "NOME");
+                string usuario = MetodosSql.GetField(sql, "USUARIO");
 
-            {
-                frmPrincipal frm = new frmPrincipal();
+                frmPrincipal frm = new frmPrincipal(nome, usuario);
                 frm.FormClosed += (s, args) => this.Close();
                 frm.Show();
                 this.Visible = false;
 
 
-            }
+           }
            else
             {
                 MessageBox.Show("Úsuaio ou Senha inválidos"); 

@@ -7,14 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using AltfErp;
+using DevExpress.XtraExport.Xls;
 
 namespace AltfErp
 {
     public partial class frmPrincipal : DevExpress.XtraBars.Ribbon.RibbonForm
     {
-        public frmPrincipal()
+        public frmPrincipal(string nome, string usuario)
         {
+            
             InitializeComponent();
+            bsUsuario.Caption = "• " + nome; 
             string sql = String.Format(@"SELECT * FROM PROPRIETARIO");
             this.Text = MetodosSql.GetField(sql, "NOMEFANTASIA");
 
@@ -194,6 +197,21 @@ namespace AltfErp
         {
             frmCadastroPorcentagens frm = new frmCadastroPorcentagens();
             frm.ShowDialog();
+        }
+
+        private void btnUsuario_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if(bsUsuario.Caption == "• Mestre")
+            {
+                frmVisaoUsuario frm = new frmVisaoUsuario();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            else
+            {
+                MessageBox.Show("Apenas o usuário mestre tem permissão para acessar esta aba", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            
         }
     }
 }

@@ -13,7 +13,7 @@ namespace AltfErp
     public partial class frmIdPagamento : Form
     {
 
-        Boolean Editar;
+        Boolean Editar, EntradaVenda;
         string Cod;
         public string CODIGOPARCELA { get; set; }
         public string CODIGOVENDA { get; set; }
@@ -23,13 +23,13 @@ namespace AltfErp
         string STATUS = String.Empty;
 
 
-        public frmIdPagamento(bool Editar_, string Cod_)
+        public frmIdPagamento(bool Editar_, string Cod_, bool entradaVenda)
         {
             InitializeComponent();
             Cod = Cod_;
             Editar = Editar_;
             txtCodigo.Visible = false;
-
+            EntradaVenda = entradaVenda;
             txtDataPagamento.Text = DateTime.Now.ToString();
 
         }
@@ -113,56 +113,45 @@ namespace AltfErp
 
         private void frmIdPagamento_Load(object sender, EventArgs e)
         {
-
-
-
-
-
-
-            txtValorRestante.Text = RESTANTE;
-            if (String.IsNullOrWhiteSpace(txtValorRestante.Text))
+            if(EntradaVenda)
             {
-                txtValorRestante.Text = "0.00";
+                txtValorRestante.Text = RESTANTE;
+                txtCodigoVenda.Text = CODIGOVENDA;
+                txtCodigoParcela.Text = CODIGOPARCELA;
+                sql = String.Format(@"select cast(VALOR as numeric(20,2)) as 'VALOR' from PARCELA where IDPARCELA = '{0}'", CODIGOPARCELA);
+                txtValorParcela.Text = MetodosSql.GetField(sql, "VALOR");
+                txtValorRestante.Text = txtValorParcela.Text;
             }
-            txtCodigoVenda.Text = CODIGOVENDA;
-            txtCodigoParcela.Text = CODIGOPARCELA;
-            sql = String.Format(@"select cast(VALOR as numeric(20,2)) as 'VALOR' from PARCELA where IDPARCELA = '{0}'", CODIGOPARCELA);
-            txtValorParcela.Text = MetodosSql.GetField(sql, "VALOR");
-
-
-
-
-
-
+            else
+            {
+                txtValorRestante.Text = RESTANTE;
+                txtCodigoVenda.Text = CODIGOVENDA;
+                txtCodigoParcela.Text = CODIGOPARCELA;
+                sql = String.Format(@"select cast(VALOR as numeric(20,2)) as 'VALOR' from PARCELA where IDPARCELA = '{0}'", CODIGOPARCELA);
+                txtValorParcela.Text = MetodosSql.GetField(sql, "VALOR");
+            }
+                
         }
-
+                
         private Boolean ChecaValor()
         {
             Validar();
 
             sql = String.Format(@"select cast(isnull(P.TOTAL,0) - isnull(R.PAGO,0)as numeric (20,2)) as 'DEVENDO'
+                                from  (select IDPARCELA, cast(sum(isnull(VALOR,0))as numeric(20,2) ) as 'TOTAL' from PARCELA group by IDPARCELA) P
+                                left join (select IDPARCELA, cast(sum(isnull(VALORDINHEIRO,0) + 
+		                        isnull(VALORCHEQUE,0) + 
+                                isnull(VALORCARTAODEBITO,0) + 
+		                        isnull(VALORCARTAOCREDITO,0))as numeric (20,2)) as 'PAGO' from RECEBIMENTO 
+		                        group by IDPARCELA) R
+                                on R.IDPARCELA = P.IDPARCELA
+                                where P.IDPARCELA = '{0}'", txtCodigoParcela.Text);
+
 													
-                                      from  (select IDPARCELA, cast(sum(isnull(VALOR,0))as numeric(20,2) ) as 'TOTAL' from PARCELA group by IDPARCELA) P
-
-                                    left join (select IDPARCELA, cast(sum(isnull(VALORDINHEIRO,0) + 
-		                                    isnull(VALORCHEQUE,0) + 
-		                                    isnull(VALORCARTAODEBITO,0) + 
-		                                    isnull(VALORCARTAOCREDITO,0))as numeric (20,2)) as 'PAGO' from RECEBIMENTO 
-		                                    group by IDPARCELA) R
-                                    on R.IDPARCELA = P.IDPARCELA
-
-                                    where P.IDPARCELA = '{0}'", txtCodigoParcela.Text);
-
-
-
-
-
-
 
             string RestanteString = txtValorRestante.Text;
             double Restante = double.Parse(RestanteString);
             double Resultado = Convert.ToDouble(txtValorCheque.Text.Replace(".", ",")) + Convert.ToDouble(txtValorCredito.Text.Replace(".", ",")) + Convert.ToDouble(txtValorDebito.Text.Replace(".", ",")) + Convert.ToDouble(txtValorDinheiro.Text.Replace(".", ","));
-
 
             if (Resultado > Restante)
             {
@@ -182,7 +171,7 @@ namespace AltfErp
                 return true;
             }
         }
-
+                
         private void CadastroRecebimento()
         {
             try
@@ -259,9 +248,7 @@ namespace AltfErp
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
-
+                
         private String CampoLeave(TextBox txt)
         {
             if (String.IsNullOrWhiteSpace(txt.Text))
@@ -279,11 +266,7 @@ namespace AltfErp
         {
             txtValorCheque.Text = CampoLeave(txtValorCheque);
         }
-
-
-
-
-
+          
         private void txtValorCredito_Leave(object sender, EventArgs e)
         {
             txtValorCredito.Text = CampoLeave(txtValorCredito);
@@ -300,3 +283,32 @@ namespace AltfErp
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -22,7 +22,7 @@ namespace AltfErp
             BonusSkins.Register();
             SkinManager.EnableFormSkins();
             UserLookAndFeel.Default.SetSkinStyle("DevExpress Style");
-            Application.Run(new frmPrincipal());
+            Application.Run(new frmLogin());
         }
     }
 }
