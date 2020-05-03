@@ -63,6 +63,7 @@
             this.barButtonItem21 = new DevExpress.XtraBars.BarButtonItem();
             this.bsUsuario = new DevExpress.XtraBars.BarStaticItem();
             this.btnUsuario = new DevExpress.XtraBars.BarButtonItem();
+            this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.ribbonMiniToolbar1 = new DevExpress.XtraBars.Ribbon.RibbonMiniToolbar(this.components);
             this.ribbonPage6 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup10 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -95,7 +96,6 @@
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
-            this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHypertextLabel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager2)).BeginInit();
@@ -415,7 +415,7 @@
             // 
             // barHeaderItem1
             // 
-            this.barHeaderItem1.Caption = "2020.04.30.0007";
+            this.barHeaderItem1.Caption = "2020.05.02.0008";
             this.barHeaderItem1.Id = 28;
             this.barHeaderItem1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barHeaderItem1.ImageOptions.Image")));
             this.barHeaderItem1.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barHeaderItem1.ImageOptions.LargeImage")));
@@ -453,6 +453,12 @@
             this.btnUsuario.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
             | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
             this.btnUsuario.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUsuario_ItemClick);
+            // 
+            // barStaticItem1
+            // 
+            this.barStaticItem1.Caption = "barStaticItem1";
+            this.barStaticItem1.Id = 33;
+            this.barStaticItem1.Name = "barStaticItem1";
             // 
             // ribbonMiniToolbar1
             // 
@@ -652,12 +658,6 @@
             this.documentManager2.View = this.tabbedView1;
             this.documentManager2.ViewCollection.AddRange(new DevExpress.XtraBars.Docking2010.Views.BaseView[] {
             this.tabbedView1});
-            // 
-            // barStaticItem1
-            // 
-            this.barStaticItem1.Caption = "barStaticItem1";
-            this.barStaticItem1.Id = 33;
-            this.barStaticItem1.Name = "barStaticItem1";
             // 
             // frmPrincipal
             // 

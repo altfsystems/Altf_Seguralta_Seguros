@@ -44,16 +44,25 @@ namespace AltfErp
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            if(txtSenha.Text == txtConfirmarSenha.Text)
+            if(txtSenha.Text != txtConfirmarSenha.Text)
+            {
+                
+                MessageBox.Show("As senhas não batem!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if(String.IsNullOrWhiteSpace(txtUsuario.Text))
+            {
+                MessageBox.Show("Por favor, insira um usuário!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if(String.IsNullOrWhiteSpace(txtNome.Text))
+            {
+                MessageBox.Show("Por favor, insira um nome!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
             {
                 Cadastro();
                 this.Close();
             }
-            else
-            {
-                MessageBox.Show("As senhas não batem!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            
+           
         }
 
         private void frmCadastroUsuario_Load(object sender, EventArgs e)
@@ -72,7 +81,24 @@ namespace AltfErp
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            Cadastro();
+            if (txtSenha.Text != txtConfirmarSenha.Text)
+            {
+
+                MessageBox.Show("As senhas não batem!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (String.IsNullOrWhiteSpace(txtUsuario.Text))
+            {
+                MessageBox.Show("Por favor, insira um usuário!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (String.IsNullOrWhiteSpace(txtNome.Text))
+            {
+                MessageBox.Show("Por favor, insira um nome!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                Cadastro();
+                
+            }
         }
     }
 }

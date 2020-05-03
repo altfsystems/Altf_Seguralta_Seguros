@@ -30,10 +30,10 @@ namespace AltfErp
 
         private void Filtro()
         {
-            frmFiltroDataVencimento frm = new frmFiltroDataVencimento();
+            frmFiltroComissoes frm = new frmFiltroComissoes();
             frm.ShowDialog();
-            Inicio = frm.DataInicio;
-            Fim = frm.DataFim;
+            Inicio = frm.dtInicio;
+            Fim = frm.dtFim;
 
         }
 
@@ -53,7 +53,7 @@ namespace AltfErp
             (SELECT TIP.DESCRICAO WHERE TIP.IDTIPOPAGAMENTO = VD.TIPOPAGAMENTO) AS PAGAMENTO , VD.STATUS,
             CONVERT(VARCHAR, VD.DATAINCLUSAO, 103) AS DATAVENDA,
             CONVERT(VARCHAR, VD.DATAVENCIMENTO, 103) AS DATAVENCIMENTO, VD.DESCONTO, 
-            ROUND(CAST(SUM(PAR.VALOR * ITM.QUANTIDADE)AS NUMERIC(20,2)), 2) AS TOTALVENDA
+            CAST(SUM(PAR.VALOR * ITM.QUANTIDADE)AS NUMERIC(20,2)) AS TOTALVENDA
             FROM VENDA VD
             INNER JOIN PARCELA PAR
             ON VD.IDVENDA = PAR.IDVENDA
