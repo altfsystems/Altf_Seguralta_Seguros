@@ -31,13 +31,13 @@ namespace AltfErp
             {
                 if (rbtnEmAberto.Checked == true)
                 {
-                    RETORNO = "ROUND(((IT.QUANTIDADE * IT.VALOR - VD.DESCONTO) - ROUND(X.TOTAL_RECEBIMENTO, -1)), -1) > 0 or ROUND(X.TOTAL_RECEBIMENTO, 2) is null--";
+                    RETORNO = "(SELECT SUM(VALOR) FROM PARCELA WHERE IDVENDA = VD.IDVENDA) - (X.TOTAL_RECEBIMENTO) > 0 or (X.TOTAL_RECEBIMENTO) is null--";
                 }
                 else
                 {
                     if (rbtnPagos.Checked == true)
                     {
-                        RETORNO = "ROUND(cast((IT.VALOR * IT.QUANTIDADE) - VD.DESCONTO as numeric(20,2)) - ROUND(X.TOTAL_RECEBIMENTO, -1), 2) <= 0--";
+                        RETORNO = "(SELECT SUM(VALOR) FROM PARCELA WHERE IDVENDA = VD.IDVENDA) - (X.TOTAL_RECEBIMENTO) <= 0--";
                     }
                     else
                     {

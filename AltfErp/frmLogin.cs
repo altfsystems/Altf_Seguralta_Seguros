@@ -17,28 +17,56 @@ namespace AltfErp
         {
             InitializeComponent();
         }
-        
-        private void btnLogin_Click(object sender, EventArgs e)
+
+        private void Login()
         {
             valida = MetodosSql.ChecaLogin(txtLogin.Text, txtSenha.Text);
-            
-           if(valida)
-           {
+
+            if (valida)
+            {
                 string sql = String.Format(@"SELECT NOME, USUARIO FROM LOGIN WHERE USUARIO = '{0}'", txtLogin.Text);
                 string nome = MetodosSql.GetField(sql, "NOME");
                 string usuario = MetodosSql.GetField(sql, "USUARIO");
 
                 frmPrincipal frm = new frmPrincipal(nome, usuario);
                 frm.FormClosed += (s, args) => this.Close();
+                frm.bhiVersao.Caption = lblVersao.Text;
                 frm.Show();
                 this.Visible = false;
 
 
-           }
-           else
-            {
-                MessageBox.Show("Úsuaio ou Senha inválidos"); 
             }
+            else
+            {
+                MessageBox.Show("Úsuaio ou Senha inválidos", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            Login();
+        }
+
+        private void btnLogin_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                Login();
+            }
+        }
+                
+
+        private void txtSenha_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar == 13)
+            {
+                Login();
+            }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

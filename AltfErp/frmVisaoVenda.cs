@@ -5,8 +5,15 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using DevExpress.LookAndFeel;
+using DevExpress.XtraReports.UI;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.DataAccess.Sql;
+using Microsoft.Win32;
+using System.Diagnostics;
+using DevExpress.XtraSplashScreen;
 
 namespace AltfErp
 {
@@ -95,7 +102,9 @@ namespace AltfErp
         {
             try
             {
+                
 
+                
                 string sql = String.Format(@"SELECT VD.IDVENDA, VD.IDFCFO AS IDCLIENTE, FC.NOME, FC.NOMEFANTASIA AS SOBRENOME, 
                                             (SELECT CAST(SUM(VALOR) AS NUMERIC(20,2)) FROM PARCELA WHERE IDVENDA = VD.IDVENDA) AS TOTALVENDA,
                                             VD.DESCONTO, (X.TOTAL_RECEBIMENTO) AS TOTAL_RECEBIMENTO ,
@@ -103,7 +112,7 @@ namespace AltfErp
                                             VD.OBSERVACAO, CONVERT(VARCHAR , CONVERT(DATETIME , VD.DATAINCLUSAO , 121) , 103) AS DATAINCLUSAO , 
                                             CONVERT(varchar, CONVERT(DATETIME,VD.DATAPAGAMENTO,121),103) AS DATAPAGAMENTO,
 		                                    case
-	                                        WHEN (SELECT SUM(VALOR) FROM PARCELA WHERE IDVENDA = VD.IDVENDA) - ROUND(X.TOTAL_RECEBIMENTO, 2) <= 0 THEN 'P'
+	                                        WHEN (SELECT SUM(VALOR) FROM PARCELA WHERE IDVENDA = VD.IDVENDA) - (X.TOTAL_RECEBIMENTO) <= 0 THEN 'P'
                                             ELSE
 	                                        'A'
                                             END AS STATUS
@@ -120,9 +129,9 @@ namespace AltfErp
                                             GROUP BY VD.IDVENDA, VD.IDFCFO, X.TOTAL_RECEBIMENTO, FC.NOME, FC.NOMEFANTASIA, VD.OBSERVACAO, VD.DATAINCLUSAO, VD.DATAPAGAMENTO, VD.DESCONTO
 											ORDER BY IDVENDA DESC", Filtro, Data, Nulo);
 
-                            
-													
-													
+
+
+                
 
 
 
@@ -131,7 +140,7 @@ namespace AltfErp
 
 
                 gridControl1.DataSource = MetodosSql.GetDT(sql);
-
+               
 
 
 

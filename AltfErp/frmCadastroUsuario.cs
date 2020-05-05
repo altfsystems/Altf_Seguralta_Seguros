@@ -25,7 +25,7 @@ namespace AltfErp
         {
             if(Editar)
             {
-                string sql = String.Format(@"UPDATE LOGIN SET NOME = '{0}', USUARIO = '{1}', SENHA = '{2}'", txtNome.Text, txtUsuario.Text, txtSenha.Text);
+                string sql = String.Format(@"UPDATE LOGIN SET NOME = '{0}', USUARIO = '{1}', SENHA = '{2}' WHERE ID = '{3}'", txtNome.Text, txtUsuario.Text, txtSenha.Text, Cod);
                 MetodosSql.ExecQuery(sql);
             }
             else

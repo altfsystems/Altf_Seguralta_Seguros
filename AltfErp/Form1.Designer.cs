@@ -58,7 +58,7 @@
             this.barButtonItem7 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem10 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem11 = new DevExpress.XtraBars.BarButtonItem();
-            this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
+            this.bhiVersao = new DevExpress.XtraBars.BarHeaderItem();
             this.barButtonItem13 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem21 = new DevExpress.XtraBars.BarButtonItem();
             this.bsUsuario = new DevExpress.XtraBars.BarStaticItem();
@@ -135,7 +135,7 @@
             this.barButtonItem7,
             this.barButtonItem10,
             this.barButtonItem11,
-            this.barHeaderItem1,
+            this.bhiVersao,
             this.barButtonItem13,
             this.barButtonItem21,
             this.bsUsuario,
@@ -154,7 +154,7 @@
             this.ribbonPage4});
             this.ribbonControl1.QuickToolbarItemLinks.Add(this.skinRibbonGalleryBarItem1);
             this.ribbonControl1.QuickToolbarItemLinks.Add(this.btnSkinSave);
-            this.ribbonControl1.QuickToolbarItemLinks.Add(this.barHeaderItem1);
+            this.ribbonControl1.QuickToolbarItemLinks.Add(this.bhiVersao);
             this.ribbonControl1.QuickToolbarItemLinks.Add(this.bsUsuario);
             this.ribbonControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemHypertextLabel1});
@@ -413,13 +413,12 @@
             | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
             this.barButtonItem11.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem11_ItemClick);
             // 
-            // barHeaderItem1
+            // bhiVersao
             // 
-            this.barHeaderItem1.Caption = "2020.05.02.0008";
-            this.barHeaderItem1.Id = 28;
-            this.barHeaderItem1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barHeaderItem1.ImageOptions.Image")));
-            this.barHeaderItem1.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barHeaderItem1.ImageOptions.LargeImage")));
-            this.barHeaderItem1.Name = "barHeaderItem1";
+            this.bhiVersao.Id = 28;
+            this.bhiVersao.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barHeaderItem1.ImageOptions.Image")));
+            this.bhiVersao.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barHeaderItem1.ImageOptions.LargeImage")));
+            this.bhiVersao.Name = "bhiVersao";
             // 
             // barButtonItem13
             // 
@@ -744,7 +743,6 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem10;
         private DevExpress.XtraBars.BarButtonItem barButtonItem11;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup13;
-        private DevExpress.XtraBars.BarHeaderItem barHeaderItem1;
         private DevExpress.XtraBars.BarButtonItem barButtonItem13;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup14;
         private DevExpress.XtraBars.BarButtonItem barButtonItem21;
@@ -754,6 +752,7 @@
         private DevExpress.XtraBars.BarButtonItem btnUsuario;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup16;
         private DevExpress.XtraBars.BarStaticItem barStaticItem1;
+        public DevExpress.XtraBars.BarHeaderItem bhiVersao;
     }
 }
 

@@ -20,6 +20,7 @@ namespace AltfErp
             bsUsuario.Caption = "• " + nome; 
             string sql = String.Format(@"SELECT * FROM PROPRIETARIO");
             this.Text = MetodosSql.GetField(sql, "NOMEFANTASIA");
+            
 
         }
         private void SalvaLayout(object sender, EventArgs args)
