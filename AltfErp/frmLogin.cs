@@ -38,7 +38,7 @@ namespace AltfErp
             }
             else
             {
-                MessageBox.Show("Úsuaio ou Senha inválidos", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Usuário ou Senha inválidos", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         

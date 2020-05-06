@@ -225,6 +225,7 @@
             // 
             // txtEstado
             // 
+            this.txtEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtEstado.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEstado.FormattingEnabled = true;
             this.txtEstado.Items.AddRange(new object[] {
@@ -570,7 +571,7 @@
             // 
             // txtSexo
             // 
-            this.txtSexo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtSexo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtSexo.FormattingEnabled = true;
             this.txtSexo.ItemHeight = 13;
             this.txtSexo.Items.AddRange(new object[] {
@@ -853,6 +854,7 @@
             // 
             // txtEstadoCivil
             // 
+            this.txtEstadoCivil.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtEstadoCivil.FormattingEnabled = true;
             this.txtEstadoCivil.Items.AddRange(new object[] {
             "Solteiro",
@@ -1007,6 +1009,7 @@
             // 
             // txtTipoPessoa
             // 
+            this.txtTipoPessoa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtTipoPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTipoPessoa.FormattingEnabled = true;
             this.txtTipoPessoa.Items.AddRange(new object[] {

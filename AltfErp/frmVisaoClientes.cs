@@ -75,9 +75,17 @@ namespace AltfErp
 
                     var obj = gridView1.GetRowCellValue(rowHandle, "IDCLIENTE");
 
-                    frmFCFO frm = new frmFCFO(true, obj.ToString(), "C");
-                    frm.ShowDialog();
-                    AtualizaGrid();
+                    if(obj == null)
+                    {
+                        MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        frmFCFO frm = new frmFCFO(true, obj.ToString(), "C");
+                        frm.ShowDialog();
+                        AtualizaGrid();
+                    }
+                 
                 }
                 else
                 {
@@ -104,36 +112,43 @@ namespace AltfErp
                 {
                     var rowHandle = gridView1.FocusedRowHandle;
                     var id = gridView1.GetRowCellValue(rowHandle, "IDCLIENTE");
-
-                    string sql = String.Format(@"select IDFCFO from VENDA WHERE IDFCFO = " + id.ToString());
-
-                    string teste = MetodosSql.GetField(sql, "IDFCFO");
-                    string SQL = String.Format(@"SELECT IDFCFO FROM ORDEM where IDFCFO = " + id.ToString());
-                    string IdFcfo = MetodosSql.GetField(SQL, "IDFCFO");
-
-
-                    if (id.ToString() == teste.ToString())
+                    if(id == null)
                     {
-                        MessageBox.Show("Há uma Venda no Nome Deste Cliente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show("Selecione um registro", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     else
                     {
-                        if (id.ToString() == IdFcfo.ToString())
+                        string sql = String.Format(@"select IDFCFO from VENDA WHERE IDFCFO = " + id.ToString());
+
+                        string teste = MetodosSql.GetField(sql, "IDFCFO");
+                        string SQL = String.Format(@"SELECT IDFCFO FROM ORDEM where IDFCFO = " + id.ToString());
+                        string IdFcfo = MetodosSql.GetField(SQL, "IDFCFO");
+
+
+                        if (id.ToString() == teste.ToString())
                         {
-                            MessageBox.Show("Há uma Ordem de Serviço no Nome Deste Cliente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            MessageBox.Show("Há uma Venda no Nome Deste Cliente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         }
                         else
                         {
-                            if (DialogResult.Yes == MessageBox.Show("Deseja Excluir Este Cliente?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                            if (id.ToString() == IdFcfo.ToString())
                             {
-                                sql = String.Format(@"DELETE from FCFO WHERE IDFCFO = " + id.ToString());
-                                MetodosSql.ExecQuery(sql);
-                                AtualizaGrid();
-
+                                MessageBox.Show("Há uma Ordem de Serviço no Nome Deste Cliente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             }
-                        }
+                            else
+                            {
+                                if (DialogResult.Yes == MessageBox.Show("Deseja Excluir Este Cliente?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                                {
+                                    sql = String.Format(@"DELETE from FCFO WHERE IDFCFO = " + id.ToString());
+                                    MetodosSql.ExecQuery(sql);
+                                    AtualizaGrid();
 
+                                }
+                            }
+
+                        }
                     }
+                   
 
                 }
                 else

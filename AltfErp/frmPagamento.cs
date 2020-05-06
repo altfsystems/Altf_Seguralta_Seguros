@@ -244,20 +244,15 @@ namespace AltfErp
 
             var rowHandle = gridView1.FocusedRowHandle;
             var codParcela = gridView1.GetRowCellValue(rowHandle, "IDPARCELA");
-            //var codVenda = gridView1.GetRowCellValue(rowHandle, "IDVENDA");
-            //var restante = gridView1.GetRowCellValue(rowHandle, "RESTANTE");
-            //var valorParcela = gridView1.GetRowCellValue(rowHandle, "VALOR");
+            
 
-            //frmEdiçãoParcela frm = new frmEdiçãoParcela(true, codVenda.ToString(), codParcela.ToString(), restante.ToString(), valorParcela.ToString());
-            //frm.ShowDialog();
-
-            if (DialogResult.Yes == MessageBox.Show("Deseja extornar este pagamento?", "Pergunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            if (DialogResult.Yes == MessageBox.Show("Deseja estornar este pagamento?", "Pergunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
                 string sql = String.Format(@"UPDATE RECEBIMENTO SET EXTORNO = 1 WHERE IDPARCELA = '{0}'", codParcela);
                 MetodosSql.ExecQuery(sql);
                 sql = String.Format(@"UPDATE PARCELA SET STATUS  = 'A', DATAPAGAMENTO = NULL WHERE IDPARCELA = '{0}'", codParcela);
                 MetodosSql.ExecQuery(sql);
-                MessageBox.Show("Êxito ao extornar o pagamento!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Êxito ao estornar o pagamento!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 AtualizaGrid();
             }
         }

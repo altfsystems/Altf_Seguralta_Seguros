@@ -62,12 +62,20 @@ namespace AltfErp
             var rowHandle = gridView1.FocusedRowHandle;
             var cod = gridView1.GetRowCellValue(rowHandle, "ID");
 
-            if(DialogResult.Yes == MessageBox.Show("Tem certeza que deseja excluir este usuário?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            if(cod == null)
             {
-                string sql = String.Format(@"DELETE FROM LOGIN WHERE ID = '{0}'", cod);
-                MetodosSql.ExecQuery(sql);
+                MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            AtualizaGrid();
+            else
+            {
+                if (DialogResult.Yes == MessageBox.Show("Tem certeza que deseja excluir este usuário?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                {
+                    string sql = String.Format(@"DELETE FROM LOGIN WHERE ID = '{0}'", cod);
+                    MetodosSql.ExecQuery(sql);
+                    AtualizaGrid();
+                }
+            }
+           
         }
 
         private void grdVisaoUsuario_DoubleClick(object sender, EventArgs e)

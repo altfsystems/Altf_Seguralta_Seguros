@@ -142,9 +142,9 @@
             this.lblVersao.Appearance.Options.UseForeColor = true;
             this.lblVersao.Location = new System.Drawing.Point(161, 244);
             this.lblVersao.Name = "lblVersao";
-            this.lblVersao.Size = new System.Drawing.Size(166, 18);
+            this.lblVersao.Size = new System.Drawing.Size(164, 18);
             this.lblVersao.TabIndex = 23;
-            this.lblVersao.Text = "Version 2020.05.05.0010";
+            this.lblVersao.Text = "Version 2020.05.06.0011";
             // 
             // frmLogin
             // 

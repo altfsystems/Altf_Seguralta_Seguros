@@ -90,6 +90,7 @@
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.txtDataVencimento);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmDataVencimento";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

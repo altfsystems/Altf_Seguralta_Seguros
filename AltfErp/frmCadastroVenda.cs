@@ -96,11 +96,12 @@ namespace AltfErp
                     ano += 1;
                     mes = 1;
                 }
-                else
+                else 
                 {
                     mes += 1;
                 }
 
+                
                 data1 = (dia + "/" + mes + "/" + ano);
 
             }
@@ -117,67 +118,53 @@ namespace AltfErp
                     gridView1.Columns.Clear();
                     gridControl1.DataSource = MetodosSql.GetDT(String.Format(@"select IM.IDITEM, 
                     IM.IDPRODUTO, 
-	                cast(IM.QUANTIDADE as numeric(20,2)) as 'QUANTIDADE',
-	                P.DESCRICAO, 
-	                cast(IM.VALOR as numeric(20,2)) as 'VALOR UNITARIO', 
-	                cast((IM.QUANTIDADE*IM.VALOR) as numeric(20,2)) as 'TOTAL'
+	                P.DESCRICAO 
                     from ITEMMOVIMENTO IM
                     inner join PRODUTO P
                     on P.IDPRODUTO = IM.IDPRODUTO 
                     where IDVENDA = '{0}'
                     ORDER BY IDITEM DESC", txtCodigo.Text));
-
-                    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-                    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
                     gridView1.BestFitColumns();
+	                
+	                
+	                 
                     //txtTotalVenda.Text = MetodosSql.GetField(String.Format(@"select cast(sum(QUANTIDADE* VALOR) as numeric(20, 2)) as 'TOTAL' from ITEMMOVIMENTO where IDVENDA = '{0}'", txtCodigo.Text), "TOTAL");
                     txtTotalDesconto.Text = MetodosSql.GetField(String.Format(@"SELECT VD.IDVENDA, VD.IDFCFO,  cast(SUM(IT.VALOR * IT.QUANTIDADE) - VD.DESCONTO as numeric(20,2)) AS TOTAL_VENDA FROM VENDA VD
                                                                                 INNER JOIN ITEMMOVIMENTO IT
                                                                                 ON IT.IDVENDA = VD.IDVENDA WHERE VD.IDVENDA IS NOT NULL AND VD.IDVENDA = {0}
                                                                                 GROUP BY VD.DESCONTO, VD.IDVENDA, VD.IDFCFO", txtCodigo.Text), "TOTAL_VENDA");
-
-
-
                 }
                 else
                 {
                     gridView1.ClearDocument();
                     gridControl1.DataSource = produtos;
                     gridControl1.RefreshDataSource();
-                    double Total = 0;
+                    //double Total = 0;
 
                     //foreach (Produto P in produtos)
                     //{
                     //    Total += Convert.ToDouble(P.VALORTOTAL);
-
                     //}
-
                     //txtTotalVenda.Text = String.Format("{0:N}", Total);
+
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
-
         private void AlteraEstoque()
         {
             string SQL = String.Format(@"select IDPRODUTO, QUANTIDADE from ITEMMOVIMENTO where IDVENDA = '{0}'", txtCodigo.Text);
             DataTable Produtos = MetodosSql.GetDT(sql);
 
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+            
             foreach (DataRow Produto in Produtos.Rows)
             {
                 SQL = String.Format(@"update ESTOQUE
-                                             set QUANTIDADE = QUANTIDADE + {0}
-                                             where IDPRODUTO = '{1}'", Produto["QUANTIDADE"].ToString().Replace(",", "."), Produto["IDPRODUTO"].ToString());
+                                    set QUANTIDADE = QUANTIDADE + {0}
+                                    where IDPRODUTO = '{1}'", Produto["QUANTIDADE"].ToString().Replace(",", "."), Produto["IDPRODUTO"].ToString());
                 MetodosSql.ExecQuery(sql);
             }
         }
@@ -188,7 +175,6 @@ namespace AltfErp
             DataTable Produtos = MetodosSql.GetDT(sql);
 
 
-
             foreach (DataRow Produto in Produtos.Rows)
             {
                 sql = String.Format(@"update ESTOQUE
@@ -196,51 +182,63 @@ namespace AltfErp
                                              where IDPRODUTO = '{1}'", Produto["QUANTIDADE"].ToString().Replace(",", "."), Produto["IDPRODUTO"].ToString());
                 MetodosSql.ExecQuery(sql);
             }
+
         }
+
+
+
+
+                    
+
+
+
+
+
+
 
 
 
         private void Cadastro()
         {
-
-
-
             try
             {
                 if (txtTipoPagamento.Text != "1")
                 {
-
                     frmDataVencimento data = new frmDataVencimento();
                     data.ShowDialog();
                     data1 = data.dataVencimento;
                 }
-   
 
                 if (String.IsNullOrWhiteSpace(txtDesconto.Text))
                 {
                     txtDesconto.Text = "0";
                 }
+   
 
 
-                sql = String.Format(@"insert into VENDA (IDFCFO, IDVENDEDOR, IDORDEM, TIPOPAGAMENTO, DESCONTO, OBSERVACAO, STATUS, DATAINCLUSAO, DATAPAGAMENTO, DATAVENCIMENTO) values('{0}' ,{4}, null, '{1}' ,{2}, '{3}' , 'A' , getdate() , null, CONVERT(DATETIME, CONVERT(VARCHAR,'{5}', 121),103)) select SCOPE_IDENTITY()"
-              , txtIdCliente.Text, txtTipoPagamento.Text, txtDesconto.Text.Replace(".", "").Replace(",", "."), txtObservacao.Text, txtIdVendedor.Text, txtDataVencimento.Text);
 
+                sql = String.Format(@"insert into VENDA (IDFCFO, IDVENDEDOR, IDORDEM, TIPOPAGAMENTO, DESCONTO, OBSERVACAO, STATUS, DATAINCLUSAO, DATAPAGAMENTO, DATAVENCIMENTO) values(
+                                    '{0}' ,{4}, null, '{1}' ,{2}, '{3}' , 'A' , getdate() , null, CONVERT(DATETIME, CONVERT(VARCHAR,'{5}', 121),103)) select SCOPE_IDENTITY()",
+                                    txtIdCliente.Text, txtTipoPagamento.Text, txtDesconto.Text.Replace(".", "").Replace(",", "."), txtObservacao.Text, txtIdVendedor.Text,
+                                    txtDataVencimento.Text);
                 object IDVENDA = MetodosSql.ExecScalar(sql);
                 txtCodigo.Text = IDVENDA.ToString();
 
+
         
+                string valor;
                 char coCorretagem;
                 double valorSeguralta;
                 string query = @"INSERT INTO VENDACOMISSAO(IDVENDA, IDCLIENTE, VALORLIQUIDO, IOF, TOTALVENDA, COMISSAO, COMISSAOVENDA, COCORRETAGEM, VALORSEGURALTA)
                                VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}')";
-                string valor;
+
 
                 sql = String.Format(@"SELECT * FROM PORCENTAGENS ");
                 double percCorretora = double.Parse(MetodosSql.GetField(sql, "PERCSEGURALTA"));
 
+
                 if (cbCoCorretagem.Checked == true)
                 {
-
                     coCorretagem = 'S';
                     valorSeguralta = (double.Parse(txtComissaoVenda.Text) * percCorretora) / 100;
                     valor = valorSeguralta.ToString("F2", CultureInfo.InvariantCulture);
@@ -273,34 +271,17 @@ namespace AltfErp
                                   /*{7}*/ coCorretagem,
                                   /*{8}*/ valor);
                 }
-
-
-
                 MetodosSql.ExecQuery(sql);
-
-             
-
-
 
 
                 foreach (Produto p in produtos)
                 {
-
                     sql = String.Format("insert into ITEMMOVIMENTO (IDVENDA, IDPRODUTO, VALOR, QUANTIDADE, DATAINCLUSAO) values ('{0}','{1}','{2}','1', GETDATE())",
                                                   /*{0}*/ IDVENDA.ToString(),
                                                   /*{1}*/ p.IDPRODUTO,
                                                   /*{2}*/ txtTotalVenda.Text.Replace(".", "").Replace(",", "."));
-
-
-
-
-
                     MetodosSql.ExecQuery(sql);
-
                 }
-
-
-
 
 
                 Editar = true;
@@ -308,10 +289,6 @@ namespace AltfErp
                 txtTotalVenda.Text = String.Format("{0:N}", TotalDesconto.ToString());
                 InsertParcela();
                 InsereEstoque();
-
-
-
-
 
 
                 if (vendaClick == false)
@@ -324,18 +301,13 @@ namespace AltfErp
                     frm.CODIGOCLIENTE = txtIdCliente.Text;
                     frm.ShowDialog();
                 }
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
-
-
         }
-
-
 
         private void frmCadastroVenda_Load(object sender, EventArgs e)
         {
@@ -381,25 +353,14 @@ namespace AltfErp
                     {
                         cbCoCorretagem.Checked = true;
                     }
-
-
-
-
-
                 }
-
                 AtualizaGrid();
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
-
-
         private void simpleButton2_Click(object sender, EventArgs e)
         {
             frmVisaoSelecionaCliente frm = new frmVisaoSelecionaCliente();
@@ -408,16 +369,10 @@ namespace AltfErp
             txtNome.Text = frm.NOME;
             txtSobrenome.Text = frm.SOBRENOME;
         }
-
-
-
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
-
-
         private void btnOk_Click(object sender, EventArgs e)
         {
             string id = produtos.Count.ToString();
@@ -446,11 +401,7 @@ namespace AltfErp
             {
                 MessageBox.Show(@"Por favor, selecione um seguro", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
-
-
-
         private void CalculaTotal()
         {
             //try
@@ -471,7 +422,6 @@ namespace AltfErp
             //{
             //    MessageBox.Show(ex.Message);
             //}
-
         }
 
         private void LimpaCampos()
@@ -480,9 +430,9 @@ namespace AltfErp
             txtDescricaoProduto.Text = String.Empty;
             txtQuantidade.Text = "1";
             txtCiaSeguradora.Text = String.Empty;
-
-
         }
+
+
 
         private void btnSelecionaProduto_Click(object sender, EventArgs e)
         {
@@ -495,13 +445,8 @@ namespace AltfErp
 
             //sql = String.Format(@"select * from PRODUTO where IDPRODUTO = '{0}'", frm.CODIGO);
             //txtValorUnitario.Text = MetodosSql.GetField(sql, "PRECOUNVENDA");
-
-
             //CalculaTotal();
         }
-
-
-
         private void txtValorLiquido_Leave(object sender, EventArgs e)
         {
             if (String.IsNullOrWhiteSpace(txtValorLiquido.Text))
@@ -513,7 +458,6 @@ namespace AltfErp
                 double valorLiquido = Convert.ToDouble(txtValorLiquido.Text);
                 txtValorLiquido.Text = String.Format("{0:N}", valorLiquido).Replace(".", "").Replace(".", ",");
             }
-
         }
 
         private void txtIof_Leave(object sender, EventArgs e)
@@ -564,7 +508,6 @@ namespace AltfErp
 
 
         }
-
         private void txtComissao_Leave(object sender, EventArgs e)
         {
             if (String.IsNullOrWhiteSpace(txtComissao.Text))
@@ -584,11 +527,7 @@ namespace AltfErp
 
                 txtComissaoVenda.Text = String.Format("{0:N}", comissaoVenda);
             }
-
-
-
         }
-
         private void txtValorLiquido_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
@@ -637,9 +576,6 @@ namespace AltfErp
         {
             try
             {
-
-
-
                 if (!String.IsNullOrWhiteSpace(txtCodigoProduto.Text))
                 {
                     if (Editar)
@@ -669,21 +605,20 @@ namespace AltfErp
                                                     /*{0}*/ txtIof.Text.Replace(",", "."),
                                                     /*{1}*/ txtQuantidade.Text.Replace(",", "."),
                                                     /*{2}*/ IDITEM);
-
                             MetodosSql.ExecQuery(sql);
-
                             IDITEM = null;
                         }
-
-
-
                     }
+
+
+
+
+
                     else
                     {
                         if (String.IsNullOrWhiteSpace(IDITEM))
                         {
                             Produto produto = new Produto();
-
                             produto.IDPRODUTO = txtCodigoProduto.Text;
                             produto.DESCRICAO = txtDescricaoProduto.Text;
                             produto.CIASEGURADORA = txtCiaSeguradora.Text;
@@ -691,7 +626,6 @@ namespace AltfErp
                             //produto.PRECOUNITARIO = txtIof.Text;
                             //produto.QUANTIDADE = txtQuantidade.Text;
                             //produto.VALORTOTAL = txtValorTotal.Text;
-
                             produtos.Add(produto);
                         }
                         else
@@ -701,13 +635,9 @@ namespace AltfErp
                             //produtos[indice].QUANTIDADE = txtQuantidade.Text;
                             //produtos[indice].VALORTOTAL = txtValorTotal.Text;
                         }
-
                     }
                 }
-
-
                 AtualizaGrid();
-
                 LimpaCampos();
             }
             catch (Exception ex)
@@ -716,7 +646,6 @@ namespace AltfErp
             }
 
         }
-
         private void gridControl1_DoubleClick(object sender, EventArgs e)
         {
             try
@@ -725,22 +654,18 @@ namespace AltfErp
 
                 if (Editar)
                 {
-
-
                     IDITEM = gridView1.GetRowCellValue(rowHandle, "IDITEM").ToString();
 
                     sql = String.Format(@"select * from ITEMMOVIMENTO where IDITEM = '{0}'", IDITEM);
-
                     txtCodigoProduto.Text = MetodosSql.GetField(sql, "IDPRODUTO");
                     txtIof.Text = MetodosSql.GetField(sql, "VALOR");
                     txtQuantidade.Text = MetodosSql.GetField(sql, "QUANTIDADE");
 
-
                     CalculaTotal();
 
                     sql = String.Format(@"select DESCRICAO from PRODUTO where IDPRODUTO = '{0}'", txtCodigoProduto.Text);
-
                     txtDescricaoProduto.Text = MetodosSql.GetField(sql, "DESCRICAO");
+
                 }
                 else
                 {
@@ -750,19 +675,15 @@ namespace AltfErp
                     //txtQuantidade.Text = produtos[indice].QUANTIDADE;
                     //txtValorTotal.Text = produtos[indice].VALORTOTAL;
                     txtDescricaoProduto.Text = produtos[indice].DESCRICAO;
-
                     IDITEM = indice.ToString();
                 }
-
                 btnExcluir.Visible = true;
                 btnSelecionaProduto.Enabled = false;
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)
@@ -771,12 +692,8 @@ namespace AltfErp
             {
                 if (Editar)
                 {
-
-
                     sql = String.Format(@"delete from ITEMMOVIMENTO where IDITEM = '{0}'", IDITEM);
-
                     MetodosSql.ExecQuery(sql);
-
                 }
                 else
                 {
@@ -785,11 +702,11 @@ namespace AltfErp
 
                 btnExcluir.Visible = false;
                 btnSelecionaProduto.Enabled = true;
-
                 IDITEM = null;
 
                 AtualizaGrid();
                 LimpaCampos();
+
                 txtIof.Text = String.Empty;
                 txtValorLiquido.Text = String.Empty;
                 txtComissao.Text = String.Empty;
@@ -801,7 +718,6 @@ namespace AltfErp
                 MessageBox.Show(ex.Message);
             }
         }
-
         private void btnTipoPagamento_Click(object sender, EventArgs e)
         {
             frmTipoPagamento frm = new frmTipoPagamento();
@@ -809,8 +725,6 @@ namespace AltfErp
             txtTipoPagamento.Text = frm.CODIGO;
             txtDescricaoTipoPagamento.Text = frm.DESCRICAO;
         }
-
-
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             SALVAR = "0";
@@ -821,7 +735,6 @@ namespace AltfErp
             }
             else
             {
-
                 if (String.IsNullOrWhiteSpace(txtTotalVenda.Text))
                 {
                     MessageBox.Show("Selecione um Produto", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -833,7 +746,6 @@ namespace AltfErp
                 }
             }
         }
-
         private void txtDesconto_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
@@ -841,10 +753,100 @@ namespace AltfErp
                 e.Handled = true;
             }
         }
-
-
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+             
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

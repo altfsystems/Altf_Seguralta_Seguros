@@ -233,7 +233,7 @@
             this.btnEditarPagamento.Name = "btnEditarPagamento";
             this.btnEditarPagamento.Size = new System.Drawing.Size(114, 23);
             this.btnEditarPagamento.TabIndex = 63;
-            this.btnEditarPagamento.Text = "Extornar Pagamento";
+            this.btnEditarPagamento.Text = "Estornar Pagamento";
             this.btnEditarPagamento.Click += new System.EventHandler(this.btnEditarPagamento_Click);
             // 
             // frmPagamento

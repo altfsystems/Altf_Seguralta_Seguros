@@ -107,7 +107,7 @@ namespace AltfErp
         {
             if (String.IsNullOrWhiteSpace(txtNome.Text))
             {
-                throw new Exception("Digite o nome");
+                throw new Exception("Por favor, digite o nome");
 
             }
 
@@ -115,20 +115,24 @@ namespace AltfErp
             {
                 if (tipo == "F")
                 {
-                    throw new Exception("Digite o nome fantasia");
+                    throw new Exception("Por favor, digite o nome fantasia");
                 }
                 else
                 {
-                    throw new Exception("Digite o sobrenome");
+                    throw new Exception("Por favor, digite o sobrenome");
                 }
 
             }
 
             if (String.IsNullOrWhiteSpace(txtTipoPessoa.Text))
             {
-                throw new Exception("Selecione o tipo de pessoa");
+                throw new Exception("Por favor, selecione o tipo de pessoa");
             }
 
+            if(txtCpf.Text == "___.___.___-__")
+            {
+                throw new Exception("Por favor, digite o cpf");
+            }
 
 
 
@@ -297,22 +301,20 @@ namespace AltfErp
                 }
                 else
                 {
-                    string sql = String.Format(@"SELECT * FROM FCFO WHERE NOME = '{0}' AND NOMEFANTASIA = '{1}'", txtNome.Text, txtNomeFantasia.Text);
-                    string valida = MetodosSql.GetField(sql, "NOME");
+                    
+                    string sql = String.Format(@"SELECT * FROM FCFO WHERE CPF = '{0}'", txtCpf.Text);
+                    string valida = MetodosSql.GetField(sql, "CPF");
 
                     if(valida == "")
                     {
                         Insert();
                     }
-                    else if(DialogResult.Yes == MessageBox.Show("Já existe um cadastro com esse nome. Tem certeza que deseja continuar?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                    else 
                     {
-                        Insert();
-                    }
-                    else
-                    {
+                        MessageBox.Show("Já existe um cadastro com esse cpf!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         MessageBox.Show("O cadastro foi cancelado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                     
+                  
 
                     
 
@@ -400,6 +402,7 @@ namespace AltfErp
 
         private void btnOk_Click_1(object sender, EventArgs e)
         {
+            
              Cadastro();
             if (validacao != 1)
             {
