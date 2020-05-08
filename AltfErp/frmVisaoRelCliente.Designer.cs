@@ -33,8 +33,8 @@
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnInformacoesCliente = new System.Windows.Forms.ToolStripLabel();
-            this.btnRelatorio = new System.Windows.Forms.ToolStripLabel();
+            this.btnRelatorioTodos = new DevExpress.XtraEditors.SimpleButton();
+            this.btnInformacoesCliente = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.grdVisaoRelCliente)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -69,9 +69,7 @@
             // 
             this.toolStrip1.AutoSize = false;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnRelatorio,
-            this.toolStripSeparator1,
-            this.btnInformacoesCliente});
+            this.toolStripSeparator1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(800, 46);
@@ -83,28 +81,35 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 46);
             // 
+            // btnRelatorioTodos
+            // 
+            this.btnRelatorioTodos.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
+            this.btnRelatorioTodos.ImageOptions.SvgImageColorizationMode = DevExpress.Utils.SvgImageColorizationMode.Full;
+            this.btnRelatorioTodos.Location = new System.Drawing.Point(169, 9);
+            this.btnRelatorioTodos.Name = "btnRelatorioTodos";
+            this.btnRelatorioTodos.Size = new System.Drawing.Size(127, 31);
+            this.btnRelatorioTodos.TabIndex = 16;
+            this.btnRelatorioTodos.Text = "Relatório Todos";
+            this.btnRelatorioTodos.Click += new System.EventHandler(this.btnRelatorioTodos_Click);
+            // 
             // btnInformacoesCliente
             // 
-            this.btnInformacoesCliente.Image = ((System.Drawing.Image)(resources.GetObject("btnInformacoesCliente.Image")));
+            this.btnInformacoesCliente.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage1")));
+            this.btnInformacoesCliente.ImageOptions.SvgImageColorizationMode = DevExpress.Utils.SvgImageColorizationMode.Full;
+            this.btnInformacoesCliente.Location = new System.Drawing.Point(21, 9);
             this.btnInformacoesCliente.Name = "btnInformacoesCliente";
-            this.btnInformacoesCliente.Size = new System.Drawing.Size(129, 43);
+            this.btnInformacoesCliente.Size = new System.Drawing.Size(142, 31);
+            this.btnInformacoesCliente.TabIndex = 17;
             this.btnInformacoesCliente.Text = "Informações Cliente";
-            this.btnInformacoesCliente.Click += new System.EventHandler(this.btnInformacoesCliente_Click);
-            // 
-            // btnRelatorio
-            // 
-            this.btnRelatorio.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.btnRelatorio.Image = ((System.Drawing.Image)(resources.GetObject("btnRelatorio.Image")));
-            this.btnRelatorio.Name = "btnRelatorio";
-            this.btnRelatorio.Size = new System.Drawing.Size(104, 43);
-            this.btnRelatorio.Text = "Relatório Todos";
-            this.btnRelatorio.Click += new System.EventHandler(this.btnRelatorio_Click);
+            this.btnInformacoesCliente.Click += new System.EventHandler(this.btnInformacoesCliente_Click_1);
             // 
             // frmVisaoRelCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnInformacoesCliente);
+            this.Controls.Add(this.btnRelatorioTodos);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.grdVisaoRelCliente);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -124,7 +129,7 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripLabel btnInformacoesCliente;
-        private System.Windows.Forms.ToolStripLabel btnRelatorio;
+        private DevExpress.XtraEditors.SimpleButton btnRelatorioTodos;
+        private DevExpress.XtraEditors.SimpleButton btnInformacoesCliente;
     }
 }

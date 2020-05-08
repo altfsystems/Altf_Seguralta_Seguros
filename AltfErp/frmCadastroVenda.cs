@@ -93,11 +93,13 @@ namespace AltfErp
                 Cod = Codparcela.ToString();
                 if (mes == 12)
                 {
+                    
                     ano += 1;
                     mes = 1;
                 }
                 else 
                 {
+
                     mes += 1;
                 }
 
@@ -234,13 +236,14 @@ namespace AltfErp
 
 
                 sql = String.Format(@"SELECT * FROM PORCENTAGENS ");
-                double percCorretora = double.Parse(MetodosSql.GetField(sql, "PERCSEGURALTA"));
+                double percCorretora = double.Parse(MetodosSql.GetField(sql, "PERCSEGURALTA")) / 100;
+                double impostoNota = double.Parse(MetodosSql.GetField(sql, "PERCIMPOSTONOTA")) / 100;
 
 
                 if (cbCoCorretagem.Checked == true)
                 {
                     coCorretagem = 'S';
-                    valorSeguralta = (double.Parse(txtComissaoVenda.Text) * percCorretora) / 100;
+                    valorSeguralta = (double.Parse(txtComissaoVenda.Text) * percCorretora);
                     valor = valorSeguralta.ToString("F2", CultureInfo.InvariantCulture);
 
                     sql = String.Format(query,
@@ -257,7 +260,7 @@ namespace AltfErp
                 else
                 {
                     coCorretagem = 'N';
-                    valorSeguralta = (double.Parse(txtComissaoVenda.Text) * percCorretora * 0.8874) / 100;
+                    valorSeguralta = (double.Parse(txtComissaoVenda.Text) * percCorretora * impostoNota);
                     valor = valorSeguralta.ToString("F2", CultureInfo.InvariantCulture);
 
                     sql = String.Format(query,

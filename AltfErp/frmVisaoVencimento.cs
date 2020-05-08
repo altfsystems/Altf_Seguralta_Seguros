@@ -30,24 +30,14 @@ namespace AltfErp
 
         }
 
-        private void Filtro()
-        {
-            frmFiltroDataVencimento frm = new frmFiltroDataVencimento();
-            frm.ShowDialog();
-            Inicio = frm.DataInicio;
-            Fim = frm.DataFim;
-            Todos = frm.todos;
-            Vencidos = frm.vencidos;
-        }
-
-        private void toolStripLabel1_Click(object sender, EventArgs e)
+        private void btnVizu_Click(object sender, EventArgs e)
         {
             try
             {
                 var rowHandle = gridView1.FocusedRowHandle;
                 var obj = gridView1.GetRowCellValue(rowHandle, "IDVENDA");
 
-                if(obj != null)
+                if (obj != null)
                 {
                     string sql = String.Format(@"SELECT COCORRETAGEM FROM VENDACOMISSAO WHERE IDVENDA = '{0}'", obj.ToString());
                     string coCorretagem = MetodosSql.GetField(sql, "COCORRETAGEM");
@@ -67,7 +57,7 @@ namespace AltfErp
                     frm.txtValorLiquido.Enabled = false;
                     frm.txtIof.Enabled = false;
                     frm.txtComissao.Enabled = false;
-                    if(coCorretagem == "S")
+                    if (coCorretagem == "S")
                     {
                         frm.cbCoCorretagem.Checked = true;
                     }
@@ -89,6 +79,21 @@ namespace AltfErp
                 MessageBox.Show(ex.Message);
 
             }
+        }
+
+        private void Filtro()
+        {
+            frmFiltroDataVencimento frm = new frmFiltroDataVencimento();
+            frm.ShowDialog();
+            Inicio = frm.DataInicio;
+            Fim = frm.DataFim;
+            Todos = frm.todos;
+            Vencidos = frm.vencidos;
+        }
+
+        private void toolStripLabel1_Click(object sender, EventArgs e)
+        {
+            
         }
 
         private void AtualizaGrid()

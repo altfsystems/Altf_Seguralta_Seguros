@@ -32,10 +32,9 @@
             this.grdVisaoVendedores = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnSelecionar = new System.Windows.Forms.ToolStripLabel();
+            this.btnSelecionar = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.grdVisaoVendedores)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // grdVisaoVendedores
@@ -68,8 +67,6 @@
             // 
             this.toolStrip1.AutoSize = false;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnSelecionar});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(673, 49);
@@ -78,17 +75,20 @@
             // 
             // btnSelecionar
             // 
-            this.btnSelecionar.Image = ((System.Drawing.Image)(resources.GetObject("btnSelecionar.Image")));
+            this.btnSelecionar.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
+            this.btnSelecionar.Location = new System.Drawing.Point(12, 8);
             this.btnSelecionar.Name = "btnSelecionar";
-            this.btnSelecionar.Size = new System.Drawing.Size(81, 46);
+            this.btnSelecionar.Size = new System.Drawing.Size(98, 34);
+            this.btnSelecionar.TabIndex = 18;
             this.btnSelecionar.Text = "Selecionar";
-            this.btnSelecionar.Click += new System.EventHandler(this.btnSelecionar_Click);
+            this.btnSelecionar.Click += new System.EventHandler(this.btnSelecionar_Click_1);
             // 
             // frmVisaoVendedoresVenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(673, 388);
+            this.Controls.Add(this.btnSelecionar);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.grdVisaoVendedores);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -96,8 +96,6 @@
             this.Text = "Visão Vendedores";
             ((System.ComponentModel.ISupportInitialize)(this.grdVisaoVendedores)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -107,6 +105,6 @@
         private DevExpress.XtraGrid.GridControl grdVisaoVendedores;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripLabel btnSelecionar;
+        private DevExpress.XtraEditors.SimpleButton btnSelecionar;
     }
 }

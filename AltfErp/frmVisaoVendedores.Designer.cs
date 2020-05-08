@@ -32,12 +32,11 @@
             this.grdVisaoVendedores = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnNovo = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.btnDelete = new System.Windows.Forms.ToolStripLabel();
+            this.btnExcluir = new DevExpress.XtraEditors.SimpleButton();
+            this.btnEditar = new DevExpress.XtraEditors.SimpleButton();
+            this.btnNovo = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.grdVisaoVendedores)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // grdVisaoVendedores
@@ -75,52 +74,53 @@
             // 
             this.toolStrip1.AutoSize = false;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnNovo,
-            this.toolStripLabel2,
-            this.btnDelete});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1129, 53);
             this.toolStrip1.TabIndex = 15;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // btnExcluir
+            // 
+            this.btnExcluir.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnExcluir.ImageOptions.Image")));
+            this.btnExcluir.ImageOptions.SvgImageColorizationMode = DevExpress.Utils.SvgImageColorizationMode.Full;
+            this.btnExcluir.Location = new System.Drawing.Point(174, 12);
+            this.btnExcluir.Name = "btnExcluir";
+            this.btnExcluir.Size = new System.Drawing.Size(75, 34);
+            this.btnExcluir.TabIndex = 29;
+            this.btnExcluir.Text = "Excluir";
+            this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
+            // 
+            // btnEditar
+            // 
+            this.btnEditar.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnEditar.ImageOptions.Image")));
+            this.btnEditar.ImageOptions.SvgImageColorizationMode = DevExpress.Utils.SvgImageColorizationMode.Full;
+            this.btnEditar.Location = new System.Drawing.Point(93, 12);
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(75, 33);
+            this.btnEditar.TabIndex = 28;
+            this.btnEditar.Text = "Editar";
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
+            // 
             // btnNovo
             // 
-            this.btnNovo.Image = ((System.Drawing.Image)(resources.GetObject("btnNovo.Image")));
-            this.btnNovo.IsLink = true;
-            this.btnNovo.LinkVisited = true;
+            this.btnNovo.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnNovo.ImageOptions.Image")));
+            this.btnNovo.ImageOptions.SvgImageColorizationMode = DevExpress.Utils.SvgImageColorizationMode.Full;
+            this.btnNovo.Location = new System.Drawing.Point(12, 12);
             this.btnNovo.Name = "btnNovo";
-            this.btnNovo.Size = new System.Drawing.Size(56, 50);
+            this.btnNovo.Size = new System.Drawing.Size(75, 33);
+            this.btnNovo.TabIndex = 27;
             this.btnNovo.Text = "Novo";
-            this.btnNovo.VisitedLinkColor = System.Drawing.Color.Blue;
-            this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
-            // 
-            // toolStripLabel2
-            // 
-            this.toolStripLabel2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripLabel2.Image")));
-            this.toolStripLabel2.IsLink = true;
-            this.toolStripLabel2.LinkVisited = true;
-            this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(57, 50);
-            this.toolStripLabel2.Text = "Editar";
-            this.toolStripLabel2.VisitedLinkColor = System.Drawing.Color.Blue;
-            this.toolStripLabel2.Click += new System.EventHandler(this.toolStripLabel2_Click);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
-            this.btnDelete.IsLink = true;
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(62, 50);
-            this.btnDelete.Text = "Excluir";
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click_1);
             // 
             // frmVisaoVendedores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1129, 450);
+            this.Controls.Add(this.btnExcluir);
+            this.Controls.Add(this.btnEditar);
+            this.Controls.Add(this.btnNovo);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.grdVisaoVendedores);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -128,8 +128,6 @@
             this.Text = "Visão Vendedores";
             ((System.ComponentModel.ISupportInitialize)(this.grdVisaoVendedores)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -139,8 +137,8 @@
         private DevExpress.XtraGrid.GridControl grdVisaoVendedores;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripLabel btnDelete;
-        private System.Windows.Forms.ToolStripLabel btnNovo;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
+        private DevExpress.XtraEditors.SimpleButton btnExcluir;
+        private DevExpress.XtraEditors.SimpleButton btnEditar;
+        private DevExpress.XtraEditors.SimpleButton btnNovo;
     }
 }

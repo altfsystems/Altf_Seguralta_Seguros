@@ -37,8 +37,7 @@ namespace AltfErp
             CodVendedor = obj.ToString();
             this.Close();
         }
-
-        private void btnSelecionar_Click(object sender, EventArgs e)
+        private void btnSelecionar_Click_1(object sender, EventArgs e)
         {
             var rowHandle = gridView1.FocusedRowHandle;
             var obj = gridView1.GetRowCellValue(rowHandle, "IDVENDEDOR");

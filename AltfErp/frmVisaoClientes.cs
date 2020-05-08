@@ -38,13 +38,7 @@ namespace AltfErp
 
         }
 
-        private void btnNovo_Click(object sender, EventArgs e)
-        {
-            frmFCFO frm = new frmFCFO(false, null, "C");
-            frm.ShowDialog();
-            AtualizaGrid();
-
-        }
+       
 
         private void gridControl1_DoubleClick(object sender, EventArgs e)
         {
@@ -64,8 +58,17 @@ namespace AltfErp
                 MessageBox.Show(ex.Message);
             }
         }
+   
 
-        private void toolStripLabel2_Click(object sender, EventArgs e)
+  
+        private void btnNovo_Click_1(object sender, EventArgs e)
+        {
+            frmFCFO frm = new frmFCFO(false, null, "C");
+            frm.ShowDialog();
+            AtualizaGrid();
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -75,7 +78,7 @@ namespace AltfErp
 
                     var obj = gridView1.GetRowCellValue(rowHandle, "IDCLIENTE");
 
-                    if(obj == null)
+                    if (obj == null)
                     {
                         MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -85,7 +88,7 @@ namespace AltfErp
                         frm.ShowDialog();
                         AtualizaGrid();
                     }
-                 
+
                 }
                 else
                 {
@@ -101,9 +104,7 @@ namespace AltfErp
             }
         }
 
-      
-
-        private void btnExcluir_Click(object sender, EventArgs e)
+        private void btnExcluir_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -112,7 +113,7 @@ namespace AltfErp
                 {
                     var rowHandle = gridView1.FocusedRowHandle;
                     var id = gridView1.GetRowCellValue(rowHandle, "IDCLIENTE");
-                    if(id == null)
+                    if (id == null)
                     {
                         MessageBox.Show("Selecione um registro", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
@@ -148,7 +149,7 @@ namespace AltfErp
 
                         }
                     }
-                   
+
 
                 }
                 else
@@ -164,7 +165,6 @@ namespace AltfErp
             {
                 MessageBox.Show(ex.Message);
             }
-                
         }
     }
 }

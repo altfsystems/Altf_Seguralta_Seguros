@@ -38,7 +38,9 @@ namespace AltfErp
 
         }
 
-        private void btnRelatorio_Click(object sender, EventArgs e)
+       
+
+        private void btnRelatorioTodos_Click(object sender, EventArgs e)
         {
             relClientes report = new relClientes(null);
 
@@ -48,12 +50,12 @@ namespace AltfErp
             }
         }
 
-        private void btnInformacoesCliente_Click(object sender, EventArgs e)
+        private void btnInformacoesCliente_Click_1(object sender, EventArgs e)
         {
             var rowHandle = gridView1.FocusedRowHandle;
             var cod = gridView1.GetRowCellValue(rowHandle, "IDFCFO");
 
-            if(cod != null)
+            if (cod != null)
             {
                 relInfoCliente report = new relInfoCliente(cod.ToString());
 
@@ -66,7 +68,6 @@ namespace AltfErp
             {
                 MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            
         }
     }
 }

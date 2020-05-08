@@ -33,13 +33,12 @@
             this.grdVisaoRelComissoes = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnRelatorio = new System.Windows.Forms.ToolStripLabel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btnAtualizar = new DevExpress.XtraEditors.SimpleButton();
+            this.btnRelatorio = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.grdVisaoRelComissoes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // grdVisaoRelComissoes
@@ -71,21 +70,11 @@
             // 
             this.toolStrip1.AutoSize = false;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnRelatorio});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(800, 49);
             this.toolStrip1.TabIndex = 18;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // btnRelatorio
-            // 
-            this.btnRelatorio.Image = global::AltfErp.Properties.Resources.RelatorioVenda_512px;
-            this.btnRelatorio.Name = "btnRelatorio";
-            this.btnRelatorio.Size = new System.Drawing.Size(74, 46);
-            this.btnRelatorio.Text = "Relatório";
-            this.btnRelatorio.Click += new System.EventHandler(this.btnRelatorio_Click);
             // 
             // contextMenuStrip1
             // 
@@ -103,11 +92,22 @@
             this.btnAtualizar.Size = new System.Drawing.Size(40, 46);
             this.btnAtualizar.TabIndex = 21;
             // 
+            // btnRelatorio
+            // 
+            this.btnRelatorio.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
+            this.btnRelatorio.Location = new System.Drawing.Point(12, 6);
+            this.btnRelatorio.Name = "btnRelatorio";
+            this.btnRelatorio.Size = new System.Drawing.Size(94, 34);
+            this.btnRelatorio.TabIndex = 22;
+            this.btnRelatorio.Text = "Relatório";
+            this.btnRelatorio.Click += new System.EventHandler(this.btnRelatorio_Click_1);
+            // 
             // frmVisaoRelComissoes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnRelatorio);
             this.Controls.Add(this.btnAtualizar);
             this.Controls.Add(this.grdVisaoRelComissoes);
             this.Controls.Add(this.toolStrip1);
@@ -116,8 +116,6 @@
             this.Text = "Visão Comissões";
             ((System.ComponentModel.ISupportInitialize)(this.grdVisaoRelComissoes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -130,6 +128,6 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private DevExpress.XtraEditors.SimpleButton btnAtualizar;
-        private System.Windows.Forms.ToolStripLabel btnRelatorio;
+        private DevExpress.XtraEditors.SimpleButton btnRelatorio;
     }
 }

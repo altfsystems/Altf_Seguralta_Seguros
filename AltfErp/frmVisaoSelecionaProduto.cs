@@ -66,11 +66,7 @@ namespace AltfErp
             }
         }
 
-
-
-
-
-        private void btnSelecionar_Click(object sender, EventArgs e)
+        private void btnSelecionar_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -78,7 +74,7 @@ namespace AltfErp
 
                 var obj = gridView1.GetRowCellValue(rowHandle, "IDPRODUTO");
 
-                if(obj != null)
+                if (obj != null)
                 {
                     CODIGO = obj.ToString();
                     obj = gridView1.GetRowCellValue(rowHandle, "DESCRICAO");
@@ -100,7 +96,7 @@ namespace AltfErp
                 {
                     MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-                
+
             }
             catch (Exception ex)
             {

@@ -66,13 +66,9 @@ namespace AltfErp
             Selecionar();
         }
 
-            
-
-        private void btnSelecionar_Click(object sender, EventArgs e)
+        private void btnSelecionar_Click_1(object sender, EventArgs e)
         {
             Selecionar();
         }
-
-            
     }
 }

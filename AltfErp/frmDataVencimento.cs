@@ -18,29 +18,25 @@ namespace AltfErp
         public frmDataVencimento()
         {
             InitializeComponent();
-            txtDataVencimento.Select();
+            
         }
 
      
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            string[] vet = txtDataVencimento.Text.Split('/');
-            int dia, mes, ano;
-            dia = int.Parse(vet[0]);
-            mes = int.Parse(vet[1]);
-            ano = int.Parse(vet[2]);
-
-            if(dia > 31 || mes > 12 || ano < 2020)
-            {
-                MessageBox.Show("Por favor, selecione uma data valida", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                dataVencimento = txtDataVencimento.Text;
-                this.Close();
-            }
             
+            string dia, mes, ano;
+            dia = txtDia.Text;
+            mes = txtMes.Text;
+            ano = txtAno.Text;
+
+            dataVencimento = dia + "/" + mes + "/" + ano;
+            this.Close();
         }
     }
 }
+           
+           
+            
+            

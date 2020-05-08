@@ -37,7 +37,8 @@ namespace AltfErp
 
         }
 
-        private void btnRelatorioVenda_Click(object sender, EventArgs e)
+
+        private void simpleButton1_Click(object sender, EventArgs e)
         {
             relVendaMes report = new relVendaMes(Inicio, Fim);
 

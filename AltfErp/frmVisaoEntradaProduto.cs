@@ -49,12 +49,7 @@ namespace AltfErp
 
 	   
 
-        private void btnNovo_Click(object sender, EventArgs e)
-        {
-            frmEntradaProduto frm = new frmEntradaProduto(false, null);
-            frm.ShowDialog();
-            AtualizaGrid();
-        }
+ 
 
         private void gridControl1_DoubleClick(object sender, EventArgs e)
         {
@@ -78,38 +73,22 @@ namespace AltfErp
             }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+      
+
+
+        private void simpleButton1_Click(object sender, EventArgs e)
         {
-            {
-                try
-                {
-                    var rowHandle = gridView1.FocusedRowHandle;
-
-                    var obj = gridView1.GetRowCellValue(rowHandle, "IDENTRADA");
-
-                    if(obj != null)
-                    {
-                        if (DialogResult.Yes == MessageBox.Show("Deseja mesmo exluir?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-                        {
-                            MetodosSql.ExecQuery(String.Format(@"delete from ENTRADAPRODUTO where IDENTRADA = {0}", obj.ToString()));
-                            AtualizaGrid();
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show(@"Por favor, selecione um registro para ser excluido", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-
-                    
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
+            AtualizaGrid();
         }
 
-        private void toolStripLabel1_Click(object sender, EventArgs e)
+        private void btnNovo_Click_1(object sender, EventArgs e)
+        {
+            frmEntradaProduto frm = new frmEntradaProduto(false, null);
+            frm.ShowDialog();
+            AtualizaGrid();
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -117,7 +96,7 @@ namespace AltfErp
 
                 var obj = gridView1.GetRowCellValue(rowHandle, "IDENTRADA");
 
-                if(obj != null)
+                if (obj != null)
                 {
                     frmEntradaProduto frm = new frmEntradaProduto(true, obj.ToString());
                     frm.ShowDialog();
@@ -127,7 +106,7 @@ namespace AltfErp
                 {
                     MessageBox.Show(@"Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-               
+
 
 
             }
@@ -137,9 +116,33 @@ namespace AltfErp
             }
         }
 
-        private void simpleButton1_Click(object sender, EventArgs e)
+        private void btnExcluir_Click(object sender, EventArgs e)
         {
-            AtualizaGrid();
+            try
+            {
+                var rowHandle = gridView1.FocusedRowHandle;
+
+                var obj = gridView1.GetRowCellValue(rowHandle, "IDENTRADA");
+
+                if (obj != null)
+                {
+                    if (DialogResult.Yes == MessageBox.Show("Deseja mesmo exluir?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                    {
+                        MetodosSql.ExecQuery(String.Format(@"delete from ENTRADAPRODUTO where IDENTRADA = {0}", obj.ToString()));
+                        AtualizaGrid();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(@"Por favor, selecione um registro para ser excluido", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

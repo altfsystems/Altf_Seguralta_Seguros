@@ -32,8 +32,7 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.grdVisaoRelVendas = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.btnRelatorioVenda = new System.Windows.Forms.ToolStripLabel();
-            this.toolStrip1.SuspendLayout();
+            this.btnRelatorioVenda = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.grdVisaoRelVendas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.SuspendLayout();
@@ -41,8 +40,6 @@
             // toolStrip1
             // 
             this.toolStrip1.AutoSize = false;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnRelatorioVenda});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(800, 46);
@@ -76,24 +73,25 @@
             // 
             // btnRelatorioVenda
             // 
-            this.btnRelatorioVenda.Image = ((System.Drawing.Image)(resources.GetObject("btnRelatorioVenda.Image")));
+            this.btnRelatorioVenda.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
+            this.btnRelatorioVenda.Location = new System.Drawing.Point(12, 9);
             this.btnRelatorioVenda.Name = "btnRelatorioVenda";
-            this.btnRelatorioVenda.Size = new System.Drawing.Size(70, 43);
+            this.btnRelatorioVenda.Size = new System.Drawing.Size(96, 30);
+            this.btnRelatorioVenda.TabIndex = 18;
             this.btnRelatorioVenda.Text = "Relatório";
-            this.btnRelatorioVenda.Click += new System.EventHandler(this.btnRelatorioVenda_Click);
+            this.btnRelatorioVenda.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // frmVisaoRelVenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnRelatorioVenda);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.grdVisaoRelVendas);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmVisaoRelVenda";
             this.Text = "Visão Vendas";
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdVisaoRelVendas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.ResumeLayout(false);
@@ -105,6 +103,6 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private DevExpress.XtraGrid.GridControl grdVisaoRelVendas;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private System.Windows.Forms.ToolStripLabel btnRelatorioVenda;
+        private DevExpress.XtraEditors.SimpleButton btnRelatorioVenda;
     }
 }

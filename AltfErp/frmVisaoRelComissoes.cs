@@ -24,11 +24,13 @@ namespace AltfErp
             AtualizaGrid();
         }
 
-        private void btnRelatorio_Click(object sender, EventArgs e)
+        
+
+        private void btnRelatorio_Click_1(object sender, EventArgs e)
         {
             relComissoes report = new relComissoes(Inicio, Fim);
 
-            using(ReportPrintTool print = new ReportPrintTool(report))
+            using (ReportPrintTool print = new ReportPrintTool(report))
             {
                 print.ShowPreviewDialog();
             }

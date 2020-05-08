@@ -30,7 +30,14 @@ namespace AltfErp
                                                                ON PRODUTO.IDPRODUTO = ESTOQUE.IDPRODUTO");
         }
 
-        private void toolStripLabel1_Click(object sender, EventArgs e)
+  
+
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            AtualizaGrid();
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -38,7 +45,7 @@ namespace AltfErp
 
                 var obj = gridView1.GetRowCellValue(rowHandle, "IDPRODUTO");
 
-                if(obj != null)
+                if (obj != null)
                 {
                     frmAlteraQuantidade frm = new frmAlteraQuantidade(true, obj.ToString());
                     frm.ShowDialog();
@@ -48,7 +55,7 @@ namespace AltfErp
                 {
                     MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-               
+
 
 
             }
@@ -56,11 +63,6 @@ namespace AltfErp
             {
                 MessageBox.Show("Selecione um item");
             }
-        }
-
-        private void simpleButton1_Click(object sender, EventArgs e)
-        {
-            AtualizaGrid();
         }
     }
 }

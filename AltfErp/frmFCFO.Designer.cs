@@ -486,9 +486,9 @@
             this.label18.Location = new System.Drawing.Point(6, 29);
             this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(38, 13);
+            this.label18.Size = new System.Drawing.Size(32, 13);
             this.label18.TabIndex = 33;
-            this.label18.Text = "Email1";
+            this.label18.Text = "Email";
             // 
             // txtEmail
             // 
@@ -632,9 +632,9 @@
             this.label10.Location = new System.Drawing.Point(9, 180);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(32, 13);
+            this.label10.Size = new System.Drawing.Size(26, 13);
             this.label10.TabIndex = 4;
-            this.label10.Text = "Fixo1";
+            this.label10.Text = "Fixo";
             // 
             // txtNome
             // 
@@ -697,9 +697,9 @@
             this.label28.AutoSize = true;
             this.label28.Location = new System.Drawing.Point(631, 5);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(86, 13);
+            this.label28.Size = new System.Drawing.Size(43, 13);
             this.label28.TabIndex = 1018;
-            this.label28.Text = "Anexar Imagem2";
+            this.label28.Text = "Anexo2";
             // 
             // pbDoc2
             // 
@@ -901,9 +901,9 @@
             this.label21.AutoSize = true;
             this.label21.Location = new System.Drawing.Point(380, 5);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(86, 13);
+            this.label21.Size = new System.Drawing.Size(43, 13);
             this.label21.TabIndex = 1014;
-            this.label21.Text = "Anexar Imagem1";
+            this.label21.Text = "Anexo1";
             // 
             // pbImagemDoc1
             // 

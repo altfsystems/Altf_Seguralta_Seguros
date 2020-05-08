@@ -36,10 +36,9 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            this.btnSeleciona = new System.Windows.Forms.ToolStripLabel();
+            this.btnSelecionar = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.grdVisaoSelecionaCia)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // grdVisaoSelecionaCia
@@ -77,8 +76,6 @@
             // 
             this.toolStrip1.AutoSize = false;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnSeleciona});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(666, 45);
@@ -95,19 +92,22 @@
             this.simpleButton2.Size = new System.Drawing.Size(40, 46);
             this.simpleButton2.TabIndex = 21;
             // 
-            // btnSeleciona
+            // btnSelecionar
             // 
-            this.btnSeleciona.Image = ((System.Drawing.Image)(resources.GetObject("btnSeleciona.Image")));
-            this.btnSeleciona.Name = "btnSeleciona";
-            this.btnSeleciona.Size = new System.Drawing.Size(81, 42);
-            this.btnSeleciona.Text = "Selecionar";
-            this.btnSeleciona.Click += new System.EventHandler(this.btnSeleciona_Click);
+            this.btnSelecionar.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSelecionar.ImageOptions.Image")));
+            this.btnSelecionar.Location = new System.Drawing.Point(12, 6);
+            this.btnSelecionar.Name = "btnSelecionar";
+            this.btnSelecionar.Size = new System.Drawing.Size(98, 34);
+            this.btnSelecionar.TabIndex = 22;
+            this.btnSelecionar.Text = "Selecionar";
+            this.btnSelecionar.Click += new System.EventHandler(this.btnSelecionar_Click);
             // 
             // frmVisaoSelecionaCiaSeuradora
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(666, 386);
+            this.Controls.Add(this.btnSelecionar);
             this.Controls.Add(this.simpleButton2);
             this.Controls.Add(this.grdVisaoSelecionaCia);
             this.Controls.Add(this.toolStrip1);
@@ -117,8 +117,6 @@
             this.Text = "Cia Seguradora";
             ((System.ComponentModel.ISupportInitialize)(this.grdVisaoSelecionaCia)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -130,7 +128,7 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripLabel btnSeleciona;
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
+        private DevExpress.XtraEditors.SimpleButton btnSelecionar;
     }
 }

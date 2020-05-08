@@ -29,11 +29,12 @@ namespace AltfErp
             grdVisaoSelecionaCia.DataSource = MetodosSql.GetDT("SELECT IDSEGURADORA AS COD, NOME, NOMEFANTASIA, CPF, CNPJ, RG, CONVERT(VARCHAR, DATAINCLUSAO, 103) AS DATAINCLUSAO FROM FCFOSEGURADORA");
         }
 
-        private void btnSeleciona_Click(object sender, EventArgs e)
+
+        private void btnSelecionar_Click(object sender, EventArgs e)
         {
             var rowHandle = gridView1.FocusedRowHandle;
             var cod = gridView1.GetRowCellValue(rowHandle, "COD");
-            if(cod != null)
+            if (cod != null)
             {
                 Codigo = cod.ToString();
                 this.Close();
@@ -42,8 +43,6 @@ namespace AltfErp
             {
                 MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            
-
         }
     }
 }

@@ -50,18 +50,6 @@ namespace AltfErp
                         
 
 
-
-        public void btnNovo_Click(object sender, EventArgs e)
-        {
-            frmCadastroProdutos frm = new frmCadastroProdutos(false, null);
-            frm.ShowDialog();
-            AtualizaGrid();
-
-        }
-
-
-
-
         private void gridControl1_DoubleClick(object sender, EventArgs e)
         {
             try
@@ -83,9 +71,25 @@ namespace AltfErp
             }
         }
 
+    
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            AtualizaGrid();
+        }
 
+        private void gridControl1_Load(object sender, EventArgs e)
+        {
+            AtualizaGrid();
+        }
 
-        private void toolStripLabel1_Click(object sender, EventArgs e)
+        private void btnNovo_Click_1(object sender, EventArgs e)
+        {
+            frmCadastroProdutos frm = new frmCadastroProdutos(false, null);
+            frm.ShowDialog();
+            AtualizaGrid();
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -93,7 +97,7 @@ namespace AltfErp
 
                 var obj = gridView1.GetRowCellValue(rowHandle, "IDPRODUTO");
 
-                if(obj != null)
+                if (obj != null)
                 {
                     frmCadastroProdutos frm = new frmCadastroProdutos(true, obj.ToString());
                     frm.ShowDialog();
@@ -109,19 +113,17 @@ namespace AltfErp
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
-        private void btnDelete_Click_1(object sender, EventArgs e)
+        private void btnExcluir_Click(object sender, EventArgs e)
         {
-
             try
             {
                 int quant;
                 var rowHandle = gridView1.FocusedRowHandle;
                 var obj = gridView1.GetRowCellValue(rowHandle, "IDPRODUTO");
 
-                if(obj != null)
+                if (obj != null)
                 {
                     quant = int.Parse(MetodosSql.GetField(String.Format(@"SELECT COUNT(IDPRODUTO) AS PRODUTO FROM ITEMMOVIMENTO WHERE IDPRODUTO= '{0}'", obj.ToString()), "PRODUTO"));
 
@@ -144,25 +146,12 @@ namespace AltfErp
                 {
                     MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-               
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
-
-
-        }
-
-        private void simpleButton1_Click(object sender, EventArgs e)
-        {
-            AtualizaGrid();
-        }
-
-        private void gridControl1_Load(object sender, EventArgs e)
-        {
-            AtualizaGrid();
         }
     }
 }

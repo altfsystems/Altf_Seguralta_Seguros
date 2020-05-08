@@ -54,12 +54,7 @@ namespace AltfErp
 
         }
 
-        private void btnNovo_Click(object sender, EventArgs e)
-        {
-            frmPagamento frm = new frmPagamento(false, null);
-            frm.ShowDialog();
-            AtualizaGrid();
-        }
+     
 
         private void gridControl1_DoubleClick(object sender, EventArgs e)
         {
@@ -82,7 +77,14 @@ namespace AltfErp
             }
         }
 
-        private void toolStripLabel1_Click(object sender, EventArgs e)
+    
+
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            AtualizaGrid();
+        }
+
+        private void btnVisualizarParcelas_Click(object sender, EventArgs e)
         {
             try
             {
@@ -90,7 +92,7 @@ namespace AltfErp
                 var obj = gridView1.GetRowCellValue(rowHandle, "IDCLIENTE");
 
 
-                if(obj != null)
+                if (obj != null)
                 {
                     frmPagamento frm = new frmPagamento(true, obj.ToString());
                     frm.ShowDialog();
@@ -107,11 +109,6 @@ namespace AltfErp
                 MessageBox.Show(ex.Message);
 
             }
-        }
-
-        private void simpleButton1_Click(object sender, EventArgs e)
-        {
-            AtualizaGrid();
         }
     }
 }

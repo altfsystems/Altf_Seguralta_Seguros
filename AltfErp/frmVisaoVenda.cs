@@ -159,12 +159,7 @@ namespace AltfErp
 
 
 
-        private void btnNovo_Click(object sender, EventArgs e)
-        {
-            frmCadastroVenda frm = new frmCadastroVenda(false, null, null);
-            frm.ShowDialog();
-            AtualizaGrid();
-        }
+        
 
 
 
@@ -175,90 +170,6 @@ namespace AltfErp
             {
 
                 ChamaCadastro();
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-
-            }
-        }
-
-
-
-
-
-
-
-
-
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-
-            try
-            {
-                var rowHandle = gridView1.FocusedRowHandle;
-                var obj = gridView1.GetRowCellValue(rowHandle, "IDVENDA");
-                int LINHA, IDITEM, IDPRODUTO;
-                double QUANTIDADE;
-
-                if(obj != null)
-                {
-                    if (DialogResult.Yes == MessageBox.Show("Deseja mesmo exluir?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-                    {
-
-                        string sql = String.Format(@"select count(IDITEM) as LINHA FROM ITEMMOVIMENTO WHERE IDVENDA = {0}", obj);
-                        LINHA = int.Parse(MetodosSql.GetField(sql, "LINHA"));
-
-                        sql = String.Format(@"SELECT MIN(IDITEM) AS MINIDITEM FROM ITEMMOVIMENTO WHERE IDVENDA = {0}", obj);
-                        IDITEM = int.Parse(MetodosSql.GetField(sql, "MINIDITEM"));
-
-                        for (int i = 1; i <= LINHA; i++)
-                        {
-
-                            sql = String.Format(@"SELECT IDPRODUTO, QUANTIDADE FROM ITEMMOVIMENTO WHERE IDITEM = {0}", IDITEM);
-
-                            IDPRODUTO = int.Parse(MetodosSql.GetField(sql, "IDPRODUTO"));
-                            QUANTIDADE = double.Parse(MetodosSql.GetField(sql, "QUANTIDADE"));
-
-                            string estoque = String.Format(@"UPDATE ESTOQUE SET QUANTIDADE = QUANTIDADE + {0} WHERE IDPRODUTO = {1} ", QUANTIDADE, IDPRODUTO);
-                            IDITEM++;
-
-                            MetodosSql.ExecQuery(sql);
-                            MetodosSql.ExecQuery(estoque);
-                        }
-
-
-
-
-                        MetodosSql.ExecQuery(String.Format(@"DELETE FROM PARCELA WHERE IDVENDA = {0}", obj));
-                        MetodosSql.ExecQuery(String.Format(@"delete from VENDA where IDVENDA = {0}", obj.ToString()));
-                        AtualizaGrid();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-              
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            gridView1.BestFitColumns();
-
-        }
-
-        private void toolStripLabel1_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ChamaCadastro();
-
 
 
             }
@@ -300,6 +211,88 @@ namespace AltfErp
 
             frmCadastroVenda frm = new frmCadastroVenda(true, IdVenda.ToString(), status.ToString());
             frm.ShowDialog();
+        }
+
+        private void btnNovo_Click_1(object sender, EventArgs e)
+        {
+            frmCadastroVenda frm = new frmCadastroVenda(false, null, null);
+            frm.ShowDialog();
+            AtualizaGrid();
+        }
+
+     
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var rowHandle = gridView1.FocusedRowHandle;
+                var obj = gridView1.GetRowCellValue(rowHandle, "IDVENDA");
+                int LINHA, IDITEM, IDPRODUTO;
+                double QUANTIDADE;
+
+                if (obj != null)
+                {
+                    if (DialogResult.Yes == MessageBox.Show("Deseja mesmo exluir?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                    {
+
+                        string sql = String.Format(@"select count(IDITEM) as LINHA FROM ITEMMOVIMENTO WHERE IDVENDA = {0}", obj);
+                        LINHA = int.Parse(MetodosSql.GetField(sql, "LINHA"));
+
+                        sql = String.Format(@"SELECT MIN(IDITEM) AS MINIDITEM FROM ITEMMOVIMENTO WHERE IDVENDA = {0}", obj);
+                        IDITEM = int.Parse(MetodosSql.GetField(sql, "MINIDITEM"));
+
+                        for (int i = 1; i <= LINHA; i++)
+                        {
+
+                            sql = String.Format(@"SELECT IDPRODUTO, QUANTIDADE FROM ITEMMOVIMENTO WHERE IDITEM = {0}", IDITEM);
+
+                            IDPRODUTO = int.Parse(MetodosSql.GetField(sql, "IDPRODUTO"));
+                            QUANTIDADE = double.Parse(MetodosSql.GetField(sql, "QUANTIDADE"));
+
+                            string estoque = String.Format(@"UPDATE ESTOQUE SET QUANTIDADE = QUANTIDADE + {0} WHERE IDPRODUTO = {1} ", QUANTIDADE, IDPRODUTO);
+                            IDITEM++;
+
+                            MetodosSql.ExecQuery(sql);
+                            MetodosSql.ExecQuery(estoque);
+                        }
+
+
+
+
+                        MetodosSql.ExecQuery(String.Format(@"DELETE FROM PARCELA WHERE IDVENDA = {0}", obj));
+                        MetodosSql.ExecQuery(String.Format(@"delete from VENDA where IDVENDA = {0}", obj.ToString()));
+                        AtualizaGrid();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            gridView1.BestFitColumns();
+
+        }
+
+        private void btnVizu_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ChamaCadastro();
+
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
         }
     }
 }

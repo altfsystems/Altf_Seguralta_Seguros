@@ -499,7 +499,7 @@ namespace AltfErp
                 }
                 catch(Exception)
                 {
-                    MessageBox.Show("O arquivo de imagem não suporta arquivos .pdf", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("O arquivo e imagens apenas aceita .png, .jpg e .jpeg!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 
 

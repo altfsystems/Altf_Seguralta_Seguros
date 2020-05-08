@@ -28,14 +28,9 @@ namespace AltfErp
             grdVisaoVendedores.DataSource = MetodosSql.GetDT(@"SELECT * FROM VENDEDORES");
         }
 
-        private void btnNovo_Click(object sender, EventArgs e)
-        {
-            frmCadastroVendedores frm = new frmCadastroVendedores(false, null);
-            frm.ShowDialog();
-            AtualizaGrid();
-        }
 
-        private void toolStripLabel2_Click(object sender, EventArgs e)
+
+        private void grdVisaoVendedores_DoubleClick(object sender, EventArgs e)
         {
             var rowHandle = gridView1.FocusedRowHandle;
             var obj = gridView1.GetRowCellValue(rowHandle, "IDVENDEDOR");
@@ -52,7 +47,31 @@ namespace AltfErp
             }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void btnNovo_Click_1(object sender, EventArgs e)
+        {
+            frmCadastroVendedores frm = new frmCadastroVendedores(false, null);
+            frm.ShowDialog();
+            AtualizaGrid();
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            var rowHandle = gridView1.FocusedRowHandle;
+            var obj = gridView1.GetRowCellValue(rowHandle, "IDVENDEDOR");
+
+            if (obj != null)
+            {
+                frmCadastroVendedores frm = new frmCadastroVendedores(true, obj.ToString());
+                frm.ShowDialog();
+                AtualizaGrid();
+            }
+            else
+            {
+                MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
         {
             var rowHandle = gridView1.FocusedRowHandle;
             var obj = gridView1.GetRowCellValue(rowHandle, "IDVENDEDOR");
@@ -65,27 +84,6 @@ namespace AltfErp
                     MetodosSql.ExecQuery(sql);
                     AtualizaGrid();
                 }
-            }
-            else
-            {
-                MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
-
-
-
-        }
-
-        private void grdVisaoVendedores_DoubleClick(object sender, EventArgs e)
-        {
-            var rowHandle = gridView1.FocusedRowHandle;
-            var obj = gridView1.GetRowCellValue(rowHandle, "IDVENDEDOR");
-
-            if (obj != null)
-            {
-                frmCadastroVendedores frm = new frmCadastroVendedores(true, obj.ToString());
-                frm.ShowDialog();
-                AtualizaGrid();
             }
             else
             {
