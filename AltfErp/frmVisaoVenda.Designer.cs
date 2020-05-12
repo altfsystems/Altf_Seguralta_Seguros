@@ -126,7 +126,6 @@
             // 
             // btnEditar
             // 
-            this.btnEditar.Enabled = false;
             this.btnEditar.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnEditar.ImageOptions.Image")));
             this.btnEditar.ImageOptions.SvgImageColorizationMode = DevExpress.Utils.SvgImageColorizationMode.Full;
             this.btnEditar.Location = new System.Drawing.Point(93, 8);
@@ -134,6 +133,7 @@
             this.btnEditar.Size = new System.Drawing.Size(75, 33);
             this.btnEditar.TabIndex = 25;
             this.btnEditar.Text = "Editar";
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // btnNovo
             // 

@@ -900,13 +900,9 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtIdCliente;
-        private System.Windows.Forms.TextBox txtNome;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox txtDescricaoProduto;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtCodigoProduto;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
@@ -939,7 +935,6 @@
         public System.Windows.Forms.TextBox txtIof;
         public System.Windows.Forms.TextBox txtQuantidade;
         public System.Windows.Forms.TextBox txtTotalVenda;
-        private System.Windows.Forms.TextBox txtSobrenome;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
@@ -948,13 +943,10 @@
         public System.Windows.Forms.Label lblTotalDesconto;
         public System.Windows.Forms.MaskedTextBox txtDataVencimento;
         public System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox txtNomeVendedor;
-        private System.Windows.Forms.TextBox txtIdVendedor;
         private System.Windows.Forms.Label label18;
         public DevExpress.XtraEditors.SimpleButton btnSelecionaVendedor;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.TextBox txtSobrenomeVendedor;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label25;
         public System.Windows.Forms.TextBox txtComissaoVenda;
@@ -965,7 +957,15 @@
         private System.Windows.Forms.Label label21;
         public System.Windows.Forms.TextBox txtValorLiquido;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.TextBox txtCiaSeguradora;
         public System.Windows.Forms.CheckBox cbCoCorretagem;
+        public System.Windows.Forms.TextBox txtIdCliente;
+        public System.Windows.Forms.TextBox txtNome;
+        public System.Windows.Forms.TextBox txtDescricaoProduto;
+        public System.Windows.Forms.TextBox txtCodigoProduto;
+        public System.Windows.Forms.TextBox txtSobrenome;
+        public System.Windows.Forms.TextBox txtNomeVendedor;
+        public System.Windows.Forms.TextBox txtIdVendedor;
+        public System.Windows.Forms.TextBox txtSobrenomeVendedor;
+        public System.Windows.Forms.TextBox txtCiaSeguradora;
     }
 }

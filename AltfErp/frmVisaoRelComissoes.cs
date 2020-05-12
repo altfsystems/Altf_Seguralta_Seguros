@@ -36,6 +36,11 @@ namespace AltfErp
             }
         }
 
+        private void btnAtualizar_Click(object sender, EventArgs e)
+        {
+            AtualizaGrid();
+        }
+
         private void AtualizaGrid()
         {
             string sql = String.Format(@"SELECT VC.IDVENDA, VC.TOTALVENDA,

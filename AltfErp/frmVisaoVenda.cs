@@ -24,6 +24,7 @@ namespace AltfErp
         public string Data { get; set; }
         public string Nulo { get; set; }
         public int IDITEM { get; set; }
+        public int IDVENDA { get; set; }
 
 
         public frmVisaoVenda()
@@ -34,6 +35,32 @@ namespace AltfErp
             gridControl1.EmbeddedNavigator.Buttons.Remove.Visible = false;
             Filtra();
             gridView1.BestFitColumns();
+        }
+
+        private Boolean TestaUpdate()
+        {
+            Boolean Validar;
+            double Valor;
+            string sql = String.Format(@"SELECT SUM(ISNULL(VALORDINHEIRO, 0) + ISNULL(VALORCHEQUE, 0) + ISNULL(VALORCARTAOCREDITO, 0) + ISNULL(VALORCARTAODEBITO, 0)) AS VALOR
+                                        FROM RECEBIMENTO WHERE IDVENDA = '{0}' AND EXTORNO = 0", IDVENDA);
+            if(MetodosSql.GetField(sql, "VALOR") == "")
+            {
+                Valor = 0;
+            }
+            else
+            {
+                Valor = double.Parse(MetodosSql.GetField(sql, "VALOR"));
+            }
+            
+            if (Valor == 0)
+            {
+                Validar = true;
+            }
+            else
+            {
+                Validar = false;
+            }
+            return Validar;
         }
 
         private void ChamaCadastro()
@@ -92,19 +119,10 @@ namespace AltfErp
             AtualizaGrid();
         }
 
-
-
-
-
-
-
         private void AtualizaGrid()
         {
             try
             {
-                
-
-                
                 string sql = String.Format(@"SELECT VD.IDVENDA, VD.IDFCFO AS IDCLIENTE, FC.NOME, FC.NOMEFANTASIA AS SOBRENOME, 
                                             (SELECT CAST(SUM(VALOR) AS NUMERIC(20,2)) FROM PARCELA WHERE IDVENDA = VD.IDVENDA) AS TOTALVENDA,
                                             VD.DESCONTO, (X.TOTAL_RECEBIMENTO) AS TOTAL_RECEBIMENTO ,
@@ -129,40 +147,13 @@ namespace AltfErp
                                             GROUP BY VD.IDVENDA, VD.IDFCFO, X.TOTAL_RECEBIMENTO, FC.NOME, FC.NOMEFANTASIA, VD.OBSERVACAO, VD.DATAINCLUSAO, VD.DATAPAGAMENTO, VD.DESCONTO
 											ORDER BY IDVENDA DESC", Filtro, Data, Nulo);
 
-
-
-                
-
-
-
-
-
-
-
                 gridControl1.DataSource = MetodosSql.GetDT(sql);
-               
-
-
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
-
-
-
-
-
         }
-
-
-
-        
-
-
-
 
         private void gridControl1_DoubleClick(object sender, EventArgs e)
         {
@@ -184,6 +175,7 @@ namespace AltfErp
         {
             Filtra();
         }
+
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
@@ -294,5 +286,59 @@ namespace AltfErp
 
             }
         }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            var rowHandle = gridView1.FocusedRowHandle;
+            var idVenda = gridView1.GetRowCellValue(rowHandle, "IDVENDA");
+            var status = gridView1.GetRowCellValue(rowHandle, "STATUS");
+
+            IDVENDA = int.Parse(idVenda.ToString());
+            if(TestaUpdate())
+            {
+                frmCadastroVenda frm = new frmCadastroVenda(true, idVenda.ToString(), status.ToString());
+                frm.ShowDialog();
+                AtualizaGrid();
+            }
+            else
+            {
+                MessageBox.Show("Já existem pagamentos nesta venda. A edição está bloqueada!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
+
+
+
+                
+
+                
+
+
+                
+
+
+
+
+
+
+
+               
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
 }

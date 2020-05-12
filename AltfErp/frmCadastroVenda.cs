@@ -17,7 +17,7 @@ namespace AltfErp
         List<Produto> produtos = new List<Produto>();
         string IDITEM = null;
         bool vendaClick;
-        string data1, idVendedor, status, SALVAR, Cod, sql;
+        string data1, idVendedor, status, SALVAR, Cod, sql, IDPRODUTO;
         int ano, dia, mes;
         string diaVencimento, mesVencimento;
         public string VENCIMENTOANUAL { get; set; }
@@ -65,7 +65,7 @@ namespace AltfErp
         }
 
 
-
+       
 
 
         private void InsertParcela()
@@ -109,7 +109,225 @@ namespace AltfErp
             }
         }
 
+        private void InsertVenda()
+        {
+            if (txtTipoPagamento.Text != "1")
+            {
+                frmDataVencimento data = new frmDataVencimento();
+                data.ShowDialog();
+                data1 = data.dataVencimento;
+            }
 
+            if (String.IsNullOrWhiteSpace(txtDesconto.Text))
+            {
+                txtDesconto.Text = "0";
+            }
+
+
+
+
+            sql = String.Format(@"insert into VENDA (IDFCFO, IDVENDEDOR, IDORDEM, TIPOPAGAMENTO, DESCONTO, OBSERVACAO, STATUS, DATAINCLUSAO, DATAPAGAMENTO, DATAVENCIMENTO) values(
+                                    '{0}' ,{4}, null, '{1}' ,{2}, '{3}' , 'A' , getdate() , null, CONVERT(DATETIME, CONVERT(VARCHAR,'{5}', 121),103)) select SCOPE_IDENTITY()",
+                                txtIdCliente.Text, txtTipoPagamento.Text, txtDesconto.Text.Replace(".", "").Replace(",", "."), txtObservacao.Text, txtIdVendedor.Text,
+                                txtDataVencimento.Text);
+            object IDVENDA = MetodosSql.ExecScalar(sql);
+            txtCodigo.Text = IDVENDA.ToString();
+
+
+
+            string valor;
+            char coCorretagem;
+            double valorSeguralta;
+            string query = @"INSERT INTO VENDACOMISSAO(IDVENDA, IDCLIENTE, VALORLIQUIDO, IOF, TOTALVENDA, COMISSAO, COMISSAOVENDA, COCORRETAGEM, VALORSEGURALTA)
+                               VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}')";
+
+
+            sql = String.Format(@"SELECT * FROM PORCENTAGENS ");
+            double percCorretora = double.Parse(MetodosSql.GetField(sql, "PERCSEGURALTA")) / 100;
+            double impostoNota = double.Parse(MetodosSql.GetField(sql, "PERCIMPOSTONOTA")) / 100;
+
+
+            if (cbCoCorretagem.Checked == true)
+            {
+                coCorretagem = 'S';
+                valorSeguralta = (double.Parse(txtComissaoVenda.Text) * percCorretora);
+                valor = valorSeguralta.ToString("F2", CultureInfo.InvariantCulture);
+
+                sql = String.Format(query,
+                              /*{0}*/ IDVENDA,
+                              /*{1}*/ txtIdCliente.Text,
+                              /*{2}*/ txtValorLiquido.Text.Replace(".", "").Replace(",", "."),
+                              /*{3}*/ txtIof.Text.Replace(".", "").Replace(",", "."),
+                              /*{4}*/ txtValorTotal.Text.Replace(".", "").Replace(",", "."),
+                              /*{5}*/ txtComissao.Text.Replace(".", "").Replace(",", "."),
+                              /*{6}*/ txtComissaoVenda.Text.Replace(".", "").Replace(",", "."),
+                              /*{7}*/ coCorretagem,
+                              /*{8}*/ valor);
+            }
+            else
+            {
+                coCorretagem = 'N';
+                valorSeguralta = (double.Parse(txtComissaoVenda.Text) * percCorretora * impostoNota);
+                valor = valorSeguralta.ToString("F2", CultureInfo.InvariantCulture);
+
+                sql = String.Format(query,
+                              /*{0}*/ IDVENDA,
+                              /*{1}*/ txtIdCliente.Text,
+                              /*{2}*/ txtValorLiquido.Text.Replace(".", "").Replace(",", "."),
+                              /*{3}*/ txtIof.Text.Replace(".", "").Replace(",", "."),
+                              /*{4}*/ txtValorTotal.Text.Replace(".", "").Replace(",", "."),
+                              /*{5}*/ txtComissao.Text.Replace(".", "").Replace(",", "."),
+                              /*{6}*/ txtComissaoVenda.Text.Replace(".", "").Replace(",", "."),
+                              /*{7}*/ coCorretagem,
+                              /*{8}*/ valor);
+            }
+            MetodosSql.ExecQuery(sql);
+
+
+            foreach (Produto p in produtos)
+            {
+                sql = String.Format("insert into ITEMMOVIMENTO (IDVENDA, IDPRODUTO, VALOR, QUANTIDADE, DATAINCLUSAO) values ('{0}','{1}','{2}','1', GETDATE())",
+                                              /*{0}*/ IDVENDA.ToString(),
+                                              /*{1}*/ p.IDPRODUTO,
+                                              /*{2}*/ txtTotalVenda.Text.Replace(".", "").Replace(",", "."));
+                MetodosSql.ExecQuery(sql);
+            }
+
+
+            Editar = true;
+            double TotalDesconto = Convert.ToDouble(txtTotalVenda.Text) - Convert.ToDouble(txtDesconto.Text);
+            txtTotalVenda.Text = String.Format("{0:N}", TotalDesconto.ToString());
+            InsertParcela();
+
+
+
+            if (vendaClick == false)
+            {
+                frmIdPagamento frm = new frmIdPagamento(false, null, true);
+                frm.txtValorRestante.Enabled = false;
+                frm.label7.Enabled = false;
+                frm.CODIGOVENDA = IDVENDA.ToString();
+                frm.CODIGOPARCELA = Cod.ToString();
+                frm.CODIGOCLIENTE = txtIdCliente.Text;
+                frm.ShowDialog();
+            }
+        }
+
+        private void UpdateVenda()
+        {
+            try
+            {
+                if (txtTipoPagamento.Text != "1")
+                {
+                    frmDataVencimento data = new frmDataVencimento();
+                    data.ShowDialog();
+                    data1 = data.dataVencimento;
+                }
+
+                if (String.IsNullOrWhiteSpace(txtDesconto.Text))
+                {
+                    txtDesconto.Text = "0";
+                }
+
+                string sql = String.Format(@"UPDATE VENDA SET IDFCFO = '{0}', IDVENDEDOR = '{1}', TIPOPAGAMENTO = '{2}', DESCONTO = '{3}', OBSERVACAO = '{4}', STATUS = 'A',
+                                             DATAINCLUSAO = GETDATE(), DATAVENCIMENTO = '{5}' WHERE IDVENDA = '{6}' ",
+                                           /*{0}*/  txtIdCliente.Text,
+                                           /*{1}*/  txtIdVendedor.Text,
+                                           /*{2}*/  txtTipoPagamento.Text,
+                                           /*{3}*/  txtDesconto.Text.Replace(".", "").Replace(",", "."),
+                                           /*{4}*/  txtObservacao.Text,
+                                           /*{5}*/  txtDataVencimento.Text,
+                                           /*{6}*/  txtCodigo.Text);
+                MetodosSql.ExecQuery(sql);
+
+
+                string valor;
+                char coCorretagem;
+                double valorSeguralta;
+                string query = @"UPDATE VENDACOMISSAO SET IDCLIENTE = '{0}', VALORLIQUIDO = '{1}', IOF = '{2}', TOTALVENDA = '{3}', COMISSAO = '{4}', COMISSAOVENDA = '{5}',
+                                    COCORRETAGEM = '{6}', VALORSEGURALTA = '{7}' WHERE IDVENDA = '{8}'";
+
+
+                sql = String.Format(@"SELECT * FROM PORCENTAGENS ");
+                double percCorretora = double.Parse(MetodosSql.GetField(sql, "PERCSEGURALTA")) / 100;
+                double impostoNota = double.Parse(MetodosSql.GetField(sql, "PERCIMPOSTONOTA")) / 100;
+
+                if (cbCoCorretagem.Checked == true)
+                {
+                    coCorretagem = 'S';
+                    valorSeguralta = (double.Parse(txtComissaoVenda.Text) * percCorretora);
+                    valor = valorSeguralta.ToString("F2", CultureInfo.InvariantCulture);
+
+                    sql = String.Format(query,
+                           /*{0}*/ txtIdCliente.Text,
+                           /*{1}*/ txtValorLiquido.Text.Replace(".", "").Replace(",", "."),
+                           /*{2}*/ txtIof.Text.Replace(".", "").Replace(",", "."),
+                           /*{3}*/ txtTotalVenda.Text.Replace(".", "").Replace(",", "."),
+                           /*{4}*/ txtComissao.Text.Replace(".", "").Replace(",", "."),
+                           /*{5}*/ txtComissaoVenda.Text.Replace(".", "").Replace(",", "."),
+                           /*{6}*/ coCorretagem,
+                           /*{7}*/ valor,
+                           /*{8}*/ txtCodigo.Text);
+
+                }
+                else
+                {
+                    coCorretagem = 'N';
+                    valorSeguralta = (double.Parse(txtComissaoVenda.Text) * percCorretora * impostoNota);
+                    valor = valorSeguralta.ToString("F2", CultureInfo.InvariantCulture);
+
+                    sql = String.Format(query,
+                           /*{0}*/ txtIdCliente.Text,
+                           /*{1}*/ txtValorLiquido.Text.Replace(".", "").Replace(",", "."),
+                           /*{2}*/ txtIof.Text.Replace(".", "").Replace(",", "."),
+                           /*{3}*/ txtTotalVenda.Text.Replace(".", "").Replace(",", "."),
+                           /*{4}*/ txtComissao.Text.Replace(".", "").Replace(",", "."),
+                           /*{5}*/ txtComissaoVenda.Text.Replace(".", "").Replace(",", "."),
+                           /*{6}*/ coCorretagem,
+                           /*{7}*/ valor,
+                           /*{8}*/ txtCodigo.Text);
+                }
+                MetodosSql.ExecQuery(sql);
+
+                  sql = String.Format(@"SELECT * FROM ITEMMOVIMENTO WHERE IDVENDA = '{0}'", txtCodigo.Text);
+                IDPRODUTO = MetodosSql.GetField(sql, "IDPRODUTO");
+
+                    sql = String.Format("UPDATE ITEMMOVIMENTO SET IDPRODUTO = '{0}', VALOR = '{1}', QUANTIDADE = 1, DATAINCLUSAO = getdate() WHERE IDVENDA = '{2}'",
+                                                  /*{0}*/ IDPRODUTO,
+                                                  /*{1}*/ txtTotalVenda.Text.Replace(".", "").Replace(",", "."),
+                                                  /*{2}*/ txtCodigo.Text);
+                    MetodosSql.ExecQuery(sql);
+                
+
+                 MetodosSql.ExecQuery(String.Format(@"DELETE FROM PARCELA WHERE IDVENDA = '{0}'", txtCodigo.Text));
+                InsertParcela();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+        }
+        private void Cadastro()
+        {
+            try
+            {
+                if(Editar)
+                {
+                    UpdateVenda();
+                }
+               else
+                {
+                    InsertVenda();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+        }
 
         private void AtualizaGrid()
         {
@@ -171,146 +389,9 @@ namespace AltfErp
             }
         }
 
-        private void InsereEstoque()
-        {
-            sql = String.Format(@"select IDPRODUTO, QUANTIDADE from ITEMMOVIMENTO where IDVENDA = '{0}'", txtCodigo.Text);
-            DataTable Produtos = MetodosSql.GetDT(sql);
-
-
-            foreach (DataRow Produto in Produtos.Rows)
-            {
-                sql = String.Format(@"update ESTOQUE
-                                             set QUANTIDADE = QUANTIDADE - {0}
-                                             where IDPRODUTO = '{1}'", Produto["QUANTIDADE"].ToString().Replace(",", "."), Produto["IDPRODUTO"].ToString());
-                MetodosSql.ExecQuery(sql);
-            }
-
-        }
-
-
-
-
-                    
-
-
-
-
-
-
-
-
-
-        private void Cadastro()
-        {
-            try
-            {
-                if (txtTipoPagamento.Text != "1")
-                {
-                    frmDataVencimento data = new frmDataVencimento();
-                    data.ShowDialog();
-                    data1 = data.dataVencimento;
-                }
-
-                if (String.IsNullOrWhiteSpace(txtDesconto.Text))
-                {
-                    txtDesconto.Text = "0";
-                }
-   
-
-
-
-                sql = String.Format(@"insert into VENDA (IDFCFO, IDVENDEDOR, IDORDEM, TIPOPAGAMENTO, DESCONTO, OBSERVACAO, STATUS, DATAINCLUSAO, DATAPAGAMENTO, DATAVENCIMENTO) values(
-                                    '{0}' ,{4}, null, '{1}' ,{2}, '{3}' , 'A' , getdate() , null, CONVERT(DATETIME, CONVERT(VARCHAR,'{5}', 121),103)) select SCOPE_IDENTITY()",
-                                    txtIdCliente.Text, txtTipoPagamento.Text, txtDesconto.Text.Replace(".", "").Replace(",", "."), txtObservacao.Text, txtIdVendedor.Text,
-                                    txtDataVencimento.Text);
-                object IDVENDA = MetodosSql.ExecScalar(sql);
-                txtCodigo.Text = IDVENDA.ToString();
-
-
         
-                string valor;
-                char coCorretagem;
-                double valorSeguralta;
-                string query = @"INSERT INTO VENDACOMISSAO(IDVENDA, IDCLIENTE, VALORLIQUIDO, IOF, TOTALVENDA, COMISSAO, COMISSAOVENDA, COCORRETAGEM, VALORSEGURALTA)
-                               VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}')";
 
 
-                sql = String.Format(@"SELECT * FROM PORCENTAGENS ");
-                double percCorretora = double.Parse(MetodosSql.GetField(sql, "PERCSEGURALTA")) / 100;
-                double impostoNota = double.Parse(MetodosSql.GetField(sql, "PERCIMPOSTONOTA")) / 100;
-
-
-                if (cbCoCorretagem.Checked == true)
-                {
-                    coCorretagem = 'S';
-                    valorSeguralta = (double.Parse(txtComissaoVenda.Text) * percCorretora);
-                    valor = valorSeguralta.ToString("F2", CultureInfo.InvariantCulture);
-
-                    sql = String.Format(query,
-                                  /*{0}*/ IDVENDA,
-                                  /*{1}*/ txtIdCliente.Text,
-                                  /*{2}*/ txtValorLiquido.Text.Replace(".", "").Replace(",", "."),
-                                  /*{3}*/ txtIof.Text.Replace(".", "").Replace(",", "."),
-                                  /*{4}*/ txtValorTotal.Text.Replace(".", "").Replace(",", "."),
-                                  /*{5}*/ txtComissao.Text.Replace(".", "").Replace(",", "."),
-                                  /*{6}*/ txtComissaoVenda.Text.Replace(".", "").Replace(",", "."),
-                                  /*{7}*/ coCorretagem,
-                                  /*{8}*/ valor);
-                }
-                else
-                {
-                    coCorretagem = 'N';
-                    valorSeguralta = (double.Parse(txtComissaoVenda.Text) * percCorretora * impostoNota);
-                    valor = valorSeguralta.ToString("F2", CultureInfo.InvariantCulture);
-
-                    sql = String.Format(query,
-                                  /*{0}*/ IDVENDA,
-                                  /*{1}*/ txtIdCliente.Text,
-                                  /*{2}*/ txtValorLiquido.Text.Replace(".", "").Replace(",", "."),
-                                  /*{3}*/ txtIof.Text.Replace(".", "").Replace(",", "."),
-                                  /*{4}*/ txtValorTotal.Text.Replace(".", "").Replace(",", "."),
-                                  /*{5}*/ txtComissao.Text.Replace(".", "").Replace(",", "."),
-                                  /*{6}*/ txtComissaoVenda.Text.Replace(".", "").Replace(",", "."),
-                                  /*{7}*/ coCorretagem,
-                                  /*{8}*/ valor);
-                }
-                MetodosSql.ExecQuery(sql);
-
-
-                foreach (Produto p in produtos)
-                {
-                    sql = String.Format("insert into ITEMMOVIMENTO (IDVENDA, IDPRODUTO, VALOR, QUANTIDADE, DATAINCLUSAO) values ('{0}','{1}','{2}','1', GETDATE())",
-                                                  /*{0}*/ IDVENDA.ToString(),
-                                                  /*{1}*/ p.IDPRODUTO,
-                                                  /*{2}*/ txtTotalVenda.Text.Replace(".", "").Replace(",", "."));
-                    MetodosSql.ExecQuery(sql);
-                }
-
-
-                Editar = true;
-                double TotalDesconto = Convert.ToDouble(txtTotalVenda.Text) - Convert.ToDouble(txtDesconto.Text);
-                txtTotalVenda.Text = String.Format("{0:N}", TotalDesconto.ToString());
-                InsertParcela();
-                InsereEstoque();
-
-
-                if (vendaClick == false)
-                {
-                    frmIdPagamento frm = new frmIdPagamento(false, null, true);
-                    frm.txtValorRestante.Enabled = false;
-                    frm.label7.Enabled = false;
-                    frm.CODIGOVENDA = IDVENDA.ToString();
-                    frm.CODIGOPARCELA = Cod.ToString();
-                    frm.CODIGOCLIENTE = txtIdCliente.Text;
-                    frm.ShowDialog();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-        }
 
         private void frmCadastroVenda_Load(object sender, EventArgs e)
         {
@@ -356,6 +437,7 @@ namespace AltfErp
                     {
                         cbCoCorretagem.Checked = true;
                     }
+                    
                 }
                 AtualizaGrid();
             }
@@ -378,32 +460,68 @@ namespace AltfErp
         }
         private void btnOk_Click(object sender, EventArgs e)
         {
-            string id = produtos.Count.ToString();
-            if (SALVAR == "0")
+            if(Editar)
             {
-                this.Close();
+                string sql = String.Format(@"SELECT COUNT(IDPRODUTO) AS QUANTIDADE FROM ITEMMOVIMENTO WHERE IDVENDA = '{0}'", txtCodigo.Text);
+                string count = MetodosSql.GetField(sql, "QUANTIDADE");
+                if (SALVAR == "0")
+                {
+                    this.Close();
+                }
+                else if (String.IsNullOrWhiteSpace(txtTipoPagamento.Text))
+                {
+                    MessageBox.Show("Selecione Um Tipo De Pagameto", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else if (String.IsNullOrWhiteSpace(txtTotalVenda.Text))
+                {
+                    MessageBox.Show("Selecione um Produto", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (String.IsNullOrWhiteSpace(txtIdVendedor.Text))
+                {
+                    MessageBox.Show("Selecione um vendedor", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (count != "0")
+                {
+                    Cadastro();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show(@"Por favor, selecione um seguro", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else if (String.IsNullOrWhiteSpace(txtTipoPagamento.Text))
+           else
             {
-                MessageBox.Show("Selecione Um Tipo De Pagameto", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                string count = produtos.Count.ToString();
+                if (SALVAR == "0")
+                {
+                    this.Close();
+                }
+                else if (String.IsNullOrWhiteSpace(txtTipoPagamento.Text))
+                {
+                    MessageBox.Show("Selecione Um Tipo De Pagameto", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else if (String.IsNullOrWhiteSpace(txtTotalVenda.Text))
+                {
+                    MessageBox.Show("Selecione um Produto", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (String.IsNullOrWhiteSpace(txtIdVendedor.Text))
+                {
+                    MessageBox.Show("Selecione um vendedor", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (count != "0")
+                {
+                    Cadastro();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show(@"Por favor, selecione um seguro", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else if (String.IsNullOrWhiteSpace(txtTotalVenda.Text))
-            {
-                MessageBox.Show("Selecione um Produto", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if(String.IsNullOrWhiteSpace(txtIdVendedor.Text))
-            {
-                MessageBox.Show("Selecione um vendedor", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (id != "0")
-            {
-                Cadastro();
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show(@"Por favor, selecione um seguro", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+               
+            
+            
         }
         private void CalculaTotal()
         {
@@ -592,7 +710,7 @@ namespace AltfErp
                             sql = String.Format("insert into ITEMMOVIMENTO (IDVENDA, IDPRODUTO, VALOR, QUANTIDADE, DATAINCLUSAO) values ('{0}','{1}','{2}','{3}', GETDATE())",
                                                   /*{0}*/ txtCodigo.Text,
                                                   /*{1}*/ txtCodigoProduto.Text,
-                                                  /*{2}*/ txtIof.Text.Replace(",", "."),
+                                                  /*{2}*/ txtValorTotal.Text.Replace(".", "").Replace(",", "."),
                                                   /*{3}*/ txtQuantidade.Text.Replace(",", "."));
 
                             MetodosSql.ExecQuery(sql);
@@ -661,13 +779,13 @@ namespace AltfErp
 
                     sql = String.Format(@"select * from ITEMMOVIMENTO where IDITEM = '{0}'", IDITEM);
                     txtCodigoProduto.Text = MetodosSql.GetField(sql, "IDPRODUTO");
-                    txtIof.Text = MetodosSql.GetField(sql, "VALOR");
-                    txtQuantidade.Text = MetodosSql.GetField(sql, "QUANTIDADE");
-
-                    CalculaTotal();
-
+                    
                     sql = String.Format(@"select DESCRICAO from PRODUTO where IDPRODUTO = '{0}'", txtCodigoProduto.Text);
                     txtDescricaoProduto.Text = MetodosSql.GetField(sql, "DESCRICAO");
+                    
+
+                    //CalculaTotal();
+
 
                 }
                 else
@@ -758,6 +876,18 @@ namespace AltfErp
         }
     }
 }
+
+
+                    
+
+
+
+
+
+
+
+
+
 
 
 
