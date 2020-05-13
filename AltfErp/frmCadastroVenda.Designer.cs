@@ -82,7 +82,6 @@
             this.txtTotalDesconto = new System.Windows.Forms.TextBox();
             this.lblTotalDesconto = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.txtDesconto = new System.Windows.Forms.MaskedTextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.txtTotalVenda = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -97,6 +96,7 @@
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.txtSobrenomeVendedor = new System.Windows.Forms.TextBox();
+            this.txtDesconto = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -124,7 +124,7 @@
             // txtTipoPagamento
             // 
             this.txtTipoPagamento.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.txtTipoPagamento.Location = new System.Drawing.Point(758, 211);
+            this.txtTipoPagamento.Location = new System.Drawing.Point(758, 210);
             this.txtTipoPagamento.Margin = new System.Windows.Forms.Padding(2);
             this.txtTipoPagamento.Name = "txtTipoPagamento";
             this.txtTipoPagamento.ReadOnly = true;
@@ -135,7 +135,7 @@
             // 
             this.lblTipoPagamento.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblTipoPagamento.AutoSize = true;
-            this.lblTipoPagamento.Location = new System.Drawing.Point(755, 195);
+            this.lblTipoPagamento.Location = new System.Drawing.Point(755, 194);
             this.lblTipoPagamento.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTipoPagamento.Name = "lblTipoPagamento";
             this.lblTipoPagamento.Size = new System.Drawing.Size(100, 13);
@@ -145,7 +145,7 @@
             // btnSalvar
             // 
             this.btnSalvar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSalvar.Location = new System.Drawing.Point(948, 489);
+            this.btnSalvar.Location = new System.Drawing.Point(948, 504);
             this.btnSalvar.Margin = new System.Windows.Forms.Padding(2);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(82, 30);
@@ -156,7 +156,7 @@
             // simpleButton1
             // 
             this.simpleButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.simpleButton1.Location = new System.Drawing.Point(1035, 489);
+            this.simpleButton1.Location = new System.Drawing.Point(1035, 504);
             this.simpleButton1.Margin = new System.Windows.Forms.Padding(2);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(76, 30);
@@ -188,18 +188,18 @@
             // txtObservacao
             // 
             this.txtObservacao.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtObservacao.Location = new System.Drawing.Point(10, 479);
+            this.txtObservacao.Location = new System.Drawing.Point(10, 457);
             this.txtObservacao.Margin = new System.Windows.Forms.Padding(2);
             this.txtObservacao.Multiline = true;
             this.txtObservacao.Name = "txtObservacao";
-            this.txtObservacao.Size = new System.Drawing.Size(357, 40);
+            this.txtObservacao.Size = new System.Drawing.Size(411, 77);
             this.txtObservacao.TabIndex = 15;
             // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 464);
+            this.label3.Location = new System.Drawing.Point(7, 438);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 13);
@@ -262,7 +262,7 @@
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.Location = new System.Drawing.Point(861, 489);
+            this.btnOk.Location = new System.Drawing.Point(863, 504);
             this.btnOk.Margin = new System.Windows.Forms.Padding(2);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(82, 30);
@@ -313,7 +313,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(1101, 370);
+            this.groupBox1.Size = new System.Drawing.Size(1101, 368);
             this.groupBox1.TabIndex = 1005;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cadastro";
@@ -480,7 +480,7 @@
             this.gridControl1.Location = new System.Drawing.Point(6, 125);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(723, 231);
+            this.gridControl1.Size = new System.Drawing.Size(723, 229);
             this.gridControl1.TabIndex = 1006;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -508,7 +508,7 @@
             // txtDescricaoTipoPagamento
             // 
             this.txtDescricaoTipoPagamento.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.txtDescricaoTipoPagamento.Location = new System.Drawing.Point(817, 211);
+            this.txtDescricaoTipoPagamento.Location = new System.Drawing.Point(817, 210);
             this.txtDescricaoTipoPagamento.Margin = new System.Windows.Forms.Padding(2);
             this.txtDescricaoTipoPagamento.Name = "txtDescricaoTipoPagamento";
             this.txtDescricaoTipoPagamento.ReadOnly = true;
@@ -518,7 +518,7 @@
             // btnTipoPagamento
             // 
             this.btnTipoPagamento.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnTipoPagamento.Location = new System.Drawing.Point(794, 212);
+            this.btnTipoPagamento.Location = new System.Drawing.Point(794, 211);
             this.btnTipoPagamento.Margin = new System.Windows.Forms.Padding(2);
             this.btnTipoPagamento.Name = "btnTipoPagamento";
             this.btnTipoPagamento.Size = new System.Drawing.Size(19, 18);
@@ -643,7 +643,6 @@
             this.txtQuantidade.TabIndex = 1020;
             this.txtQuantidade.Text = "1";
             this.txtQuantidade.Visible = false;
-            this.txtQuantidade.Leave += new System.EventHandler(this.txtQuantidade_Leave);
             // 
             // label11
             // 
@@ -659,56 +658,43 @@
             // txtTotalDesconto
             // 
             this.txtTotalDesconto.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txtTotalDesconto.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalDesconto.Location = new System.Drawing.Point(371, 479);
+            this.txtTotalDesconto.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotalDesconto.Location = new System.Drawing.Point(863, 453);
             this.txtTotalDesconto.Margin = new System.Windows.Forms.Padding(2);
             this.txtTotalDesconto.Name = "txtTotalDesconto";
             this.txtTotalDesconto.ReadOnly = true;
-            this.txtTotalDesconto.Size = new System.Drawing.Size(240, 38);
+            this.txtTotalDesconto.Size = new System.Drawing.Size(240, 47);
             this.txtTotalDesconto.TabIndex = 1035;
-            this.txtTotalDesconto.Visible = false;
             // 
             // lblTotalDesconto
             // 
             this.lblTotalDesconto.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblTotalDesconto.AutoSize = true;
             this.lblTotalDesconto.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalDesconto.Location = new System.Drawing.Point(368, 464);
+            this.lblTotalDesconto.Location = new System.Drawing.Point(860, 438);
             this.lblTotalDesconto.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTotalDesconto.Name = "lblTotalDesconto";
             this.lblTotalDesconto.Size = new System.Drawing.Size(101, 13);
             this.lblTotalDesconto.TabIndex = 1034;
             this.lblTotalDesconto.Text = "Total com desconto";
-            this.lblTotalDesconto.Visible = false;
             // 
             // label16
             // 
             this.label16.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(667, 441);
+            this.label16.Location = new System.Drawing.Point(432, 499);
             this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(49, 31);
             this.label16.TabIndex = 1033;
             this.label16.Text = "R$";
             // 
-            // txtDesconto
-            // 
-            this.txtDesconto.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txtDesconto.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDesconto.Location = new System.Drawing.Point(720, 438);
-            this.txtDesconto.Margin = new System.Windows.Forms.Padding(2);
-            this.txtDesconto.Name = "txtDesconto";
-            this.txtDesconto.Size = new System.Drawing.Size(184, 38);
-            this.txtDesconto.TabIndex = 9;
-            this.txtDesconto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDesconto_KeyPress);
-            // 
             // label15
             // 
             this.label15.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(717, 423);
+            this.label15.Location = new System.Drawing.Point(482, 480);
             this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(53, 13);
@@ -719,7 +705,7 @@
             // 
             this.txtTotalVenda.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.txtTotalVenda.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalVenda.Location = new System.Drawing.Point(908, 438);
+            this.txtTotalVenda.Location = new System.Drawing.Point(673, 496);
             this.txtTotalVenda.Margin = new System.Windows.Forms.Padding(2);
             this.txtTotalVenda.Name = "txtTotalVenda";
             this.txtTotalVenda.ReadOnly = true;
@@ -731,7 +717,7 @@
             this.label9.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(906, 423);
+            this.label9.Location = new System.Drawing.Point(670, 480);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(31, 13);
@@ -843,13 +829,26 @@
             this.txtSobrenomeVendedor.Size = new System.Drawing.Size(186, 22);
             this.txtSobrenomeVendedor.TabIndex = 1041;
             // 
+            // txtDesconto
+            // 
+            this.txtDesconto.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtDesconto.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDesconto.Location = new System.Drawing.Point(483, 496);
+            this.txtDesconto.Margin = new System.Windows.Forms.Padding(2);
+            this.txtDesconto.Name = "txtDesconto";
+            this.txtDesconto.Size = new System.Drawing.Size(186, 38);
+            this.txtDesconto.TabIndex = 1043;
+            this.txtDesconto.TextChanged += new System.EventHandler(this.txtDesconto_TextChanged_1);
+            this.txtDesconto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDesconto_KeyPress_1);
+            // 
             // frmCadastroVenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1114, 530);
+            this.ClientSize = new System.Drawing.Size(1114, 545);
+            this.Controls.Add(this.txtDesconto);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.txtSobrenomeVendedor);
             this.Controls.Add(this.label19);
@@ -865,7 +864,6 @@
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.txtIdOrdem);
-            this.Controls.Add(this.txtDesconto);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label15);
@@ -939,7 +937,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         public System.Windows.Forms.TextBox txtTotalDesconto;
-        public System.Windows.Forms.MaskedTextBox txtDesconto;
         public System.Windows.Forms.Label lblTotalDesconto;
         public System.Windows.Forms.MaskedTextBox txtDataVencimento;
         public System.Windows.Forms.Label label17;
@@ -967,5 +964,6 @@
         public System.Windows.Forms.TextBox txtIdVendedor;
         public System.Windows.Forms.TextBox txtSobrenomeVendedor;
         public System.Windows.Forms.TextBox txtCiaSeguradora;
+        public System.Windows.Forms.TextBox txtDesconto;
     }
 }

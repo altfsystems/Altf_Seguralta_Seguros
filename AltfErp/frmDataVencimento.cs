@@ -30,9 +30,17 @@ namespace AltfErp
             dia = txtDia.Text;
             mes = txtMes.Text;
             ano = txtAno.Text;
+            if(dia == "" || mes == "" || ano == "")
+            {
+                MessageBox.Show("Por favor, selecione uma data válida", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                dataVencimento = dia + "/" + mes + "/" + ano;
+                this.Close();
+            }
 
-            dataVencimento = dia + "/" + mes + "/" + ano;
-            this.Close();
+            
         }
     }
 }

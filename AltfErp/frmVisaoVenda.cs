@@ -85,8 +85,6 @@ namespace AltfErp
                 Cad.txtTotalVenda.Enabled = false;
                 Cad.txtObservacao.Enabled = false;
                 Cad.txtDesconto.Enabled = false;
-                Cad.txtTotalDesconto.Visible = true;
-                Cad.lblTotalDesconto.Visible = true;
                 Cad.btnSelecionaVendedor.Enabled = false;
                 Cad.txtComissao.Enabled = false;
                 Cad.txtValorLiquido.Enabled = false;
@@ -100,6 +98,7 @@ namespace AltfErp
             {
                 MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+                
 
             
         }
@@ -261,6 +260,10 @@ namespace AltfErp
                     }
 
                 }
+                else
+                {
+                    MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             catch (Exception ex)
             {
@@ -293,17 +296,26 @@ namespace AltfErp
             var idVenda = gridView1.GetRowCellValue(rowHandle, "IDVENDA");
             var status = gridView1.GetRowCellValue(rowHandle, "STATUS");
 
-            IDVENDA = int.Parse(idVenda.ToString());
-            if(TestaUpdate())
+            if(idVenda != null)
             {
-                frmCadastroVenda frm = new frmCadastroVenda(true, idVenda.ToString(), status.ToString());
-                frm.ShowDialog();
-                AtualizaGrid();
+                IDVENDA = int.Parse(idVenda.ToString());
+                if (TestaUpdate())
+                {
+                    frmCadastroVenda frm = new frmCadastroVenda(true, idVenda.ToString(), status.ToString());
+                    frm.ShowDialog();
+                    AtualizaGrid();
+                }
+                else
+                {
+                    MessageBox.Show("Já existem pagamentos nesta venda. A edição está bloqueada!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+              
             }
             else
             {
-                MessageBox.Show("Já existem pagamentos nesta venda. A edição está bloqueada!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+           
         }
     }
 
