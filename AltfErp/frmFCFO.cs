@@ -16,7 +16,7 @@ namespace AltfErp
 {
     public partial class frmFCFO : Form
     {
-
+        Valida val = new Valida();
         bool Editar, validaBtn1, validaBtn2;
         string Cod;
         string tipo;
@@ -33,44 +33,44 @@ namespace AltfErp
             tipo = _tipo;
             txtDataInclusao.Text = DateTime.Now.ToString();
             txtEstado.SelectedIndex = 24;
-           
+
 
         }
 
         private void Insert()
         {
-           string  SQL = String.Format(@"insert into FCFO (NOME , NOMEFANTASIA, CPF, CNPJ, RG, CNH, TELEFONE1, TELEFONE2, CELULAR, CELULAR2, EMAIL, EMAIL2, RUA, LOGRADOURO, NUMERO, BAIRRO, CIDADE,
+            string SQL = String.Format(@"insert into FCFO (NOME , NOMEFANTASIA, CPF, CNPJ, RG, CNH, TELEFONE1, TELEFONE2, CELULAR, CELULAR2, EMAIL, EMAIL2, RUA, LOGRADOURO, NUMERO, BAIRRO, CIDADE,
                        CEP,ESTADO , COMPLEMENTO, OBSERVACAO, TIPO, DTANASCIMENTO, SEXO, ESTADOCIVIL, TIPORESIDENCIA, OBSDOCUMENTO, TIPOPESSOA, DATAINCLUSAO, APOLICE) values ('{0}','{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}','{10}','{11}','{12}','{13}','{14}',
                        '{15}','{16}','{17}','{18}','{19}' , '{20}', '{21}' , '{22}' , '{23}' , '{24}' , '{25}' , '{26}','{27}', getdate(), '{28}' ) select SCOPE_IDENTITY()",
-                               /*{0}*/ txtNome.Text,
-                               /*{1}*/ txtNomeFantasia.Text,
-                               /*{2}*/ txtCpf.Text,
-                               /*{3}*/ txtCNPJ.Text,
-                               /*{4}*/ txtRg.Text,
-                               /*{5}*/ txtCnh.Text,
-                               /*{6}*/ txtTelefone.Text,
-                               /*{7}*/ txtTelefone2.Text,
-                               /*{8}*/ txtCelular.Text,
-                               /*{9}*/ txtCelular2.Text,
-                              /*{10}*/ txtEmail.Text,
-                              /*{11}*/ txtEmail2.Text,
-                              /*{12}*/ txtRua.Text,
-                              /*{13}*/ txtLogradouro.Text,
-                              /*{14}*/ txtNumero.Text,
-                              /*{15}*/ txtBairro.Text,
-                              /*{16}*/ txtCidade.Text,
-                              /*{17}*/ txtCep.Text,
-                              /*{18}*/ txtEstado.Text,
-                              /*{19}*/ txtComplemento.Text,
-                              /*{20}*/ txtObservacao.Text,
-                              /*{21}*/ tipo,
-                              /*{22}*/ txtDataNasc.Text,
-                              /*{23}*/ txtSexo.Text,
-                              /*{24}*/ txtEstadoCivil.Text,
-                              /*{25}*/ txtTipoResidencia.Text,
-                              /*{26}*/ txtObservacaoDocumento.Text,
-                              /*{27}*/ txtTipoPessoa.Text,
-                              /*{28}*/  txtApolice.Text);
+                                /*{0}*/ txtNome.Text,
+                                /*{1}*/ txtNomeFantasia.Text,
+                                /*{2}*/ txtCpf.Text,
+                                /*{3}*/ txtCNPJ.Text,
+                                /*{4}*/ txtRg.Text,
+                                /*{5}*/ txtCnh.Text,
+                                /*{6}*/ txtTelefone.Text,
+                                /*{7}*/ txtTelefone2.Text,
+                                /*{8}*/ txtCelular.Text,
+                                /*{9}*/ txtCelular2.Text,
+                               /*{10}*/ txtEmail.Text,
+                               /*{11}*/ txtEmail2.Text,
+                               /*{12}*/ txtRua.Text,
+                               /*{13}*/ txtLogradouro.Text,
+                               /*{14}*/ txtNumero.Text,
+                               /*{15}*/ txtBairro.Text,
+                               /*{16}*/ txtCidade.Text,
+                               /*{17}*/ txtCep.Text,
+                               /*{18}*/ txtEstado.Text,
+                               /*{19}*/ txtComplemento.Text,
+                               /*{20}*/ txtObservacao.Text,
+                               /*{21}*/ tipo,
+                               /*{22}*/ txtDataNasc.Text,
+                               /*{23}*/ txtSexo.Text,
+                               /*{24}*/ txtEstadoCivil.Text,
+                               /*{25}*/ txtTipoResidencia.Text,
+                               /*{26}*/ txtObservacaoDocumento.Text,
+                               /*{27}*/ txtTipoPessoa.Text,
+                               /*{28}*/  txtApolice.Text);
 
 
 
@@ -129,7 +129,7 @@ namespace AltfErp
                 throw new Exception("Por favor, selecione o tipo de pessoa");
             }
 
-            if(txtCpf.Text == "___.___.___-__")
+            if (txtCpf.Text == "___.___.___-__")
             {
                 throw new Exception("Por favor, digite o cpf");
             }
@@ -144,7 +144,7 @@ namespace AltfErp
             validaBtn1 = false;
             validaBtn2 = false;
             txtTipoPessoa.Select();
-                        
+
             try
             {
                 if (Editar)
@@ -192,7 +192,7 @@ namespace AltfErp
                         pbDoc2.Image = Image.FromStream(MetodosSql.GetImage(sql, "IMAGEM2"));
                     }
                     txtDataInclusao.Text = MetodosSql.GetField(String.Format(@"select CONVERT(varchar, CONVERT(DATETIME, DATAINCLUSAO, 121), 103) as 'Nasc' from FCFO where IDFCFO = {0}", Cod), "Nasc");
-                    
+
 
 
 
@@ -217,7 +217,7 @@ namespace AltfErp
                 validacao = 0;
 
 
-            
+
 
                 if (Editar)
                 {
@@ -256,11 +256,6 @@ namespace AltfErp
                                            /*{26}*/  txtObservacaoDocumento.Text,
                                            /*{27}*/  Cod,
                                            /*{28}*/  txtApolice.Text);
-                                             
-		                                             
-
-
-
                     MetodosSql.ExecQuery(SQL);
 
                     Image Valida1, Valida2;
@@ -296,37 +291,42 @@ namespace AltfErp
                     {
                         MetodosSql.ExecQuery(String.Format("UPDATE FCFOIMAGEM SET IMAGEM1 = NULL, IMAGEM2 = NULL WHERE IDFCFO = {0}", Cod));
                     }
-
-
                 }
                 else
                 {
-                    
+
                     string sql = String.Format(@"SELECT * FROM FCFO WHERE CPF = '{0}'", txtCpf.Text);
                     string valida = MetodosSql.GetField(sql, "CPF");
 
-                    if(valida == "")
+                    if (valida == "")
                     {
                         Insert();
                     }
-                    else 
+                    else
                     {
                         MessageBox.Show("Já existe um cadastro com esse cpf!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         MessageBox.Show("O cadastro foi cancelado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                  
-
-                    
-
                 }
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 validacao = 1;
             }
+
+
+
+
+
+
+
         }
+
+
+
+
+
 
         private void txtNumero_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -389,33 +389,40 @@ namespace AltfErp
             e.Handled = true;
         }
 
-   
+
 
         private void txtEstado_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
         }
-
-        
-
-
-
         private void btnOk_Click_1(object sender, EventArgs e)
         {
-            
-             Cadastro();
-            if (validacao != 1)
+            if(!val.ValidaEmail(txtEmail.Text) || !val.ValidaEmail(txtEmail2.Text))
             {
-
-                this.Close();
+                MessageBox.Show("Insira um EMAIL válido", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-        }
+            else if (!val.ValidaCNPJ(txtCNPJ.Text))
+            {
+                MessageBox.Show("Insira um CNPJ válido", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (!val.ValidaCPF(txtCpf.Text))
+            {
+                MessageBox.Show("Insira um CPF válido", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                Cadastro();
+                if (validacao != 1)
+                {
+                    this.Close();
+                }
+            }
 
+        }
         private void btnSalvar_Click_1(object sender, EventArgs e)
         {
             Cadastro();
         }
-
         private void txtApolice_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
@@ -423,7 +430,6 @@ namespace AltfErp
                 e.Handled = true;
             }
         }
-
         private void txtCnh_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
@@ -431,17 +437,14 @@ namespace AltfErp
                 e.Handled = true;
             }
         }
-
         private void btnLimpar1_Click(object sender, EventArgs e)
         {
             pbImagemDoc1.Image = null;
         }
-
         private void btnLimpar2_Click(object sender, EventArgs e)
         {
             pbDoc2.Image = null;
         }
-
         private void txtNumero_KeyPress_1(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
@@ -449,24 +452,18 @@ namespace AltfErp
                 e.Handled = true;
             }
         }
-
         private void txtSexo_KeyPress_1(object sender, KeyPressEventArgs e)
         {
             if (!(char.IsLetter(e.KeyChar) || char.IsControl(e.KeyChar)))
             {
-
                 e.Handled = true;
-
             }
         }
-
         private void txtEstadoCivil_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!(char.IsLetter(e.KeyChar) || char.IsControl(e.KeyChar)))
             {
-
                 e.Handled = true;
-
             }
         }
 
@@ -474,17 +471,13 @@ namespace AltfErp
         {
             if (!(char.IsLetter(e.KeyChar) || char.IsControl(e.KeyChar)))
             {
-
                 e.Handled = true;
-
             }
         }
-
         private void btnCancelar_Click_1(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void btnAbrir1_Click(object sender, EventArgs e)
         {
             validaBtn1 = true;
@@ -497,18 +490,12 @@ namespace AltfErp
                     bmpImagem1 = new Bitmap(imagem1);
                     pbImagemDoc1.Image = bmpImagem1;
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     MessageBox.Show("O arquivo e imagens apenas aceita .png, .jpg e .jpeg!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-                
-
-
-
-
             }
         }
-
         private void btnAbrir2_Click(object sender, EventArgs e)
         {
             validaBtn2 = true;
@@ -524,14 +511,51 @@ namespace AltfErp
                 catch (Exception)
                 {
                     MessageBox.Show("O arquivo de imagem não suporta arquivos .pdf", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
                 }
-                
-
             }
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

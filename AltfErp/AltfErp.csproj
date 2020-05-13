@@ -411,7 +411,7 @@
     <Compile Include="relVendaMes.Designer.cs">
       <DependentUpon>relVendaMes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vendas.cs" />
+    <Compile Include="Valida.cs" />
     <Compile Include="WaitForm1.cs">
       <SubType>Form</SubType>
     </Compile>
