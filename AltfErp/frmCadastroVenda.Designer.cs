@@ -840,6 +840,7 @@
             this.txtDesconto.TabIndex = 1043;
             this.txtDesconto.TextChanged += new System.EventHandler(this.txtDesconto_TextChanged_1);
             this.txtDesconto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDesconto_KeyPress_1);
+            this.txtDesconto.Leave += new System.EventHandler(this.txtDesconto_Leave);
             // 
             // frmCadastroVenda
             // 
