@@ -53,7 +53,6 @@ namespace AltfErp
                     frm.txtValorTotal.Enabled = false;
                     frm.txtIof.Enabled = false;
                     frm.txtTotalVenda.Enabled = false;
-                    frm.txtQuantidade.Enabled = false;
                     frm.txtValorLiquido.Enabled = false;
                     frm.txtIof.Enabled = false;
                     frm.txtComissao.Enabled = false;
