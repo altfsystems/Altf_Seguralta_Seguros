@@ -144,7 +144,7 @@
             this.lblVersao.Name = "lblVersao";
             this.lblVersao.Size = new System.Drawing.Size(166, 18);
             this.lblVersao.TabIndex = 23;
-            this.lblVersao.Text = "Version 2020.05.13.0015";
+            this.lblVersao.Text = "Version 2020.05.14.0016";
             // 
             // frmLogin
             // 
