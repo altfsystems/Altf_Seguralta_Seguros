@@ -77,8 +77,6 @@
             this.txtCodigoProduto = new System.Windows.Forms.TextBox();
             this.txtNome = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.txtQuantidade = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.txtTotalDesconto = new System.Windows.Forms.TextBox();
             this.lblTotalDesconto = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -129,7 +127,7 @@
             this.txtTipoPagamento.Name = "txtTipoPagamento";
             this.txtTipoPagamento.ReadOnly = true;
             this.txtTipoPagamento.Size = new System.Drawing.Size(32, 20);
-            this.txtTipoPagamento.TabIndex = 100;
+            this.txtTipoPagamento.TabIndex = 20;
             // 
             // lblTipoPagamento
             // 
@@ -266,7 +264,7 @@
             this.btnOk.Margin = new System.Windows.Forms.Padding(2);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(82, 30);
-            this.btnOk.TabIndex = 10;
+            this.btnOk.TabIndex = 9;
             this.btnOk.Text = "Ok";
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
@@ -344,7 +342,7 @@
             this.cbCoCorretagem.Location = new System.Drawing.Point(738, 236);
             this.cbCoCorretagem.Name = "cbCoCorretagem";
             this.cbCoCorretagem.Size = new System.Drawing.Size(171, 28);
-            this.cbCoCorretagem.TabIndex = 8;
+            this.cbCoCorretagem.TabIndex = 100;
             this.cbCoCorretagem.Text = "Co-Corretagem";
             this.cbCoCorretagem.UseVisualStyleBackColor = true;
             // 
@@ -634,27 +632,6 @@
             this.label7.TabIndex = 1004;
             this.label7.Text = "Nome";
             // 
-            // txtQuantidade
-            // 
-            this.txtQuantidade.Location = new System.Drawing.Point(1005, 28);
-            this.txtQuantidade.Margin = new System.Windows.Forms.Padding(2);
-            this.txtQuantidade.Name = "txtQuantidade";
-            this.txtQuantidade.Size = new System.Drawing.Size(81, 20);
-            this.txtQuantidade.TabIndex = 1020;
-            this.txtQuantidade.Text = "1";
-            this.txtQuantidade.Visible = false;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(1002, 13);
-            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(62, 13);
-            this.label11.TabIndex = 1019;
-            this.label11.Text = "Quantidade";
-            this.label11.Visible = false;
-            // 
             // txtTotalDesconto
             // 
             this.txtTotalDesconto.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -837,7 +814,7 @@
             this.txtDesconto.Margin = new System.Windows.Forms.Padding(2);
             this.txtDesconto.Name = "txtDesconto";
             this.txtDesconto.Size = new System.Drawing.Size(186, 38);
-            this.txtDesconto.TabIndex = 1043;
+            this.txtDesconto.TabIndex = 8;
             this.txtDesconto.TextChanged += new System.EventHandler(this.txtDesconto_TextChanged_1);
             this.txtDesconto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDesconto_KeyPress_1);
             this.txtDesconto.Leave += new System.EventHandler(this.txtDesconto_Leave);
@@ -861,8 +838,6 @@
             this.Controls.Add(this.lblTotalDesconto);
             this.Controls.Add(this.txtDataVencimento);
             this.Controls.Add(this.label17);
-            this.Controls.Add(this.txtQuantidade);
-            this.Controls.Add(this.label11);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.txtIdOrdem);
             this.Controls.Add(this.label8);
@@ -904,7 +879,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label11;
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private System.Windows.Forms.Label label9;
@@ -932,7 +906,6 @@
         public System.Windows.Forms.TextBox txtDescricaoTipoPagamento;
         public System.Windows.Forms.TextBox txtValorTotal;
         public System.Windows.Forms.TextBox txtIof;
-        public System.Windows.Forms.TextBox txtQuantidade;
         public System.Windows.Forms.TextBox txtTotalVenda;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label15;
