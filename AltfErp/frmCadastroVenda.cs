@@ -57,7 +57,7 @@ namespace AltfErp
             gridView1.OptionsBehavior.Editable = false;
             gridControl1.EmbeddedNavigator.Buttons.Append.Visible = false;
             gridControl1.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            txtQuantidade.Text = "1";
+           
         }
 
         private void Calculos()
@@ -89,9 +89,9 @@ namespace AltfErp
             txtValorTotal.Text = String.Format("{0:N}", valorTotal);
 
             double TotalDesconto = Convert.ToDouble(txtTotalVenda.Text) - Convert.ToDouble(txtDesconto.Text);
-            txtTotalDesconto.Text = TotalDesconto.ToString("F2");
-
+            txtTotalDesconto.Text = String.Format("{0:N}", TotalDesconto);
             txtTotalVenda.Text = txtValorTotal.Text;
+
         }
 
 
@@ -510,6 +510,10 @@ namespace AltfErp
                 {
                     MessageBox.Show("Selecione um vendedor", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                else if (String.IsNullOrWhiteSpace(txtComissao.Text))
+                {
+                    MessageBox.Show("Insira uma comissão", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 else if (count != "0")
                 {
                     Cadastro();
@@ -559,7 +563,7 @@ namespace AltfErp
         {
             txtCodigoProduto.Text = String.Empty;
             txtDescricaoProduto.Text = String.Empty;
-            txtQuantidade.Text = "1";
+            
             txtCiaSeguradora.Text = String.Empty;
         }
 
@@ -580,22 +584,59 @@ namespace AltfErp
         }
         private void txtValorLiquido_Leave(object sender, EventArgs e)
         {
-            Calculos();
+            //Calculos();
+            if (String.IsNullOrWhiteSpace(txtValorLiquido.Text)) { txtValorLiquido.Text = "0,00"; }
+            if (String.IsNullOrWhiteSpace(txtIof.Text)) { txtIof.Text = "0,00"; }
+
+            double valorLiquido = Convert.ToDouble(txtValorLiquido.Text);
+            txtValorLiquido.Text = String.Format("{0:N}", valorLiquido).Replace(".", "").Replace(".", ",");
+
+
+            double iof = Convert.ToDouble(txtIof.Text);
+            txtIof.Text = String.Format("{0:N}", iof).Replace(".", "").Replace(".", ",");
+
+            valorLiquido = double.Parse(txtValorLiquido.Text);
+            double valorTotal = Convert.ToDouble(valorLiquido + iof);
+            txtValorTotal.Text = String.Format("{0:N}", valorTotal);
+            txtTotalVenda.Text = txtValorTotal.Text;
         }
 
         private void txtIof_Leave(object sender, EventArgs e)
         {
-            Calculos();
+            //Calculos();
+            if (String.IsNullOrWhiteSpace(txtValorLiquido.Text)) { txtValorLiquido.Text = "0,00"; }
+            if (String.IsNullOrWhiteSpace(txtIof.Text)) { txtIof.Text = "0,00"; }
+
+            double valorLiquido = Convert.ToDouble(txtValorLiquido.Text);
+            txtValorLiquido.Text = String.Format("{0:N}", valorLiquido).Replace(".", "").Replace(".", ",");
+
+
+            double iof = Convert.ToDouble(txtIof.Text);
+            txtIof.Text = String.Format("{0:N}", iof).Replace(".", "").Replace(".", ",");
+
+            valorLiquido = double.Parse(txtValorLiquido.Text);
+            double valorTotal = Convert.ToDouble(valorLiquido + iof);
+            txtValorTotal.Text = String.Format("{0:N}", valorTotal);
+            txtTotalVenda.Text = txtValorTotal.Text;
+            
         }
 
 
         private void txtComissao_Leave(object sender, EventArgs e)
         {
-            Calculos();
-            double valorLiquido = Convert.ToDouble(txtValorLiquido.Text);
-            double comissao = Convert.ToDouble(txtComissao.Text);
-            double comissaoVenda = (valorLiquido * comissao) / 100;
-            txtComissaoVenda.Text = comissaoVenda.ToString("F2");
+            //Calculos();
+            if(!String.IsNullOrWhiteSpace(txtComissao.Text))
+            {
+                double valorLiquido = Convert.ToDouble(txtValorLiquido.Text);
+                double comissao = Convert.ToDouble(txtComissao.Text);
+                double comissaoVenda = (valorLiquido * comissao) / 100;
+                txtComissaoVenda.Text = comissaoVenda.ToString("F2");
+            }
+            else
+            {
+                txtComissaoVenda.Text = String.Empty;
+            }
+            
         }
         private void txtValorLiquido_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -686,11 +727,11 @@ namespace AltfErp
 
                         if (String.IsNullOrWhiteSpace(IDITEM))
                         {
-                            sql = String.Format("insert into ITEMMOVIMENTO (IDVENDA, IDPRODUTO, VALOR, QUANTIDADE, DATAINCLUSAO) values ('{0}','{1}','{2}','{3}', GETDATE())",
+                            sql = String.Format("insert into ITEMMOVIMENTO (IDVENDA, IDPRODUTO, VALOR, QUANTIDADE, DATAINCLUSAO) values ('{0}','{1}','{2}','1', GETDATE())",
                                                   /*{0}*/ txtCodigo.Text,
                                                   /*{1}*/ txtCodigoProduto.Text,
-                                                  /*{2}*/ txtValorTotal.Text.Replace(".", "").Replace(",", "."),
-                                                  /*{3}*/ txtQuantidade.Text.Replace(",", "."));
+                                                  /*{2}*/ txtValorTotal.Text.Replace(".", "").Replace(",", "."));
+                                                  
 
                             MetodosSql.ExecQuery(sql);
                         }
@@ -699,12 +740,12 @@ namespace AltfErp
 
                             sql = String.Format(@"update ITEMMOVIMENTO
 	                                                set  VALOR = '{0}',
-			                                        QUANTIDADE = '{1}',
+			                                        QUANTIDADE = '1',
 			                                        DATAINCLUSAO = GETDATE()
-		                                            where IDITEM = '{2}'",
+		                                            where IDITEM = '{1}'",
                                                     /*{0}*/ txtIof.Text.Replace(",", "."),
-                                                    /*{1}*/ txtQuantidade.Text.Replace(",", "."),
-                                                    /*{2}*/ IDITEM);
+                                                    /*{1}*/ IDITEM);
+                                                    
                             MetodosSql.ExecQuery(sql);
                             IDITEM = null;
                         }
