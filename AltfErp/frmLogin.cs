@@ -15,7 +15,18 @@ namespace AltfErp
         Boolean valida;
         public frmLogin()
         {
+            Random rand = new Random();
             InitializeComponent();
+            string data = DateTime.Now.ToString();
+            string[] vet = data.Split('/', ' ');
+            string dia, mes, ano;
+            int random;
+            random = rand.Next(1, 1000);
+            dia = vet[0];
+            mes = vet[1];
+            ano = vet[2];
+
+            lblVersao.Text = "Version "+ano + "." + mes + "." + dia + "."+random;
         }
 
         private void Login()

@@ -78,18 +78,18 @@ namespace AltfErp
                 Cad.btnSalvar.Enabled = false;
                 Cad.btnOk.Enabled = false;
                 Cad.btnExcluir.Enabled = false;
-                Cad.txtIof.Enabled = false;
+                Cad.txtIof.ReadOnly = true;
                 Cad.simpleButton2.Enabled = false;
-                Cad.txtQuantidade.Enabled = false;
-                Cad.txtValorTotal.Enabled = false;
-                Cad.txtTotalVenda.Enabled = false;
-                Cad.txtObservacao.Enabled = false;
-                Cad.txtDesconto.Enabled = false;
+                Cad.txtValorTotal.ReadOnly = true;
+                Cad.txtTotalVenda.ReadOnly = true;
+                Cad.txtObservacao.ReadOnly = true;
+                Cad.txtDesconto.ReadOnly = true;
                 Cad.btnSelecionaVendedor.Enabled = false;
-                Cad.txtComissao.Enabled = false;
-                Cad.txtValorLiquido.Enabled = false;
-                Cad.txtIof.Enabled = false;
+                Cad.txtComissao.ReadOnly = true;
+                Cad.txtValorLiquido.ReadOnly = true;
+                Cad.txtIof.ReadOnly = true;
                 Cad.cbCoCorretagem.Enabled = false;
+                Cad.txtDataVencimento.ReadOnly = true;
                 Cad.ShowDialog();
 
                 AtualizaGrid();
