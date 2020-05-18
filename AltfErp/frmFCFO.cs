@@ -306,6 +306,7 @@ namespace AltfErp
                     {
                         MessageBox.Show("Já existe um cadastro com esse cpf!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         MessageBox.Show("O cadastro foi cancelado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        validacao = 1;
                     }
                 }
             }
