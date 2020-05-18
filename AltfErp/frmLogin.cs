@@ -19,12 +19,12 @@ namespace AltfErp
             string data = DateTime.Now.ToString();
             string[] vet = data.Split('/', ' ');
             string dia, mes, ano;
-            int random;
+           
             dia = vet[0];
             mes = vet[1];
             ano = vet[2];
 
-            lblVersao.Text = "Version "+ano + "." + mes + "." + dia + ".00018";
+            lblVersao.Text = "Version "+ano + "." + mes + "." + dia + ".00019";
         }
 
         private void Login()

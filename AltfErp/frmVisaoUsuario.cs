@@ -24,7 +24,7 @@ namespace AltfErp
         private void AtualizaGrid()
         {
             grdVisaoUsuario.DataSource = MetodosSql.GetDT(@"SELECT ID, NOME, USUARIO, DATAINCLUSAO FROM LOGIN");
-
+            
         }
 
 
@@ -76,20 +76,26 @@ namespace AltfErp
         {
             var rowHandle = gridView1.FocusedRowHandle;
             var cod = gridView1.GetRowCellValue(rowHandle, "ID");
+            var user = gridView1.GetRowCellValue(rowHandle, "USUARIO");
 
             if (cod == null)
             {
                 MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else
+            else if(user.ToString() == "mestre")
             {
-                if (DialogResult.Yes == MessageBox.Show("Tem certeza que deseja excluir este usuário?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-                {
-                    string sql = String.Format(@"DELETE FROM LOGIN WHERE ID = '{0}'", cod);
-                    MetodosSql.ExecQuery(sql);
-                    AtualizaGrid();
-                }
+                MessageBox.Show("Você não pode excluir o usuário mestre!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (DialogResult.Yes == MessageBox.Show("Tem certeza que deseja excluir este usuário?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            {
+                string sql = String.Format(@"DELETE FROM LOGIN WHERE ID = '{0}'", cod);
+                MetodosSql.ExecQuery(sql);
+                AtualizaGrid();
             }
         }
     }
 }
+
+
+
+
