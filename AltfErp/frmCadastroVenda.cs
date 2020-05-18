@@ -79,7 +79,7 @@ namespace AltfErp
             txtValorTotal.Text = String.Format("{0:N}", valorTotal);
 
             txtTotalVenda.Text = txtValorTotal.Text;
-            txtTotalDesconto.Text = txtValorTotal.Text;
+            
 
             iof = Convert.ToDouble(txtIof.Text);
             txtIof.Text = String.Format("{0:N}", iof).Replace(".", "").Replace(".", ",");
@@ -88,9 +88,8 @@ namespace AltfErp
             valorTotal = Convert.ToDouble(valorLiquido + iof);
             txtValorTotal.Text = String.Format("{0:N}", valorTotal);
 
-            double TotalDesconto = Convert.ToDouble(txtTotalVenda.Text) - Convert.ToDouble(txtDesconto.Text);
-            txtTotalDesconto.Text = String.Format("{0:N}", TotalDesconto);
-            txtTotalVenda.Text = txtValorTotal.Text;
+            
+            
 
         }
 
@@ -165,8 +164,8 @@ namespace AltfErp
             string valor;
             char coCorretagem;
             double valorSeguralta;
-            string query = @"INSERT INTO VENDACOMISSAO(IDVENDA, IDCLIENTE, VALORLIQUIDO, IOF, TOTALVENDA, COMISSAO, COMISSAOVENDA, COCORRETAGEM, VALORSEGURALTA)
-                               VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}')";
+            string query = @"INSERT INTO VENDACOMISSAO(IDVENDA, IDCLIENTE, VALORLIQUIDO, IOF, TOTALVENDAORIGINAL, COMISSAO, COMISSAOVENDA, COCORRETAGEM, VALORSEGURALTA, TOTALVENDADESCONTO)
+                               VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}')";
 
 
             sql = String.Format(@"SELECT * FROM PORCENTAGENS ");
@@ -185,11 +184,12 @@ namespace AltfErp
                               /*{1}*/ txtIdCliente.Text,
                               /*{2}*/ txtValorLiquido.Text.Replace(".", "").Replace(",", "."),
                               /*{3}*/ txtIof.Text.Replace(".", "").Replace(",", "."),
-                              /*{4}*/ txtTotalDesconto.Text.Replace(".", "").Replace(",", "."),
+                              /*{4}*/ txtValorTotal.Text.Replace(".", "").Replace(",", "."),
                               /*{5}*/ txtComissao.Text.Replace(".", "").Replace(",", "."),
                               /*{6}*/ txtComissaoVenda.Text.Replace(".", "").Replace(",", "."),
                               /*{7}*/ coCorretagem,
-                              /*{8}*/ valor);
+                              /*{8}*/ valor,
+                              /*{9}*/ txtTotalDesconto.Text.Replace(".", "").Replace(",", "."));
             }
             else
             {
@@ -202,11 +202,13 @@ namespace AltfErp
                               /*{1}*/ txtIdCliente.Text,
                               /*{2}*/ txtValorLiquido.Text.Replace(".", "").Replace(",", "."),
                               /*{3}*/ txtIof.Text.Replace(".", "").Replace(",", "."),
-                              /*{4}*/ txtTotalDesconto.Text.Replace(".", "").Replace(",", "."),
+                              /*{4}*/ txtValorTotal.Text.Replace(".", "").Replace(",", "."),
                               /*{5}*/ txtComissao.Text.Replace(".", "").Replace(",", "."),
                               /*{6}*/ txtComissaoVenda.Text.Replace(".", "").Replace(",", "."),
                               /*{7}*/ coCorretagem,
-                              /*{8}*/ valor);
+                              /*{8}*/ valor,
+                              /*{9}*/ txtTotalDesconto.Text.Replace(".", "").Replace(",", "."));
+
             }
             MetodosSql.ExecQuery(sql);
 
@@ -270,8 +272,8 @@ namespace AltfErp
                 string valor;
                 char coCorretagem;
                 double valorSeguralta;
-                string query = @"UPDATE VENDACOMISSAO SET IDCLIENTE = '{0}', VALORLIQUIDO = '{1}', IOF = '{2}', TOTALVENDA = '{3}', COMISSAO = '{4}', COMISSAOVENDA = '{5}',
-                                    COCORRETAGEM = '{6}', VALORSEGURALTA = '{7}' WHERE IDVENDA = '{8}'";
+                string query = @"UPDATE VENDACOMISSAO SET IDCLIENTE = '{0}', VALORLIQUIDO = '{1}', IOF = '{2}', TOTALVENDAORIGINAL = '{3}', COMISSAO = '{4}', COMISSAOVENDA = '{5}',
+                                    COCORRETAGEM = '{6}', VALORSEGURALTA = '{7}', TOTALVENDADESCONTO = '{8}' WHERE IDVENDA = '{9}'";
 
 
                 sql = String.Format(@"SELECT * FROM PORCENTAGENS ");
@@ -288,12 +290,13 @@ namespace AltfErp
                            /*{0}*/ txtIdCliente.Text,
                            /*{1}*/ txtValorLiquido.Text.Replace(".", "").Replace(",", "."),
                            /*{2}*/ txtIof.Text.Replace(".", "").Replace(",", "."),
-                           /*{3}*/ txtTotalDesconto.Text.Replace(".", "").Replace(",", "."),
+                           /*{3}*/ txtValorTotal.Text.Replace(".", "").Replace(",", "."),
                            /*{4}*/ txtComissao.Text.Replace(".", "").Replace(",", "."),
                            /*{5}*/ txtComissaoVenda.Text.Replace(".", "").Replace(",", "."),
                            /*{6}*/ coCorretagem,
                            /*{7}*/ valor,
-                           /*{8}*/ txtCodigo.Text);
+                           /*{8}*/ txtTotalDesconto.Text.Replace(".", "").Replace(",", "."),
+                           /*{9}*/ txtCodigo.Text); 
 
                 }
                 else
@@ -306,12 +309,13 @@ namespace AltfErp
                            /*{0}*/ txtIdCliente.Text,
                            /*{1}*/ txtValorLiquido.Text.Replace(".", "").Replace(",", "."),
                            /*{2}*/ txtIof.Text.Replace(".", "").Replace(",", "."),
-                           /*{3}*/ txtTotalDesconto.Text.Replace(".", "").Replace(",", "."),
+                           /*{3}*/ txtValorTotal.Text.Replace(".", "").Replace(",", "."),
                            /*{4}*/ txtComissao.Text.Replace(".", "").Replace(",", "."),
                            /*{5}*/ txtComissaoVenda.Text.Replace(".", "").Replace(",", "."),
                            /*{6}*/ coCorretagem,
                            /*{7}*/ valor,
-                           /*{8}*/ txtCodigo.Text);
+                           /*{8}*/ txtTotalDesconto.Text.Replace(".", "").Replace(",", "."),
+                           /*{9}*/ txtCodigo.Text);
                 }
                 MetodosSql.ExecQuery(sql);
 
@@ -345,7 +349,7 @@ namespace AltfErp
                 }
                 else
                 {
-                    InsertVenda();
+                   InsertVenda();
                 }
             }
             catch (Exception ex)
@@ -377,10 +381,7 @@ namespace AltfErp
 
 
                     //txtTotalVenda.Text = MetodosSql.GetField(String.Format(@"select cast(sum(QUANTIDADE* VALOR) as numeric(20, 2)) as 'TOTAL' from ITEMMOVIMENTO where IDVENDA = '{0}'", txtCodigo.Text), "TOTAL");
-                    txtTotalDesconto.Text = MetodosSql.GetField(String.Format(@"SELECT VD.IDVENDA, VD.IDFCFO,  cast(SUM(IT.VALOR * IT.QUANTIDADE) - VD.DESCONTO as numeric(20,2)) AS TOTAL_VENDA FROM VENDA VD
-                                                                                INNER JOIN ITEMMOVIMENTO IT
-                                                                                ON IT.IDVENDA = VD.IDVENDA WHERE VD.IDVENDA IS NOT NULL AND VD.IDVENDA = {0}
-                                                                                GROUP BY VD.DESCONTO, VD.IDVENDA, VD.IDFCFO", txtCodigo.Text), "TOTAL_VENDA");
+                    
                 }
                 else
                 {
@@ -450,23 +451,25 @@ namespace AltfErp
                     txtDataVencimento.Text = MetodosSql.GetField(String.Format(@"select CONVERT(varchar, CONVERT(varchar, DATAVENCIMENTO, 103)) as 'Vencimento' from VENDA where IDVENDA = {0}", Cod), "Vencimento");
                     sql = String.Format(@"SELECT * FROM VENDACOMISSAO WHERE IDVENDA = '{0}'", Cod);
                     valorLiquido = double.Parse(MetodosSql.GetField(sql, "VALORLIQUIDO"));
-                    txtValorLiquido.Text = valorLiquido.ToString("F2");
+                    txtValorLiquido.Text = String.Format("{0:N}", valorLiquido).Replace(".", "").Replace(".", ",");
                     iof = double.Parse(MetodosSql.GetField(sql, "IOF"));
-                    txtIof.Text = iof.ToString("F2");
+                    txtIof.Text = String.Format("{0:N}", iof).Replace(".", "").Replace(".", ",");
                     comissaoVenda = double.Parse(MetodosSql.GetField(sql, "COMISSAO"));
                     txtComissao.Text = comissaoVenda.ToString("F2");
-                    valorTotal = double.Parse(MetodosSql.GetField(sql, "TOTALVENDA"));
-                    txtTotalVenda.Text = valorTotal.ToString("F2");
+                    valorTotal = double.Parse(MetodosSql.GetField(sql, "TOTALVENDAORIGINAL"));
+                    txtTotalVenda.Text = String.Format("{0:N}", valorTotal.ToString("F2")).Replace(".", "").Replace(".", ",");
                     txtValorTotal.Text = txtTotalVenda.Text;
                     comissaoVenda = double.Parse(MetodosSql.GetField(sql, "COMISSAOVENDA"));
-                    txtComissaoVenda.Text = comissaoVenda.ToString("F2");
+                    txtComissaoVenda.Text = String.Format("{0:N}", comissaoVenda).Replace(".", "").Replace(".", ",");
                     string desconto = String.Format(@"select * from VENDA where IDVENDA = {0}", Cod);
                     double Desconto = double.Parse(MetodosSql.GetField(desconto, "DESCONTO"));
-                    txtDesconto.Text = Desconto.ToString("F2");
+                    txtDesconto.Text = String.Format("{0:N}", Desconto).Replace(".", "").Replace(".", ",");
                     if (MetodosSql.GetField(sql, "COCORRETAGEM") == "S")
                     {
                         cbCoCorretagem.Checked = true;
                     }
+                    sql = String.Format(@"SELECT CAST(TOTALVENDADESCONTO AS NUMERIC(20,2)) AS TOTALVENDADESCONTO FROM VENDACOMISSAO WHERE IDVENDA = '{0}'", Cod);
+                    txtTotalDesconto.Text = String.Format("{0:N}", MetodosSql.GetField(sql, "TOTALVENDADESCONTO")).Replace(".", "").Replace(".", ",");
 
                 }
                 AtualizaGrid();
@@ -543,6 +546,10 @@ namespace AltfErp
                 {
                     MessageBox.Show("Selecione um vendedor", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                else if (String.IsNullOrWhiteSpace(txtComissao.Text))
+                {
+                    MessageBox.Show("Insira uma comissão", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 else if (count != "0")
                 {
                     Cadastro();
@@ -604,20 +611,26 @@ namespace AltfErp
         private void txtIof_Leave(object sender, EventArgs e)
         {
             //Calculos();
-            if (String.IsNullOrWhiteSpace(txtValorLiquido.Text)) { txtValorLiquido.Text = "0,00"; }
-            if (String.IsNullOrWhiteSpace(txtIof.Text)) { txtIof.Text = "0,00"; }
+            if(String.IsNullOrWhiteSpace(txtValorLiquido.Text)) { txtValorLiquido.Text = "0,00"; }
+            if(String.IsNullOrWhiteSpace(txtIof.Text)) { txtIof.Text = "0,00"; }
+            if(String.IsNullOrWhiteSpace(txtDesconto.Text)) { txtDesconto.Text = "0,00"; }
 
             double valorLiquido = Convert.ToDouble(txtValorLiquido.Text);
-            txtValorLiquido.Text = String.Format("{0:N}", valorLiquido).Replace(".", "").Replace(".", ",");
-
-
             double iof = Convert.ToDouble(txtIof.Text);
+            double desconto = Convert.ToDouble(txtDesconto.Text);
+            valorLiquido = double.Parse(txtValorLiquido.Text);
+
+            txtValorLiquido.Text = String.Format("{0:N}", valorLiquido).Replace(".", "").Replace(".", ",");
             txtIof.Text = String.Format("{0:N}", iof).Replace(".", "").Replace(".", ",");
 
-            valorLiquido = double.Parse(txtValorLiquido.Text);
             double valorTotal = Convert.ToDouble(valorLiquido + iof);
             txtValorTotal.Text = String.Format("{0:N}", valorTotal);
             txtTotalVenda.Text = txtValorTotal.Text;
+            double totalDesconto = Convert.ToDouble(double.Parse(txtTotalVenda.Text) - desconto);
+            txtTotalDesconto.Text = String.Format("{0:N}", totalDesconto);
+
+
+            
             
         }
 
@@ -627,10 +640,13 @@ namespace AltfErp
             //Calculos();
             if(!String.IsNullOrWhiteSpace(txtComissao.Text))
             {
+                if(String.IsNullOrWhiteSpace(txtValorLiquido.Text)) { txtValorLiquido.Text = "0,00"; }
+                if(String.IsNullOrWhiteSpace(txtIof.Text)) { txtIof.Text = "0,00"; }
                 double valorLiquido = Convert.ToDouble(txtValorLiquido.Text);
                 double comissao = Convert.ToDouble(txtComissao.Text);
                 double comissaoVenda = (valorLiquido * comissao) / 100;
-                txtComissaoVenda.Text = comissaoVenda.ToString("F2");
+                txtComissaoVenda.Text = String.Format("{0:N}", comissaoVenda);
+                txtComissao.Text = String.Format("{0:N}", comissao);
             }
             else
             {
