@@ -79,7 +79,7 @@ namespace AltfErp
                 Cad.btnOk.Enabled = false;
                 Cad.btnExcluir.Enabled = false;
                 Cad.txtIof.ReadOnly = true;
-                Cad.simpleButton2.Enabled = false;
+                Cad.btnSelecionaCliente.Enabled = false;
                 Cad.txtValorTotal.ReadOnly = true;
                 Cad.txtTotalVenda.ReadOnly = true;
                 Cad.txtObservacao.ReadOnly = true;
