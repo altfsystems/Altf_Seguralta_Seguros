@@ -11,6 +11,7 @@ namespace AltfErp
         public relInfoCliente(string cod)
         {
             InitializeComponent();
+            sqlDataSource1.Connection.ConnectionString = MetodosSql.GetConnectionString();
             sqlDataSource1.Queries[0].Parameters[0].Value = cod;
         }
 
