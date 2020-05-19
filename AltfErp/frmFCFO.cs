@@ -422,8 +422,24 @@ namespace AltfErp
         }
         private void btnSalvar_Click_1(object sender, EventArgs e)
         {
-            Cadastro();
+            if (!val.ValidaEmail(txtEmail.Text) || !val.ValidaEmail(txtEmail2.Text))
+            {
+                MessageBox.Show("Insira um EMAIL válido", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (!val.ValidaCNPJ(txtCNPJ.Text))
+            {
+                MessageBox.Show("Insira um CNPJ válido", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (!val.ValidaCPF(txtCpf.Text))
+            {
+                MessageBox.Show("Insira um CPF válido", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                Cadastro();
+            }
         }
+            
         private void txtApolice_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
