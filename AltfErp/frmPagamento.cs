@@ -189,7 +189,7 @@ namespace AltfErp
                 frm.btnOk.Enabled = false;
                 frm.btnSalvar.Enabled = false;
                 frm.btnSelecionaProduto.Enabled = false;
-                frm.simpleButton2.Enabled = false;
+                frm.btnSelecionaCliente.Enabled = false;
                 frm.btnTipoPagamento.Enabled = false;
                 frm.txtObservacao.Enabled = false;
                 frm.txtValorTotal.Enabled = false;
