@@ -400,15 +400,19 @@ namespace AltfErp
         {
             if(!val.ValidaEmail(txtEmail.Text) || !val.ValidaEmail(txtEmail2.Text))
             {
-                MessageBox.Show("Insira um EMAIL válido", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Insira um EMAIL válido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (!val.ValidaCNPJ(txtCNPJ.Text))
             {
-                MessageBox.Show("Insira um CNPJ válido", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Insira um CNPJ válido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (!val.ValidaCPF(txtCpf.Text))
             {
-                MessageBox.Show("Insira um CPF válido", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Insira um CPF válido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if(txtCpf.Text == "___.___.___ - __")
+            {
+                MessageBox.Show("Por favor, informar o CPF", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {

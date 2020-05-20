@@ -210,7 +210,7 @@ namespace AltfErp
             }
             else
             {
-                MessageBox.Show("Apenas o usuário mestre tem permissão para acessar esta aba", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Seu usuário não possui acesso a teste menu", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
         }
