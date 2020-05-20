@@ -12,7 +12,7 @@ namespace AltfErp
     {
         public Boolean ValidaCPF(String cpf)
         {
-            if (cpf.Equals("___.___.___-__")) { return false; }
+            if (cpf.Equals("___.___.___-__")) { return true; }
             if (cpf.Equals("000.000.000-00")) { return true; }
             if (cpf.Equals("111.111.111-11")) { return true; }
             if (cpf.Equals("222.222.222-22")) { return true; }

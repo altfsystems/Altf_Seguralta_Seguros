@@ -111,7 +111,7 @@
             this.btnSalvar.Margin = new System.Windows.Forms.Padding(2);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(82, 30);
-            this.btnSalvar.TabIndex = 11;
+            this.btnSalvar.TabIndex = 15;
             this.btnSalvar.Text = "Salvar";
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
@@ -122,7 +122,7 @@
             this.simpleButton1.Margin = new System.Windows.Forms.Padding(2);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(76, 30);
-            this.simpleButton1.TabIndex = 12;
+            this.simpleButton1.TabIndex = 16;
             this.simpleButton1.Text = "Cancelar";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
@@ -133,7 +133,7 @@
             this.btnOk.Margin = new System.Windows.Forms.Padding(2);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(82, 30);
-            this.btnOk.TabIndex = 9;
+            this.btnOk.TabIndex = 14;
             this.btnOk.Text = "Ok";
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
@@ -207,9 +207,9 @@
             this.label17.Location = new System.Drawing.Point(192, 9);
             this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(89, 13);
+            this.label17.Size = new System.Drawing.Size(103, 13);
             this.label17.TabIndex = 1032;
-            this.label17.Text = "Data Vencimento";
+            this.label17.Text = "Término de validade";
             // 
             // txtDataVencimento
             // 
@@ -218,7 +218,7 @@
             this.txtDataVencimento.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtDataVencimento.Name = "txtDataVencimento";
             this.txtDataVencimento.Size = new System.Drawing.Size(96, 23);
-            this.txtDataVencimento.TabIndex = 1033;
+            this.txtDataVencimento.TabIndex = 13;
             this.txtDataVencimento.TabStop = false;
             this.txtDataVencimento.ValidatingType = typeof(System.DateTime);
             // 
@@ -255,7 +255,7 @@
             this.btnSelecionaVendedor.Margin = new System.Windows.Forms.Padding(2);
             this.btnSelecionaVendedor.Name = "btnSelecionaVendedor";
             this.btnSelecionaVendedor.Size = new System.Drawing.Size(19, 18);
-            this.btnSelecionaVendedor.TabIndex = 1087;
+            this.btnSelecionaVendedor.TabIndex = 0;
             this.btnSelecionaVendedor.Text = "...";
             this.btnSelecionaVendedor.Click += new System.EventHandler(this.btnSelecionaVendedor_Click_1);
             // 
@@ -363,7 +363,7 @@
             this.txtDesconto.Margin = new System.Windows.Forms.Padding(2);
             this.txtDesconto.Name = "txtDesconto";
             this.txtDesconto.Size = new System.Drawing.Size(140, 38);
-            this.txtDesconto.TabIndex = 1094;
+            this.txtDesconto.TabIndex = 12;
             this.txtDesconto.TextChanged += new System.EventHandler(this.txtDesconto_TextChanged);
             this.txtDesconto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDesconto_KeyPress);
             this.txtDesconto.Leave += new System.EventHandler(this.txtDesconto_Leave_1);
@@ -387,7 +387,7 @@
             this.txtObservacao.Multiline = true;
             this.txtObservacao.Name = "txtObservacao";
             this.txtObservacao.Size = new System.Drawing.Size(247, 66);
-            this.txtObservacao.TabIndex = 15;
+            this.txtObservacao.TabIndex = 11;
             // 
             // groupBox1
             // 
@@ -483,7 +483,7 @@
             this.txtComissao.Margin = new System.Windows.Forms.Padding(2);
             this.txtComissao.Name = "txtComissao";
             this.txtComissao.Size = new System.Drawing.Size(80, 26);
-            this.txtComissao.TabIndex = 1164;
+            this.txtComissao.TabIndex = 6;
             this.txtComissao.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtComissao_KeyPress);
             this.txtComissao.Leave += new System.EventHandler(this.txtComissao_Leave_1);
             // 
@@ -494,7 +494,7 @@
             this.txtValorLiquido.Margin = new System.Windows.Forms.Padding(2);
             this.txtValorLiquido.Name = "txtValorLiquido";
             this.txtValorLiquido.Size = new System.Drawing.Size(108, 26);
-            this.txtValorLiquido.TabIndex = 1162;
+            this.txtValorLiquido.TabIndex = 4;
             this.txtValorLiquido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValorLiquido_KeyPress_1);
             this.txtValorLiquido.Leave += new System.EventHandler(this.txtValorLiquido_Leave_1);
             // 
@@ -515,7 +515,7 @@
             this.txtIof.Margin = new System.Windows.Forms.Padding(2);
             this.txtIof.Name = "txtIof";
             this.txtIof.Size = new System.Drawing.Size(93, 26);
-            this.txtIof.TabIndex = 1163;
+            this.txtIof.TabIndex = 5;
             this.txtIof.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIof_KeyPress);
             this.txtIof.Leave += new System.EventHandler(this.txtIof_Leave);
             // 
@@ -709,7 +709,7 @@
             this.btnAdicionar.Margin = new System.Windows.Forms.Padding(2);
             this.btnAdicionar.Name = "btnAdicionar";
             this.btnAdicionar.Size = new System.Drawing.Size(67, 20);
-            this.btnAdicionar.TabIndex = 1153;
+            this.btnAdicionar.TabIndex = 3;
             this.btnAdicionar.Text = "Adicionar";
             this.btnAdicionar.Click += new System.EventHandler(this.btnAdicionar_Click_1);
             // 
@@ -719,7 +719,7 @@
             this.btnSelecionaProduto.Margin = new System.Windows.Forms.Padding(2);
             this.btnSelecionaProduto.Name = "btnSelecionaProduto";
             this.btnSelecionaProduto.Size = new System.Drawing.Size(19, 18);
-            this.btnSelecionaProduto.TabIndex = 1152;
+            this.btnSelecionaProduto.TabIndex = 2;
             this.btnSelecionaProduto.Text = "...";
             this.btnSelecionaProduto.Click += new System.EventHandler(this.btnSelecionaProduto_Click_2);
             // 
@@ -773,7 +773,7 @@
             this.txtAno.Location = new System.Drawing.Point(895, 285);
             this.txtAno.Name = "txtAno";
             this.txtAno.Size = new System.Drawing.Size(87, 28);
-            this.txtAno.TabIndex = 1149;
+            this.txtAno.TabIndex = 10;
             // 
             // labelControl2
             // 
@@ -791,9 +791,9 @@
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Location = new System.Drawing.Point(761, 264);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(221, 18);
+            this.label11.Size = new System.Drawing.Size(189, 18);
             this.label11.TabIndex = 1146;
-            this.label11.Text = "Selecione a data de vencimento ";
+            this.label11.Text = "Selecione a data da parcela\r\n";
             // 
             // txtDia
             // 
@@ -832,7 +832,7 @@
             this.txtDia.Location = new System.Drawing.Point(764, 285);
             this.txtDia.Name = "txtDia";
             this.txtDia.Size = new System.Drawing.Size(45, 28);
-            this.txtDia.TabIndex = 1147;
+            this.txtDia.TabIndex = 8;
             // 
             // txtMes
             // 
@@ -855,7 +855,7 @@
             this.txtMes.Location = new System.Drawing.Point(827, 285);
             this.txtMes.Name = "txtMes";
             this.txtMes.Size = new System.Drawing.Size(47, 28);
-            this.txtMes.TabIndex = 1148;
+            this.txtMes.TabIndex = 9;
             // 
             // labelControl1
             // 
@@ -881,11 +881,11 @@
             // btnTipoPagamento
             // 
             this.btnTipoPagamento.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnTipoPagamento.Location = new System.Drawing.Point(800, 222);
+            this.btnTipoPagamento.Location = new System.Drawing.Point(800, 221);
             this.btnTipoPagamento.Margin = new System.Windows.Forms.Padding(2);
             this.btnTipoPagamento.Name = "btnTipoPagamento";
             this.btnTipoPagamento.Size = new System.Drawing.Size(21, 21);
-            this.btnTipoPagamento.TabIndex = 1143;
+            this.btnTipoPagamento.TabIndex = 7;
             this.btnTipoPagamento.Text = "...";
             this.btnTipoPagamento.Click += new System.EventHandler(this.btnTipoPagamento_Click_1);
             // 
@@ -925,7 +925,7 @@
             this.btnSelecionaCliente.Margin = new System.Windows.Forms.Padding(2);
             this.btnSelecionaCliente.Name = "btnSelecionaCliente";
             this.btnSelecionaCliente.Size = new System.Drawing.Size(19, 18);
-            this.btnSelecionaCliente.TabIndex = 1178;
+            this.btnSelecionaCliente.TabIndex = 1;
             this.btnSelecionaCliente.Text = "...";
             this.btnSelecionaCliente.Click += new System.EventHandler(this.simpleButton2_Click_1);
             // 
