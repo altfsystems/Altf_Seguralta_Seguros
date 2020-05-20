@@ -2,7 +2,7 @@
 <Alias>
     <host>192.168.0.15</host>
     <port>1433</port>
-    <instance>BDTESTE</instance>
+    <instance>BD</instance>
     <user>sa</user>
     <password>M@$t3rk3yRM</password>
     <timeout>30</timeout>  
