@@ -251,13 +251,11 @@ namespace AltfErp
 
 
                         MetodosSql.ExecQuery(String.Format(@"DELETE FROM PARCELA WHERE IDVENDA = {0}", obj));
-                        MetodosSql.ExecQuery(String.Format(@"delete from VENDA where IDVENDA = {0}", obj.ToString()));
+                        MetodosSql.ExecQuery(String.Format(@"delete from VENDA where IDVENDA = {0}", obj));
+                        MetodosSql.ExecQuery(String.Format(@"DELETE FROM VENDACOMISSAO WHERE IDVENDA = {0}", obj));
                         AtualizaGrid();
                     }
-                    else
-                    {
-                        MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
+                    
 
                 }
                 else
