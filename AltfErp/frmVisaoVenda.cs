@@ -123,7 +123,7 @@ namespace AltfErp
             try
             {
                 string sql = String.Format(@"SELECT VD.IDVENDA, VD.IDFCFO AS IDCLIENTE, FC.NOME, FC.NOMEFANTASIA AS SOBRENOME, 
-                                            (SELECT CAST(SUM(VALOR) AS NUMERIC(20,2)) FROM PARCELA WHERE IDVENDA = VD.IDVENDA) AS TOTALVENDA,
+                                            (SELECT cast(SUM(VALOR ) AS numeric(20,2)) FROM PARCELA WHERE IDVENDA = VD.IDVENDA ) AS TOTALVENDA,
                                             VD.DESCONTO, (X.TOTAL_RECEBIMENTO) AS TOTAL_RECEBIMENTO ,
 		                                    (SELECT CAST(SUM(VALOR) AS NUMERIC(20,2)) FROM PARCELA WHERE IDVENDA = VD.IDVENDA) - (X.TOTAL_RECEBIMENTO) AS TOTAL_RESTANTE,
                                             VD.OBSERVACAO, CONVERT(VARCHAR , CONVERT(DATETIME , VD.DATAINCLUSAO , 121) , 103) AS DATAINCLUSAO , 
@@ -134,7 +134,7 @@ namespace AltfErp
 	                                        'A'
                                             END AS STATUS
                                             FROM VENDA VD
-                                            inner join FCFO FC
+											inner join FCFO FC
                                             on VD.IDFCFO = FC.IDFCFO
                                             INNER JOIN ITEMMOVIMENTO IT
                                             ON IT.IDVENDA = VD.IDVENDA

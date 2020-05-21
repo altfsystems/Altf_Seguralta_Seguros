@@ -17,7 +17,7 @@ namespace AltfErp
         List<Produto> produtos = new List<Produto>();
         string IDITEM = null;
         bool vendaClick;
-        string data1, idVendedor, status, SALVAR, Cod, sql, IDPRODUTO;
+        string data1, idVendedor, status, Cod, sql, IDPRODUTO;
         int ano, dia, mes;
         string diaVencimento, mesVencimento;
         public string VENCIMENTOANUAL { get; set; }
@@ -71,11 +71,8 @@ namespace AltfErp
             }
             
 
-            if (SALVAR == "0")
-            {
-                return false;
-            }
-            else if (String.IsNullOrWhiteSpace(txtIdVendedor.Text))
+            
+            if (String.IsNullOrWhiteSpace(txtIdVendedor.Text))
             {
                 MessageBox.Show("Selecione um vendedor", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -272,10 +269,8 @@ namespace AltfErp
             }
 
 
-            Editar = true;
 
             InsertParcela();
-
 
 
             if (vendaClick == false)
@@ -288,6 +283,8 @@ namespace AltfErp
                 frm.CODIGOCLIENTE = txtIdCliente.Text;
                 frm.ShowDialog();
             }
+
+            Editar = true;
         }
 
         private void UpdateVenda()
@@ -863,7 +860,7 @@ namespace AltfErp
         }
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            SALVAR = "0";
+            
             vendaClick = true;
             if(ValidaCadastro())
             {
