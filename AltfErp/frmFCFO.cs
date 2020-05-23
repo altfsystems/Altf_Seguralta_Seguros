@@ -295,11 +295,17 @@ namespace AltfErp
                 else
                 {
 
-                    string sql = String.Format(@"SELECT * FROM FCFO WHERE CPF = '{0}'", txtCpf.Text);
+                    string sql = String.Format(@"SELECT CPF FROM FCFO WHERE CPF = '{0}'", txtCpf.Text);
                     string valida = MetodosSql.GetField(sql, "CPF");
 
-                    if (valida == "")
+
+                    if (valida == "___.___.___-__")
                     {
+                        Insert();
+                    }
+                    else if (valida == "")
+                    {
+
                         Insert();
                     }
                     else
