@@ -40,11 +40,8 @@
             this.txtDataInclusao = new System.Windows.Forms.MaskedTextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.txtNumeroQuiver = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.txtCiaSeguradora = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.txtTipoSeguro = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.btnOk = new DevExpress.XtraEditors.SimpleButton();
@@ -54,7 +51,7 @@
             // btnSalvar
             // 
             this.btnSalvar.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnSalvar.Location = new System.Drawing.Point(478, 381);
+            this.btnSalvar.Location = new System.Drawing.Point(478, 328);
             this.btnSalvar.Margin = new System.Windows.Forms.Padding(2);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(77, 31);
@@ -76,7 +73,7 @@
             // btnCancelar
             // 
             this.btnCancelar.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnCancelar.Location = new System.Drawing.Point(561, 381);
+            this.btnCancelar.Location = new System.Drawing.Point(561, 328);
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(71, 32);
@@ -97,7 +94,7 @@
             // txtObservacao
             // 
             this.txtObservacao.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtObservacao.Location = new System.Drawing.Point(11, 275);
+            this.txtObservacao.Location = new System.Drawing.Point(11, 233);
             this.txtObservacao.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtObservacao.Name = "txtObservacao";
             this.txtObservacao.Size = new System.Drawing.Size(608, 23);
@@ -126,7 +123,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 259);
+            this.label1.Location = new System.Drawing.Point(11, 217);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 13);
@@ -160,11 +157,8 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.simpleButton1);
             this.groupBox1.Controls.Add(this.txtNumeroQuiver);
             this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Controls.Add(this.txtCiaSeguradora);
-            this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.txtTipoSeguro);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.txtDescricao);
@@ -175,23 +169,14 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(623, 316);
+            this.groupBox1.Size = new System.Drawing.Size(623, 266);
             this.groupBox1.TabIndex = 50;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Identificação";
             // 
-            // simpleButton1
-            // 
-            this.simpleButton1.Location = new System.Drawing.Point(10, 188);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(24, 20);
-            this.simpleButton1.TabIndex = 2;
-            this.simpleButton1.Text = "...";
-            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
-            // 
             // txtNumeroQuiver
             // 
-            this.txtNumeroQuiver.Location = new System.Drawing.Point(10, 231);
+            this.txtNumeroQuiver.Location = new System.Drawing.Point(10, 189);
             this.txtNumeroQuiver.Margin = new System.Windows.Forms.Padding(2);
             this.txtNumeroQuiver.Name = "txtNumeroQuiver";
             this.txtNumeroQuiver.Size = new System.Drawing.Size(138, 20);
@@ -200,31 +185,12 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(7, 216);
+            this.label14.Location = new System.Drawing.Point(7, 174);
             this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(78, 13);
             this.label14.TabIndex = 65;
             this.label14.Text = "Número Quiver";
-            // 
-            // txtCiaSeguradora
-            // 
-            this.txtCiaSeguradora.Location = new System.Drawing.Point(39, 188);
-            this.txtCiaSeguradora.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCiaSeguradora.Name = "txtCiaSeguradora";
-            this.txtCiaSeguradora.ReadOnly = true;
-            this.txtCiaSeguradora.Size = new System.Drawing.Size(583, 20);
-            this.txtCiaSeguradora.TabIndex = 62;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(36, 173);
-            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(80, 13);
-            this.label12.TabIndex = 63;
-            this.label12.Text = "Cia Seguradora";
             // 
             // txtTipoSeguro
             // 
@@ -247,7 +213,7 @@
             // btnOk
             // 
             this.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnOk.Location = new System.Drawing.Point(403, 380);
+            this.btnOk.Location = new System.Drawing.Point(403, 327);
             this.btnOk.Margin = new System.Windows.Forms.Padding(2);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(71, 32);
@@ -260,7 +226,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(643, 423);
+            this.ClientSize = new System.Drawing.Size(643, 371);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.txtDataInclusao);
             this.Controls.Add(this.btnOk);
@@ -295,12 +261,9 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.GroupBox groupBox1;
         private DevExpress.XtraEditors.SimpleButton btnOk;
-        private System.Windows.Forms.TextBox txtCiaSeguradora;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtTipoSeguro;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtNumeroQuiver;
         private System.Windows.Forms.Label label14;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
     }
 }

@@ -28,7 +28,7 @@ namespace AltfErp
             gridView1.OptionsBehavior.Editable = false;
             gridControl1.EmbeddedNavigator.Buttons.Append.Visible = false;
             gridControl1.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            gridControl1.DataSource = MetodosSql.GetDT(@"SELECT PRODUTO.IDPRODUTO , PRODUTO.DESCRICAO, PRODUTO.TIPOSEGURO, PRODUTO.CIASEGURADORA,
+            gridControl1.DataSource = MetodosSql.GetDT(@"SELECT PRODUTO.IDPRODUTO , PRODUTO.DESCRICAO, PRODUTO.TIPOSEGURO,
                                                         PRODUTO.OBSERVACAO
                                                         FROM PRODUTO
                                                         ORDER by PRODUTO.IDPRODUTO");
@@ -47,9 +47,6 @@ namespace AltfErp
                 CODIGO = obj.ToString();
                 obj = gridView1.GetRowCellValue(rowHandle, "DESCRICAO");
                 DESCRICAO = obj.ToString();
-
-                obj = gridView1.GetRowCellValue(rowHandle, "CIASEGURADORA");
-                CIASEGURADORA = obj.ToString();
 
                 obj = gridView1.GetRowCellValue(rowHandle, "OBSERVACAO");
                 OBSERVACAO = obj.ToString();
@@ -79,10 +76,7 @@ namespace AltfErp
                     CODIGO = obj.ToString();
                     obj = gridView1.GetRowCellValue(rowHandle, "DESCRICAO");
                     DESCRICAO = obj.ToString();
-
-                    obj = gridView1.GetRowCellValue(rowHandle, "CIASEGURADORA");
-                    CIASEGURADORA = obj.ToString();
-
+                                        
                     obj = gridView1.GetRowCellValue(rowHandle, "OBSERVACAO");
                     OBSERVACAO = obj.ToString();
                     //obj = gridView1.GetRowCellValue(rowHandle, "PRECOUNVENDA");

@@ -82,6 +82,11 @@ namespace AltfErp
                 MessageBox.Show("Selecione um cliente", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
+            else if(String.IsNullOrWhiteSpace(txtCiaSeguradora.Text))
+            {
+                MessageBox.Show("Selecione uma cia seguradora", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
             else if(count == 0)
             {
                 MessageBox.Show(@"Por favor, selecione um seguro", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -567,8 +572,8 @@ namespace AltfErp
             frm.ShowDialog();
             txtCodigoProduto.Text = frm.CODIGO;
             txtDescricaoProduto.Text = frm.DESCRICAO;
-            txtCiaSeguradora.Text = frm.CIASEGURADORA;
             OBS = frm.OBSERVACAO;
+            
 
             //sql = String.Format(@"select * from PRODUTO where IDPRODUTO = '{0}'", frm.CODIGO);
             //txtValorUnitario.Text = MetodosSql.GetField(sql, "PRECOUNVENDA");
@@ -686,6 +691,17 @@ namespace AltfErp
                 double TotalDesconto = Convert.ToDouble(txtTotalVenda.Text) - Convert.ToDouble(txtDesconto.Text);
                 txtTotalDesconto.Text = String.Format("{0:N}", TotalDesconto);
             }
+        }
+
+        private void btnSelecioaCiaSeguradora_Click(object sender, EventArgs e)
+        {
+            frmVisaoSelecionaCiaSeuradora frm = new frmVisaoSelecionaCiaSeuradora();
+            frm.ShowDialog();
+            Cod = frm.Codigo;
+
+           string Desc = MetodosSql.GetField(String.Format("SELECT NOMEFANTASIA FROM FCFOSEGURADORA WHERE IDSEGURADORA = '{0}'", Cod), "NOMEFANTASIA");
+            txtCiaSeguradora.Text = Desc;
+
         }
 
         private void txtDesconto_Leave_1(object sender, EventArgs e)
@@ -867,9 +883,9 @@ namespace AltfErp
                 Cadastro();
             }
         }
-
     }
 }
+
 
 
                     

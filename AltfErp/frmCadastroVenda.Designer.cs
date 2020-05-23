@@ -99,6 +99,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnSelecionaCliente = new DevExpress.XtraEditors.SimpleButton();
+            this.btnSelecioaCiaSeguradora = new DevExpress.XtraEditors.SimpleButton();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -391,6 +392,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnSelecioaCiaSeguradora);
             this.groupBox1.Controls.Add(this.txtSobrenome);
             this.groupBox1.Controls.Add(this.txtNome);
             this.groupBox1.Controls.Add(this.txtIdCliente);
@@ -521,11 +523,11 @@
             // 
             // txtCiaSeguradora
             // 
-            this.txtCiaSeguradora.Location = new System.Drawing.Point(395, 84);
+            this.txtCiaSeguradora.Location = new System.Drawing.Point(418, 84);
             this.txtCiaSeguradora.Margin = new System.Windows.Forms.Padding(2);
             this.txtCiaSeguradora.Name = "txtCiaSeguradora";
             this.txtCiaSeguradora.ReadOnly = true;
-            this.txtCiaSeguradora.Size = new System.Drawing.Size(186, 20);
+            this.txtCiaSeguradora.Size = new System.Drawing.Size(163, 20);
             this.txtCiaSeguradora.TabIndex = 1160;
             // 
             // txtDescricaoProduto
@@ -665,7 +667,7 @@
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(392, 69);
+            this.label27.Location = new System.Drawing.Point(419, 69);
             this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(80, 13);
@@ -929,6 +931,16 @@
             this.btnSelecionaCliente.Text = "...";
             this.btnSelecionaCliente.Click += new System.EventHandler(this.simpleButton2_Click_1);
             // 
+            // btnSelecioaCiaSeguradora
+            // 
+            this.btnSelecioaCiaSeguradora.Location = new System.Drawing.Point(395, 85);
+            this.btnSelecioaCiaSeguradora.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSelecioaCiaSeguradora.Name = "btnSelecioaCiaSeguradora";
+            this.btnSelecioaCiaSeguradora.Size = new System.Drawing.Size(19, 18);
+            this.btnSelecioaCiaSeguradora.TabIndex = 1143;
+            this.btnSelecioaCiaSeguradora.Text = "...";
+            this.btnSelecioaCiaSeguradora.Click += new System.EventHandler(this.btnSelecioaCiaSeguradora_Click);
+            // 
             // frmCadastroVenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1050,5 +1062,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label1;
         public DevExpress.XtraEditors.SimpleButton btnSelecionaCliente;
+        public DevExpress.XtraEditors.SimpleButton btnSelecioaCiaSeguradora;
     }
 }

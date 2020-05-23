@@ -55,6 +55,7 @@
             this.grdVisaoSelecionaCia.TabIndex = 19;
             this.grdVisaoSelecionaCia.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
+            this.grdVisaoSelecionaCia.DoubleClick += new System.EventHandler(this.grdVisaoSelecionaCia_DoubleClick);
             // 
             // gridView1
             // 

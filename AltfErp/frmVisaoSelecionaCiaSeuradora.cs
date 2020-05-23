@@ -44,5 +44,20 @@ namespace AltfErp
                 MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private void grdVisaoSelecionaCia_DoubleClick(object sender, EventArgs e)
+        {
+            var rowHandle = gridView1.FocusedRowHandle;
+            var cod = gridView1.GetRowCellValue(rowHandle, "COD");
+            if (cod != null)
+            {
+                Codigo = cod.ToString();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
     }
 }

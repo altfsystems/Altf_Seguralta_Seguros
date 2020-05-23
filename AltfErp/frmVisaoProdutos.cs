@@ -39,7 +39,7 @@ namespace AltfErp
 
         public void AtualizaGrid()
         {
-            string sql = String.Format(@"select IDPRODUTO, DESCRICAO, TIPOSEGURO, CIASEGURADORA, NUMEROQUIVER,  
+            string sql = String.Format(@"select IDPRODUTO, DESCRICAO, TIPOSEGURO, NUMEROQUIVER,  
                                         OBSERVACAO, DATAINCLUSAO
                                         from PRODUTO 
 						                ORDER BY PRODUTO.IDPRODUTO");

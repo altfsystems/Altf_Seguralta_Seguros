@@ -16,7 +16,7 @@ namespace AltfErp
     public partial class frmCadastroProdutos : Form
     {
         Boolean Editar;
-        string Cod, codCliente;
+        string Cod;
        
 
         public frmCadastroProdutos(bool Editar_, string Cod_)
@@ -76,18 +76,16 @@ namespace AltfErp
                     string SQL = String.Format(@"update PRODUTO
 	                                             set DESCRICAO = ('{0}'),
                                                      TIPOSEGURO = '{1}',
-                                                     CIASEGURADORA = '{2}',
-                                                     NUMEROQUIVER = '{3}',
-                                                     OBSERVACAO = '{4}'
-                                                     where IDPRODUTO = '{5}'",
+                                                     NUMEROQUIVER = '{2}',
+                                                     OBSERVACAO = '{3}'
+                                                     where IDPRODUTO = '{4}'",
 
 
                    /*{0}*/  txtDescricao.Text,
                    /*{1}*/ txtTipoSeguro.Text,
-                   /*{2}*/ txtCiaSeguradora.Text,
-                   /*{3}*/ txtNumeroQuiver.Text,
-                   /*{4}*/ txtObservacao.Text,
-                   /*{5}*/ Cod);
+                   /*{2}*/ txtNumeroQuiver.Text,
+                   /*{3}*/ txtObservacao.Text,
+                   /*{4}*/ Cod);
                     MetodosSql.ExecQuery(SQL);
 
 
@@ -110,14 +108,13 @@ namespace AltfErp
 
                     ValidarReplace();
 
-                    string SQL = String.Format(@"insert into PRODUTO (DESCRICAO , TIPOSEGURO, CIASEGURADORA, NUMEROQUIVER , OBSERVACAO , UNIDADECONTROLE , DATAINCLUSAO) 
-                                                    values('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', getdate()) select SCOPE_IDENTITY()",
+                    string SQL = String.Format(@"insert into PRODUTO (DESCRICAO , TIPOSEGURO, NUMEROQUIVER , OBSERVACAO , UNIDADECONTROLE , DATAINCLUSAO) 
+                                                    values('{0}', '{1}', '{2}', '{3}', '{4}', getdate()) select SCOPE_IDENTITY()",
                    /*{0}*/  txtDescricao.Text,
                    /*{1}*/ txtTipoSeguro.Text,
-                   /*{2}*/ txtCiaSeguradora.Text,
-                   /*{3}*/ txtNumeroQuiver.Text,
-                   /*{4}*/ txtObservacao.Text,
-                   /*{5}*/ null);
+                   /*{2}*/ txtNumeroQuiver.Text,
+                   /*{3}*/ txtObservacao.Text,
+                   /*{4}*/ null);
 
 
                     object IDPRODUTO = MetodosSql.ExecScalar(SQL);
@@ -184,7 +181,6 @@ namespace AltfErp
                         //txtPrecoVenda.Text = MetodosSql.GetField(sql, "PRECOUNVENDA");
                         //txtPrecoVenda.Text = MetodosSql.GetField(String.Format(@"select CAST(PRECOUNVENDA as numeric(20,2))as 'PV' from PRODUTO where IDPRODUTO = {0}", Cod), "PV");
                         txtTipoSeguro.Text = MetodosSql.GetField(sql, "TIPOSEGURO");
-                        txtCiaSeguradora.Text = MetodosSql.GetField(sql, "CIASEGURADORA");
                         txtNumeroQuiver.Text = MetodosSql.GetField(sql, "NUMEROQUIVER");
                         
                        
@@ -315,17 +311,7 @@ namespace AltfErp
         //    }
         //}
 
-        private void simpleButton1_Click(object sender, EventArgs e)
-        {
-            frmVisaoSelecionaCiaSeuradora frm = new frmVisaoSelecionaCiaSeuradora();
-            frm.ShowDialog();
-            if(!String.IsNullOrWhiteSpace(frm.Codigo))
-            {
-                codCliente = frm.Codigo;
-                txtCiaSeguradora.Text = MetodosSql.GetField(String.Format("SELECT NOMEFANTASIA FROM FCFOSEGURADORA WHERE IDSEGURADORA = {0}", codCliente), "NOMEFANTASIA");
-            }
-            
-        }
+       
     }
 
 }

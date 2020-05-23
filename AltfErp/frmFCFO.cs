@@ -406,7 +406,7 @@ namespace AltfErp
             {
                 MessageBox.Show("Insira um CNPJ válido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (!val.ValidaCPF(txtCpf.Text))
+            else if (!val.ValidaCPF(txtCpf.Text) && txtTipoPessoa.Text != "Pessoa Jurídica")
             {
                 MessageBox.Show("Insira um CPF válido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
