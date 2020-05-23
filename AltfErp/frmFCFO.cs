@@ -129,7 +129,7 @@ namespace AltfErp
                 throw new Exception("Por favor, selecione o tipo de pessoa");
             }
 
-            if (txtCpf.Text == "___.___.___-__")
+            if (txtCpf.Text == "___.___.___-__" && txtTipoPessoa.Text == "Pessoa Física")
             {
                 throw new Exception("Por favor, digite o cpf");
             }
@@ -406,11 +406,11 @@ namespace AltfErp
             {
                 MessageBox.Show("Insira um CNPJ válido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (!val.ValidaCPF(txtCpf.Text) && txtTipoPessoa.Text != "Pessoa Jurídica")
+            else if (!val.ValidaCPF(txtCpf.Text))
             {
                 MessageBox.Show("Insira um CPF válido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if(txtCpf.Text == "___.___.___ - __")
+            else if(txtCpf.Text == "___.___.___ - __" && txtTipoPessoa.Text == "Pessoa Física")
             {
                 MessageBox.Show("Por favor, informar o CPF", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
