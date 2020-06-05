@@ -54,7 +54,7 @@ namespace AltfErp
 											ON PARCELA.IDVENDA = VENDA.IDVENDA
                                             left JOIN(SELECT IDPARCELA, cast((SUM(isnull((RECEBIMENTO.VALORDINHEIRO),0.00))+ (SUM(isnull((RECEBIMENTO.VALORCHEQUE),0.00)))+ 
 							                (SUM(isnull((RECEBIMENTO.VALORCARTAOCREDITO),0.00)) + (SUM(isnull((RECEBIMENTO.VALORCARTAODEBITO),0.00)))))as numeric(20,2))
-                                            AS 'VALORPAGO' FROM RECEBIMENTO WHERE EXTORNO != 1
+                                            AS 'VALORPAGO' FROM RECEBIMENTO WHERE ESTORNO != 1
                                             GROUP BY IDPARCELA)X
                                             ON X.IDPARCELA = PARCELA.IDPARCELA
 											where PARCELA.IDFCFO = {0} {1}
@@ -247,7 +247,7 @@ namespace AltfErp
 
             if (DialogResult.Yes == MessageBox.Show("Deseja estornar este pagamento?", "Pergunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
-                string sql = String.Format(@"UPDATE RECEBIMENTO SET EXTORNO = 1 WHERE IDPARCELA = '{0}'", codParcela);
+                string sql = String.Format(@"UPDATE RECEBIMENTO SET ESTORNO = 1 WHERE IDPARCELA = '{0}'", codParcela);
                 MetodosSql.ExecQuery(sql);
                 sql = String.Format(@"UPDATE PARCELA SET STATUS  = 'A', DATAPAGAMENTO = NULL WHERE IDPARCELA = '{0}'", codParcela);
                 MetodosSql.ExecQuery(sql);

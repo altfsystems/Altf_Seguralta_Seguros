@@ -42,7 +42,7 @@ namespace AltfErp
             Boolean Validar;
             double Valor;
             string sql = String.Format(@"SELECT SUM(ISNULL(VALORDINHEIRO, 0) + ISNULL(VALORCHEQUE, 0) + ISNULL(VALORCARTAOCREDITO, 0) + ISNULL(VALORCARTAODEBITO, 0)) AS VALOR
-                                        FROM RECEBIMENTO WHERE IDVENDA = '{0}' AND EXTORNO = 0", IDVENDA);
+                                        FROM RECEBIMENTO WHERE IDVENDA = '{0}' AND ESTORNO = 0", IDVENDA);
             if(MetodosSql.GetField(sql, "VALOR") == "")
             {
                 Valor = 0;
@@ -140,7 +140,7 @@ namespace AltfErp
                                             ON IT.IDVENDA = VD.IDVENDA
                                             Left JOIN (SELECT IDVENDA, 
                                             CAST(SUM(VALORCARTAOCREDITO+VALORCARTAODEBITO+VALORCHEQUE+VALORDINHEIRO)AS numeric(20,2)) AS TOTAL_RECEBIMENTO
-                                            FROM RECEBIMENTO WHERE EXTORNO != 1
+                                            FROM RECEBIMENTO WHERE ESTORNO != 1
                                             GROUP BY IDVENDA)X ON X.IDVENDA = VD.IDVENDA
                                             WHERE VD.IDVENDA IS NOT NULL AND {0} AND CONVERT(VARCHAR, CONVERT(DATETIME, VD.DATAINCLUSAO , 121) , 103) = {2}'{1}'
                                             GROUP BY VD.IDVENDA, VD.IDFCFO, X.TOTAL_RECEBIMENTO, FC.NOME, FC.NOMEFANTASIA, VD.OBSERVACAO, VD.DATAINCLUSAO, VD.DATAPAGAMENTO, VD.DESCONTO
@@ -218,45 +218,51 @@ namespace AltfErp
             {
                 var rowHandle = gridView1.FocusedRowHandle;
                 var obj = gridView1.GetRowCellValue(rowHandle, "IDVENDA");
+                IDVENDA = int.Parse(obj.ToString());
                 int LINHA, IDITEM, IDPRODUTO;
                 double QUANTIDADE;
-
+                
                 if (obj != null)
                 {
-                    if (DialogResult.Yes == MessageBox.Show("Deseja mesmo exluir?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                    if(TestaUpdate())
                     {
-
-                        string sql = String.Format(@"select count(IDITEM) as LINHA FROM ITEMMOVIMENTO WHERE IDVENDA = {0}", obj);
-                        LINHA = int.Parse(MetodosSql.GetField(sql, "LINHA"));
-
-                        sql = String.Format(@"SELECT MIN(IDITEM) AS MINIDITEM FROM ITEMMOVIMENTO WHERE IDVENDA = {0}", obj);
-                        IDITEM = int.Parse(MetodosSql.GetField(sql, "MINIDITEM"));
-
-                        for (int i = 1; i <= LINHA; i++)
+                        if (DialogResult.Yes == MessageBox.Show("Deseja mesmo exluir?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                         {
 
-                            sql = String.Format(@"SELECT IDPRODUTO, QUANTIDADE FROM ITEMMOVIMENTO WHERE IDITEM = {0}", IDITEM);
+                            string sql = String.Format(@"select count(IDITEM) as LINHA FROM ITEMMOVIMENTO WHERE IDVENDA = {0}", obj);
+                            LINHA = int.Parse(MetodosSql.GetField(sql, "LINHA"));
 
-                            IDPRODUTO = int.Parse(MetodosSql.GetField(sql, "IDPRODUTO"));
-                            QUANTIDADE = double.Parse(MetodosSql.GetField(sql, "QUANTIDADE"));
+                            sql = String.Format(@"SELECT MIN(IDITEM) AS MINIDITEM FROM ITEMMOVIMENTO WHERE IDVENDA = {0}", obj);
+                            IDITEM = int.Parse(MetodosSql.GetField(sql, "MINIDITEM"));
 
-                            string estoque = String.Format(@"UPDATE ESTOQUE SET QUANTIDADE = QUANTIDADE + {0} WHERE IDPRODUTO = {1} ", QUANTIDADE, IDPRODUTO);
-                            IDITEM++;
+                            for (int i = 1; i <= LINHA; i++)
+                            {
 
-                            MetodosSql.ExecQuery(sql);
-                            MetodosSql.ExecQuery(estoque);
+                                sql = String.Format(@"SELECT IDPRODUTO, QUANTIDADE FROM ITEMMOVIMENTO WHERE IDITEM = {0}", IDITEM);
+
+                                IDPRODUTO = int.Parse(MetodosSql.GetField(sql, "IDPRODUTO"));
+                                QUANTIDADE = double.Parse(MetodosSql.GetField(sql, "QUANTIDADE"));
+
+                                string estoque = String.Format(@"UPDATE ESTOQUE SET QUANTIDADE = QUANTIDADE + {0} WHERE IDPRODUTO = {1} ", QUANTIDADE, IDPRODUTO);
+                                IDITEM++;
+
+                                MetodosSql.ExecQuery(sql);
+                                MetodosSql.ExecQuery(estoque);
+                            }
+
+
+
+
+                            MetodosSql.ExecQuery(String.Format(@"DELETE FROM PARCELA WHERE IDVENDA = {0}", obj));
+                            MetodosSql.ExecQuery(String.Format(@"delete from VENDA where IDVENDA = {0}", obj));
+                            MetodosSql.ExecQuery(String.Format(@"DELETE FROM VENDACOMISSAO WHERE IDVENDA = {0}", obj));
+                            AtualizaGrid();
                         }
-
-
-
-
-                        MetodosSql.ExecQuery(String.Format(@"DELETE FROM PARCELA WHERE IDVENDA = {0}", obj));
-                        MetodosSql.ExecQuery(String.Format(@"delete from VENDA where IDVENDA = {0}", obj));
-                        MetodosSql.ExecQuery(String.Format(@"DELETE FROM VENDACOMISSAO WHERE IDVENDA = {0}", obj));
-                        AtualizaGrid();
                     }
-                    
-
+                    else
+                    {
+                        MessageBox.Show("Já existem pagamentos nesta venda. A exclusão está bloqueada!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {

@@ -40,7 +40,7 @@ namespace AltfErp
         {
             txtCodigo.Text = Cod;
 
-            string SQL = String.Format(@"insert into RECEBIMENTO(IDVENDA , IDFCFO , IDPARCELA , VALORDINHEIRO , VALORCHEQUE, VALORCARTAOCREDITO , VALORCARTAODEBITO , OBSERVACAO, EXTORNO )
+            string SQL = String.Format(@"insert into RECEBIMENTO(IDVENDA , IDFCFO , IDPARCELA , VALORDINHEIRO , VALORCHEQUE, VALORCARTAOCREDITO , VALORCARTAODEBITO , OBSERVACAO, ESTORNO )
                                                                        values ('{0}' , '{6}' , '{1}' , '{2}' , '{3}' , '{4}' , '{5}', NULL, 0 )select SCOPE_IDENTITY()", txtCodigoVenda.Text, txtCodigoParcela.Text, txtValorDinheiro.Text.Replace(".", "").Replace(",", "."), txtValorCheque.Text.Replace(".", "").Replace(",", "."),
                                                                txtValorCredito.Text.Replace(".", "").Replace(",", "."), txtValorDebito.Text.Replace(".", "").Replace(",", "."), CODIGOCLIENTE);
 
@@ -88,7 +88,7 @@ namespace AltfErp
                                     left join (select IDPARCELA, cast(sum(isnull(VALORDINHEIRO,0) + 
 		                                    isnull(VALORCHEQUE,0) + 
 		                                    isnull(VALORCARTAODEBITO,0) + 
-		                                    isnull(VALORCARTAOCREDITO,0))as numeric (20,2)) as 'PAGO' from RECEBIMENTO WHERE EXTORNO != 1
+		                                    isnull(VALORCARTAOCREDITO,0))as numeric (20,2)) as 'PAGO' from RECEBIMENTO WHERE ESTORNO != 1
 		                                    group by IDPARCELA) R
                                     on R.IDPARCELA = P.IDPARCELA
 
@@ -200,7 +200,7 @@ namespace AltfErp
 
                     txtCodigo.Text = Cod;
 
-                    SQL = String.Format(@"insert into RECEBIMENTO(IDVENDA , IDFCFO , IDPARCELA , VALORDINHEIRO , VALORCHEQUE, VALORCARTAOCREDITO , VALORCARTAODEBITO , OBSERVACAO, EXTORNO )
+                    SQL = String.Format(@"insert into RECEBIMENTO(IDVENDA , IDFCFO , IDPARCELA , VALORDINHEIRO , VALORCHEQUE, VALORCARTAOCREDITO , VALORCARTAODEBITO , OBSERVACAO, ESTORNO )
                                                                        values ('{0}' , '{6}' , '{1}' , '{2}' , '{3}' , '{4}' , '{5}', NULL, 0 )select SCOPE_IDENTITY()", txtCodigoVenda.Text, txtCodigoParcela.Text, txtValorDinheiro.Text, txtValorCheque.Text,
                                                                        txtValorCredito.Text, txtValorDebito.Text, CODIGOCLIENTE);
 

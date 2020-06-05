@@ -375,6 +375,13 @@ namespace AltfErp
                 MetodosSql.ExecQuery(String.Format(@"DELETE FROM PARCELA WHERE IDVENDA = '{0}'", txtCodigo.Text));
                 InsertParcela();
 
+                frmIdPagamento frm = new frmIdPagamento(false, null, true);
+                frm.txtValorRestante.Enabled = false;
+                frm.label7.Enabled = false;
+                frm.CODIGOVENDA = txtCodigo.Text;
+                frm.CODIGOPARCELA = Cod.ToString();
+                frm.CODIGOCLIENTE = txtIdCliente.Text;
+                frm.ShowDialog();
             }
             catch (Exception ex)
             {
