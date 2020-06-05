@@ -57,6 +57,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtObservacao = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSelecioaCiaSeguradora = new DevExpress.XtraEditors.SimpleButton();
             this.txtSobrenome = new System.Windows.Forms.TextBox();
             this.txtNome = new System.Windows.Forms.TextBox();
             this.txtIdCliente = new System.Windows.Forms.TextBox();
@@ -99,7 +100,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnSelecionaCliente = new DevExpress.XtraEditors.SimpleButton();
-            this.btnSelecioaCiaSeguradora = new DevExpress.XtraEditors.SimpleButton();
+            this.txtIdCia = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -392,6 +394,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtIdCia);
+            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.btnSelecioaCiaSeguradora);
             this.groupBox1.Controls.Add(this.txtSobrenome);
             this.groupBox1.Controls.Add(this.txtNome);
@@ -440,6 +444,16 @@
             this.groupBox1.TabIndex = 1142;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cadastro";
+            // 
+            // btnSelecioaCiaSeguradora
+            // 
+            this.btnSelecioaCiaSeguradora.Location = new System.Drawing.Point(395, 85);
+            this.btnSelecioaCiaSeguradora.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSelecioaCiaSeguradora.Name = "btnSelecioaCiaSeguradora";
+            this.btnSelecioaCiaSeguradora.Size = new System.Drawing.Size(19, 18);
+            this.btnSelecioaCiaSeguradora.TabIndex = 1143;
+            this.btnSelecioaCiaSeguradora.Text = "...";
+            this.btnSelecioaCiaSeguradora.Click += new System.EventHandler(this.btnSelecioaCiaSeguradora_Click);
             // 
             // txtSobrenome
             // 
@@ -536,7 +550,7 @@
             this.txtDescricaoProduto.Margin = new System.Windows.Forms.Padding(2);
             this.txtDescricaoProduto.Name = "txtDescricaoProduto";
             this.txtDescricaoProduto.ReadOnly = true;
-            this.txtDescricaoProduto.Size = new System.Drawing.Size(293, 20);
+            this.txtDescricaoProduto.Size = new System.Drawing.Size(252, 20);
             this.txtDescricaoProduto.TabIndex = 1156;
             // 
             // txtCodigoProduto
@@ -931,15 +945,24 @@
             this.btnSelecionaCliente.Text = "...";
             this.btnSelecionaCliente.Click += new System.EventHandler(this.simpleButton2_Click_1);
             // 
-            // btnSelecioaCiaSeguradora
+            // txtIdCia
             // 
-            this.btnSelecioaCiaSeguradora.Location = new System.Drawing.Point(395, 85);
-            this.btnSelecioaCiaSeguradora.Margin = new System.Windows.Forms.Padding(2);
-            this.btnSelecioaCiaSeguradora.Name = "btnSelecioaCiaSeguradora";
-            this.btnSelecioaCiaSeguradora.Size = new System.Drawing.Size(19, 18);
-            this.btnSelecioaCiaSeguradora.TabIndex = 1143;
-            this.btnSelecioaCiaSeguradora.Text = "...";
-            this.btnSelecioaCiaSeguradora.Click += new System.EventHandler(this.btnSelecioaCiaSeguradora_Click);
+            this.txtIdCia.Location = new System.Drawing.Point(354, 84);
+            this.txtIdCia.Margin = new System.Windows.Forms.Padding(2);
+            this.txtIdCia.Name = "txtIdCia";
+            this.txtIdCia.ReadOnly = true;
+            this.txtIdCia.Size = new System.Drawing.Size(37, 20);
+            this.txtIdCia.TabIndex = 1183;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(351, 69);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(36, 13);
+            this.label8.TabIndex = 1184;
+            this.label8.Text = "ID Cia";
             // 
             // frmCadastroVenda
             // 
@@ -1063,5 +1086,7 @@
         private System.Windows.Forms.Label label1;
         public DevExpress.XtraEditors.SimpleButton btnSelecionaCliente;
         public DevExpress.XtraEditors.SimpleButton btnSelecioaCiaSeguradora;
+        public System.Windows.Forms.TextBox txtIdCia;
+        private System.Windows.Forms.Label label8;
     }
 }

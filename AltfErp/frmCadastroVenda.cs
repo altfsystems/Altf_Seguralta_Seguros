@@ -16,10 +16,12 @@ namespace AltfErp
         Boolean Editar;
         List<Produto> produtos = new List<Produto>();
         string IDITEM = null;
+        string IDCIA = null;
+        string DESCIA = null;
         bool vendaClick;
         string data1, idVendedor, status, Cod, sql, IDPRODUTO;
         int ano, dia, mes;
-        string diaVencimento, mesVencimento;
+        string diaVencimento, mesVencimento, idCia;
         public string VENCIMENTOANUAL { get; set; }
         public string OBS { get; set; }
 
@@ -80,11 +82,6 @@ namespace AltfErp
             else if(String.IsNullOrWhiteSpace(txtIdCliente.Text))
             {
                 MessageBox.Show("Selecione um cliente", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            else if(String.IsNullOrWhiteSpace(txtCiaSeguradora.Text))
-            {
-                MessageBox.Show("Selecione uma cia seguradora", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             else if(count == 0)
@@ -199,10 +196,10 @@ namespace AltfErp
 
 
 
-            sql = String.Format(@"insert into VENDA (IDFCFO, IDVENDEDOR, IDORDEM, TIPOPAGAMENTO, DESCONTO, OBSERVACAO, STATUS, DATAINCLUSAO, DATAPAGAMENTO, DATAVENCIMENTO) values(
-                                    '{0}' ,{4}, null, '{1}' ,{2}, '{3}' , 'A' , getdate() , null, CONVERT(DATETIME, CONVERT(VARCHAR,'{5}', 121),103)) select SCOPE_IDENTITY()",
+            sql = String.Format(@"insert into VENDA (IDFCFO, IDVENDEDOR, IDORDEM, TIPOPAGAMENTO, DESCONTO, OBSERVACAO, STATUS, DATAINCLUSAO, DATAPAGAMENTO, DATAVENCIMENTO, IDCIASEGURADORA) values(
+                                    '{0}' ,{4}, null, '{1}' ,{2}, '{3}' , 'A' , getdate() , null, CONVERT(DATETIME, CONVERT(VARCHAR,'{5}', 121),103), '{6}') select SCOPE_IDENTITY()",
                                 txtIdCliente.Text, txtTipoPagamento.Text, txtDesconto.Text.Replace(".", "").Replace(",", "."), txtObservacao.Text, txtIdVendedor.Text,
-                                txtDataVencimento.Text);
+                                txtDataVencimento.Text, idCia);
             object IDVENDA = MetodosSql.ExecScalar(sql);
             txtCodigo.Text = IDVENDA.ToString();
 
@@ -303,14 +300,15 @@ namespace AltfErp
                 data1 = txtDia.Text + "/" + txtMes.Text + "/" + txtAno.Text;
 
                 string sql = String.Format(@"UPDATE VENDA SET IDFCFO = '{0}', IDVENDEDOR = '{1}', TIPOPAGAMENTO = '{2}', DESCONTO = '{3}', OBSERVACAO = '{4}', STATUS = 'A',
-                                             DATAINCLUSAO = GETDATE(), DATAVENCIMENTO = CONVERT(DATETIME, CONVERT(VARCHAR,'{5}', 121),103) WHERE IDVENDA = '{6}' ",
+                                             DATAINCLUSAO = GETDATE(), DATAVENCIMENTO = CONVERT(DATETIME, CONVERT(VARCHAR,'{5}', 121),103), IDCIASEGURADORA = '{6}'  WHERE IDVENDA = '{7}' ",
                                            /*{0}*/  txtIdCliente.Text,
                                            /*{1}*/  txtIdVendedor.Text,
                                            /*{2}*/  txtTipoPagamento.Text,
                                            /*{3}*/  txtDesconto.Text.Replace(".", "").Replace(",", "."),
                                            /*{4}*/  txtObservacao.Text,
                                            /*{5}*/  txtDataVencimento.Text,
-                                           /*{6}*/  txtCodigo.Text);
+                                           /*{6}*/  idCia,
+                                           /*{7}*/  txtCodigo.Text);
                 MetodosSql.ExecQuery(sql);
 
 
@@ -410,18 +408,23 @@ namespace AltfErp
             {
                 if (Editar)
                 {
+                    string IDCIASEG = MetodosSql.GetField(String.Format("SELECT IDCIASEGURADORA FROM VENDA WHERE IDVENDA = '{0}'", txtCodigo.Text), "IDCIASEGURADORA");
+                    string DESCIASEG = MetodosSql.GetField(String.Format("SELECT NOMEFANTASIA FROM FCFOSEGURADORA WHERE IDSEGURADORA = '{0}'", IDCIASEG), "NOMEFANTASIA");
+                    IDCIA = IDCIASEG;
+                    DESCIA = DESCIASEG;
                     gridView1.Columns.Clear();
                     gridControl1.DataSource = MetodosSql.GetDT(String.Format(@"select IM.IDITEM, 
                     IM.IDPRODUTO, 
 	                P.DESCRICAO ,
-                    P.CIASEGURADORA AS CIASEGURADORA,
+                    '{1}' AS CIASEGURADORA,
                     P.OBSERVACAO
                     from ITEMMOVIMENTO IM
                     inner join PRODUTO P
                     on P.IDPRODUTO = IM.IDPRODUTO 
                     where IDVENDA = '{0}'
-                    ORDER BY IDITEM DESC", txtCodigo.Text));
+                    ORDER BY IDITEM DESC", txtCodigo.Text, DESCIASEG));
                     gridView1.BestFitColumns();
+                    
 
 
 
@@ -450,17 +453,17 @@ namespace AltfErp
         }
         private void AlteraEstoque()
         {
-            string SQL = String.Format(@"select IDPRODUTO, QUANTIDADE from ITEMMOVIMENTO where IDVENDA = '{0}'", txtCodigo.Text);
-            DataTable Produtos = MetodosSql.GetDT(sql);
+            //string SQL = String.Format(@"select IDPRODUTO, QUANTIDADE from ITEMMOVIMENTO where IDVENDA = '{0}'", txtCodigo.Text);
+            //DataTable Produtos = MetodosSql.GetDT(sql);
 
 
-            foreach (DataRow Produto in Produtos.Rows)
-            {
-                SQL = String.Format(@"update ESTOQUE
-                                    set QUANTIDADE = QUANTIDADE + {0}
-                                    where IDPRODUTO = '{1}'", Produto["QUANTIDADE"].ToString().Replace(",", "."), Produto["IDPRODUTO"].ToString());
-                MetodosSql.ExecQuery(sql);
-            }
+            //foreach (DataRow Produto in Produtos.Rows)
+            //{
+            //    SQL = String.Format(@"update ESTOQUE
+            //                        set QUANTIDADE = QUANTIDADE + {0}
+            //                        where IDPRODUTO = '{1}'", Produto["QUANTIDADE"].ToString().Replace(",", "."), Produto["IDPRODUTO"].ToString());
+            //    MetodosSql.ExecQuery(sql);
+            //}
         }
 
         private void frmCadastroVenda_Load(object sender, EventArgs e)
@@ -518,6 +521,7 @@ namespace AltfErp
                     }
                     sql = String.Format(@"SELECT CAST(TOTALVENDADESCONTO AS NUMERIC(20,2)) AS TOTALVENDADESCONTO FROM VENDACOMISSAO WHERE IDVENDA = '{0}'", Cod);
                     txtTotalDesconto.Text = String.Format("{0:N}", MetodosSql.GetField(sql, "TOTALVENDADESCONTO")).Replace(".", "").Replace(".", ",");
+                    
 
 
                 }
@@ -563,7 +567,7 @@ namespace AltfErp
             txtCodigoProduto.Text = String.Empty;
             txtDescricaoProduto.Text = String.Empty;
             txtCiaSeguradora.Text = String.Empty;
-
+            txtIdCia.Text = String.Empty;
         }
 
         private void btnSelecionaProduto_Click_2(object sender, EventArgs e)
@@ -699,8 +703,9 @@ namespace AltfErp
             frm.ShowDialog();
             Cod = frm.Codigo;
 
-           string Desc = MetodosSql.GetField(String.Format("SELECT NOMEFANTASIA FROM FCFOSEGURADORA WHERE IDSEGURADORA = '{0}'", Cod), "NOMEFANTASIA");
-            txtCiaSeguradora.Text = Desc;
+           string sql = String.Format("SELECT IDSEGURADORA, NOMEFANTASIA FROM FCFOSEGURADORA WHERE IDSEGURADORA = '{0}'", Cod);
+            txtIdCia.Text = MetodosSql.GetField(sql, "IDSEGURADORA");
+            txtCiaSeguradora.Text = MetodosSql.GetField(sql, "NOMEFANTASIA");
 
         }
 
@@ -726,7 +731,8 @@ namespace AltfErp
                 if (Editar)
                 {
                     IDITEM = gridView1.GetRowCellValue(rowHandle, "IDITEM").ToString();
-
+                    txtIdCia.Text = IDCIA;
+                    txtCiaSeguradora.Text = DESCIA;
                     sql = String.Format(@"select * from ITEMMOVIMENTO where IDITEM = '{0}'", IDITEM);
                     txtCodigoProduto.Text = MetodosSql.GetField(sql, "IDPRODUTO");
 
@@ -787,7 +793,7 @@ namespace AltfErp
         {
             try
             {
-                if (!String.IsNullOrWhiteSpace(txtCodigoProduto.Text))
+                if (!String.IsNullOrWhiteSpace(txtCodigoProduto.Text) && !String.IsNullOrWhiteSpace(txtIdCia.Text))
                 {
                     if (Editar)
                     {
@@ -842,9 +848,19 @@ namespace AltfErp
                             //produtos[indice].VALORTOTAL = txtValorTotal.Text;
                         }
                     }
+                    idCia = txtIdCia.Text;
+                    AtualizaGrid();
+                    LimpaCampos();
                 }
-                AtualizaGrid();
-                LimpaCampos();
+                else if(String.IsNullOrWhiteSpace(txtIdCia.Text))
+                {
+                    MessageBox.Show("Por favor, selecione uma cia seguradora", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if(String.IsNullOrWhiteSpace(txtCodigoProduto.Text))
+                {
+                    MessageBox.Show("Por favor, selecione um seguro", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
             }
             catch (Exception ex)
             {

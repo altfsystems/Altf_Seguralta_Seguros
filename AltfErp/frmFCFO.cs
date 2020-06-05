@@ -221,6 +221,7 @@ namespace AltfErp
 
                 if (Editar)
                 {
+                    Cod = txtCodigo.Text;
                     string SQL = String.Format(@"update FCFO
 	                                             set NOME = '{0}',  NOMEFANTASIA =  '{1}',  CPF = '{2}', CNPJ = '{3}', RG = '{4}', DTANASCIMENTO = '{5}', SEXO = '{6}',
                                                      TELEFONE1 = '{7}', TELEFONE2 =  '{8}', CELULAR = '{9}', CELULAR2 =  '{10}', EMAIL = '{11}',  EMAIL2 = '{12}', 
