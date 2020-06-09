@@ -104,8 +104,9 @@ namespace AltfErp
                                         ON FCFO.IDFCFO = VENDA.IDFCFO
                                         INNER JOIN VENDEDORES
                                         ON VENDEDORES.IDVENDEDOR = VENDA.IDVENDEDOR
-                                        WHERE {0} {1} DATAVENCIMENTO >=CONVERT(varchar, CONVERT(DATETIME, '{2}', 103), 121) AND DATAVENCIMENTO <= CONVERT(varchar, CONVERT(datetime, '{3}', 103), 121)
+                                        WHERE {0} {1} CONVERT(VARCHAR, DATAVENCIMENTO, 103) >= '{2}' AND CONVERT(VARCHAR, DATAVENCIMENTO, 103) <= '{3}'
 										", Todos, Vencidos, Inicio, Fim);
+                                       
 
             grdVisaoDataVencimento.DataSource = MetodosSql.GetDT(sql);
 

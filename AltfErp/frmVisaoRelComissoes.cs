@@ -53,6 +53,7 @@ namespace AltfErp
             ON VC.IDVENDA = VD.IDVENDA
             WHERE CONVERT(VARCHAR,VD.DATAINCLUSAO, 103) >= '{0}'
             AND CONVERT(VARCHAR,VD.DATAINCLUSAO, 103) <= '{1}'
+            AND REC.ESTORNO = 0
             GROUP BY VC.IDVENDA , VC.TOTALVENDADESCONTO, VC.COCORRETAGEM, VC.VALORSEGURALTA, VD.DATAINCLUSAO", Inicio, Fim);
             grdVisaoRelComissoes.DataSource = MetodosSql.GetDT(sql);
             

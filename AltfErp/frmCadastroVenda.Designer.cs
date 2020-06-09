@@ -57,6 +57,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtObservacao = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtIdCia = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.btnSelecioaCiaSeguradora = new DevExpress.XtraEditors.SimpleButton();
             this.txtSobrenome = new System.Windows.Forms.TextBox();
             this.txtNome = new System.Windows.Forms.TextBox();
@@ -100,8 +102,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnSelecionaCliente = new DevExpress.XtraEditors.SimpleButton();
-            this.txtIdCia = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -210,9 +210,9 @@
             this.label17.Location = new System.Drawing.Point(192, 9);
             this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(103, 13);
+            this.label17.Size = new System.Drawing.Size(48, 13);
             this.label17.TabIndex = 1032;
-            this.label17.Text = "Término de validade";
+            this.label17.Text = "Vigência";
             // 
             // txtDataVencimento
             // 
@@ -305,7 +305,7 @@
             this.lblTotalDesconto.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblTotalDesconto.AutoSize = true;
             this.lblTotalDesconto.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalDesconto.Location = new System.Drawing.Point(616, 485);
+            this.lblTotalDesconto.Location = new System.Drawing.Point(616, 492);
             this.lblTotalDesconto.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTotalDesconto.Name = "lblTotalDesconto";
             this.lblTotalDesconto.Size = new System.Drawing.Size(101, 13);
@@ -444,6 +444,25 @@
             this.groupBox1.TabIndex = 1142;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cadastro";
+            // 
+            // txtIdCia
+            // 
+            this.txtIdCia.Location = new System.Drawing.Point(354, 84);
+            this.txtIdCia.Margin = new System.Windows.Forms.Padding(2);
+            this.txtIdCia.Name = "txtIdCia";
+            this.txtIdCia.ReadOnly = true;
+            this.txtIdCia.Size = new System.Drawing.Size(37, 20);
+            this.txtIdCia.TabIndex = 1183;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(351, 69);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(36, 13);
+            this.label8.TabIndex = 1184;
+            this.label8.Text = "ID Cia";
             // 
             // btnSelecioaCiaSeguradora
             // 
@@ -944,25 +963,6 @@
             this.btnSelecionaCliente.TabIndex = 1;
             this.btnSelecionaCliente.Text = "...";
             this.btnSelecionaCliente.Click += new System.EventHandler(this.simpleButton2_Click_1);
-            // 
-            // txtIdCia
-            // 
-            this.txtIdCia.Location = new System.Drawing.Point(354, 84);
-            this.txtIdCia.Margin = new System.Windows.Forms.Padding(2);
-            this.txtIdCia.Name = "txtIdCia";
-            this.txtIdCia.ReadOnly = true;
-            this.txtIdCia.Size = new System.Drawing.Size(37, 20);
-            this.txtIdCia.TabIndex = 1183;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(351, 69);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(36, 13);
-            this.label8.TabIndex = 1184;
-            this.label8.Text = "ID Cia";
             // 
             // frmCadastroVenda
             // 
