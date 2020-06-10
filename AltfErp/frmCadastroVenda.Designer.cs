@@ -187,9 +187,9 @@
             this.label6.Location = new System.Drawing.Point(92, 9);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(70, 13);
+            this.label6.Size = new System.Drawing.Size(88, 13);
             this.label6.TabIndex = 18;
-            this.label6.Text = "DataInclusão";
+            this.label6.Text = "Data de Inclusão";
             // 
             // txtDataInclusao
             // 
@@ -230,9 +230,9 @@
             this.label20.AutoSize = true;
             this.label20.Location = new System.Drawing.Point(781, 9);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(61, 13);
+            this.label20.Size = new System.Drawing.Size(110, 13);
             this.label20.TabIndex = 1093;
-            this.label20.Text = "Sobrenome";
+            this.label20.Text = "Sobrenome Vendedor";
             // 
             // txtSobrenomeVendedor
             // 
@@ -248,9 +248,9 @@
             this.label19.AutoSize = true;
             this.label19.Location = new System.Drawing.Point(483, 9);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(35, 13);
+            this.label19.Size = new System.Drawing.Size(84, 13);
             this.label19.TabIndex = 1091;
-            this.label19.Text = "Nome";
+            this.label19.Text = "Nome Vendedor";
             // 
             // btnSelecionaVendedor
             // 
@@ -308,9 +308,9 @@
             this.lblTotalDesconto.Location = new System.Drawing.Point(616, 492);
             this.lblTotalDesconto.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTotalDesconto.Name = "lblTotalDesconto";
-            this.lblTotalDesconto.Size = new System.Drawing.Size(101, 13);
+            this.lblTotalDesconto.Size = new System.Drawing.Size(80, 13);
             this.lblTotalDesconto.TabIndex = 1099;
-            this.lblTotalDesconto.Text = "Total com desconto";
+            this.lblTotalDesconto.Text = "Total da Venda";
             // 
             // txtTotalVenda
             // 
@@ -354,9 +354,9 @@
             this.label9.Location = new System.Drawing.Point(458, 500);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(31, 13);
+            this.label9.Size = new System.Drawing.Size(69, 13);
             this.label9.TabIndex = 1095;
-            this.label9.Text = "Total";
+            this.label9.Text = "Total Original";
             // 
             // txtDesconto
             // 
@@ -631,9 +631,9 @@
             this.label25.Location = new System.Drawing.Point(874, 141);
             this.label25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(86, 13);
+            this.label25.Size = new System.Drawing.Size(79, 13);
             this.label25.TabIndex = 1174;
-            this.label25.Text = "Comissão Venda";
+            this.label25.Text = "Valor Comissão";
             // 
             // label24
             // 
@@ -652,9 +652,9 @@
             this.label23.Location = new System.Drawing.Point(761, 141);
             this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(52, 13);
+            this.label23.Size = new System.Drawing.Size(63, 13);
             this.label23.TabIndex = 1171;
-            this.label23.Text = "Comissão";
+            this.label23.Text = "% Comissão";
             // 
             // label22
             // 
@@ -761,7 +761,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(81, 69);
+            this.label10.Location = new System.Drawing.Point(97, 69);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(110, 13);
@@ -930,9 +930,9 @@
             this.label13.Location = new System.Drawing.Point(419, 23);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(61, 13);
+            this.label13.Size = new System.Drawing.Size(96, 13);
             this.label13.TabIndex = 1181;
-            this.label13.Text = "Sobrenome";
+            this.label13.Text = "Sobrenome Cliente";
             // 
             // label7
             // 
@@ -940,9 +940,9 @@
             this.label7.Location = new System.Drawing.Point(98, 23);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 13);
+            this.label7.Size = new System.Drawing.Size(70, 13);
             this.label7.TabIndex = 1179;
-            this.label7.Text = "Nome";
+            this.label7.Text = "Nome Cliente";
             // 
             // label1
             // 
