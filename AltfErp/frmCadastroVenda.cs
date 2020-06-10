@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
+using DevExpress.ClipboardSource.SpreadsheetML;
 
 namespace AltfErp
 {
@@ -32,7 +33,7 @@ namespace AltfErp
             public String DESCRICAO { get; set; }
             public String CIASEGURADORA { get; set; }
             public String OBSERVACAO { get; set; }
-
+            
 
             //public String PRECOUNITARIO { get; set; }
             //public String QUANTIDADE { get; set; }
@@ -361,15 +362,20 @@ namespace AltfErp
                            /*{9}*/ txtCodigo.Text);
                 }
                 MetodosSql.ExecQuery(sql);
+                                    
 
-                sql = String.Format(@"SELECT * FROM ITEMMOVIMENTO WHERE IDVENDA = '{0}'", txtCodigo.Text);
-                IDPRODUTO = MetodosSql.GetField(sql, "IDPRODUTO");
+                foreach(Produto p in produtos)
+                {
+                    IDPRODUTO = p.IDPRODUTO;
+                    sql = String.Format("UPDATE ITEMMOVIMENTO SET IDPRODUTO = '{0}', VALOR = '{1}', QUANTIDADE = 1, DATAINCLUSAO = getdate() WHERE IDVENDA = '{2}' AND IDPRODUTO = '{3}'",
+                                             /*{0}*/ IDPRODUTO,
+                                             /*{1}*/ txtTotalDesconto.Text.Replace(".", "").Replace(",", "."),
+                                             /*{2}*/ txtCodigo.Text,
+                                             /*{3}*/ p.IDPRODUTO);
+                    MetodosSql.ExecQuery(sql);
+                }
 
-                sql = String.Format("UPDATE ITEMMOVIMENTO SET IDPRODUTO = '{0}', VALOR = '{1}', QUANTIDADE = 1, DATAINCLUSAO = getdate() WHERE IDVENDA = '{2}'",
-                                              /*{0}*/ IDPRODUTO,
-                                              /*{1}*/ txtTotalDesconto.Text.Replace(".", "").Replace(",", "."),
-                                              /*{2}*/ txtCodigo.Text);
-                MetodosSql.ExecQuery(sql);
+               
 
 
                 MetodosSql.ExecQuery(String.Format(@"DELETE FROM PARCELA WHERE IDVENDA = '{0}'", txtCodigo.Text));
