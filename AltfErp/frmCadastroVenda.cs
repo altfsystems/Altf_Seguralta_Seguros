@@ -41,6 +41,7 @@ namespace AltfErp
             //public String CODPARCELA { get; set; }
         }
 
+
         public frmCadastroVenda(bool Editar_, string Cod_, string status_)
         {
             InitializeComponent();
@@ -72,20 +73,20 @@ namespace AltfErp
             {
                 count = int.Parse(produtos.Count.ToString());
             }
-            
 
-            
+
+
             if (String.IsNullOrWhiteSpace(txtIdVendedor.Text))
             {
                 MessageBox.Show("Selecione um vendedor", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            else if(String.IsNullOrWhiteSpace(txtIdCliente.Text))
+            else if (String.IsNullOrWhiteSpace(txtIdCliente.Text))
             {
                 MessageBox.Show("Selecione um cliente", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            else if(count == 0)
+            else if (count == 0)
             {
                 MessageBox.Show(@"Por favor, selecione um seguro", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -105,11 +106,11 @@ namespace AltfErp
                 MessageBox.Show("Selecione um vencimento válido para as parcelas", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            else 
+            else
             {
                 return true;
             }
-           
+
         }
         private Boolean TestaData()
         {
@@ -194,9 +195,6 @@ namespace AltfErp
             }
             data1 = txtDia.Text + "/" + txtMes.Text + "/" + txtAno.Text;
 
-
-
-
             sql = String.Format(@"insert into VENDA (IDFCFO, IDVENDEDOR, IDORDEM, TIPOPAGAMENTO, DESCONTO, OBSERVACAO, STATUS, DATAINCLUSAO, DATAPAGAMENTO, DATAVENCIMENTO, IDCIASEGURADORA) values(
                                     '{0}' ,{4}, null, '{1}' ,{2}, '{3}' , 'A' , getdate() , null, CONVERT(DATETIME, CONVERT(VARCHAR,'{5}', 121),103), '{6}') select SCOPE_IDENTITY()",
                                 txtIdCliente.Text, txtTipoPagamento.Text, txtDesconto.Text.Replace(".", "").Replace(",", "."), txtObservacao.Text, txtIdVendedor.Text,
@@ -223,7 +221,7 @@ namespace AltfErp
                 coCorretagem = 'S';
                 valorSeguralta = (double.Parse(txtComissaoVenda.Text) * percCorretora);
                 valor = valorSeguralta.ToString("F2", CultureInfo.InvariantCulture);
-                
+
 
                 sql = String.Format(query,
                               /*{0}*/ IDVENDA,
@@ -375,7 +373,19 @@ namespace AltfErp
                     MetodosSql.ExecQuery(sql);
                 }
 
-               
+
+
+
+
+                sql = String.Format("UPDATE ITEMMOVIMENTO SET IDPRODUTO = '{0}', VALOR = '{1}', QUANTIDADE = 1, DATAINCLUSAO = getdate() WHERE IDVENDA = '{2}'",
+                                          /*{0}*/ IDPRODUTO,
+                                          /*{1}*/ txtTotalDesconto.Text.Replace(".", "").Replace(",", "."),
+                                          /*{2}*/ txtCodigo.Text);
+                MetodosSql.ExecQuery(sql);
+
+
+
+
 
 
                 MetodosSql.ExecQuery(String.Format(@"DELETE FROM PARCELA WHERE IDVENDA = '{0}'", txtCodigo.Text));
@@ -437,7 +447,7 @@ namespace AltfErp
                     where IDVENDA = '{0}'
                     ORDER BY IDITEM DESC", txtCodigo.Text, DESCIASEG));
                     gridView1.BestFitColumns();
-                    
+
 
 
 
@@ -483,7 +493,7 @@ namespace AltfErp
         {
             try
             {
-                
+
 
                 double valorLiquido, iof, valorTotal, comissaoVenda;
                 if (Editar)
@@ -534,7 +544,7 @@ namespace AltfErp
                     }
                     sql = String.Format(@"SELECT CAST(TOTALVENDADESCONTO AS NUMERIC(20,2)) AS TOTALVENDADESCONTO FROM VENDACOMISSAO WHERE IDVENDA = '{0}'", Cod);
                     txtTotalDesconto.Text = String.Format("{0:N}", MetodosSql.GetField(sql, "TOTALVENDADESCONTO")).Replace(".", "").Replace(".", ",");
-                    
+
 
 
                 }
@@ -545,8 +555,8 @@ namespace AltfErp
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-                    
-                    
+
+
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
@@ -590,7 +600,7 @@ namespace AltfErp
             txtCodigoProduto.Text = frm.CODIGO;
             txtDescricaoProduto.Text = frm.DESCRICAO;
             OBS = frm.OBSERVACAO;
-            
+
 
             //sql = String.Format(@"select * from PRODUTO where IDPRODUTO = '{0}'", frm.CODIGO);
             //txtValorUnitario.Text = MetodosSql.GetField(sql, "PRECOUNVENDA");
@@ -716,7 +726,7 @@ namespace AltfErp
             frm.ShowDialog();
             Cod = frm.Codigo;
 
-           string sql = String.Format("SELECT IDSEGURADORA, NOMEFANTASIA FROM FCFOSEGURADORA WHERE IDSEGURADORA = '{0}'", Cod);
+            string sql = String.Format("SELECT IDSEGURADORA, NOMEFANTASIA FROM FCFOSEGURADORA WHERE IDSEGURADORA = '{0}'", Cod);
             txtIdCia.Text = MetodosSql.GetField(sql, "IDSEGURADORA");
             txtCiaSeguradora.Text = MetodosSql.GetField(sql, "NOMEFANTASIA");
 
@@ -794,7 +804,7 @@ namespace AltfErp
                 AtualizaGrid();
                 LimpaCampos();
 
-                
+
             }
             catch (Exception ex)
             {
@@ -865,15 +875,15 @@ namespace AltfErp
                     AtualizaGrid();
                     LimpaCampos();
                 }
-                else if(String.IsNullOrWhiteSpace(txtIdCia.Text))
+                else if (String.IsNullOrWhiteSpace(txtIdCia.Text))
                 {
                     MessageBox.Show("Por favor, selecione uma cia seguradora", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                else if(String.IsNullOrWhiteSpace(txtCodigoProduto.Text))
+                else if (String.IsNullOrWhiteSpace(txtCodigoProduto.Text))
                 {
                     MessageBox.Show("Por favor, selecione um seguro", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -905,9 +915,9 @@ namespace AltfErp
         }
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            
+
             vendaClick = true;
-            if(ValidaCadastro())
+            if (ValidaCadastro())
             {
                 Cadastro();
             }
@@ -917,9 +927,9 @@ namespace AltfErp
 
 
 
-                    
-                
-            
+
+
+
 
 
 
