@@ -73,9 +73,12 @@ namespace AltfErp
             {
                 count = int.Parse(produtos.Count.ToString());
             }
+            if(txtComissao.Text == "0,00")
+            {
+                txtComissaoVenda.Text = "0,00";
+            }
 
-
-
+            
             if (String.IsNullOrWhiteSpace(txtIdVendedor.Text))
             {
                 MessageBox.Show("Selecione um vendedor", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -262,10 +265,10 @@ namespace AltfErp
 
             foreach (Produto p in produtos)
             {
-                sql = String.Format("insert into ITEMMOVIMENTO (IDVENDA, IDPRODUTO, VALOR, QUANTIDADE, DATAINCLUSAO) values ('{0}','{1}','{2}','1', GETDATE())",
+                sql = String.Format("insert into ITEMMOVIMENTO (IDVENDA, IDPRODUTO, QUANTIDADE, DATAINCLUSAO) values ('{0}','{1}','1', GETDATE())",
                                               /*{0}*/ IDVENDA.ToString(),
-                                              /*{1}*/ p.IDPRODUTO,
-                                              /*{2}*/ txtTotalDesconto.Text.Replace(".", "").Replace(",", "."));
+                                              /*{1}*/ p.IDPRODUTO);
+
                 MetodosSql.ExecQuery(sql);
             }
 
@@ -274,7 +277,7 @@ namespace AltfErp
             InsertParcela();
 
 
-            if (vendaClick == false)
+            if (!vendaClick)
             {
                 frmIdPagamento frm = new frmIdPagamento(false, null, true);
                 frm.txtValorRestante.Enabled = false;
@@ -362,42 +365,34 @@ namespace AltfErp
                 MetodosSql.ExecQuery(sql);
                                     
 
+
+                // MEU
                 foreach(Produto p in produtos)
                 {
                     IDPRODUTO = p.IDPRODUTO;
-                    sql = String.Format("UPDATE ITEMMOVIMENTO SET IDPRODUTO = '{0}', VALOR = '{1}', QUANTIDADE = 1, DATAINCLUSAO = getdate() WHERE IDVENDA = '{2}' AND IDPRODUTO = '{3}'",
+                    sql = String.Format("UPDATE ITEMMOVIMENTO SET IDPRODUTO = '{0}', QUANTIDADE = 1, DATAINCLUSAO = getdate() WHERE IDVENDA = '{1}' AND IDPRODUTO = '{2}'",
                                              /*{0}*/ IDPRODUTO,
-                                             /*{1}*/ txtTotalDesconto.Text.Replace(".", "").Replace(",", "."),
-                                             /*{2}*/ txtCodigo.Text,
-                                             /*{3}*/ p.IDPRODUTO);
+                                             /*{1}*/ txtCodigo.Text,
+                                             /*{2}*/ p.IDPRODUTO);
+                                             
                     MetodosSql.ExecQuery(sql);
                 }
 
 
-
-
-
-                sql = String.Format("UPDATE ITEMMOVIMENTO SET IDPRODUTO = '{0}', VALOR = '{1}', QUANTIDADE = 1, DATAINCLUSAO = getdate() WHERE IDVENDA = '{2}'",
-                                          /*{0}*/ IDPRODUTO,
-                                          /*{1}*/ txtTotalDesconto.Text.Replace(".", "").Replace(",", "."),
-                                          /*{2}*/ txtCodigo.Text);
-                MetodosSql.ExecQuery(sql);
-
-
-
-
-
-
-                MetodosSql.ExecQuery(String.Format(@"DELETE FROM PARCELA WHERE IDVENDA = '{0}'", txtCodigo.Text));
+               MetodosSql.ExecQuery(String.Format(@"DELETE FROM PARCELA WHERE IDVENDA = '{0}'", txtCodigo.Text));
                 InsertParcela();
 
-                frmIdPagamento frm = new frmIdPagamento(false, null, true);
-                frm.txtValorRestante.Enabled = false;
-                frm.label7.Enabled = false;
-                frm.CODIGOVENDA = txtCodigo.Text;
-                frm.CODIGOPARCELA = Cod.ToString();
-                frm.CODIGOCLIENTE = txtIdCliente.Text;
-                frm.ShowDialog();
+                if(!vendaClick)
+                {
+                    frmIdPagamento frm = new frmIdPagamento(false, null, true);
+                    frm.txtValorRestante.Enabled = false;
+                    frm.label7.Enabled = false;
+                    frm.CODIGOVENDA = txtCodigo.Text;
+                    frm.CODIGOPARCELA = Cod.ToString();
+                    frm.CODIGOCLIENTE = txtIdCliente.Text;
+                    frm.ShowDialog();
+                }
+                
             }
             catch (Exception ex)
             {
@@ -474,21 +469,7 @@ namespace AltfErp
                 MessageBox.Show(ex.Message);
             }
         }
-        private void AlteraEstoque()
-        {
-            //string SQL = String.Format(@"select IDPRODUTO, QUANTIDADE from ITEMMOVIMENTO where IDVENDA = '{0}'", txtCodigo.Text);
-            //DataTable Produtos = MetodosSql.GetDT(sql);
-
-
-            //foreach (DataRow Produto in Produtos.Rows)
-            //{
-            //    SQL = String.Format(@"update ESTOQUE
-            //                        set QUANTIDADE = QUANTIDADE + {0}
-            //                        where IDPRODUTO = '{1}'", Produto["QUANTIDADE"].ToString().Replace(",", "."), Produto["IDPRODUTO"].ToString());
-            //    MetodosSql.ExecQuery(sql);
-            //}
-        }
-
+        
         private void frmCadastroVenda_Load(object sender, EventArgs e)
         {
             try
@@ -504,8 +485,7 @@ namespace AltfErp
                     string mes = vet[1];
                     string ano = vet[2];
 
-                    txtCodigo.Text = Cod;
-                    btnSalvar.Enabled = false;
+                    txtCodigo.Text = Cod;                    
                     sql = String.Format(@"select * from VENDA where IDVENDA = {0}", Cod);
                     idVendedor = MetodosSql.GetField(sql, "IDVENDEDOR");
                     txtIdCliente.Text = MetodosSql.GetField(sql, "IDFCFO");
@@ -564,12 +544,12 @@ namespace AltfErp
         }
         private void btnOk_Click(object sender, EventArgs e)
         {
+            vendaClick = false;
             if (Editar)
             {
-
                 if (ValidaCadastro())
                 {
-                    Cadastro();
+                    Cadastro(); 
                     this.Close();
                 }
             }
@@ -774,7 +754,7 @@ namespace AltfErp
                     txtDescricaoProduto.Text = produtos[indice].DESCRICAO;
                     IDITEM = indice.ToString();
                 }
-                btnExcluir.Visible = true;
+                btnExcluir.Enabled = true;
                 btnSelecionaProduto.Enabled = false;
             }
             catch (Exception ex)
@@ -797,7 +777,7 @@ namespace AltfErp
                     produtos.RemoveAt(int.Parse(IDITEM));
                 }
 
-                btnExcluir.Visible = false;
+                btnExcluir.Enabled = false;
                 btnSelecionaProduto.Enabled = true;
                 IDITEM = null;
 
@@ -820,9 +800,6 @@ namespace AltfErp
                 {
                     if (Editar)
                     {
-
-
-                        AlteraEstoque();
 
                         if (String.IsNullOrWhiteSpace(IDITEM))
                         {
@@ -919,6 +896,7 @@ namespace AltfErp
             vendaClick = true;
             if (ValidaCadastro())
             {
+                btnSalvar.Enabled = false;
                 Cadastro();
             }
         }

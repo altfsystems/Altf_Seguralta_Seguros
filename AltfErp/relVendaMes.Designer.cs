@@ -160,7 +160,7 @@
             this.xrLabel6.StylePriority.UseFont = false;
             this.xrLabel6.StylePriority.UseForeColor = false;
             this.xrLabel6.StylePriority.UseTextAlignment = false;
-            this.xrLabel6.Text = "Vencimento";
+            this.xrLabel6.Text = "Vigência";
             this.xrLabel6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // xrLabel5
@@ -371,7 +371,7 @@
             // xrLabel15
             // 
             this.xrLabel15.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "Query.DATAVENCIMENTO")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "Query.VIGÊNCIA")});
             this.xrLabel15.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrLabel15.ForeColor = System.Drawing.Color.Black;
             this.xrLabel15.LocationFloat = new DevExpress.Utils.PointFloat(712.6221F, 0F);

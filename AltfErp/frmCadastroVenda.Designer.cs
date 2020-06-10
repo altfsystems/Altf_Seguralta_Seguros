@@ -132,7 +132,7 @@
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.Location = new System.Drawing.Point(863, 526);
+            this.btnOk.Location = new System.Drawing.Point(861, 526);
             this.btnOk.Margin = new System.Windows.Forms.Padding(2);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(82, 30);
@@ -709,13 +709,13 @@
             // 
             // btnExcluir
             // 
+            this.btnExcluir.Enabled = false;
             this.btnExcluir.Location = new System.Drawing.Point(656, 84);
             this.btnExcluir.Margin = new System.Windows.Forms.Padding(2);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(69, 20);
             this.btnExcluir.TabIndex = 1159;
             this.btnExcluir.Text = "Excluir";
-            this.btnExcluir.Visible = false;
             this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click_1);
             // 
             // gridControl1
