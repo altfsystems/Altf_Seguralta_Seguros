@@ -43,6 +43,7 @@ namespace AltfErp
                 string sql = String.Format(@"insert into RECEBIMENTO(IDVENDA, IDFCFO , VALORDINHEIRO , VALORCHEQUE , VALORCARTAOCREDITO , VALORCARTAODEBITO) VALUES ({0}, {1} , {2} , {3} , {4} , {5})", Entrada, IDCLIENTE, txtValorDinheiro.Text.Replace(",", "."), txtValorCheque.Text.Replace(",", "."), txtValorCredito.Text.Replace(",", "."), txtValorDebito.Text.Replace(",", "."));
                 MetodosSql.ExecQuery(sql);
 
+                
                 sql = String.Format(@"select PARCELAS from TIPOPAGAMENTO where IDTIPOPAGAMENTO = {0}", TipoPagamento);
                 int NParcelas = int.Parse(MetodosSql.GetField(sql, "PARCELAS"));
 

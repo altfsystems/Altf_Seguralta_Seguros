@@ -176,9 +176,7 @@ namespace AltfErp
         {
             try
             {
-
-
-
+                
                 string SQL = String.Format(@"update PARCELA set STATUS = '{0}' where IDPARCELA = {1} ", STATUS, txtCodigoParcela.Text);
                 MetodosSql.ExecQuery(SQL);
 

@@ -127,7 +127,7 @@ namespace AltfErp
                                             VD.DESCONTO, (X.TOTAL_RECEBIMENTO) AS TOTAL_RECEBIMENTO ,
 		                                    (SELECT CAST(SUM(VALOR) AS NUMERIC(20,2)) FROM PARCELA WHERE IDVENDA = VD.IDVENDA) - (X.TOTAL_RECEBIMENTO) AS TOTAL_RESTANTE,
                                             VD.OBSERVACAO, CONVERT(VARCHAR , CONVERT(DATETIME , VD.DATAINCLUSAO , 121) , 103) AS DATAINCLUSAO , 
-                                            CONVERT(varchar, CONVERT(DATETIME,VD.DATAPAGAMENTO,121),103) AS DATAPAGAMENTO,
+                                            (select TOP 1 DATAPAGAMENTO from PARCELA WHERE DATAPAGAMENTO IS NOT NULL AND IDVENDA = VD.IDVENDA ORDER BY DATAPAGAMENTO DESC) AS DATAPAGAMENTO,
 		                                    case
 	                                        WHEN (SELECT SUM(VALOR) FROM PARCELA WHERE IDVENDA = VD.IDVENDA) - (X.TOTAL_RECEBIMENTO) <= 0 THEN 'P'
                                             ELSE
@@ -143,7 +143,7 @@ namespace AltfErp
                                             FROM RECEBIMENTO WHERE ESTORNO != 1
                                             GROUP BY IDVENDA)X ON X.IDVENDA = VD.IDVENDA
                                             WHERE VD.IDVENDA IS NOT NULL AND {0} AND CONVERT(VARCHAR, CONVERT(DATETIME, VD.DATAINCLUSAO , 121) , 103) = {2}'{1}'
-                                            GROUP BY VD.IDVENDA, VD.IDFCFO, X.TOTAL_RECEBIMENTO, FC.NOME, FC.NOMEFANTASIA, VD.OBSERVACAO, VD.DATAINCLUSAO, VD.DATAPAGAMENTO, VD.DESCONTO
+                                            GROUP BY VD.IDVENDA, VD.IDFCFO, X.TOTAL_RECEBIMENTO, FC.NOME, FC.NOMEFANTASIA, VD.OBSERVACAO, VD.DATAINCLUSAO, VD.DESCONTO
 											ORDER BY IDVENDA DESC", Filtro, Data, Nulo);
 
                 gridControl1.DataSource = MetodosSql.GetDT(sql);
