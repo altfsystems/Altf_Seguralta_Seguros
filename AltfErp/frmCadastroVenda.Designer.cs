@@ -703,9 +703,9 @@
             this.label27.Location = new System.Drawing.Point(419, 69);
             this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(80, 13);
+            this.label27.Size = new System.Drawing.Size(146, 13);
             this.label27.TabIndex = 1161;
-            this.label27.Text = "Cia Seguradora";
+            this.label27.Text = "Descrição da Cia Seguradora";
             // 
             // btnExcluir
             // 
@@ -826,9 +826,9 @@
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Location = new System.Drawing.Point(761, 264);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(189, 18);
+            this.label11.Size = new System.Drawing.Size(175, 18);
             this.label11.TabIndex = 1146;
-            this.label11.Text = "Selecione a data da parcela\r\n";
+            this.label11.Text = "Selecione data 1ª parcela\r\n";
             // 
             // txtDia
             // 
@@ -909,9 +909,9 @@
             this.lblTipoPagamento.Location = new System.Drawing.Point(761, 203);
             this.lblTipoPagamento.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTipoPagamento.Name = "lblTipoPagamento";
-            this.lblTipoPagamento.Size = new System.Drawing.Size(100, 13);
+            this.lblTipoPagamento.Size = new System.Drawing.Size(107, 13);
             this.lblTipoPagamento.TabIndex = 1142;
-            this.lblTipoPagamento.Text = "Tipo de Pagamento";
+            this.lblTipoPagamento.Text = "Cond. de Pagamento";
             // 
             // btnTipoPagamento
             // 

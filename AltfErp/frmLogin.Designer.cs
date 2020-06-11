@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogin));
             this.btnLogin = new System.Windows.Forms.Button();
             this.txtSenha = new System.Windows.Forms.TextBox();
@@ -38,6 +39,7 @@
             this.separatorControl1 = new DevExpress.XtraEditors.SeparatorControl();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.lblVersao = new DevExpress.XtraEditors.LabelControl();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.separatorControl1)).BeginInit();
             this.SuspendLayout();
@@ -111,6 +113,8 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             // 
             // separatorControl1
             // 
@@ -185,5 +189,6 @@
         private DevExpress.XtraEditors.SeparatorControl separatorControl1;
         private System.Windows.Forms.Button btnCancelar;
         private DevExpress.XtraEditors.LabelControl lblVersao;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

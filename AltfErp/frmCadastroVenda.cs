@@ -168,10 +168,13 @@ namespace AltfErp
                 double totalVenda = (double)double.Parse(totalVendaString) / NParcelas;
                 string totalVendaInsert = totalVenda.ToString("F2", CultureInfo.InvariantCulture);
 
-
                 sql = String.Format(@"insert into PARCELA(NPARCELA, IDVENDA, IDFCFO, VALOR, DATAVENCIMENTO, STATUS) values ({0},{1},{2}, '{3}', CONVERT(DATETIME, CONVERT(VARCHAR,'{4}', 121),103), 'A') select SCOPE_IDENTITY()", parcela, txtCodigo.Text, txtIdCliente.Text, totalVendaInsert, data1);
                 object Codparcela = MetodosSql.ExecScalar(sql);
-                Cod = Codparcela.ToString();
+
+                if (parcela == 1)
+                {
+                    Cod = Codparcela.ToString();
+                }
                 if (mes == 12)
                 {
 

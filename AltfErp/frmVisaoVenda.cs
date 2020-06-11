@@ -304,6 +304,19 @@ namespace AltfErp
             }
            
         }
+
+        private void btnPagamento_Click(object sender, EventArgs e)
+        {
+            var rowHandle = gridView1.FocusedRowHandle;
+            var IdVenda = gridView1.GetRowCellValue(rowHandle, "IDVENDA");
+            var IdCliente = gridView1.GetRowCellValue(rowHandle, "IDCLIENTE");
+            string IDVENDA = String.Format(@"AND VENDA.IDVENDA = {0}", IdVenda);
+
+            frmPagamento frm = new frmPagamento(false, IdCliente.ToString());
+            frm.CODIGOVENDA = IDVENDA.ToString();
+            frm.CarregaNome();
+            frm.ShowDialog();
+        }
     }
 
 
