@@ -91,7 +91,7 @@
             this.Controls.Add(this.grdVisaoDataVencimento);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmVisaoVencimento";
-            this.Text = "Vigência";
+            this.Text = "Vencimentos";
             ((System.ComponentModel.ISupportInitialize)(this.grdVisaoDataVencimento)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.ResumeLayout(false);

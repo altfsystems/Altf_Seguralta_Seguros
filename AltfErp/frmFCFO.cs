@@ -228,35 +228,35 @@ namespace AltfErp
                                                      RUA = '{13}', LOGRADOURO = '{14}', NUMERO = '{15}', BAIRRO = '{16}',
                                                      CIDADE = '{17}', CEP = '{18}', ESTADO = '{19}', COMPLEMENTO = '{20}', OBSERVACAO = '{21}', TIPOPESSOA = '{22}', CNH = '{23}',
                                                      ESTADOCIVIL = '{24}', TIPORESIDENCIA = '{25}', OBSDOCUMENTO = '{26}' ,DATAINCLUSAO = getdate(), APOLICE = '{28}' where IDFCFO = '{27}'",
-                                                   /*{0}*/   txtNome.Text,
-                                                   /*{1}*/   txtNomeFantasia.Text,
-                                                   /*{2}*/   txtCpf.Text,
-                                                   /*{3}*/   txtCNPJ.Text,
-                                                   /*{4}*/   txtRg.Text,
-                                                   /*{5}*/   txtDataNasc.Text,
-                                                   /*{6}*/   txtSexo.Text,
-                                                   /*{7}*/   txtTelefone.Text,
-                                                   /*{8}*/   txtTelefone2.Text,
-                                                   /*{9}*/   txtCelular.Text,
-                                                   /*{10}*/  txtCelular2.Text,
-                                                   /*{11}*/  txtEmail.Text,
-                                                   /*{12}*/  txtEmail2.Text,
-                                                   /*{13}*/  txtRua.Text,
-                                                   /*{14}*/  txtLogradouro.Text,
-                                                   /*{15}*/  txtNumero.Text,
-                                                   /*{16}*/  txtBairro.Text,
-                                                   /*{17}*/  txtCidade.Text,
-                                                   /*{18}*/  txtCep.Text,
-                                                   /*{19}*/  txtEstado.Text,
-                                                   /*{20}*/  txtComplemento.Text,
-                                                   /*{21}*/  txtObservacao.Text,
-                                                   /*{22}*/  txtTipoPessoa.Text,
-                                                   /*{23}*/  txtCnh.Text,
-                                                   /*{24}*/  txtEstadoCivil.Text,
-                                                   /*{25}*/  txtTipoResidencia.Text,
-                                                   /*{26}*/  txtObservacaoDocumento.Text,
-                                                   /*{27}*/  Cod,
-                                                   /*{28}*/  txtApolice.Text);
+                                           /*{0}*/   txtNome.Text,
+                                           /*{1}*/   txtNomeFantasia.Text,
+                                           /*{2}*/   txtCpf.Text,
+                                           /*{3}*/   txtCNPJ.Text,
+                                           /*{4}*/   txtRg.Text,
+                                           /*{5}*/   txtDataNasc.Text,
+                                           /*{6}*/   txtSexo.Text,
+                                           /*{7}*/   txtTelefone.Text,
+                                           /*{8}*/   txtTelefone2.Text,
+                                           /*{9}*/   txtCelular.Text,
+                                           /*{10}*/  txtCelular2.Text,
+                                           /*{11}*/  txtEmail.Text,
+                                           /*{12}*/  txtEmail2.Text,
+                                           /*{13}*/  txtRua.Text,
+                                           /*{14}*/  txtLogradouro.Text,
+                                           /*{15}*/  txtNumero.Text,
+                                           /*{16}*/  txtBairro.Text,
+                                           /*{17}*/  txtCidade.Text,
+                                           /*{18}*/  txtCep.Text,
+                                           /*{19}*/  txtEstado.Text,
+                                           /*{20}*/  txtComplemento.Text,
+                                           /*{21}*/  txtObservacao.Text,
+                                           /*{22}*/  txtTipoPessoa.Text,
+                                           /*{23}*/  txtCnh.Text,
+                                           /*{24}*/  txtEstadoCivil.Text,
+                                           /*{25}*/  txtTipoResidencia.Text,
+                                           /*{26}*/  txtObservacaoDocumento.Text,
+                                           /*{27}*/  Cod,
+                                           /*{28}*/  txtApolice.Text);
                     MetodosSql.ExecQuery(SQL);
 
                     Image Valida1, Valida2;
@@ -322,7 +322,19 @@ namespace AltfErp
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 validacao = 1;
             }
+
+
+
+
+
+
+
         }
+
+
+
+
+
 
         private void txtNumero_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -436,7 +448,6 @@ namespace AltfErp
             else
             {
                 Cadastro();
-                btnSalvar.Enabled = false;
             }
         }
             
@@ -491,15 +502,6 @@ namespace AltfErp
                 e.Handled = true;
             }
         }
-
-        private void txtRg_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!(char.IsLetter(e.KeyChar) || char.IsControl(e.KeyChar)))
-            {
-                e.Handled = true;
-            }
-        }
-
         private void btnCancelar_Click_1(object sender, EventArgs e)
         {
             this.Close();
@@ -518,7 +520,7 @@ namespace AltfErp
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("O arquivo de imagens apenas aceita .png, .jpg e .jpeg!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("O arquivo e imagens apenas aceita .png, .jpg e .jpeg!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
@@ -536,7 +538,7 @@ namespace AltfErp
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("O arquivo de imagens apenas aceita .png, .jpg e .jpeg!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("O arquivo de imagem não suporta arquivos .pdf", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

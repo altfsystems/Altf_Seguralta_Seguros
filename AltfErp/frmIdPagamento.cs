@@ -31,11 +31,6 @@ namespace AltfErp
             txtCodigo.Visible = false;
             EntradaVenda = entradaVenda;
             txtDataPagamento.Text = DateTime.Now.ToString();
-            if(EntradaVenda)
-            {
-                txtDataPagamento.Visible = false;
-                lblDataPagamento.Visible = false;
-            }
 
         }
 

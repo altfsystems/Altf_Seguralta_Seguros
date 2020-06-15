@@ -49,7 +49,7 @@
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtDataPagamento = new System.Windows.Forms.MaskedTextBox();
-            this.lblDataPagamento = new System.Windows.Forms.Label();
+            this.lblDataInclusao = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -271,15 +271,15 @@
             this.txtDataPagamento.TabStop = false;
             this.txtDataPagamento.ValidatingType = typeof(System.DateTime);
             // 
-            // lblDataPagamento
+            // lblDataInclusao
             // 
-            this.lblDataPagamento.AutoSize = true;
-            this.lblDataPagamento.Location = new System.Drawing.Point(6, 295);
-            this.lblDataPagamento.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblDataPagamento.Name = "lblDataPagamento";
-            this.lblDataPagamento.Size = new System.Drawing.Size(136, 13);
-            this.lblDataPagamento.TabIndex = 1002;
-            this.lblDataPagamento.Text = "Data Do Último Pagamento";
+            this.lblDataInclusao.AutoSize = true;
+            this.lblDataInclusao.Location = new System.Drawing.Point(6, 295);
+            this.lblDataInclusao.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblDataInclusao.Name = "lblDataInclusao";
+            this.lblDataInclusao.Size = new System.Drawing.Size(136, 13);
+            this.lblDataInclusao.TabIndex = 1002;
+            this.lblDataInclusao.Text = "Data Do Último Pagamento";
             // 
             // frmIdPagamento
             // 
@@ -288,7 +288,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(339, 341);
             this.Controls.Add(this.txtDataPagamento);
-            this.Controls.Add(this.lblDataPagamento);
+            this.Controls.Add(this.lblDataInclusao);
             this.Controls.Add(this.txtCodigo);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label8);
@@ -331,7 +331,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         public System.Windows.Forms.Label label7;
         public System.Windows.Forms.TextBox txtValorRestante;
-        private System.Windows.Forms.Label lblDataPagamento;
+        private System.Windows.Forms.Label lblDataInclusao;
         public System.Windows.Forms.TextBox txtCodigoVenda;
         public System.Windows.Forms.MaskedTextBox txtDataPagamento;
     }

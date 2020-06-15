@@ -43,7 +43,7 @@ namespace AltfErp
                     {
                         if (rbtnData.Checked == true)
                         {
-                            RETORNODATA = "'" + txtDataInicio.Text+ "' AND CONVERT(VARCHAR, CONVERT(DATETIME, VD.DATAINCLUSAO , 121) , 103) <= '" +txtDataFim.Text+ "'";
+                            RETORNODATA = txtData.Text;
                         }
                         else
                         {
@@ -81,13 +81,11 @@ namespace AltfErp
         {
             if(rbtnData.Checked == true)
             {
-                txtDataInicio.Enabled = true;
-                txtDataFim.Enabled = true;
+                txtData.Enabled = true;
             }
             else
             {
-                txtDataInicio.Enabled = false;
-                txtDataFim.Enabled = false;
+                txtData.Enabled = false;
             }
 
         }
