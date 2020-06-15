@@ -33,31 +33,37 @@
             this.lblNome = new System.Windows.Forms.Label();
             this.txtNome = new System.Windows.Forms.TextBox();
             this.rbtnNome = new System.Windows.Forms.RadioButton();
-            this.txtData = new System.Windows.Forms.DateTimePicker();
+            this.txtDataInicio = new System.Windows.Forms.DateTimePicker();
             this.rbtnData = new System.Windows.Forms.RadioButton();
             this.rbtnEmAberto = new System.Windows.Forms.RadioButton();
             this.rbtnPagos = new System.Windows.Forms.RadioButton();
             this.rbtnTodos = new System.Windows.Forms.RadioButton();
             this.btnExecutar = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancelar = new DevExpress.XtraEditors.SimpleButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtDataFim = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.White;
+            this.groupBox1.Controls.Add(this.txtDataFim);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.lblNome);
             this.groupBox1.Controls.Add(this.txtNome);
             this.groupBox1.Controls.Add(this.rbtnNome);
-            this.groupBox1.Controls.Add(this.txtData);
+            this.groupBox1.Controls.Add(this.txtDataInicio);
             this.groupBox1.Controls.Add(this.rbtnData);
             this.groupBox1.Controls.Add(this.rbtnEmAberto);
             this.groupBox1.Controls.Add(this.rbtnPagos);
             this.groupBox1.Controls.Add(this.rbtnTodos);
             this.groupBox1.Location = new System.Drawing.Point(9, 8);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(302, 210);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
@@ -77,7 +83,7 @@
             // txtNome
             // 
             this.txtNome.Location = new System.Drawing.Point(12, 178);
-            this.txtNome.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNome.Margin = new System.Windows.Forms.Padding(2);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(246, 20);
             this.txtNome.TabIndex = 1009;
@@ -87,7 +93,7 @@
             // 
             this.rbtnNome.AutoSize = true;
             this.rbtnNome.Location = new System.Drawing.Point(12, 139);
-            this.rbtnNome.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbtnNome.Margin = new System.Windows.Forms.Padding(2);
             this.rbtnNome.Name = "rbtnNome";
             this.rbtnNome.Size = new System.Drawing.Size(53, 17);
             this.rbtnNome.TabIndex = 1008;
@@ -96,27 +102,27 @@
             this.rbtnNome.UseVisualStyleBackColor = true;
             this.rbtnNome.CheckedChanged += new System.EventHandler(this.rbtnNome_CheckedChanged);
             // 
-            // txtData
+            // txtDataInicio
             // 
-            this.txtData.Enabled = false;
-            this.txtData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtData.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.txtData.Location = new System.Drawing.Point(12, 115);
-            this.txtData.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtData.Name = "txtData";
-            this.txtData.Size = new System.Drawing.Size(113, 22);
-            this.txtData.TabIndex = 1007;
+            this.txtDataInicio.Enabled = false;
+            this.txtDataInicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDataInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.txtDataInicio.Location = new System.Drawing.Point(31, 115);
+            this.txtDataInicio.Margin = new System.Windows.Forms.Padding(2);
+            this.txtDataInicio.Name = "txtDataInicio";
+            this.txtDataInicio.Size = new System.Drawing.Size(113, 22);
+            this.txtDataInicio.TabIndex = 1007;
             // 
             // rbtnData
             // 
             this.rbtnData.AutoSize = true;
             this.rbtnData.Location = new System.Drawing.Point(12, 93);
-            this.rbtnData.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbtnData.Margin = new System.Windows.Forms.Padding(2);
             this.rbtnData.Name = "rbtnData";
-            this.rbtnData.Size = new System.Drawing.Size(48, 17);
+            this.rbtnData.Size = new System.Drawing.Size(63, 17);
             this.rbtnData.TabIndex = 1006;
             this.rbtnData.TabStop = true;
-            this.rbtnData.Text = "Data";
+            this.rbtnData.Text = "Período";
             this.rbtnData.UseVisualStyleBackColor = true;
             this.rbtnData.CheckedChanged += new System.EventHandler(this.rbtnData_CheckedChanged);
             // 
@@ -124,7 +130,7 @@
             // 
             this.rbtnEmAberto.AutoSize = true;
             this.rbtnEmAberto.Location = new System.Drawing.Point(12, 72);
-            this.rbtnEmAberto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbtnEmAberto.Margin = new System.Windows.Forms.Padding(2);
             this.rbtnEmAberto.Name = "rbtnEmAberto";
             this.rbtnEmAberto.Size = new System.Drawing.Size(74, 17);
             this.rbtnEmAberto.TabIndex = 5;
@@ -136,7 +142,7 @@
             // 
             this.rbtnPagos.AutoSize = true;
             this.rbtnPagos.Location = new System.Drawing.Point(12, 50);
-            this.rbtnPagos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbtnPagos.Margin = new System.Windows.Forms.Padding(2);
             this.rbtnPagos.Name = "rbtnPagos";
             this.rbtnPagos.Size = new System.Drawing.Size(55, 17);
             this.rbtnPagos.TabIndex = 4;
@@ -148,7 +154,7 @@
             // 
             this.rbtnTodos.AutoSize = true;
             this.rbtnTodos.Location = new System.Drawing.Point(12, 28);
-            this.rbtnTodos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbtnTodos.Margin = new System.Windows.Forms.Padding(2);
             this.rbtnTodos.Name = "rbtnTodos";
             this.rbtnTodos.Size = new System.Drawing.Size(55, 17);
             this.rbtnTodos.TabIndex = 3;
@@ -159,7 +165,7 @@
             // btnExecutar
             // 
             this.btnExecutar.Location = new System.Drawing.Point(146, 223);
-            this.btnExecutar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnExecutar.Margin = new System.Windows.Forms.Padding(2);
             this.btnExecutar.Name = "btnExecutar";
             this.btnExecutar.Size = new System.Drawing.Size(80, 27);
             this.btnExecutar.TabIndex = 4;
@@ -169,12 +175,41 @@
             // btnCancelar
             // 
             this.btnCancelar.Location = new System.Drawing.Point(230, 223);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(80, 27);
             this.btnCancelar.TabIndex = 6;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(149, 119);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(22, 13);
+            this.label1.TabIndex = 1011;
+            this.label1.Text = "até";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 119);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(21, 13);
+            this.label2.TabIndex = 1012;
+            this.label2.Text = "De";
+            // 
+            // txtDataFim
+            // 
+            this.txtDataFim.Enabled = false;
+            this.txtDataFim.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDataFim.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.txtDataFim.Location = new System.Drawing.Point(176, 115);
+            this.txtDataFim.Margin = new System.Windows.Forms.Padding(2);
+            this.txtDataFim.Name = "txtDataFim";
+            this.txtDataFim.Size = new System.Drawing.Size(113, 22);
+            this.txtDataFim.TabIndex = 1013;
             // 
             // frmFiltroVenda
             // 
@@ -185,7 +220,7 @@
             this.Controls.Add(this.btnExecutar);
             this.Controls.Add(this.btnCancelar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmFiltroVenda";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Filtrar Vendas";
@@ -205,9 +240,12 @@
         private DevExpress.XtraEditors.SimpleButton btnExecutar;
         private DevExpress.XtraEditors.SimpleButton btnCancelar;
         private System.Windows.Forms.RadioButton rbtnData;
-        private System.Windows.Forms.DateTimePicker txtData;
+        private System.Windows.Forms.DateTimePicker txtDataInicio;
         private System.Windows.Forms.RadioButton rbtnNome;
         private System.Windows.Forms.TextBox txtNome;
         private System.Windows.Forms.Label lblNome;
+        private System.Windows.Forms.DateTimePicker txtDataFim;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }

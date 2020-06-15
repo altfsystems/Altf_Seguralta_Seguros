@@ -142,7 +142,7 @@ namespace AltfErp
                                             CAST(SUM(VALORCARTAOCREDITO+VALORCARTAODEBITO+VALORCHEQUE+VALORDINHEIRO)AS numeric(20,2)) AS TOTAL_RECEBIMENTO
                                             FROM RECEBIMENTO WHERE ESTORNO != 1
                                             GROUP BY IDVENDA)X ON X.IDVENDA = VD.IDVENDA
-                                            WHERE VD.IDVENDA IS NOT NULL AND {0} AND CONVERT(VARCHAR, CONVERT(DATETIME, VD.DATAINCLUSAO , 121) , 103) = {2}'{1}'
+                                            WHERE VD.IDVENDA IS NOT NULL AND {0} AND CONVERT(VARCHAR, CONVERT(DATETIME, VD.DATAINCLUSAO , 121) , 103) >= {2} {1}
                                             GROUP BY VD.IDVENDA, VD.IDFCFO, X.TOTAL_RECEBIMENTO, FC.NOME, FC.NOMEFANTASIA, VD.OBSERVACAO, VD.DATAINCLUSAO, VD.DESCONTO
 											ORDER BY IDVENDA DESC", Filtro, Data, Nulo);
 

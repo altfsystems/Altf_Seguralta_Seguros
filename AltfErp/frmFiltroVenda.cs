@@ -43,13 +43,13 @@ namespace AltfErp
                     {
                         if (rbtnData.Checked == true)
                         {
-                            RETORNODATA = txtData.Text;
+                            RETORNODATA = "'" + txtDataInicio.Text+ "' AND CONVERT(VARCHAR, CONVERT(DATETIME, VD.DATAINCLUSAO , 121) , 103) <= '" +txtDataFim.Text+ "'";
                         }
                         else
                         {
                             if(rbtnNome.Checked == true)
                             {
-                                RETORNO = "FC.NOME = '" +txtNome.Text+ "' --";
+                                RETORNO = "FC.NOME LIKE '" +txtNome.Text+ "%' --";
                             }
                             else
                             {
@@ -81,11 +81,13 @@ namespace AltfErp
         {
             if(rbtnData.Checked == true)
             {
-                txtData.Enabled = true;
+                txtDataInicio.Enabled = true;
+                txtDataFim.Enabled = true;
             }
             else
             {
-                txtData.Enabled = false;
+                txtDataInicio.Enabled = false;
+                txtDataFim.Enabled = false;
             }
 
         }

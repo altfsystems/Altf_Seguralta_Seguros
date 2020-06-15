@@ -98,7 +98,7 @@ namespace AltfErp
         private void AtualizaGrid()
         {
             string sql = String.Format(@"SELECT VENDA.IDVENDA, FCFO.NOME, FCFO.NOMEFANTASIA AS SOBRENOME, VENDEDORES.NOME AS VENDEDOR, VENDEDORES.SOBRENOME,
-                                        VENDA.TIPOPAGAMENTO, VENDA.DESCONTO, VENDA.STATUS, CONVERT(VARCHAR, VENDA.DATAVENCIMENTO, 103) AS VIGÊNCIA,
+                                        VENDA.TIPOPAGAMENTO, VENDA.DESCONTO, CONVERT(VARCHAR, VENDA.DATAVENCIMENTO, 103) AS VIGÊNCIA,
                                         CONVERT(VARCHAR, VENDA.DATAINCLUSAO,103) AS DATAVENDA  FROM VENDA 
                                         INNER JOIN FCFO
                                         ON FCFO.IDFCFO = VENDA.IDFCFO

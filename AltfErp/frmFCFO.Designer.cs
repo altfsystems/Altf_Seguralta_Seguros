@@ -791,10 +791,10 @@
             // 
             this.txtRg.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRg.Location = new System.Drawing.Point(124, 31);
-            this.txtRg.Mask = "00.000.000-00";
             this.txtRg.Name = "txtRg";
             this.txtRg.Size = new System.Drawing.Size(100, 22);
             this.txtRg.TabIndex = 20;
+            this.txtRg.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRg_KeyPress);
             // 
             // label20
             // 
