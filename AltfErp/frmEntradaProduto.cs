@@ -101,16 +101,9 @@ namespace AltfErp
                 if (String.IsNullOrWhiteSpace(txtValorEntrada.Text))
                 {
                     throw new Exception("Digite o Valor Unitário");
-                }
-            
-         
-
-            
-
-             
-        }
-
-            
+                }                                     
+                             
+        }          
            
 
 

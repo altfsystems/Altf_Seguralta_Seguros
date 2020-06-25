@@ -88,44 +88,21 @@ namespace AltfErp
             }
         }
 
-        public static void InsereImagem(string sql, Bitmap _bmpImagem1, Bitmap _bmpImagem2)
+        public static void InsereImagem(string sql, byte[] byteImagem)
         {
-            
-
-            Bitmap BmpImagem1, BmpImagem2;
-            BmpImagem1 = _bmpImagem1;
-            BmpImagem2 = _bmpImagem2;
-
-            if(BmpImagem1 != null && BmpImagem2 != null)
+            if(byteImagem != null)
             {
                 SqlConnection con = new SqlConnection();
-                SqlCommand cmd;
-
-                MemoryStream memoryImagem1 = new MemoryStream();
-                MemoryStream memoryImagem2 = new MemoryStream();
-
-                BmpImagem1.Save(memoryImagem1, ImageFormat.Bmp);
-                BmpImagem2.Save(memoryImagem2, ImageFormat.Bmp);
-
-                byte[] foto1, foto2;
-                foto1 = memoryImagem1.ToArray();
-                foto2 = memoryImagem2.ToArray();
-
+                SqlCommand cmd;           
+                
                 con.ConnectionString = GetConnectionString();
                 cmd = new SqlCommand(sql, con);
 
-                SqlParameter imagem1 = new SqlParameter("@Imagem", SqlDbType.Binary);
-                SqlParameter imagem2 = new SqlParameter("@Imagem2", SqlDbType.Binary);
-
-                imagem1.Value = foto1;
-                imagem2.Value = foto2;
-
-                cmd.Parameters.Add(imagem1);
-                cmd.Parameters.Add(imagem2);
-
+                SqlParameter imagem1 = new SqlParameter("@Imagem", SqlDbType.Binary);             
+                imagem1.Value = byteImagem;              
+                cmd.Parameters.Add(imagem1);     
 
                 int i = 0;
-
                 try
                 {
                     con.Open();
@@ -139,112 +116,18 @@ namespace AltfErp
                 {
                     con.Close();
                 }
-            }
-            else if(BmpImagem1 == null && BmpImagem2 != null)
-            {
-                SqlConnection con = new SqlConnection();
-                SqlCommand cmd;
-
-                MemoryStream memoryImagem2 = new MemoryStream();
-
-
-                BmpImagem2.Save(memoryImagem2, ImageFormat.Bmp);
-
-                byte[] foto2;
-                
-                foto2 = memoryImagem2.ToArray();
-
-                con.ConnectionString = GetConnectionString();
-                cmd = new SqlCommand(sql, con);
-
-                SqlParameter imagem2 = new SqlParameter("@Imagem2", SqlDbType.Binary);
-
-                imagem2.Value = foto2;
-
-                cmd.Parameters.Add(imagem2);
-
-                int i = 0;
-
-                try
-                {
-                    con.Open();
-                    i = cmd.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-                    throw new System.Exception(ex.Message, ex);
-                }
-                finally
-                {
-                    con.Close();
-                }
-            }
-            else if(BmpImagem2 == null && BmpImagem1 != null)
-            {
-                SqlConnection con = new SqlConnection();
-                SqlCommand cmd;
-
-                MemoryStream memoryImagem1 = new MemoryStream();
-               
-
-                BmpImagem1.Save(memoryImagem1, ImageFormat.Bmp);
-
-
-                byte[] foto1;
-                foto1 = memoryImagem1.ToArray();
-               
-
-                con.ConnectionString = GetConnectionString();
-                cmd = new SqlCommand(sql, con);
-
-                SqlParameter imagem1 = new SqlParameter("@Imagem", SqlDbType.Binary);
-                
-
-                imagem1.Value = foto1;
-                
-
-                cmd.Parameters.Add(imagem1);
-                
-                int i = 0;
-
-                try
-                {
-                    con.Open();
-                    i = cmd.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-                    throw new System.Exception(ex.Message, ex);
-                }
-                finally
-                {
-                    con.Close();
-                }
-            }
-
-
-            
-            
+            }        
         }
-                
-               
-                
-                  
-                
-
-
 
         public static void ExecQuery(string sql)
         {
             SqlConnection con = new SqlConnection();
             SqlCommand cmd;
 
-
             con.ConnectionString = GetConnectionString();
             cmd = new SqlCommand(sql, con);
 
             int i = 0;
-
             try
             {
                 con.Open();
@@ -310,17 +193,8 @@ namespace AltfErp
                     {
                         byte[] imagem = (byte[])(dr[field]);
                         memory = new MemoryStream(imagem);
-                    }
-                       
+                    }                       
                 }
-                    
-                    
-                    
-               
-                
-                
-
-
             }
             catch (Exception ex)
             {

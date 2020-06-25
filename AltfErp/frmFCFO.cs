@@ -17,13 +17,14 @@ namespace AltfErp
     public partial class frmFCFO : Form
     {
         Valida val = new Valida();
-        bool Editar, validaBtn1, validaBtn2;
+        bool Editar;
+        List<ArquivosVisao> arquivoClasse = new List<ArquivosVisao>();
         string Cod;
+        string codFcfo;
         string tipo;
         int validacao;
-        string valida;
-        Bitmap bmpImagem1, bmpImagem2;
-
+        string valida;        
+        byte[] byteImagemFinal;
 
         public frmFCFO(Boolean _Editar, String _Cod, String _tipo)
         {
@@ -33,9 +34,13 @@ namespace AltfErp
             tipo = _tipo;
             txtDataInclusao.Text = DateTime.Now.ToString();
             txtEstado.SelectedIndex = 24;
-
-
         }
+
+        public class ArquivosVisao
+        {
+            public String Arquivo { get; set; }
+            public String Extensão { get; set; }
+        }            
 
         private void Insert()
         {
@@ -72,32 +77,11 @@ namespace AltfErp
                                /*{27}*/ txtTipoPessoa.Text,
                                /*{28}*/  txtApolice.Text);
 
-
-
-
             object Ncad = MetodosSql.ExecScalar(SQL);
+            codFcfo = Ncad.ToString();
             txtCodigo.Text = Ncad.ToString();
-            Image Valida1, Valida2;
-
-            Valida1 = pbImagemDoc1.Image;
-            Valida2 = pbDoc2.Image;
-
-            if (Valida2 != null && Valida1 != null)
-            {
-                MetodosSql.InsereImagem(String.Format(@"INSERT INTO FCFOIMAGEM(IDFCFO, IMAGEM1, IMAGEM2) VALUES ({0} ,@Imagem, @Imagem2)", Ncad), bmpImagem1, bmpImagem2);
-            }
-            else if (Valida1 == null && Valida2 != null)
-            {
-                MetodosSql.InsereImagem(String.Format(@"INSERT INTO FCFOIMAGEM(IDFCFO, IMAGEM2) VALUES({0}, @Imagem2) ", Ncad), bmpImagem1, bmpImagem2);
-            }
-            else if (Valida2 == null && Valida1 != null)
-            {
-                MetodosSql.InsereImagem(String.Format(@"INSERT INTO FCFOIMAGEM(IDFCFO, IMAGEM1) VALUES({0}, @Imagem) ", Ncad), bmpImagem1, bmpImagem2);
-            }
-            else if (Valida2 == null && Valida1 == null)
-            {
-                MetodosSql.ExecQuery(String.Format("INSERT INTO FCFOIMAGEM(IDFCFO) VALUES({0}) ", Ncad));
-            }
+            
+            InsereImagem();           
 
             Editar = true;
         }
@@ -121,7 +105,6 @@ namespace AltfErp
                 {
                     throw new Exception("Por favor, digite o sobrenome");
                 }
-
             }
 
             if (String.IsNullOrWhiteSpace(txtTipoPessoa.Text))
@@ -133,18 +116,11 @@ namespace AltfErp
             {
                 throw new Exception("Por favor, digite o cpf");
             }
-
-
-
         }
-
         private void frmFCFO_Load(object sender, EventArgs e)
         {
-            txtCodigo.Text = Cod;
-            validaBtn1 = false;
-            validaBtn2 = false;
+            txtCodigo.Text = Cod;            
             txtTipoPessoa.Select();
-
             try
             {
                 if (Editar)
@@ -192,16 +168,7 @@ namespace AltfErp
                         pbDoc2.Image = Image.FromStream(MetodosSql.GetImage(sql, "IMAGEM2"));
                     }
                     txtDataInclusao.Text = MetodosSql.GetField(String.Format(@"select CONVERT(varchar, CONVERT(DATETIME, DATAINCLUSAO, 121), 103) as 'Nasc' from FCFO where IDFCFO = {0}", Cod), "Nasc");
-
-
-
-
                 }
-
-
-
-
-
             }
             catch (Exception ex)
             {
@@ -215,9 +182,6 @@ namespace AltfErp
             {
                 Validar();
                 validacao = 0;
-
-
-
 
                 if (Editar)
                 {
@@ -257,48 +221,14 @@ namespace AltfErp
                                            /*{26}*/  txtObservacaoDocumento.Text,
                                            /*{27}*/  Cod,
                                            /*{28}*/  txtApolice.Text);
-                    MetodosSql.ExecQuery(SQL);
-
-                    Image Valida1, Valida2;
-
-                    Valida1 = pbImagemDoc1.Image;
-                    Valida2 = pbDoc2.Image;
-
-                    if (Valida2 != null && Valida1 != null)
-                    {
-                        if (validaBtn1 == true && validaBtn2 == true)
-                        {
-                            MetodosSql.InsereImagem(String.Format("UPDATE FCFOIMAGEM SET IMAGEM1 = @Imagem, IMAGEM2 = @Imagem2 WHERE IDFCFO = {0}", Cod), bmpImagem1, bmpImagem2);
-                        }
-                        else if (validaBtn1 == true && validaBtn2 == false)
-                        {
-                            MetodosSql.InsereImagem(String.Format("UPDATE FCFOIMAGEM SET IMAGEM1 = @Imagem WHERE IDFCFO = {0}", Cod), bmpImagem1, bmpImagem2);
-                        }
-                        else if (validaBtn1 == false && validaBtn2 == true)
-                        {
-                            MetodosSql.InsereImagem(String.Format("UPDATE FCFOIMAGEM SET IMAGEM2 = @Imagem2 WHERE IDFCFO = {0}", Cod), bmpImagem1, bmpImagem2);
-                        }
-
-                    }
-                    else if (Valida1 == null && Valida2 != null)
-                    {
-                        MetodosSql.InsereImagem(String.Format("UPDATE FCFOIMAGEM SET IMAGEM2 = @Imagem2 WHERE IDFCFO = {0}", Cod), bmpImagem1, bmpImagem2);
-                    }
-                    else if (Valida2 == null && Valida1 != null)
-                    {
-                        MetodosSql.InsereImagem(String.Format("UPDATE FCFOIMAGEM SET IMAGEM1 = @Imagem WHERE IDFCFO = {0}", Cod), bmpImagem1, bmpImagem2);
-                    }
-                    else if (Valida2 == null && Valida1 == null)
-                    {
-                        MetodosSql.ExecQuery(String.Format("UPDATE FCFOIMAGEM SET IMAGEM1 = NULL, IMAGEM2 = NULL WHERE IDFCFO = {0}", Cod));
-                    }
+                    MetodosSql.ExecQuery(SQL);    
+                                                                           
                 }
                 else
                 {
 
                     string sql = String.Format(@"SELECT CPF FROM FCFO WHERE CPF = '{0}'", txtCpf.Text);
                     string valida = MetodosSql.GetField(sql, "CPF");
-
 
                     if (valida == "___.___.___-__")
                     {
@@ -322,19 +252,7 @@ namespace AltfErp
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 validacao = 1;
             }
-
-
-
-
-
-
-
         }
-
-
-
-
-
 
         private void txtNumero_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -396,8 +314,6 @@ namespace AltfErp
         {
             e.Handled = true;
         }
-
-
 
         private void txtEstado_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -465,14 +381,7 @@ namespace AltfErp
                 e.Handled = true;
             }
         }
-        private void btnLimpar1_Click(object sender, EventArgs e)
-        {
-            pbImagemDoc1.Image = null;
-        }
-        private void btnLimpar2_Click(object sender, EventArgs e)
-        {
-            pbDoc2.Image = null;
-        }
+      
         private void txtNumero_KeyPress_1(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
@@ -502,44 +411,70 @@ namespace AltfErp
                 e.Handled = true;
             }
         }
+
+
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (OpenFileDialog file = new OpenFileDialog() { ValidateNames = true, Multiselect = false, Filter = "Arquivos de Imagem|*.pdf;*.jpg;*.JPEG;*.png" })
+                {
+                    if (file.ShowDialog() == DialogResult.OK)
+                    {
+                        string extensao = Path.GetExtension(file.FileName);
+                        string arquivo = file.FileName;
+                        ArquivosVisao classe = new ArquivosVisao();
+                        gridView1.ClearDocument();
+                        classe.Arquivo = arquivo;
+                        classe.Extensão = extensao;
+                        arquivoClasse.Add(classe);                        
+                        gridControl1.DataSource = arquivoClasse;
+                        gridControl1.RefreshDataSource();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Selecione um arquivo válido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);               
+            }
+        }
+
+        private void btnLimpar1_Click_1(object sender, EventArgs e)
+        {
+            pbImagemDoc1.Image = null;
+        }
+
+        private void btnLimpar2_Click_1(object sender, EventArgs e)
+        {
+            pbDoc2.Image = null;
+        }
+
         private void btnCancelar_Click_1(object sender, EventArgs e)
         {
             this.Close();
-        }
-        private void btnAbrir1_Click(object sender, EventArgs e)
+        }       
+
+        private void InsereImagem()
         {
-            validaBtn1 = true;
-            OpenFileDialog open = new OpenFileDialog();
-            if (open.ShowDialog() == DialogResult.OK)
+            try
             {
-                try
+                if(!Editar)
                 {
-                    string imagem1 = open.FileName;
-                    bmpImagem1 = new Bitmap(imagem1);
-                    pbImagemDoc1.Image = bmpImagem1;
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("O arquivo e imagens apenas aceita .png, .jpg e .jpeg!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+                    int numeroLinha = gridView1.RowCount;
+                    for (int i = 0; i < numeroLinha; i++)
+                    {
+                        foreach (ArquivosVisao arq in arquivoClasse)
+                        {
+                            string imagem = arq.Arquivo;
+                            byteImagemFinal = System.IO.File.ReadAllBytes(imagem);
+                            MetodosSql.InsereImagem(String.Format(@"INSERT INTO FCFOIMAGEM(IDFCFO, IMAGEM1) VALUES('{0}', @Imagem)", codFcfo), byteImagemFinal);
+                        }
+                    }
+                }                
             }
-        }
-        private void btnAbrir2_Click(object sender, EventArgs e)
-        {
-            validaBtn2 = true;
-            OpenFileDialog open = new OpenFileDialog();
-            if (open.ShowDialog() == DialogResult.OK)
+            catch (Exception ex)
             {
-                try
-                {
-                    string imagem2 = open.FileName;
-                    bmpImagem2 = new Bitmap(imagem2);
-                    pbDoc2.Image = bmpImagem2;
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("O arquivo de imagem não suporta arquivos .pdf", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show(ex.Message);
             }
         }
     }

@@ -23,8 +23,15 @@ namespace AltfErp
             dia = vet[0];
             mes = vet[1];
             ano = vet[2];
+            lblVersao.Text = "Version "+ano + "." + mes + "." + dia + ".00032";
 
-            lblVersao.Text = "Version "+ano + "." + mes + "." + dia + ".00031";
+            SetUser();
+            if(!String.IsNullOrWhiteSpace(txtLogin.Text))
+            {
+                txtSenha.Focus();
+                txtSenha.Select();
+            }
+
         }
 
         private void Login()
@@ -52,6 +59,7 @@ namespace AltfErp
                 MessageBox.Show("Usuário ou Senha inválidos", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtSenha.Text = string.Empty;
             }
+            SaveUser(txtLogin.Text);
         }
         
         private void btnLogin_Click(object sender, EventArgs e)
@@ -91,6 +99,17 @@ namespace AltfErp
         private  void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
             toolTip1.RemoveAll();
+        }
+
+        private void SaveUser(string _usuario)
+        {
+            Properties.Settings.Default.User = _usuario;
+            Properties.Settings.Default.Save();
+        }
+
+        private void SetUser()
+        {
+            txtLogin.Text = Properties.Settings.Default.User;
         }
     }
 }
