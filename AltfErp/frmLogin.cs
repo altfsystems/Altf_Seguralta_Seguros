@@ -23,7 +23,7 @@ namespace AltfErp
             dia = vet[0];
             mes = vet[1];
             ano = vet[2];
-            lblVersao.Text = "Version "+ano + "." + mes + "." + dia + ".00032";
+            lblVersao.Text = "Version "+ano + "." + mes + "." + dia + ".00033";
 
             SetUser();
             if(!String.IsNullOrWhiteSpace(txtLogin.Text))
@@ -86,19 +86,19 @@ namespace AltfErp
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            toolTip1.ShowAlways = false;
+            //toolTip1.ShowAlways = false;
             this.Close();
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            toolTip1.Show("Contatos:\nFabio Coquieri...19997077758\nGabriel Aceti......19992743066 ", pictureBox1);
+            //toolTip1.Show("Contatos:\nFabio Coquieri...19997077758\nGabriel Aceti......19992743066 ", pictureBox1);
             
         }
 
         private  void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
-            toolTip1.RemoveAll();
+            //toolTip1.RemoveAll();
         }
 
         private void SaveUser(string _usuario)

@@ -14,53 +14,24 @@ using AltfErp;
 
 namespace AltfErp
 {
-    
-    
-
-    
-
     public partial class frmVisaoClientes : Form
     {
         public frmVisaoClientes()
         {
             InitializeComponent();
             gridView1.OptionsBehavior.Editable = false;
-            grdVisaoCliente.EmbeddedNavigator.Buttons.Append.Visible = false;
-            grdVisaoCliente.EmbeddedNavigator.Buttons.Remove.Visible = false;
+            gridControl1.EmbeddedNavigator.Buttons.Append.Visible = false;
+            gridControl1.EmbeddedNavigator.Buttons.Remove.Visible = false;
             AtualizaGrid();
             gridView1.BestFitColumns();
         }
 
         private void AtualizaGrid()
         {
-            grdVisaoCliente.DataSource = MetodosSql.GetDT(@"select IDFCFO AS IDCLIENTE, NOME, NOMEFANTASIA AS SOBRENOME, TELEFONE1, TELEFONE2, CELULAR,CELULAR2, EMAIL, EMAIL2,
+            gridControl1.DataSource = MetodosSql.GetDT(@"select IDFCFO AS IDCLIENTE, NOME, NOMEFANTASIA AS SOBRENOME, CPF, TELEFONE1, TELEFONE2, CELULAR,CELULAR2, EMAIL, EMAIL2,
                                                                OBSERVACAO, DATAINCLUSAO  FROM FCFO WHERE TIPO = 'C' ORDER BY NOME" );
 
-        }
-
-       
-
-        private void gridControl1_DoubleClick(object sender, EventArgs e)
-        {
-            try
-            {
-                var rowHandle = gridView1.FocusedRowHandle;
-
-                var obj = gridView1.GetRowCellValue(rowHandle, "IDCLIENTE");
-
-                frmFCFO frm = new frmFCFO(true, obj.ToString(), "C");
-                frm.ShowDialog();
-                AtualizaGrid();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-   
-
-  
+        }  
         private void btnNovo_Click_1(object sender, EventArgs e)
         {
             frmFCFO frm = new frmFCFO(false, null, "C");
@@ -160,6 +131,25 @@ namespace AltfErp
 
 
 
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void gridControl1_DoubleClick_1(object sender, EventArgs e)
+        {
+            try
+            {
+                var rowHandle = gridView1.FocusedRowHandle;
+
+                var obj = gridView1.GetRowCellValue(rowHandle, "IDCLIENTE");
+
+                frmFCFO frm = new frmFCFO(true, obj.ToString(), "C");
+                frm.ShowDialog();
+                AtualizaGrid();
 
             }
             catch (Exception ex)
