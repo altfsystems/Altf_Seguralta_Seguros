@@ -369,7 +369,7 @@ namespace AltfErp
                                     
 
 
-                // MEU
+                
                 foreach(Produto p in produtos)
                 {
                     IDPRODUTO = p.IDPRODUTO;

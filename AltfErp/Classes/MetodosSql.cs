@@ -178,22 +178,22 @@ namespace AltfErp
 
             try
             {
-                
+
                 cmd = new SqlCommand(sql, con);
                 SqlDataReader dr;
                 con.Open();
                 dr = cmd.ExecuteReader();
-                
 
-                while(dr.Read())
+
+                while (dr.Read())
                 {
                     valida = dr[field].ToString();
-                       
-                    if(!String.IsNullOrWhiteSpace(valida.ToString()))
+
+                    if (!String.IsNullOrWhiteSpace(valida.ToString()))
                     {
                         byte[] imagem = (byte[])(dr[field]);
                         memory = new MemoryStream(imagem);
-                    }                       
+                    }
                 }
             }
             catch (Exception ex)
@@ -206,6 +206,44 @@ namespace AltfErp
             }
 
             return memory;
+        }
+
+        public static byte[] GetImagePdf(String sql, string field)
+        {
+            string valida;
+            byte[] retorno, imagem = null;
+            SqlConnection con = new SqlConnection();
+            SqlCommand cmd;
+
+            con.ConnectionString = GetConnectionString();
+
+            try
+            {                
+                cmd = new SqlCommand(sql, con);
+                SqlDataReader dr;
+                con.Open();
+                dr = cmd.ExecuteReader();                
+
+                while(dr.Read())
+                {
+                    valida = dr[field].ToString();
+                       
+                    if(!String.IsNullOrWhiteSpace(valida.ToString()))
+                    {
+                        imagem = (byte[])(dr[field]);                        
+                    }                   
+                }                
+                retorno = imagem;
+            }
+            catch (Exception ex)
+            {
+                throw new System.Exception(ex.Message, ex);
+            }
+            finally
+            {
+                con.Close();
+            }
+            return retorno;
         }
 
         public static string GetField(String sql, String field)

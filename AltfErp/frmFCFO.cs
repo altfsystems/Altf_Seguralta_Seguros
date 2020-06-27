@@ -11,6 +11,7 @@ using System.IO;
 using System.Drawing.Imaging;
 using System.Data.SqlClient;
 using System.Data.Linq;
+using System.Security.Cryptography;
 
 namespace AltfErp
 {
@@ -18,13 +19,14 @@ namespace AltfErp
     {
         Valida val = new Valida();
         bool Editar;
-        List<ArquivosVisao> arquivoClasse = new List<ArquivosVisao>();
+        List<Anexos> anexosVisao = new List<Anexos>();
         string Cod;
         string codFcfo;
         string tipo;
         int validacao;
-        string valida;        
+        string valida;
         byte[] byteImagemFinal;
+        string indiceItem;
 
         public frmFCFO(Boolean _Editar, String _Cod, String _tipo)
         {
@@ -36,11 +38,12 @@ namespace AltfErp
             txtEstado.SelectedIndex = 24;
         }
 
-        public class ArquivosVisao
+        public class Anexos
         {
+            public String Nome { get; set; }
             public String Arquivo { get; set; }
             public String Extensão { get; set; }
-        }            
+        }
 
         private void Insert()
         {
@@ -80,12 +83,11 @@ namespace AltfErp
             object Ncad = MetodosSql.ExecScalar(SQL);
             codFcfo = Ncad.ToString();
             txtCodigo.Text = Ncad.ToString();
-            
-            InsereImagem();           
+
+            InsereImagem();
 
             Editar = true;
         }
-
 
         private void Validar()
         {
@@ -119,7 +121,7 @@ namespace AltfErp
         }
         private void frmFCFO_Load(object sender, EventArgs e)
         {
-            txtCodigo.Text = Cod;            
+            txtCodigo.Text = Cod;
             txtTipoPessoa.Select();
             try
             {
@@ -128,6 +130,7 @@ namespace AltfErp
 
                     string sql = String.Format(@"select * from FCFO where IDFCFO = {0}", Cod);
 
+                    gridControl1.DataSource = MetodosSql.GetDT("SELECT IDIMAGEM, NOMEANEXO, EXTENSAO FROM FCFOIMAGEM WHERE IDFCFO = " + Cod);
                     txtNome.Text = MetodosSql.GetField(sql, "NOME");
                     txtTipoPessoa.Text = MetodosSql.GetField(sql, "TIPOPESSOA");
                     txtNomeFantasia.Text = MetodosSql.GetField(sql, "NOMEFANTASIA");
@@ -158,16 +161,12 @@ namespace AltfErp
                     txtObservacaoDocumento.Text = MetodosSql.GetField(sql, "OBSDOCUMENTO");
                     sql = String.Format("SELECT * FROM FCFOIMAGEM WHERE IDFCFO = {0}", Cod);
                     valida = MetodosSql.GetField(sql, "IMAGEM1");
-                    if (valida != "")
-                    {
-                        pbImagemDoc1.Image = Image.FromStream(MetodosSql.GetImage(sql, "IMAGEM1"));
-                    }
                     valida = MetodosSql.GetField(sql, "IMAGEM2");
-                    if (valida != "")
-                    {
-                        pbDoc2.Image = Image.FromStream(MetodosSql.GetImage(sql, "IMAGEM2"));
-                    }
                     txtDataInclusao.Text = MetodosSql.GetField(String.Format(@"select CONVERT(varchar, CONVERT(DATETIME, DATAINCLUSAO, 121), 103) as 'Nasc' from FCFO where IDFCFO = {0}", Cod), "Nasc");
+                }
+                else
+                {
+                    btnDownload.Text = "Abrir";
                 }
             }
             catch (Exception ex)
@@ -221,8 +220,8 @@ namespace AltfErp
                                            /*{26}*/  txtObservacaoDocumento.Text,
                                            /*{27}*/  Cod,
                                            /*{28}*/  txtApolice.Text);
-                    MetodosSql.ExecQuery(SQL);    
-                                                                           
+                    MetodosSql.ExecQuery(SQL);
+                    InsereImagem();
                 }
                 else
                 {
@@ -243,7 +242,7 @@ namespace AltfErp
                     {
                         MessageBox.Show("Já existe um cadastro com esse cpf!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         validacao = 1;
-                        
+
                     }
                 }
             }
@@ -321,7 +320,7 @@ namespace AltfErp
         }
         private void btnOk_Click_1(object sender, EventArgs e)
         {
-            if(!val.ValidaEmail(txtEmail.Text) || !val.ValidaEmail(txtEmail2.Text))
+            if (!val.ValidaEmail(txtEmail.Text) || !val.ValidaEmail(txtEmail2.Text))
             {
                 MessageBox.Show("Insira um EMAIL válido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -333,7 +332,7 @@ namespace AltfErp
             {
                 MessageBox.Show("Insira um CPF válido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if(txtCpf.Text == "___.___.___ - __" && txtTipoPessoa.Text == "Pessoa Física")
+            else if (txtCpf.Text == "___.___.___ - __" && txtTipoPessoa.Text == "Pessoa Física")
             {
                 MessageBox.Show("Por favor, informar o CPF", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -366,7 +365,7 @@ namespace AltfErp
                 Cadastro();
             }
         }
-            
+
         private void txtApolice_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
@@ -381,7 +380,7 @@ namespace AltfErp
                 e.Handled = true;
             }
         }
-      
+
         private void txtNumero_KeyPress_1(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
@@ -422,60 +421,196 @@ namespace AltfErp
                     if (file.ShowDialog() == DialogResult.OK)
                     {
                         string extensao = Path.GetExtension(file.FileName);
+                        string nome = Path.GetFileName(file.FileName);
                         string arquivo = file.FileName;
-                        ArquivosVisao classe = new ArquivosVisao();
-                        gridView1.ClearDocument();
-                        classe.Arquivo = arquivo;
-                        classe.Extensão = extensao;
-                        arquivoClasse.Add(classe);                        
-                        gridControl1.DataSource = arquivoClasse;
-                        gridControl1.RefreshDataSource();
+                        byte[] imagem = File.ReadAllBytes(file.FileName);
+
+                        if (Editar)
+                        {
+                            MetodosSql.InsereImagem(String.Format("INSERT INTO FCFOIMAGEM(IDFCFO, IMAGEM1, NOMEANEXO, EXTENSAO, CAMINHO) VALUES('{0}', @Imagem, '{1}', '{2}', '{3}')", txtCodigo.Text, nome, extensao, arquivo), imagem);
+                            gridControl1.DataSource = MetodosSql.GetDT("SELECT IDIMAGEM, NOMEANEXO, EXTENSAO FROM FCFOIMAGEM WHERE IDFCFO = " + txtCodigo.Text);
+                        }
+                        else
+                        {
+
+                            Anexos classe = new Anexos();
+                            gridView1.ClearDocument();
+                            classe.Nome = nome;
+                            classe.Arquivo = arquivo;
+                            classe.Extensão = extensao;
+                            anexosVisao.Add(classe);
+                            gridControl1.DataSource = anexosVisao;
+                            gridControl1.RefreshDataSource();
+                        }
+
                     }
                 }
             }
             catch (Exception)
             {
-                MessageBox.Show("Selecione um arquivo válido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);               
+                MessageBox.Show("Selecione um arquivo válido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void btnLimpar1_Click_1(object sender, EventArgs e)
-        {
-            pbImagemDoc1.Image = null;
-        }
-
-        private void btnLimpar2_Click_1(object sender, EventArgs e)
-        {
-            pbDoc2.Image = null;
         }
 
         private void btnCancelar_Click_1(object sender, EventArgs e)
         {
             this.Close();
-        }       
+        }
 
         private void InsereImagem()
         {
             try
             {
-                if(!Editar)
+                if (Editar)
                 {
-                    int numeroLinha = gridView1.RowCount;
-                    for (int i = 0; i < numeroLinha; i++)
+                    Anexos anexosDt = new Anexos();
+                    DataTable dt = MetodosSql.GetDT("SELECT NOMEANEXO, CAMINHO, EXTENSAO FROM FCFOIMAGEM WHERE IDFCFO = " + txtCodigo.Text);
+                    MetodosSql.ExecQuery("DELETE FROM FCFOIMAGEM WHERE IDFCFO = " + txtCodigo.Text);
+
+                    foreach (DataRow dr in dt.Rows)
                     {
-                        foreach (ArquivosVisao arq in arquivoClasse)
+                        anexosVisao.Clear();
+                        anexosDt.Arquivo = dr["CAMINHO"].ToString();
+                        anexosDt.Nome = dr["NOMEANEXO"].ToString();
+                        anexosDt.Extensão = dr["EXTENSAO"].ToString();
+                        anexosVisao.Add(anexosDt);
+
+                        foreach (Anexos anexos in anexosVisao)
                         {
-                            string imagem = arq.Arquivo;
-                            byteImagemFinal = System.IO.File.ReadAllBytes(imagem);
-                            MetodosSql.InsereImagem(String.Format(@"INSERT INTO FCFOIMAGEM(IDFCFO, IMAGEM1) VALUES('{0}', @Imagem)", codFcfo), byteImagemFinal);
+                            string imagem = anexos.Arquivo;
+                            byteImagemFinal = File.ReadAllBytes(imagem);
+                            MetodosSql.InsereImagem(String.Format(@"INSERT INTO FCFOIMAGEM(IDFCFO, IMAGEM1, NOMEANEXO, EXTENSAO, CAMINHO) VALUES('{0}', @Imagem, '{1}', '{2}', '{3}')", codFcfo, anexos.Nome, anexos.Extensão, imagem), byteImagemFinal);
                         }
                     }
-                }                
+                }
+                else
+                {
+                    foreach (Anexos anexos in anexosVisao)
+                    {
+                        string imagem = anexos.Arquivo;
+                        byteImagemFinal = System.IO.File.ReadAllBytes(imagem);
+                        MetodosSql.InsereImagem(String.Format(@"INSERT INTO FCFOIMAGEM(IDFCFO, IMAGEM1, NOMEANEXO, EXTENSAO, CAMINHO) VALUES('{0}', @Imagem, '{1}', '{2}', '{3}')", codFcfo, anexos.Nome, anexos.Extensão, imagem), byteImagemFinal);
+                    }
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btnDownload_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Editar)
+                {
+                    var rowHandle = gridView1.FocusedRowHandle;
+                    var nomeAnexo = gridView1.GetRowCellValue(rowHandle, "NOMEANEXO");
+                    var idImagem = gridView1.GetRowCellValue(rowHandle, "IDIMAGEM");
+                    string sql = "SELECT IMAGEM1, EXTENSAO FROM FCFOIMAGEM WHERE IDFCFO = " + Cod + " AND IDIMAGEM = " + idImagem;
+                    string extensao = MetodosSql.GetField(sql, "EXTENSAO");
+
+                    if (idImagem != null)
+                    {
+                        SaveFileDialog sfd = new SaveFileDialog();
+                        sfd.FileName = nomeAnexo.ToString();
+                        if (extensao == ".pdf")
+                        {
+                            sfd.Filter = "Arquivos (.pdf)|*.pdf";
+                        }
+                        else if (extensao == ".jpg")
+                        {
+                            sfd.Filter = "Arquivos (.jpg)|*.jpg";
+                        }
+                        else if (extensao == ".jpeg")
+                        {
+                            sfd.Filter = "Arquivos (.jpeg)|*.jpeg";
+                        }
+                        else if (extensao == ".png")
+                        {
+                            sfd.Filter = "Arquivos (.png)|*.png";
+                        }
+                        if (sfd.ShowDialog() == DialogResult.OK)
+                        {
+                            string caminho = sfd.FileName;
+                            string nome = Path.GetFileName(caminho);
+                            byte[] imagem = MetodosSql.GetImagePdf(sql, "IMAGEM1");
+                            System.IO.File.WriteAllBytes(caminho, imagem);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Por favor, selecione um cadastro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else
+                {
+                    var rowHandle = gridView1.FocusedRowHandle;
+                    var extensao = gridView1.GetRowCellValue(rowHandle, "Extensão");
+                    var fileName = gridView1.GetRowCellValue(rowHandle, "Arquivo");
+                    if (extensao.ToString() == ".pdf")
+                    {
+                        frmVisualizaPdf frm = new frmVisualizaPdf(fileName.ToString());
+                        frm.ShowDialog();
+                    }
+                    else
+                    {
+                        frmVisualizaImagem frm = new frmVisualizaImagem(fileName.ToString());
+                        frm.ShowDialog();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Editar)
+                {
+                    if (DialogResult.Yes == MessageBox.Show("Tem certeza que deseja excluir este anexo?", "Pergunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                    {
+                        var rowHandle = gridView1.FocusedRowHandle;
+                        var idImagem = gridView1.GetRowCellValue(rowHandle, "IDIMAGEM");
+                        MetodosSql.ExecQuery("DELETE FROM FCFOIMAGEM WHERE IDIMAGEM = " + idImagem);
+                        gridControl1.DataSource = MetodosSql.GetDT("SELECT IDIMAGEM, NOMEANEXO, CAMINHO, EXTENSAO FROM FCFOIMAGEM WHERE IDFCFO = " + txtCodigo.Text);
+                    }
+
+                }
+                else
+                {
+                    if (DialogResult.Yes == MessageBox.Show("Tem certeza que deseja excluir este anexo?", "Pergunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                    {
+                        var rowHandle = gridView1.FocusedRowHandle;
+                        var nome = gridView1.GetRowCellValue(rowHandle, "NOME");
+                        anexosVisao.RemoveAt(int.Parse(indiceItem.ToString()));
+                        gridView1.ClearDocument();
+                        gridControl1.DataSource = anexosVisao;
+                        gridControl1.RefreshDataSource();
+                    }
+                }
+                btnExcluir.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void gridControl1_DoubleClick(object sender, EventArgs e)
+        {
+            var rowHandle = gridView1.FocusedRowHandle;
+            if (!Editar)
+            {
+                int indice = int.Parse(rowHandle.ToString());
+                indiceItem = indice.ToString();
+            }
+            btnExcluir.Enabled = true;
         }
     }
 }

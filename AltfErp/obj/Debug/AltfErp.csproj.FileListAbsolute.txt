@@ -1763,3 +1763,5 @@ C:\Users\gabri\Documents\GitHub\Altf_Seguralta_Seguros\AltfErp\bin\Debug\de\DevE
 C:\Users\gabri\Documents\GitHub\Altf_Seguralta_Seguros\AltfErp\bin\Debug\es\DevExpress.XtraPdfViewer.v19.1.resources.dll
 C:\Users\gabri\Documents\GitHub\Altf_Seguralta_Seguros\AltfErp\bin\Debug\ja\DevExpress.XtraPdfViewer.v19.1.resources.dll
 C:\Users\gabri\Documents\GitHub\Altf_Seguralta_Seguros\AltfErp\bin\Debug\ru\DevExpress.XtraPdfViewer.v19.1.resources.dll
+C:\Users\gabri\Documents\GitHub\Altf_Seguralta_Seguros\AltfErp\obj\Debug\AltfErp.frmVisualizaPdf.resources
+C:\Users\gabri\Documents\GitHub\Altf_Seguralta_Seguros\AltfErp\obj\Debug\AltfErp.frmVisualizaImagem.resources

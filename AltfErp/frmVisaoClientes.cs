@@ -123,8 +123,7 @@ namespace AltfErp
 
                         string teste = MetodosSql.GetField(sql, "IDFCFO");
                         string SQL = String.Format(@"SELECT IDFCFO FROM ORDEM where IDFCFO = " + id.ToString());
-                        string IdFcfo = MetodosSql.GetField(SQL, "IDFCFO");
-
+                        string IdFcfoOrdem = MetodosSql.GetField(SQL, "IDFCFO");
 
                         if (id.ToString() == teste.ToString())
                         {
@@ -132,7 +131,7 @@ namespace AltfErp
                         }
                         else
                         {
-                            if (id.ToString() == IdFcfo.ToString())
+                            if (id.ToString() == IdFcfoOrdem.ToString())
                             {
                                 MessageBox.Show("Há uma Ordem de Serviço no Nome Deste Cliente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             }
@@ -141,6 +140,8 @@ namespace AltfErp
                                 if (DialogResult.Yes == MessageBox.Show("Deseja Excluir Este Cliente?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                                 {
                                     sql = String.Format(@"DELETE from FCFO WHERE IDFCFO = " + id.ToString());
+                                    MetodosSql.ExecQuery(sql);
+                                    sql = String.Format(@"DELETE FROM FCFOIMAGEM WHERE IDFCFO = " + id.ToString());
                                     MetodosSql.ExecQuery(sql);
                                     AtualizaGrid();
 

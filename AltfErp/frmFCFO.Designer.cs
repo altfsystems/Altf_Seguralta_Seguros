@@ -39,24 +39,19 @@
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.txtDataInclusao = new System.Windows.Forms.MaskedTextBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.btnCancelar = new DevExpress.XtraEditors.SimpleButton();
+            this.btnOk = new DevExpress.XtraEditors.SimpleButton();
+            this.btnSalvar = new DevExpress.XtraEditors.SimpleButton();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtTipoPessoa = new System.Windows.Forms.ComboBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.btnAbrir = new DevExpress.XtraEditors.SimpleButton();
+            this.btnDownload = new DevExpress.XtraEditors.SimpleButton();
             this.btnAdicionar = new DevExpress.XtraEditors.SimpleButton();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.pdfViewer1 = new DevExpress.XtraPdfViewer.PdfViewer();
-            this.btnLimpar3 = new DevExpress.XtraEditors.SimpleButton();
-            this.btnAbrir3 = new DevExpress.XtraEditors.SimpleButton();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.btnLimpar2 = new DevExpress.XtraEditors.SimpleButton();
-            this.btnLimpar1 = new DevExpress.XtraEditors.SimpleButton();
-            this.label28 = new System.Windows.Forms.Label();
-            this.pbDoc2 = new System.Windows.Forms.PictureBox();
-            this.btnAbrir2 = new DevExpress.XtraEditors.SimpleButton();
-            this.label21 = new System.Windows.Forms.Label();
-            this.pbImagemDoc1 = new System.Windows.Forms.PictureBox();
-            this.btnAbrir1 = new DevExpress.XtraEditors.SimpleButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtApolice = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
@@ -118,22 +113,13 @@
             this.txtNome = new System.Windows.Forms.TextBox();
             this.lblNome = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.btnCancelar = new DevExpress.XtraEditors.SimpleButton();
-            this.btnOk = new DevExpress.XtraEditors.SimpleButton();
-            this.btnSalvar = new DevExpress.XtraEditors.SimpleButton();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.txtTipoPessoa = new System.Windows.Forms.ComboBox();
+            this.btnExcluir = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPageNumberEdit1)).BeginInit();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            this.tabPage3.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbDoc2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbImagemDoc1)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -226,17 +212,91 @@
             this.label12.TabIndex = 21;
             this.label12.Text = "CPF/CNPJ";
             // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnCancelar.Location = new System.Drawing.Point(807, 592);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(70, 31);
+            this.btnCancelar.TabIndex = 1011;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click_1);
+            // 
+            // btnOk
+            // 
+            this.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnOk.Location = new System.Drawing.Point(659, 592);
+            this.btnOk.Margin = new System.Windows.Forms.Padding(2);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(70, 31);
+            this.btnOk.TabIndex = 1009;
+            this.btnOk.Text = "Ok";
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click_1);
+            // 
+            // btnSalvar
+            // 
+            this.btnSalvar.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnSalvar.Location = new System.Drawing.Point(733, 592);
+            this.btnSalvar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSalvar.Name = "btnSalvar";
+            this.btnSalvar.Size = new System.Drawing.Size(70, 31);
+            this.btnSalvar.TabIndex = 1010;
+            this.btnSalvar.Text = "Salvar";
+            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click_1);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(7, 12);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(75, 13);
+            this.label8.TabIndex = 1016;
+            this.label8.Text = "Codigo Cliente";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(121, 12);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(73, 13);
+            this.label13.TabIndex = 1017;
+            this.label13.Text = "Data Inclusão";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(216, 12);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(28, 13);
+            this.label15.TabIndex = 1020;
+            this.label15.Text = "Tipo";
+            // 
+            // txtTipoPessoa
+            // 
+            this.txtTipoPessoa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.txtTipoPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTipoPessoa.FormattingEnabled = true;
+            this.txtTipoPessoa.Items.AddRange(new object[] {
+            "Pessoa Física",
+            "Pessoa Jurídica"});
+            this.txtTipoPessoa.Location = new System.Drawing.Point(219, 27);
+            this.txtTipoPessoa.Name = "txtTipoPessoa";
+            this.txtTipoPessoa.Size = new System.Drawing.Size(121, 24);
+            this.txtTipoPessoa.TabIndex = 1021;
+            // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.btnExcluir);
             this.tabPage4.Controls.Add(this.gridControl1);
-            this.tabPage4.Controls.Add(this.btnAbrir);
+            this.tabPage4.Controls.Add(this.btnDownload);
             this.tabPage4.Controls.Add(this.btnAdicionar);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage4.Size = new System.Drawing.Size(884, 504);
             this.tabPage4.TabIndex = 4;
-            this.tabPage4.Text = "Teste de anexo";
+            this.tabPage4.Text = "Anexos";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // gridControl1
@@ -249,20 +309,24 @@
             this.gridControl1.TabIndex = 4;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
+            this.gridControl1.DoubleClick += new System.EventHandler(this.gridControl1_DoubleClick);
             // 
             // gridView1
             // 
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsBehavior.AutoSelectAllInEditor = false;
+            this.gridView1.OptionsBehavior.Editable = false;
             // 
-            // btnAbrir
+            // btnDownload
             // 
-            this.btnAbrir.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAbrir.ImageOptions.Image")));
-            this.btnAbrir.Location = new System.Drawing.Point(93, 17);
-            this.btnAbrir.Name = "btnAbrir";
-            this.btnAbrir.Size = new System.Drawing.Size(75, 23);
-            this.btnAbrir.TabIndex = 3;
-            this.btnAbrir.Text = "Abrir";
+            this.btnDownload.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnDownload.ImageOptions.Image")));
+            this.btnDownload.Location = new System.Drawing.Point(174, 17);
+            this.btnDownload.Name = "btnDownload";
+            this.btnDownload.Size = new System.Drawing.Size(75, 23);
+            this.btnDownload.TabIndex = 3;
+            this.btnDownload.Text = "Download";
+            this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
             // 
             // btnAdicionar
             // 
@@ -274,52 +338,8 @@
             this.btnAdicionar.Text = "Adicionar";
             this.btnAdicionar.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.pdfViewer1);
-            this.tabPage3.Controls.Add(this.btnLimpar3);
-            this.tabPage3.Controls.Add(this.btnAbrir3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(884, 504);
-            this.tabPage3.TabIndex = 3;
-            this.tabPage3.Text = "Anexos";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // pdfViewer1
-            // 
-            this.pdfViewer1.Location = new System.Drawing.Point(515, 77);
-            this.pdfViewer1.Name = "pdfViewer1";
-            this.pdfViewer1.Size = new System.Drawing.Size(245, 309);
-            this.pdfViewer1.TabIndex = 1032;
-            // 
-            // btnLimpar3
-            // 
-            this.btnLimpar3.Location = new System.Drawing.Point(515, 48);
-            this.btnLimpar3.Name = "btnLimpar3";
-            this.btnLimpar3.Size = new System.Drawing.Size(245, 23);
-            this.btnLimpar3.TabIndex = 1031;
-            this.btnLimpar3.Text = "Limpar";
-            // 
-            // btnAbrir3
-            // 
-            this.btnAbrir3.Location = new System.Drawing.Point(515, 19);
-            this.btnAbrir3.Name = "btnAbrir3";
-            this.btnAbrir3.Size = new System.Drawing.Size(245, 23);
-            this.btnAbrir3.TabIndex = 1030;
-            this.btnAbrir3.Text = "Abrir";
-            // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.btnLimpar2);
-            this.tabPage1.Controls.Add(this.btnLimpar1);
-            this.tabPage1.Controls.Add(this.label28);
-            this.tabPage1.Controls.Add(this.pbDoc2);
-            this.tabPage1.Controls.Add(this.btnAbrir2);
-            this.tabPage1.Controls.Add(this.label21);
-            this.tabPage1.Controls.Add(this.pbImagemDoc1);
-            this.tabPage1.Controls.Add(this.btnAbrir1);
             this.tabPage1.Controls.Add(this.groupBox3);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -328,78 +348,6 @@
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "Documentos";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // btnLimpar2
-            // 
-            this.btnLimpar2.Location = new System.Drawing.Point(636, 51);
-            this.btnLimpar2.Name = "btnLimpar2";
-            this.btnLimpar2.Size = new System.Drawing.Size(245, 23);
-            this.btnLimpar2.TabIndex = 1036;
-            this.btnLimpar2.Text = "Limpar";
-            this.btnLimpar2.Click += new System.EventHandler(this.btnLimpar2_Click_1);
-            // 
-            // btnLimpar1
-            // 
-            this.btnLimpar1.Location = new System.Drawing.Point(385, 51);
-            this.btnLimpar1.Name = "btnLimpar1";
-            this.btnLimpar1.Size = new System.Drawing.Size(245, 23);
-            this.btnLimpar1.TabIndex = 1035;
-            this.btnLimpar1.Text = "Limpar";
-            this.btnLimpar1.Click += new System.EventHandler(this.btnLimpar1_Click_1);
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(633, 6);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(43, 13);
-            this.label28.TabIndex = 1034;
-            this.label28.Text = "Anexo2";
-            // 
-            // pbDoc2
-            // 
-            this.pbDoc2.Location = new System.Drawing.Point(633, 80);
-            this.pbDoc2.Name = "pbDoc2";
-            this.pbDoc2.Size = new System.Drawing.Size(245, 309);
-            this.pbDoc2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbDoc2.TabIndex = 1033;
-            this.pbDoc2.TabStop = false;
-            // 
-            // btnAbrir2
-            // 
-            this.btnAbrir2.Location = new System.Drawing.Point(636, 22);
-            this.btnAbrir2.Name = "btnAbrir2";
-            this.btnAbrir2.Size = new System.Drawing.Size(245, 23);
-            this.btnAbrir2.TabIndex = 1030;
-            this.btnAbrir2.Text = "Abrir";
-            
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(382, 6);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(43, 13);
-            this.label21.TabIndex = 1032;
-            this.label21.Text = "Anexo1";
-            // 
-            // pbImagemDoc1
-            // 
-            this.pbImagemDoc1.Location = new System.Drawing.Point(386, 80);
-            this.pbImagemDoc1.Name = "pbImagemDoc1";
-            this.pbImagemDoc1.Size = new System.Drawing.Size(245, 309);
-            this.pbImagemDoc1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbImagemDoc1.TabIndex = 1031;
-            this.pbImagemDoc1.TabStop = false;
-            // 
-            // btnAbrir1
-            // 
-            this.btnAbrir1.Location = new System.Drawing.Point(385, 22);
-            this.btnAbrir1.Name = "btnAbrir1";
-            this.btnAbrir1.Size = new System.Drawing.Size(245, 23);
-            this.btnAbrir1.TabIndex = 1029;
-            this.btnAbrir1.Text = "Abrir";
-            
             // 
             // groupBox3
             // 
@@ -421,7 +369,7 @@
             this.groupBox3.Controls.Add(this.txtCNPJ);
             this.groupBox3.Location = new System.Drawing.Point(6, 6);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(372, 382);
+            this.groupBox3.Size = new System.Drawing.Size(870, 298);
             this.groupBox3.TabIndex = 1015;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Documentos";
@@ -430,7 +378,7 @@
             // 
             this.txtApolice.Location = new System.Drawing.Point(6, 206);
             this.txtApolice.Name = "txtApolice";
-            this.txtApolice.Size = new System.Drawing.Size(152, 20);
+            this.txtApolice.Size = new System.Drawing.Size(155, 20);
             this.txtApolice.TabIndex = 25;
             this.txtApolice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtApolice_KeyPress);
             // 
@@ -448,7 +396,7 @@
             this.txtObservacaoDocumento.Location = new System.Drawing.Point(6, 250);
             this.txtObservacaoDocumento.Multiline = true;
             this.txtObservacaoDocumento.Name = "txtObservacaoDocumento";
-            this.txtObservacaoDocumento.Size = new System.Drawing.Size(359, 40);
+            this.txtObservacaoDocumento.Size = new System.Drawing.Size(858, 40);
             this.txtObservacaoDocumento.TabIndex = 26;
             // 
             // label27
@@ -1097,7 +1045,6 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Location = new System.Drawing.Point(-4, 57);
             this.tabControl1.Name = "tabControl1";
@@ -1105,78 +1052,16 @@
             this.tabControl1.Size = new System.Drawing.Size(892, 530);
             this.tabControl1.TabIndex = 1004;
             // 
-            // btnCancelar
+            // btnExcluir
             // 
-            this.btnCancelar.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnCancelar.Location = new System.Drawing.Point(807, 592);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(2);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(70, 31);
-            this.btnCancelar.TabIndex = 1011;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click_1);
-            // 
-            // btnOk
-            // 
-            this.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnOk.Location = new System.Drawing.Point(659, 592);
-            this.btnOk.Margin = new System.Windows.Forms.Padding(2);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(70, 31);
-            this.btnOk.TabIndex = 1009;
-            this.btnOk.Text = "Ok";
-            this.btnOk.Click += new System.EventHandler(this.btnOk_Click_1);
-            // 
-            // btnSalvar
-            // 
-            this.btnSalvar.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnSalvar.Location = new System.Drawing.Point(733, 592);
-            this.btnSalvar.Margin = new System.Windows.Forms.Padding(2);
-            this.btnSalvar.Name = "btnSalvar";
-            this.btnSalvar.Size = new System.Drawing.Size(70, 31);
-            this.btnSalvar.TabIndex = 1010;
-            this.btnSalvar.Text = "Salvar";
-            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click_1);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(7, 12);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(75, 13);
-            this.label8.TabIndex = 1016;
-            this.label8.Text = "Codigo Cliente";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(121, 12);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(73, 13);
-            this.label13.TabIndex = 1017;
-            this.label13.Text = "Data Inclusão";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(216, 12);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(28, 13);
-            this.label15.TabIndex = 1020;
-            this.label15.Text = "Tipo";
-            // 
-            // txtTipoPessoa
-            // 
-            this.txtTipoPessoa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.txtTipoPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTipoPessoa.FormattingEnabled = true;
-            this.txtTipoPessoa.Items.AddRange(new object[] {
-            "Pessoa Física",
-            "Pessoa Jurídica"});
-            this.txtTipoPessoa.Location = new System.Drawing.Point(219, 27);
-            this.txtTipoPessoa.Name = "txtTipoPessoa";
-            this.txtTipoPessoa.Size = new System.Drawing.Size(121, 24);
-            this.txtTipoPessoa.TabIndex = 1021;
+            this.btnExcluir.Enabled = false;
+            this.btnExcluir.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
+            this.btnExcluir.Location = new System.Drawing.Point(93, 17);
+            this.btnExcluir.Name = "btnExcluir";
+            this.btnExcluir.Size = new System.Drawing.Size(75, 23);
+            this.btnExcluir.TabIndex = 5;
+            this.btnExcluir.Text = "Excluir";
+            this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
             // frmFCFO
             // 
@@ -1212,11 +1097,7 @@
             this.tabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            this.tabPage3.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbDoc2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbImagemDoc1)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -1247,6 +1128,9 @@
         private DevExpress.XtraEditors.SimpleButton btnSalvar;
         private DevExpress.XtraEditors.SimpleButton btnOk;
         private DevExpress.XtraEditors.SimpleButton btnCancelar;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.MaskedTextBox txtDataInclusao;
+        private System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -1292,14 +1176,6 @@
         private System.Windows.Forms.TextBox txtNome;
         private System.Windows.Forms.Label lblNome;
         private System.Windows.Forms.TabPage tabPage1;
-        private DevExpress.XtraEditors.SimpleButton btnLimpar2;
-        private DevExpress.XtraEditors.SimpleButton btnLimpar1;
-        private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.PictureBox pbDoc2;
-        private DevExpress.XtraEditors.SimpleButton btnAbrir2;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.PictureBox pbImagemDoc1;
-        private DevExpress.XtraEditors.SimpleButton btnAbrir1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox txtApolice;
         private System.Windows.Forms.Label label29;
@@ -1317,17 +1193,11 @@
         private System.Windows.Forms.TextBox txtTipoResidencia;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.MaskedTextBox txtCNPJ;
-        private System.Windows.Forms.TabPage tabPage3;
-        private DevExpress.XtraPdfViewer.PdfViewer pdfViewer1;
-        private DevExpress.XtraEditors.SimpleButton btnLimpar3;
-        private DevExpress.XtraEditors.SimpleButton btnAbrir3;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.MaskedTextBox txtDataInclusao;
-        private System.Windows.Forms.TextBox txtCodigo;
-        private DevExpress.XtraEditors.SimpleButton btnAdicionar;
-        private DevExpress.XtraEditors.SimpleButton btnAbrir;
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraEditors.SimpleButton btnDownload;
+        private DevExpress.XtraEditors.SimpleButton btnAdicionar;
+        private DevExpress.XtraEditors.SimpleButton btnExcluir;
     }
 }
