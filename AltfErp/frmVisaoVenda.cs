@@ -90,6 +90,9 @@ namespace AltfErp
                 Cad.txtIof.ReadOnly = true;
                 Cad.cbCoCorretagem.Enabled = false;
                 Cad.txtDataVencimento.ReadOnly = true;
+                Cad.btnAdicionarImagem.Enabled = false;
+                Cad.btnDownload.Enabled = false;
+                Cad.btnExcluirImagem.Enabled = false;
                 Cad.ShowDialog();
 
                 AtualizaGrid();
@@ -158,10 +161,29 @@ namespace AltfErp
         {
             try
             {
+                var rowHandle = gridView1.FocusedRowHandle;
+                var idVenda = gridView1.GetRowCellValue(rowHandle, "IDVENDA");
+                var status = gridView1.GetRowCellValue(rowHandle, "STATUS");
 
-                ChamaCadastro();
+                if (idVenda != null)
+                {
+                    IDVENDA = int.Parse(idVenda.ToString());
+                    if (TestaUpdate())
+                    {
+                        frmCadastroVenda frm = new frmCadastroVenda(true, idVenda.ToString(), status.ToString());
+                        frm.ShowDialog();
+                        AtualizaGrid();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Já existem pagamentos nesta venda. A edição está bloqueada!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
 
-
+                }
+                else
+                {
+                    MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             catch (Exception ex)
             {
@@ -230,15 +252,16 @@ namespace AltfErp
 
                             string sql = String.Format(@"select count(IDITEM) as LINHA FROM ITEMMOVIMENTO WHERE IDVENDA = {0}", obj);
                             LINHA = int.Parse(MetodosSql.GetField(sql, "LINHA"));
-
                             sql = String.Format(@"SELECT MIN(IDITEM) AS MINIDITEM FROM ITEMMOVIMENTO WHERE IDVENDA = {0}", obj);
                             IDITEM = int.Parse(MetodosSql.GetField(sql, "MINIDITEM"));
 
+
                             MetodosSql.ExecQuery(String.Format(@"DELETE FROM PARCELA WHERE IDVENDA = {0}", obj));
-                            MetodosSql.ExecQuery(String.Format(@"delete from VENDA where IDVENDA = {0}", obj));
+                            MetodosSql.ExecQuery(String.Format(@"DELETE FROM VENDA WHERE IDVENDA = {0}", obj));
                             MetodosSql.ExecQuery(String.Format(@"DELETE FROM VENDACOMISSAO WHERE IDVENDA = {0}", obj));
                             MetodosSql.ExecQuery(String.Format(@"DELETE FROM RECEBIMENTO WHERE IDVENDA = '{0}'", obj));
                             MetodosSql.ExecQuery(String.Format(@"DELETE FROM ITEMMOVIMENTO WHERE IDVENDA = '{0}'", obj));
+                            MetodosSql.ExecQuery(String.Format(@"DELETE FROM FCFOIMAGEM WHERE IDVENDA = '{0}'", obj));
                             AtualizaGrid();
                         }
                     }
@@ -266,9 +289,6 @@ namespace AltfErp
             try
             {
                 ChamaCadastro();
-
-
-
             }
             catch (Exception ex)
             {
@@ -301,8 +321,7 @@ namespace AltfErp
             else
             {
                 MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-           
+            }           
         }
 
         private void btnPagamento_Click(object sender, EventArgs e)

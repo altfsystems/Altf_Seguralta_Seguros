@@ -24,8 +24,7 @@ namespace AltfErp
         string codFcfo;
         string tipo;
         int validacao;
-        string valida;
-        byte[] byteImagemFinal;
+        string valida;        
         string indiceItem;
 
         public frmFCFO(Boolean _Editar, String _Cod, String _tipo)
@@ -305,9 +304,9 @@ namespace AltfErp
                 {
                     foreach (Anexos anexos in anexosVisao)
                     {
-                        string imagem = anexos.Arquivo;
-                        byteImagemFinal = System.IO.File.ReadAllBytes(imagem);
-                        MetodosSql.InsereImagem(String.Format(@"INSERT INTO FCFOIMAGEM(IDFCFO, IMAGEM1, NOMEANEXO, EXTENSAO, CAMINHO) VALUES('{0}', @Imagem, '{1}', '{2}', '{3}')", codFcfo, anexos.Nome, anexos.Extensão, imagem), byteImagemFinal);
+                        string caminho = anexos.Arquivo;
+                        byte[] imagem = System.IO.File.ReadAllBytes(caminho);
+                        MetodosSql.InsereImagem(String.Format(@"INSERT INTO FCFOIMAGEM(IDFCFO, IMAGEM1, NOMEANEXO, EXTENSAO, CAMINHO) VALUES('{0}', @Imagem, '{1}', '{2}', '{3}')", codFcfo, anexos.Nome, anexos.Extensão, caminho), imagem);
                     }
                 }                
             }
@@ -397,7 +396,6 @@ namespace AltfErp
                         MetodosSql.ExecQuery("DELETE FROM FCFOIMAGEM WHERE IDIMAGEM = " + idImagem);
                         gridControl1.DataSource = MetodosSql.GetDT("SELECT IDIMAGEM, NOMEANEXO, CAMINHO, EXTENSAO FROM FCFOIMAGEM WHERE IDFCFO = " + txtCodigo.Text);
                     }
-
                 }
                 else
                 {

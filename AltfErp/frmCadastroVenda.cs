@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
 using DevExpress.ClipboardSource.SpreadsheetML;
+using System.IO;
 
 namespace AltfErp
 {
@@ -16,32 +17,31 @@ namespace AltfErp
     {
         Boolean Editar;
         List<Produto> produtos = new List<Produto>();
+        List<Anexos> anexosVisao = new List<Anexos>();
         string IDITEM = null;
         string IDCIA = null;
         string DESCIA = null;
+        string IDVENDA;
+        string indiceItem;
         bool vendaClick;
         string data1, idVendedor, status, Cod, sql, IDPRODUTO;
         int ano, dia, mes;
         string diaVencimento, mesVencimento, idCia;
         public string VENCIMENTOANUAL { get; set; }
         public string OBS { get; set; }
-
-
         public class Produto
         {
             public String IDPRODUTO { get; set; }
             public String DESCRICAO { get; set; }
             public String CIASEGURADORA { get; set; }
-            public String OBSERVACAO { get; set; }
-            
-
-            //public String PRECOUNITARIO { get; set; }
-            //public String QUANTIDADE { get; set; }
-            //public String VALORTOTAL { get; set; }
-            //public String CODPARCELA { get; set; }
+            public String OBSERVACAO { get; set; }           
         }
-
-
+        public class Anexos
+        {
+            public String Nome { get; set; }
+            public String Arquivo { get; set; }
+            public String Extensão { get; set; }
+        }
         public frmCadastroVenda(bool Editar_, string Cod_, string status_)
         {
             InitializeComponent();
@@ -60,7 +60,25 @@ namespace AltfErp
             gridControl1.EmbeddedNavigator.Buttons.Remove.Visible = false;
             btnSelecionaVendedor.Select();
         }
-
+        private void InsereImagem()
+        {
+            try
+            {
+                if(!Editar)
+                {
+                    foreach(Anexos anexo in anexosVisao)
+                    {
+                        string caminho = anexo.Arquivo;
+                        byte[] imagem = File.ReadAllBytes(caminho);
+                        MetodosSql.InsereImagem(String.Format("INSERT INTO FCFOIMAGEM(IDVENDA, IMAGEM1, NOMEANEXO, EXTENSAO, CAMINHO) VALUES('{0}', @Imagem, '{1}', '{2}', '{3}')", IDVENDA, anexo.Nome, anexo.Extensão, caminho), imagem);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         private Boolean ValidaCadastro()
         {
             int count;
@@ -123,7 +141,6 @@ namespace AltfErp
             else { retorno = true; }
             return retorno;
         }
-
         private void Calculos()
         {
             if (String.IsNullOrWhiteSpace(txtValorLiquido.Text)) { txtValorLiquido.Text = "0,00"; }
@@ -148,7 +165,6 @@ namespace AltfErp
             valorTotal = Convert.ToDouble(valorLiquido + iof);
             txtValorTotal.Text = String.Format("{0:N}", valorTotal);
         }
-
         private void InsertParcela()
         {
 
@@ -192,7 +208,6 @@ namespace AltfErp
 
             }
         }
-
         private void InsertVenda()
         {
             if (String.IsNullOrWhiteSpace(txtDesconto.Text))
@@ -205,9 +220,9 @@ namespace AltfErp
                                     '{0}' ,{4}, null, '{1}' ,{2}, '{3}' , 'A' , getdate() , null, CONVERT(DATETIME, CONVERT(VARCHAR,'{5}', 121),103), '{6}') select SCOPE_IDENTITY()",
                                 txtIdCliente.Text, txtTipoPagamento.Text, txtDesconto.Text.Replace(".", "").Replace(",", "."), txtObservacao.Text, txtIdVendedor.Text,
                                 txtDataVencimento.Text, idCia);
-            object IDVENDA = MetodosSql.ExecScalar(sql);
-            txtCodigo.Text = IDVENDA.ToString();
-
+            object idVenda = MetodosSql.ExecScalar(sql);
+            txtCodigo.Text = idVenda.ToString();
+            IDVENDA = idVenda.ToString();
 
 
             string valor;
@@ -275,8 +290,6 @@ namespace AltfErp
                 MetodosSql.ExecQuery(sql);
             }
 
-
-
             InsertParcela();
 
 
@@ -289,11 +302,8 @@ namespace AltfErp
                 frm.CODIGOPARCELA = Cod.ToString();
                 frm.CODIGOCLIENTE = txtIdCliente.Text;
                 frm.ShowDialog();
-            }
-
-            Editar = true;
+            }           
         }
-
         private void UpdateVenda()
         {
             try
@@ -410,19 +420,20 @@ namespace AltfErp
                 if (Editar)
                 {
                     UpdateVenda();
+                    InsereImagem();
                 }
                 else
                 {
                     InsertVenda();
+                    InsereImagem();
+                    Editar = true;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             }
         }
-
         private void AtualizaGrid()
         {
             try
@@ -471,8 +482,7 @@ namespace AltfErp
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-        
+        }        
         private void frmCadastroVenda_Load(object sender, EventArgs e)
         {
             try
@@ -488,7 +498,9 @@ namespace AltfErp
                     string mes = vet[1];
                     string ano = vet[2];
 
-                    txtCodigo.Text = Cod;                    
+                    txtCodigo.Text = Cod;
+                    IDVENDA = txtCodigo.Text;
+                    gridControl2.DataSource = MetodosSql.GetDT("SELECT IDIMAGEM, NOMEANEXO, EXTENSAO FROM FCFOIMAGEM WHERE IDVENDA = "+txtCodigo.Text);
                     sql = String.Format(@"select * from VENDA where IDVENDA = {0}", Cod);
                     idVendedor = MetodosSql.GetField(sql, "IDVENDEDOR");
                     txtIdCliente.Text = MetodosSql.GetField(sql, "IDFCFO");
@@ -527,9 +539,10 @@ namespace AltfErp
                     }
                     sql = String.Format(@"SELECT CAST(TOTALVENDADESCONTO AS NUMERIC(20,2)) AS TOTALVENDADESCONTO FROM VENDACOMISSAO WHERE IDVENDA = '{0}'", Cod);
                     txtTotalDesconto.Text = String.Format("{0:N}", MetodosSql.GetField(sql, "TOTALVENDADESCONTO")).Replace(".", "").Replace(".", ",");
-
-
-
+                }
+                else
+                {
+                    btnDownload.Text = "Abrir";
                 }
                 AtualizaGrid();
             }
@@ -538,9 +551,6 @@ namespace AltfErp
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
-
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -567,29 +577,13 @@ namespace AltfErp
                 }
             }
         }
-
         private void LimpaCampos()
         {
             txtCodigoProduto.Text = String.Empty;
             txtDescricaoProduto.Text = String.Empty;
             txtCiaSeguradora.Text = String.Empty;
             txtIdCia.Text = String.Empty;
-        }
-
-        private void btnSelecionaProduto_Click_2(object sender, EventArgs e)
-        {
-            frmVisaoSelecionaProduto frm = new frmVisaoSelecionaProduto();
-            frm.ShowDialog();
-            txtCodigoProduto.Text = frm.CODIGO;
-            txtDescricaoProduto.Text = frm.DESCRICAO;
-            OBS = frm.OBSERVACAO;
-
-
-            //sql = String.Format(@"select * from PRODUTO where IDPRODUTO = '{0}'", frm.CODIGO);
-            //txtValorUnitario.Text = MetodosSql.GetField(sql, "PRECOUNVENDA");
-            //CalculaTotal();
-        }
-
+        }     
         private void simpleButton2_Click_1(object sender, EventArgs e)
         {
             frmVisaoSelecionaCliente frm = new frmVisaoSelecionaCliente();
@@ -597,18 +591,216 @@ namespace AltfErp
             txtIdCliente.Text = frm.CODIGO;
             txtNome.Text = frm.NOME;
             txtSobrenome.Text = frm.SOBRENOME;
-        }
-
-        private void txtValorLiquido_Leave_1(object sender, EventArgs e)
+        }               
+        private void txtDesconto_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //Calculos();
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
+            {
+                e.Handled = true;
+            }
+        }
+        private void txtDesconto_TextChanged(object sender, EventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(txtValorLiquido.Text)) { txtValorLiquido.Text = "0,00"; }
+            if (String.IsNullOrWhiteSpace(txtIof.Text)) { txtIof.Text = "0,00"; }
+            if (String.IsNullOrWhiteSpace(txtComissao.Text)) { txtComissao.Text = "0,00"; }
+            if (String.IsNullOrWhiteSpace(txtTotalVenda.Text)) { txtTotalVenda.Text = "0,00"; }
+            if (String.IsNullOrWhiteSpace(txtDesconto.Text))
+            {
+                txtTotalDesconto.Text = txtTotalVenda.Text;
+            }
+            else
+            {
+                double TotalDesconto = Convert.ToDouble(txtTotalVenda.Text) - Convert.ToDouble(txtDesconto.Text);
+                txtTotalDesconto.Text = String.Format("{0:N}", TotalDesconto);
+            }
+        }
+        private void btnAdicionarImagem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (OpenFileDialog file = new OpenFileDialog() { ValidateNames = true, Multiselect = false, Filter = "Arquivos de Imagem|*.pdf;*.jpg;*.JPEG;*.png" })
+                {
+                    if (file.ShowDialog() == DialogResult.OK)
+                    {
+                        string extensao = Path.GetExtension(file.FileName);
+                        string nome = Path.GetFileName(file.FileName);
+                        string caminho = file.FileName;
+                        byte[] imagem = File.ReadAllBytes(file.FileName);
+
+                        if (Editar)
+                        {
+                            MetodosSql.InsereImagem(String.Format("INSERT INTO FCFOIMAGEM(IDVENDA, IMAGEM1, NOMEANEXO, EXTENSAO, CAMINHO) VALUES('{0}', @Imagem, '{1}', '{2}', '{3}')", txtCodigo.Text, nome, extensao, caminho), imagem);
+                            gridControl2.DataSource = MetodosSql.GetDT("SELECT IDIMAGEM, NOMEANEXO, EXTENSAO FROM FCFOIMAGEM WHERE IDVENDA = " + txtCodigo.Text);
+                        }
+                        else
+                        {
+                            Anexos classe = new Anexos();
+                            classe.Arquivo = caminho;
+                            classe.Extensão = extensao;
+                            classe.Nome = nome;
+                            anexosVisao.Add(classe);
+                            gridControl2.DataSource = anexosVisao;
+                            gridControl2.RefreshDataSource();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }            
+        }
+        private void btnExcluirImagem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Editar)
+                {
+                    if (DialogResult.Yes == MessageBox.Show("Tem certeza que deseja excluir este anexo?", "Pergunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                    {
+                        var rowHandle = gridView2.FocusedRowHandle;
+                        var idImagem = gridView2.GetRowCellValue(rowHandle, "IDIMAGEM");
+                        MetodosSql.ExecQuery("DELETE FROM FCFOIMAGEM WHERE IDIMAGEM = " + idImagem);
+                        gridControl2.DataSource = MetodosSql.GetDT("SELECT IDIMAGEM, NOMEANEXO, CAMINHO, EXTENSAO FROM FCFOIMAGEM WHERE IDVENDA = " + txtCodigo.Text);
+                    }
+                }
+                else
+                {
+                    if (DialogResult.Yes == MessageBox.Show("Tem certeza que deseja excluir este anexo?", "Pergunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                    {
+                        var rowHandle = gridView2.FocusedRowHandle;
+                        var nome = gridView2.GetRowCellValue(rowHandle, "NOME");
+                        anexosVisao.RemoveAt(int.Parse(indiceItem.ToString()));
+                        gridView2.ClearDocument();
+                        gridControl2.DataSource = anexosVisao;
+                        gridControl2.RefreshDataSource();
+                    }
+                }
+                btnExcluirImagem.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+        }
+        private void gridControl2_DoubleClick(object sender, EventArgs e)
+        {
+            var rowHandle = gridView2.FocusedRowHandle;
+            if (!Editar)
+            {
+                int indice = int.Parse(rowHandle.ToString());
+                indiceItem = indice.ToString();
+            }
+            btnExcluirImagem.Enabled = true;
+        }
+        private void btnDownload_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Editar)
+                {
+                    var rowHandle = gridView2.FocusedRowHandle;
+                    var nomeAnexo = gridView2.GetRowCellValue(rowHandle, "NOMEANEXO");
+                    var idImagem = gridView2.GetRowCellValue(rowHandle, "IDIMAGEM");
+                    string sql = "SELECT IMAGEM1, EXTENSAO FROM FCFOIMAGEM WHERE IDVENDA = " + IDVENDA + " AND IDIMAGEM = " + idImagem;
+                    string extensao = MetodosSql.GetField(sql, "EXTENSAO");
+
+                    if (idImagem != null)
+                    {
+                        SaveFileDialog sfd = new SaveFileDialog();
+                        sfd.FileName = nomeAnexo.ToString();
+                        if (extensao == ".pdf")
+                        {
+                            sfd.Filter = "Arquivos (.pdf)|*.pdf";
+                        }
+                        else if (extensao == ".jpg")
+                        {
+                            sfd.Filter = "Arquivos (.jpg)|*.jpg";
+                        }
+                        else if (extensao == ".jpeg")
+                        {
+                            sfd.Filter = "Arquivos (.jpeg)|*.jpeg";
+                        }
+                        else if (extensao == ".png")
+                        {
+                            sfd.Filter = "Arquivos (.png)|*.png";
+                        }
+                        if (sfd.ShowDialog() == DialogResult.OK)
+                        {
+                            string caminho = sfd.FileName;
+                            string nome = Path.GetFileName(caminho);
+                            byte[] imagem = MetodosSql.GetImagePdf(sql, "IMAGEM1");
+                            File.WriteAllBytes(caminho, imagem);
+                            MessageBox.Show("Salvo com sucesso!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Por favor, selecione um cadastro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else
+                {
+                    var rowHandle = gridView2.FocusedRowHandle;
+                    var extensao = gridView2.GetRowCellValue(rowHandle, "Extensão");
+                    var fileName = gridView2.GetRowCellValue(rowHandle, "Arquivo");
+                    if (extensao.ToString() == ".pdf")
+                    {
+                        frmVisualizaPdf frm = new frmVisualizaPdf(fileName.ToString());
+                        frm.ShowDialog();
+                    }
+                    else
+                    {
+                        frmVisualizaImagem frm = new frmVisualizaImagem(fileName.ToString());
+                        frm.ShowDialog();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void btnSelecionaCliente_Click(object sender, EventArgs e)
+        {
+            frmVisaoSelecionaCliente frm = new frmVisaoSelecionaCliente();
+            frm.ShowDialog();
+            txtIdCliente.Text = frm.CODIGO;
+            txtNome.Text = frm.NOME;
+            txtSobrenome.Text = frm.SOBRENOME;
+        }
+        private void btnSelecionaProduto_Click(object sender, EventArgs e)
+        {
+            frmVisaoSelecionaProduto frm = new frmVisaoSelecionaProduto();
+            frm.ShowDialog();
+            txtCodigoProduto.Text = frm.CODIGO;
+            txtDescricaoProduto.Text = frm.DESCRICAO;
+            OBS = frm.OBSERVACAO;
+        }
+        private void txtIof_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
+            {
+                e.Handled = true;
+            }
+        }
+        private void txtComissao_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
+            {
+                e.Handled = true;
+            }
+        }
+        private void txtValorLiquido_Leave(object sender, EventArgs e)
+        {            
             if (String.IsNullOrWhiteSpace(txtValorLiquido.Text)) { txtValorLiquido.Text = "0,00"; }
             if (String.IsNullOrWhiteSpace(txtIof.Text)) { txtIof.Text = "0,00"; }
             if (String.IsNullOrWhiteSpace(txtDesconto.Text)) { txtDesconto.Text = "0,00"; }
 
             double valorLiquido = Convert.ToDouble(txtValorLiquido.Text);
             txtValorLiquido.Text = String.Format("{0:N}", valorLiquido).Replace(".", "").Replace(".", ",");
-
 
             double iof = Convert.ToDouble(txtIof.Text);
             txtIof.Text = String.Format("{0:N}", iof).Replace(".", "").Replace(".", ",");
@@ -620,8 +812,24 @@ namespace AltfErp
             txtTotalDesconto.Text = txtValorTotal.Text;
             txtDesconto.Text = "0,00";
         }
+        private void txtIof_Leave_1(object sender, EventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(txtValorLiquido.Text)) { txtValorLiquido.Text = "0,00"; }
+            if (String.IsNullOrWhiteSpace(txtIof.Text)) { txtIof.Text = "0,00"; }
+            if (String.IsNullOrWhiteSpace(txtDesconto.Text)) { txtDesconto.Text = "0,00"; }
 
-        private void txtComissao_Leave_1(object sender, EventArgs e)
+            double iof = Convert.ToDouble(txtIof.Text);
+            txtIof.Text = String.Format("{0:N}", iof).Replace(".", "").Replace(".", ",");
+            double valorLiquido = Convert.ToDouble(txtValorLiquido.Text);
+            txtValorLiquido.Text = String.Format("{0:N}", valorLiquido).Replace(".", "").Replace(".", ",");
+
+            valorLiquido = double.Parse(txtValorLiquido.Text);
+            double valorTotal = Convert.ToDouble(valorLiquido + iof);
+            txtValorTotal.Text = String.Format("{0:N}", valorTotal);
+            txtTotalVenda.Text = txtValorTotal.Text;
+            txtTotalDesconto.Text = txtValorTotal.Text;
+        }
+        private void txtComissao_Leave(object sender, EventArgs e)
         {
             //Calculos();
             if (!String.IsNullOrWhiteSpace(txtComissao.Text))
@@ -642,93 +850,21 @@ namespace AltfErp
                 txtComissaoVenda.Text = String.Empty;
             }
         }
-
-        private void txtIof_Leave(object sender, EventArgs e)
+        private void btnTipoPagamento_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(txtValorLiquido.Text)) { txtValorLiquido.Text = "0,00"; }
-            if (String.IsNullOrWhiteSpace(txtIof.Text)) { txtIof.Text = "0,00"; }
-            if (String.IsNullOrWhiteSpace(txtDesconto.Text)) { txtDesconto.Text = "0,00"; }
-
-            double iof = Convert.ToDouble(txtIof.Text);
-            txtIof.Text = String.Format("{0:N}", iof).Replace(".", "").Replace(".", ",");
-            double valorLiquido = Convert.ToDouble(txtValorLiquido.Text);
-            txtValorLiquido.Text = String.Format("{0:N}", valorLiquido).Replace(".", "").Replace(".", ",");
-
-            valorLiquido = double.Parse(txtValorLiquido.Text);
-            double valorTotal = Convert.ToDouble(valorLiquido + iof);
-            txtValorTotal.Text = String.Format("{0:N}", valorTotal);
-            txtTotalVenda.Text = txtValorTotal.Text;
-            txtTotalDesconto.Text = txtValorTotal.Text;
-
-        }
-
-        private void txtIof_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txtComissao_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txtDesconto_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txtDesconto_TextChanged(object sender, EventArgs e)
-        {
-            if (String.IsNullOrWhiteSpace(txtValorLiquido.Text)) { txtValorLiquido.Text = "0,00"; }
-            if (String.IsNullOrWhiteSpace(txtIof.Text)) { txtIof.Text = "0,00"; }
-            if (String.IsNullOrWhiteSpace(txtComissao.Text)) { txtComissao.Text = "0,00"; }
-            if (String.IsNullOrWhiteSpace(txtTotalVenda.Text)) { txtTotalVenda.Text = "0,00"; }
-            if (String.IsNullOrWhiteSpace(txtDesconto.Text))
-            {
-                txtTotalDesconto.Text = txtTotalVenda.Text;
-            }
-            else
-            {
-                double TotalDesconto = Convert.ToDouble(txtTotalVenda.Text) - Convert.ToDouble(txtDesconto.Text);
-                txtTotalDesconto.Text = String.Format("{0:N}", TotalDesconto);
-            }
-        }
-
-        private void btnSelecioaCiaSeguradora_Click(object sender, EventArgs e)
-        {
-            frmVisaoSelecionaCiaSeuradora frm = new frmVisaoSelecionaCiaSeuradora();
+            frmTipoPagamento frm = new frmTipoPagamento();
             frm.ShowDialog();
-            Cod = frm.Codigo;
-
-            string sql = String.Format("SELECT IDSEGURADORA, NOMEFANTASIA FROM FCFOSEGURADORA WHERE IDSEGURADORA = '{0}'", Cod);
-            txtIdCia.Text = MetodosSql.GetField(sql, "IDSEGURADORA");
-            txtCiaSeguradora.Text = MetodosSql.GetField(sql, "NOMEFANTASIA");
-
+            txtTipoPagamento.Text = frm.CODIGO;
+            txtDescricaoTipoPagamento.Text = frm.DESCRICAO;
         }
-
-        private void txtDesconto_Leave_1(object sender, EventArgs e)
-        {
-            Calculos();
-        }
-
-        private void txtValorLiquido_KeyPress_1(object sender, KeyPressEventArgs e)
+        private void txtValorLiquido_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
             {
                 e.Handled = true;
             }
         }
-
-        private void gridControl1_DoubleClick_1(object sender, EventArgs e)
+        private void gridControl1_DoubleClick(object sender, EventArgs e)
         {
             try
             {
@@ -741,19 +877,13 @@ namespace AltfErp
                     txtCiaSeguradora.Text = DESCIA;
                     sql = String.Format(@"select * from ITEMMOVIMENTO where IDITEM = '{0}'", IDITEM);
                     txtCodigoProduto.Text = MetodosSql.GetField(sql, "IDPRODUTO");
-
                     sql = String.Format(@"select DESCRICAO from PRODUTO where IDPRODUTO = '{0}'", txtCodigoProduto.Text);
-                    txtDescricaoProduto.Text = MetodosSql.GetField(sql, "DESCRICAO");
-
-                    //CalculaTotal();
+                    txtDescricaoProduto.Text = MetodosSql.GetField(sql, "DESCRICAO");                    
                 }
                 else
                 {
                     int indice = int.Parse(rowHandle.ToString());
-                    txtCodigoProduto.Text = produtos[indice].IDPRODUTO;
-                    //txtIof.Text = produtos[indice].PRECOUNITARIO;
-                    //txtQuantidade.Text = produtos[indice].QUANTIDADE;
-                    //txtValorTotal.Text = produtos[indice].VALORTOTAL;
+                    txtCodigoProduto.Text = produtos[indice].IDPRODUTO;                    
                     txtDescricaoProduto.Text = produtos[indice].DESCRICAO;
                     IDITEM = indice.ToString();
                 }
@@ -765,8 +895,7 @@ namespace AltfErp
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private void btnExcluir_Click_1(object sender, EventArgs e)
+        private void btnExcluir_Click(object sender, EventArgs e)
         {
             try
             {
@@ -794,8 +923,7 @@ namespace AltfErp
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private void btnAdicionar_Click_1(object sender, EventArgs e)
+        private void btnAdicionar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -870,15 +998,20 @@ namespace AltfErp
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private void btnTipoPagamento_Click_1(object sender, EventArgs e)
+        private void btnSelecioaCiaSeguradora_Click_1(object sender, EventArgs e)
         {
-            frmTipoPagamento frm = new frmTipoPagamento();
+            frmVisaoSelecionaCiaSeuradora frm = new frmVisaoSelecionaCiaSeuradora();
             frm.ShowDialog();
-            txtTipoPagamento.Text = frm.CODIGO;
-            txtDescricaoTipoPagamento.Text = frm.DESCRICAO;
-        }
+            Cod = frm.Codigo;
 
+            string sql = String.Format("SELECT IDSEGURADORA, NOMEFANTASIA FROM FCFOSEGURADORA WHERE IDSEGURADORA = '{0}'", Cod);
+            txtIdCia.Text = MetodosSql.GetField(sql, "IDSEGURADORA");
+            txtCiaSeguradora.Text = MetodosSql.GetField(sql, "NOMEFANTASIA");
+        }
+        private void txtDesconto_Leave_1(object sender, EventArgs e)
+        {
+            Calculos();
+        }                      
         private void btnSelecionaVendedor_Click_1(object sender, EventArgs e)
         {
             frmVisaoVendedoresVenda frm = new frmVisaoVendedoresVenda();
@@ -895,16 +1028,13 @@ namespace AltfErp
         }
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-
             vendaClick = true;
             if (ValidaCadastro())
             {
                 btnSalvar.Enabled = false;
                 Cadastro();
             }
-        }
-
-        
+        }        
     }
 }
 

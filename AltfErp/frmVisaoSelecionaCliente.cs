@@ -28,27 +28,14 @@ namespace AltfErp
             gridView1.BestFitColumns();
         }
 
-      
-
         private void Selecionar()
         {
-
             try
             {
                 var rowHandle = gridView1.FocusedRowHandle;
-                
-
-
-            
-                
-                    CODIGO = gridView1.GetRowCellValue(rowHandle, "IDFCFO").ToString();
-                    NOME = gridView1.GetRowCellValue(rowHandle, "NOME").ToString();
-                    SOBRENOME = gridView1.GetRowCellValue(rowHandle, "SOBRENOME").ToString();
-
-                
-
-
-
+                CODIGO = gridView1.GetRowCellValue(rowHandle, "IDFCFO").ToString();
+                NOME = gridView1.GetRowCellValue(rowHandle, "NOME").ToString();
+                SOBRENOME = gridView1.GetRowCellValue(rowHandle, "SOBRENOME").ToString();
                 this.Close();
             }
             catch (Exception ex)
@@ -68,5 +55,5 @@ namespace AltfErp
         }
     }
 
-    
+
 }
