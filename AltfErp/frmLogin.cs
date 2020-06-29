@@ -24,7 +24,7 @@ namespace AltfErp
             dia = vet[0];
             mes = vet[1];
             ano = vet[2];
-            lblVersao.Text = "Version "+ano + "." + mes + "." + dia + ".00037";
+            lblVersao.Text = "Version "+ano + "." + mes + "." + dia + ".00038";
 
             SetUser();
             if(!String.IsNullOrWhiteSpace(txtLogin.Text))
