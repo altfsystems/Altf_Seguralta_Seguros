@@ -428,10 +428,10 @@
             this.txtTelefone2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTelefone2.Location = new System.Drawing.Point(136, 122);
             this.txtTelefone2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.txtTelefone2.Mask = "(99) 0000-0000";
             this.txtTelefone2.Name = "txtTelefone2";
             this.txtTelefone2.Size = new System.Drawing.Size(128, 23);
             this.txtTelefone2.TabIndex = 6;
+            this.txtTelefone2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefone2_KeyPress);
             // 
             // label16
             // 
@@ -459,10 +459,10 @@
             this.txtTelefone.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTelefone.Location = new System.Drawing.Point(4, 122);
             this.txtTelefone.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.txtTelefone.Mask = "(99) 0000-0000";
             this.txtTelefone.Name = "txtTelefone";
             this.txtTelefone.Size = new System.Drawing.Size(128, 23);
             this.txtTelefone.TabIndex = 5;
+            this.txtTelefone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefone_KeyPress);
             // 
             // label11
             // 

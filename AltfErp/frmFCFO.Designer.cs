@@ -114,6 +114,8 @@
             this.txtNome = new System.Windows.Forms.TextBox();
             this.lblNome = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.label21 = new System.Windows.Forms.Label();
+            this.txtCodigoSeguralta = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPageNumberEdit1)).BeginInit();
             this.tabPage4.SuspendLayout();
@@ -192,7 +194,7 @@
             // txtDataInclusao
             // 
             this.txtDataInclusao.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDataInclusao.Location = new System.Drawing.Point(124, 28);
+            this.txtDataInclusao.Location = new System.Drawing.Point(242, 28);
             this.txtDataInclusao.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtDataInclusao.Mask = "00/00/0000";
             this.txtDataInclusao.Name = "txtDataInclusao";
@@ -257,7 +259,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(121, 12);
+            this.label13.Location = new System.Drawing.Point(239, 12);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(73, 13);
             this.label13.TabIndex = 1017;
@@ -266,7 +268,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(216, 12);
+            this.label15.Location = new System.Drawing.Point(334, 11);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(28, 13);
             this.label15.TabIndex = 1020;
@@ -280,7 +282,7 @@
             this.txtTipoPessoa.Items.AddRange(new object[] {
             "Pessoa Física",
             "Pessoa Jurídica"});
-            this.txtTipoPessoa.Location = new System.Drawing.Point(219, 27);
+            this.txtTipoPessoa.Location = new System.Drawing.Point(337, 27);
             this.txtTipoPessoa.Name = "txtTipoPessoa";
             this.txtTipoPessoa.Size = new System.Drawing.Size(121, 24);
             this.txtTipoPessoa.TabIndex = 1021;
@@ -1063,6 +1065,25 @@
             this.tabControl1.Size = new System.Drawing.Size(892, 530);
             this.tabControl1.TabIndex = 1004;
             // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(125, 12);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(88, 13);
+            this.label21.TabIndex = 1027;
+            this.label21.Text = "Codigo Seguralta";
+            // 
+            // txtCodigoSeguralta
+            // 
+            this.txtCodigoSeguralta.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCodigoSeguralta.Location = new System.Drawing.Point(124, 28);
+            this.txtCodigoSeguralta.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.txtCodigoSeguralta.Name = "txtCodigoSeguralta";
+            this.txtCodigoSeguralta.Size = new System.Drawing.Size(114, 23);
+            this.txtCodigoSeguralta.TabIndex = 1026;
+            this.txtCodigoSeguralta.TabStop = false;
+            // 
             // frmFCFO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1070,6 +1091,8 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.HighlightText;
             this.ClientSize = new System.Drawing.Size(888, 627);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.txtCodigoSeguralta);
             this.Controls.Add(this.txtTipoPessoa);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label13);
@@ -1199,5 +1222,7 @@
         private DevExpress.XtraEditors.SimpleButton btnDownload;
         private DevExpress.XtraEditors.SimpleButton btnAdicionar;
         private DevExpress.XtraEditors.SimpleButton btnExcluir;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox txtCodigoSeguralta;
     }
 }

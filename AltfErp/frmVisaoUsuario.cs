@@ -34,13 +34,19 @@ namespace AltfErp
         {
             var rowHandle = gridView1.FocusedRowHandle;
             var cod = gridView1.GetRowCellValue(rowHandle, "ID");
-
-            if (DialogResult.Yes == MessageBox.Show("Tem certeza que deseja excluir este usuário?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            var user = gridView1.GetRowCellValue(rowHandle, "USUARIO");
+            if (cod == null)
             {
-                string sql = String.Format(@"DELETE FROM LOGIN WHERE ID = '{0}'", cod);
-                MetodosSql.ExecQuery(sql);
+                MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
-            AtualizaGrid();
+
+            else
+            {
+                frmCadastroUsuario frm = new frmCadastroUsuario(true, cod.ToString());
+                frm.ShowDialog();
+                AtualizaGrid();
+            }
         }
 
         private void btnNovo_Click_1(object sender, EventArgs e)
@@ -60,10 +66,6 @@ namespace AltfErp
                 MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
-            else if (user.ToString() == "mestre")
-            {
-                MessageBox.Show("Você não pode alterar o usuário mestre!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
             else
             {
                 frmCadastroUsuario frm = new frmCadastroUsuario(true, cod.ToString());
@@ -82,7 +84,7 @@ namespace AltfErp
             {
                 MessageBox.Show("Por favor, selecione um registro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if(user.ToString() == "mestre")
+            else if (user.ToString() == "mestre")
             {
                 MessageBox.Show("Você não pode excluir o usuário mestre!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -23,7 +24,7 @@ namespace AltfErp
             dia = vet[0];
             mes = vet[1];
             ano = vet[2];
-            lblVersao.Text = "Version "+ano + "." + mes + "." + dia + ".00035";
+            lblVersao.Text = "Version "+ano + "." + mes + "." + dia + ".00037";
 
             SetUser();
             if(!String.IsNullOrWhiteSpace(txtLogin.Text))
@@ -36,9 +37,9 @@ namespace AltfErp
 
         private void Login()
         {
-            toolTip1.ShowAlways = false;
+            //toolTip1.ShowAlways = false;
 
-            valida = MetodosSql.ChecaLogin(txtLogin.Text, txtSenha.Text);
+            valida = MetodosSql.ChecaLogin(txtLogin.Text, CriptografaSenha(txtSenha.Text));
 
             if (valida)
             {
@@ -110,6 +111,23 @@ namespace AltfErp
         private void SetUser()
         {
             txtLogin.Text = Properties.Settings.Default.User;
+        }
+
+        private string CriptografaSenha(string _senha)
+        {
+            StringBuilder senha = new StringBuilder();
+
+            MD5 md5 = MD5.Create();
+            byte[] entrada = Encoding.ASCII.GetBytes(_senha);
+            byte[] hash = md5.ComputeHash(entrada);
+
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < hash.Length; i++)
+            {
+                senha.Append(hash[i].ToString("X2"));
+            }
+            return senha.ToString();
         }
     }
 }

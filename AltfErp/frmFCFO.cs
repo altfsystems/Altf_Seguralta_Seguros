@@ -47,8 +47,8 @@ namespace AltfErp
         private void Insert()
         {
             string SQL = String.Format(@"insert into FCFO (NOME , NOMEFANTASIA, CPF, CNPJ, RG, CNH, TELEFONE1, TELEFONE2, CELULAR, CELULAR2, EMAIL, EMAIL2, RUA, LOGRADOURO, NUMERO, BAIRRO, CIDADE,
-                       CEP,ESTADO , COMPLEMENTO, OBSERVACAO, TIPO, DTANASCIMENTO, SEXO, ESTADOCIVIL, TIPORESIDENCIA, OBSDOCUMENTO, TIPOPESSOA, DATAINCLUSAO, APOLICE) values ('{0}','{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}','{10}','{11}','{12}','{13}','{14}',
-                       '{15}','{16}','{17}','{18}','{19}' , '{20}', '{21}' , '{22}' , '{23}' , '{24}' , '{25}' , '{26}','{27}', getdate(), '{28}' ) select SCOPE_IDENTITY()",
+                       CEP,ESTADO , COMPLEMENTO, OBSERVACAO, TIPO, DTANASCIMENTO, SEXO, ESTADOCIVIL, TIPORESIDENCIA, OBSDOCUMENTO, TIPOPESSOA, DATAINCLUSAO, APOLICE, IDSEGURALTA) values ('{0}','{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}','{10}','{11}','{12}','{13}','{14}',
+                       '{15}','{16}','{17}','{18}','{19}' , '{20}', '{21}' , '{22}' , '{23}' , '{24}' , '{25}' , '{26}','{27}', getdate(), '{28}', '{29}' ) select SCOPE_IDENTITY()",
                                 /*{0}*/ txtNome.Text,
                                 /*{1}*/ txtNomeFantasia.Text,
                                 /*{2}*/ txtCpf.Text,
@@ -77,7 +77,8 @@ namespace AltfErp
                                /*{25}*/ txtTipoResidencia.Text,
                                /*{26}*/ txtObservacaoDocumento.Text,
                                /*{27}*/ txtTipoPessoa.Text,
-                               /*{28}*/  txtApolice.Text);
+                               /*{28}*/ txtApolice.Text,
+                               /*{29}*/ txtCodigoSeguralta.Text);
 
             object Ncad = MetodosSql.ExecScalar(SQL);
             codFcfo = Ncad.ToString();
@@ -127,6 +128,7 @@ namespace AltfErp
                     string sql = String.Format(@"select * from FCFO where IDFCFO = {0}", Cod);
 
                     gridControl1.DataSource = MetodosSql.GetDT("SELECT IDIMAGEM, NOMEANEXO, EXTENSAO FROM FCFOIMAGEM WHERE IDFCFO = " + Cod);
+                    txtCodigoSeguralta.Text = MetodosSql.GetField(sql, "IDSEGURALTA");
                     txtNome.Text = MetodosSql.GetField(sql, "NOME");
                     txtTipoPessoa.Text = MetodosSql.GetField(sql, "TIPOPESSOA");
                     txtNomeFantasia.Text = MetodosSql.GetField(sql, "NOMEFANTASIA");
@@ -186,7 +188,7 @@ namespace AltfErp
                                                      TELEFONE1 = '{7}', TELEFONE2 =  '{8}', CELULAR = '{9}', CELULAR2 =  '{10}', EMAIL = '{11}',  EMAIL2 = '{12}', 
                                                      RUA = '{13}', LOGRADOURO = '{14}', NUMERO = '{15}', BAIRRO = '{16}',
                                                      CIDADE = '{17}', CEP = '{18}', ESTADO = '{19}', COMPLEMENTO = '{20}', OBSERVACAO = '{21}', TIPOPESSOA = '{22}', CNH = '{23}',
-                                                     ESTADOCIVIL = '{24}', TIPORESIDENCIA = '{25}', OBSDOCUMENTO = '{26}' ,DATAINCLUSAO = getdate(), APOLICE = '{28}' where IDFCFO = '{27}'",
+                                                     ESTADOCIVIL = '{24}', TIPORESIDENCIA = '{25}', OBSDOCUMENTO = '{26}' ,DATAINCLUSAO = getdate(), APOLICE = '{28}', IDSEGURALTA = '{29}' where IDFCFO = '{27}'",
                                            /*{0}*/   txtNome.Text,
                                            /*{1}*/   txtNomeFantasia.Text,
                                            /*{2}*/   txtCpf.Text,
@@ -215,7 +217,8 @@ namespace AltfErp
                                            /*{25}*/  txtTipoResidencia.Text,
                                            /*{26}*/  txtObservacaoDocumento.Text,
                                            /*{27}*/  Cod,
-                                           /*{28}*/  txtApolice.Text);
+                                           /*{28}*/  txtApolice.Text,
+                                           /*{29}*/  txtCodigoSeguralta.Text);
                     MetodosSql.ExecQuery(SQL);
                     InsereImagem();
                 }

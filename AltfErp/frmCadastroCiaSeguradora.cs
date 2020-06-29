@@ -20,7 +20,6 @@ namespace AltfErp
             Editar = editar;
             Cod = cod;
         }
-
         private void Cadastro()
         {
             try
@@ -44,11 +43,7 @@ namespace AltfErp
                                                  /*{11}*/  txtEmail2.Text,
                                                  /*{12}*/  txtObservacao.Text,
                                                  /*{13}*/  Cod);
-
-                                                  
-
                     MetodosSql.ExecQuery(sql);
-
                 }
                 else
                 {
@@ -62,35 +57,25 @@ namespace AltfErp
                                                   /*{5}*/  txtObservacaoDocumento.Text,
                                                   /*{6}*/  txtTelefone.Text,
                                                   /*{7}*/  txtTelefone2.Text,
-                                                 /*{8}*/   txtCelular.Text,
-                                                 /*{9}*/  txtCelular2.Text,
+                                                  /*{8}*/  txtCelular.Text,
+                                                  /*{9}*/  txtCelular2.Text,
                                                  /*{10}*/  txtEmail.Text,
                                                  /*{11}*/  txtEmail2.Text,
                                                  /*{12}*/  txtObservacao.Text);
-
-                                                 
-
                                                  MetodosSql.ExecQuery(sql);
                     Editar = true;
-                }
-                
+                }                
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
-                
+                MessageBox.Show(ex.Message);                
             }
-            
-
-
         }
-
         private void btnOk_Click(object sender, EventArgs e)
         {
             Cadastro();
             this.Close();
         }
-
         private void frmCadastroCiaSeguradora_Load(object sender, EventArgs e)
         {
             try
@@ -99,8 +84,7 @@ namespace AltfErp
                 {
                     string sql = String.Format(@"SELECT * FROM FCFOSEGURADORA WHERE IDSEGURADORA = '{0}'", Cod);
                     txtNome.Text = MetodosSql.GetField(sql, "NOME");
-                    txtNomeFantasia.Text = MetodosSql.GetField(sql, "NOMEFANTASIA");
-                   
+                    txtNomeFantasia.Text = MetodosSql.GetField(sql, "NOMEFANTASIA");                   
                     txtCelular.Text = MetodosSql.GetField(sql, "CELULAR");
                     txtCelular2.Text = MetodosSql.GetField(sql, "CELULAR2");
                     txtTelefone.Text = MetodosSql.GetField(sql, "TELEFONE1");
@@ -111,32 +95,41 @@ namespace AltfErp
                     txtCpf.Text = MetodosSql.GetField(sql, "CPF");
                     txtCNPJ.Text = MetodosSql.GetField(sql, "CNPJ");
                     txtRg.Text = MetodosSql.GetField(sql, "RG");
-                    txtObservacaoDocumento.Text = MetodosSql.GetField(sql, "OBSDOCUMENTO");
-                    
+                    txtObservacaoDocumento.Text = MetodosSql.GetField(sql, "OBSDOCUMENTO");                    
                     txtDataInclusao.Text = MetodosSql.GetField(String.Format(@"SELECT CONVERT(VARCHAR, DATAINCLUSAO, 103) AS DATAINCLUSAO FROM FCFOSEGURADORA WHERE IDSEGURADORA = '{0}'", Cod), "DATAINCLUSAO");
                     txtCodigo.Text = MetodosSql.GetField(sql, "IDSEGURADORA");
                 }
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message);
             }
         }
-
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             Cadastro();
         }
-
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void txtCelular_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+        private void txtTelefone_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '-'))
+            {
+                e.Handled = true;
+            }
+        }
+        private void txtTelefone2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '-'))
             {
                 e.Handled = true;
             }
