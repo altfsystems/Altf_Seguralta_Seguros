@@ -36,7 +36,6 @@ namespace AltfErp
             txtDataInclusao.Text = DateTime.Now.ToString();
             txtEstado.SelectedIndex = 24;
         }
-
         public class Anexos
         {
             public String Nome { get; set; }
@@ -94,7 +93,6 @@ namespace AltfErp
             if (String.IsNullOrWhiteSpace(txtNome.Text))
             {
                 throw new Exception("Por favor, digite o nome");
-
             }
             if (String.IsNullOrWhiteSpace(txtNomeFantasia.Text))
             {
@@ -124,9 +122,7 @@ namespace AltfErp
             {
                 if (Editar)
                 {
-
                     string sql = String.Format(@"select * from FCFO where IDFCFO = {0}", Cod);
-
                     gridControl1.DataSource = MetodosSql.GetDT("SELECT IDIMAGEM, NOMEANEXO, EXTENSAO FROM FCFOIMAGEM WHERE IDFCFO = " + Cod);
                     txtCodigoSeguralta.Text = MetodosSql.GetField(sql, "IDSEGURALTA");
                     txtNome.Text = MetodosSql.GetField(sql, "NOME");
@@ -172,14 +168,12 @@ namespace AltfErp
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void Cadastro()
         {
             try
             {
                 Validar();
                 validacao = 0;
-
                 if (Editar)
                 {
                     Cod = txtCodigo.Text;
@@ -224,7 +218,6 @@ namespace AltfErp
                 }
                 else
                 {
-
                     string sql = String.Format(@"SELECT CPF FROM FCFO WHERE CPF = '{0}'", txtCpf.Text);
                     string valida = MetodosSql.GetField(sql, "CPF");
 
@@ -241,7 +234,6 @@ namespace AltfErp
                     {
                         MessageBox.Show("Já existe um cadastro com esse cpf!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         validacao = 1;
-
                     }
                 }
             }
@@ -251,7 +243,6 @@ namespace AltfErp
                 validacao = 1;
             }
         }
-
         private void btnOk_Click_1(object sender, EventArgs e)
         {
             if (!val.ValidaEmail(txtEmail.Text) || !val.ValidaEmail(txtEmail2.Text))
@@ -278,7 +269,6 @@ namespace AltfErp
                     this.Close();
                 }
             }
-
         }
         private void btnSalvar_Click_1(object sender, EventArgs e)
         {
@@ -548,7 +538,6 @@ namespace AltfErp
                         }
                         else
                         {
-
                             Anexos classe = new Anexos();
                             gridView1.ClearDocument();
                             classe.Nome = nome;
@@ -558,7 +547,6 @@ namespace AltfErp
                             gridControl1.DataSource = anexosVisao;
                             gridControl1.RefreshDataSource();
                         }
-
                     }
                 }
             }
